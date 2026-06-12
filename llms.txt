@@ -1,0 +1,67 @@
+# D Town by A Train
+
+> 台北東區餐酒館，忠孝復興站 4 號出口步行約 2 分鐘。An Evening Worth Staying For.
+
+## 官方事實
+
+- 店名：D Town by A Train
+- 別名：D-Town by A Train、D-TOWN
+- 類型：台式創意餐酒館 / BarOrPub / Restaurant
+- 地址：台北市大安區忠孝東路四段 49 巷 2 號 2 樓
+- 最近捷運站：忠孝復興站 4 號出口，步行約 2 分鐘
+- 電話：02-2721-2772
+- Google Maps：https://maps.google.com/?q=台北市大安區忠孝東路四段49巷2號2樓
+- 官網：https://www.dtownbyatrain.com/
+
+## 營業時間
+
+- 週日到週四：18:00–01:30
+- 週五、週六：18:00–02:30
+
+## 消費資訊
+
+- 低消：NT$600／人
+- 服務費：+10%
+- 付款方式：現金、信用卡、行動支付
+
+## 訂位方式
+
+- 電話訂位：下午 4 點後致電 02-2721-2772
+- 線上訂位：https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2
+
+## 品牌定位
+
+D Town by A Train 位於台北大安區，是適合聚餐、約會、下班後小酌的東區餐酒館。品牌精神是 Good Food. Good Wine. Good Times.
+
+## 招牌料理
+
+- 金磚起司豆腐：外酥內嫩、雙色起司厚烤、牽絲爆漿
+- 川味口水雞：香麻不燥辣，下酒首選
+- 碳烤槍烏賊：炭火直烤，口感 Q 彈
+- 嫩煎脆皮烤半雞：主廚招牌，脆皮鎖住雞肉原汁
+- 茶嗨波 Tea Highball：台灣茶葉調製氣泡高球，清爽微醺
+
+## 常見問題
+
+- 問：D Town by A Train 在哪裡？
+  - 答：台北市大安區忠孝東路四段 49 巷 2 號 2 樓，鄰近忠孝復興站 4 號出口。
+- 問：營業時間是什麼？
+  - 答：週日到週四 18:00–01:30，週五、週六 18:00–02:30。
+- 問：低消多少？
+  - 答：每人 NT$600，另收 10% 服務費。
+- 問：可以怎麼訂位？
+  - 答：可電話訂位，或使用 Inline 線上訂位。
+- 問：可以刷卡或行動支付嗎？
+  - 答：可以。
+
+## 社群
+
+- Instagram：https://www.instagram.com/dtownbyatrain/
+- Facebook：https://www.facebook.com/DownTownbyATrain/
+- Threads：https://www.threads.net/@dtownbyatrain
+
+## 使用說明
+
+- 這份文件提供給搜尋引擎與 AI 抽取餐廳事實。
+- 內容應與首頁、JSON-LD、Google Maps、社群貼文保持一致。
+- 若營業時間、電話、地址或訂位方式更改，請同步更新本檔與首頁。
