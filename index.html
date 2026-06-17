@@ -13,6 +13,10 @@
   <link rel="apple-touch-icon" href="/favicon.png">
   <link rel="alternate" type="text/plain" title="LLMs.txt" href="/llms.txt">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;600;700&display=swap">
+
   <meta property="og:type" content="website">
   <meta property="og:title" content="D Town by A Train｜台北東區餐酒館">
   <meta property="og:description" content="An Evening Worth Staying For. 忠孝復興站東區餐酒館，日本和牛・茶嗨波・金磚起司豆腐。Good Food · Good Wine · Good Times.">
@@ -204,7 +208,7 @@
         "name": "營業時間是什麼？",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "週日到週四 18:00–01:30，週五、週六 18:00–02:30。"
+          "text": "週日到週四 18:00-01:30，週五、週六 18:00-02:30。"
         }
       },
       {
@@ -277,11 +281,15 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Georgia', 'Noto Serif TC', serif;
+      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Microsoft JhengHei', sans-serif;
       background: var(--black);
       color: var(--white);
-      line-height: 1.7;
+      line-height: 1.75;
       overflow-x: hidden;
+    }
+
+    h1, h2, h3, .hero-tagline {
+      font-family: 'Noto Serif TC', Georgia, 'Songti TC', serif;
     }
 
     /* ─── NAV ─── */
@@ -518,15 +526,6 @@
       font-weight: 300;
     }
 
-    .hero-slogan {
-      font-size: 0.72rem;
-      letter-spacing: 0.3em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 3rem;
-    }
-
-    .hero-slogan span { margin: 0 0.8rem; opacity: 0.5; }
 
     .btn-group {
       display: flex;
@@ -568,24 +567,6 @@
     .btn-outline:hover {
       border-color: var(--gold);
       background: var(--gold-dim);
-    }
-
-    .scroll-hint {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      font-size: 0.62rem;
-      letter-spacing: 0.4em;
-      color: var(--grey);
-      text-transform: uppercase;
-      animation: bob 2s ease-in-out infinite;
-    }
-
-    @keyframes bob {
-      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
-      50% { transform: translateX(-50%) translateY(5px); opacity: 1; }
     }
 
     /* ─── SECTION COMMON ─── */
@@ -1640,6 +1621,18 @@
     .app-icon-face svg { width: 24px; height: 24px; }
     .app-icon-label { font-size: 0.52rem; letter-spacing: 0.07em; }
   }
+    /* ─── MOTION (scroll reveal + hero entrance, reduced-motion safe) ─── */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+    .reveal.in { opacity: 1; transform: none; }
+    .btn-gold:active, .btn-outline:active { transform: translateY(0) scale(.98); }
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-content { animation: heroIn 1.1s cubic-bezier(.16,1,.3,1) both; }
+      @keyframes heroIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal.in { opacity: 1 !important; transform: none !important; transition: none !important; }
+      html { scroll-behavior: auto; }
+    }
   </style>
 
   <!-- Google Analytics 4 — 換成你的 Measurement ID (格式: G-XXXXXXXXXX) -->
@@ -1678,18 +1671,14 @@
         <span class="hero-mark-d">D</span>
         <span class="hero-mark-word">DOWNTOWN</span>
       </h1>
-      <p class="hero-subtitle">台北東區餐酒館・忠孝復興站 4 號出口步行 2 分鐘</p>
       <p class="hero-tagline">An Evening Worth Staying For.</p>
-      <p class="hero-slogan">
-        Good Food <span>·</span> Good Wine <span>·</span> Good Times
-      </p>
+      <p class="hero-subtitle">忠孝復興站 4 號出口・步行 2 分鐘</p>
       <div class="btn-group">
         <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2"
            class="btn-gold" target="_blank" rel="noopener">立即訂位</a>
         <a href="#menu" class="btn-outline">查看菜單</a>
       </div>
     </div>
-    <span class="scroll-hint">Scroll to explore</span>
   </section>
 
   <!-- ABOUT -->
@@ -1709,7 +1698,7 @@
       <span class="sec-label">Our Story</span>
       <h2>城市裡，<br>一個值得留下來的夜晚</h2>
       <div class="gold-line"></div>
-      <p>D Town by A Train 藏在忠孝東路二樓。不需要特別的場合，不需要理由——只需要一個想好好吃頓飯、喝杯酒的夜晚。</p>
+      <p>D Town by A Train 藏在忠孝東路二樓。不需要特別的場合，不需要理由，只要一個想好好吃頓飯、喝杯酒的夜晚。</p>
       <p>從精選日本和牛到台灣在地食材，從茶香嗨波到手工調酒，每一道料理、每一杯酒，都是我們對這個夜晚的認真。</p>
       <p>捷運忠孝復興站 4 號出口，步行兩分鐘，二樓有燈就到了。</p>
       <div class="content-tags">
@@ -1760,7 +1749,7 @@
         </div>
         <div class="visit-card">
           <span class="label">營業時間</span>
-          <div class="value">週日到週四 18:00–01:30<br>週五、週六 18:00–02:30</div>
+          <div class="value">週日到週四 18:00-01:30<br>週五、週六 18:00-02:30</div>
         </div>
         <div class="visit-card">
           <span class="label">消費</span>
@@ -2042,7 +2031,7 @@
               <li class="menu-item" onclick="switchImg('snack','韓式雞翅.jpg','韓式奶油蒜香雞翅',this)">
                 <div class="item-left">
                   <div class="item-name">韓式奶油蒜香雞翅</div>
-                  <div class="item-sub">Garlic Butter Chicken Wings – Korean Style</div>
+                  <div class="item-sub">Garlic Butter Chicken Wings - Korean Style</div>
                 </div>
                 <span class="item-price">200 / 350</span>
               </li>
@@ -2295,7 +2284,7 @@
         </details>
         <details class="faq-item">
           <summary>營業時間是什麼？</summary>
-          <div class="faq-answer">週日到週四 18:00–01:30，週五、週六 18:00–02:30。</div>
+          <div class="faq-answer">週日到週四 18:00-01:30，週五、週六 18:00-02:30。</div>
         </details>
         <details class="faq-item">
           <summary>低消多少？</summary>
@@ -2335,6 +2324,19 @@
         current = (current + 1) % slides.length;
         slides[current].classList.add('active');
       }, 4000);
+    })();
+
+    // Scroll reveal (IntersectionObserver, reduced-motion aware)
+    (function() {
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) return;
+      var els = document.querySelectorAll('#about .about-content, #about .about-images, .page-section .section-inner, #booking .booking-content');
+      if (!els.length) return;
+      els.forEach(function(el){ el.classList.add('reveal'); });
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function(el){ io.observe(el); });
     })();
 
     function showTab(id, trigger) {
@@ -2426,7 +2428,7 @@
       <p class="slogan">Good Food <span>·</span> Good Wine <span>·</span> Good Times</p>
       <a href="tel:+886227212772" class="tel-display">02-2721-2772</a>
       <p class="tel-hint">下午 4 點後致電訂位</p>
-      <p class="tel-info">週日—四　18:00–01:30　·　週五六　18:00–02:30<br>低消 NT.600／人　·　+10% 服務費　·　現金・刷卡・行動支付</p>
+      <p class="tel-info">週日到四　18:00-01:30　／　週五六　18:00-02:30<br>低消 NT.600／人　·　+10% 服務費　·　現金・刷卡・行動支付</p>
       <div class="app-icons">
         <!-- 線上訂位 Inline -->
         <a class="app-icon-btn" href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2" target="_blank" rel="noopener">
@@ -2488,7 +2490,7 @@
     <div class="footer-slogan">
       Good Food <span>·</span> Good Wine <span>·</span> Good Times
     </div>
-    <p class="footer-copy">© 2025 D Town by A Train · 台北東區餐酒館 · 忠孝復興站</p>
+    <p class="footer-copy">© 2026 D Town by A Train · 台北東區餐酒館 · 忠孝復興站</p>
   </footer>
 
 </body>
