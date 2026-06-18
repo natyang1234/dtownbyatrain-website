@@ -1706,14 +1706,14 @@
   <section id="about">
     <div class="about-images">
       <img class="carousel-slide active" src="webp/店內場景1.webp" alt="D Town by A Train 東區餐酒館內部空間">
-      <img class="carousel-slide" src="webp/氛圍燈logo.webp" alt="D Town by A Train 品牌氛圍燈與 DOWNTOWN 標誌" loading="lazy">
-      <img class="carousel-slide" src="webp/店內場景3.webp" alt="D Town by A Train 店內熱鬧氛圍" loading="lazy">
-      <img class="carousel-slide" src="webp/店內場景.webp" alt="D Town by A Train 黑大理石吧台" loading="lazy">
-      <img class="carousel-slide" src="webp/店內場景4.webp" alt="D Town by A Train 吧台區聚會" loading="lazy">
-      <img class="carousel-slide" src="webp/店內場景2.webp" alt="D Town by A Train 用餐空間氛圍" loading="lazy">
-      <img class="carousel-slide" src="webp/店內場景5.webp" alt="D Town by A Train 餐酒館用餐實景" loading="lazy">
-      <img class="carousel-slide" src="webp/封底.webp" alt="D Town by A Train 台北東區餐酒館夜晚" loading="lazy">
-      <img class="carousel-slide" src="webp/店內場景6.webp" alt="D Town by A Train 夜晚微醺氛圍" loading="lazy">
+      <img class="carousel-slide" data-src="webp/氛圍燈logo.webp" alt="D Town by A Train 品牌氛圍燈與 DOWNTOWN 標誌">
+      <img class="carousel-slide" data-src="webp/店內場景3.webp" alt="D Town by A Train 店內熱鬧氛圍">
+      <img class="carousel-slide" data-src="webp/店內場景.webp" alt="D Town by A Train 黑大理石吧台">
+      <img class="carousel-slide" data-src="webp/店內場景4.webp" alt="D Town by A Train 吧台區聚會">
+      <img class="carousel-slide" data-src="webp/店內場景2.webp" alt="D Town by A Train 用餐空間氛圍">
+      <img class="carousel-slide" data-src="webp/店內場景5.webp" alt="D Town by A Train 餐酒館用餐實景">
+      <img class="carousel-slide" data-src="webp/封底.webp" alt="D Town by A Train 台北東區餐酒館夜晚">
+      <img class="carousel-slide" data-src="webp/店內場景6.webp" alt="D Town by A Train 夜晚微醺氛圍">
       <div class="about-img-overlay"></div>
     </div>
     <div class="about-content">
@@ -2337,13 +2337,16 @@
   </section>
 
   <script>
-    // About section carousel
+    // About section carousel — 按需載入：只先載第 1 張，其餘輪到才載（並預載下一張）
     (function() {
       const slides = document.querySelectorAll('#about .carousel-slide');
+      const load = (i) => { const s = slides[i]; if (s && !s.src && s.dataset.src) s.src = s.dataset.src; };
       let current = 0;
+      load(0); load(1); // 目前 + 下一張
       setInterval(function() {
         slides[current].classList.remove('active');
         current = (current + 1) % slides.length;
+        load(current); load((current + 1) % slides.length); // 確保當前與下一張已載
         slides[current].classList.add('active');
       }, 4000);
     })();
