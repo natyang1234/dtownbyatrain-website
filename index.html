@@ -913,9 +913,13 @@
     .menu-img-wrap img {
       width: 100%;
       display: block;
+      /* 固定 3:4 圖框，所有分類/菜色大小一致；圖片 contain 完整顯示不裁切
+         （少數 2:3 的圖會在框內留極細邊，但框尺寸永遠相同） */
+      aspect-ratio: 3 / 4;
+      object-fit: contain;
       filter: brightness(0.92);
       transition: opacity 0.25s ease, transform 0.3s ease;
-      background: var(--card);
+      background: var(--black);
     }
 
     .menu-img-wrap:hover img {
