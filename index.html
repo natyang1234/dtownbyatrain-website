@@ -2394,7 +2394,8 @@
       cap.style.opacity = '0';
 
       setTimeout(() => {
-        img.src = src;
+        // 點擊菜色改用已部署的 webp（根目錄 .jpg 未進 git，線上會 404 破圖）
+        img.src = 'webp/' + src.replace(/\.jpg$/i, '.webp');
         img.alt = caption + ' D Town by A Train';
         cap.textContent = caption;
         // fade in
