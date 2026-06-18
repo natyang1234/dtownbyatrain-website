@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.dtownbyatrain.com/sitemap.xml
+Sitemap: https://natyang1234.github.io/dtownbyatrain-website/sitemap.xml

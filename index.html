@@ -8,7 +8,7 @@
   <meta name="description" content="D Town by A Train，台北大安區忠孝復興站東區餐酒館。日本和牛、金磚起司豆腐、茶嗨波 Tea Highball。每人低消 $600，捷運忠孝復興站 4 號出口步行 2 分鐘。Good Food · Good Wine · Good Times.">
   <meta name="keywords" content="D Town by A Train,台北餐酒館,忠孝復興餐酒館,東區酒吧,台北酒吧推薦,大安區餐酒館,茶嗨波,Tea Highball,日本和牛,聚餐餐廳推薦,東區聚餐,台北調酒">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://www.dtownbyatrain.com/">
+  <link rel="canonical" href="https://natyang1234.github.io/dtownbyatrain-website/">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="favicon.png">
   <link rel="alternate" type="text/plain" title="LLMs.txt" href="llms.txt">
@@ -20,8 +20,8 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="D Town by A Train｜台北東區餐酒館">
   <meta property="og:description" content="An Evening Worth Staying For. 忠孝復興站東區餐酒館，日本和牛・茶嗨波・金磚起司豆腐。Good Food · Good Wine · Good Times.">
-  <meta property="og:url" content="https://www.dtownbyatrain.com/">
-  <meta property="og:image" content="https://www.dtownbyatrain.com/og-cover.jpg">
+  <meta property="og:url" content="https://natyang1234.github.io/dtownbyatrain-website/">
+  <meta property="og:image" content="https://natyang1234.github.io/dtownbyatrain-website/og-cover.jpg">
   <meta property="og:locale" content="zh_TW">
   <meta property="og:site_name" content="D Town by A Train">
 
@@ -32,17 +32,17 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@id": "https://www.dtownbyatrain.com/#restaurant",
+    "@id": "https://natyang1234.github.io/dtownbyatrain-website/#restaurant",
     "@type": ["Restaurant", "BarOrPub"],
     "acceptsReservations": true,
     "name": "D Town by A Train",
     "alternateName": ["D-Town by A Train", "D-TOWN", "字母系列餐酒館 D Town"],
     "description": "台北東區餐酒館，提供日本和牛、茶嗨波 Tea Highball、金磚起司豆腐等特色料理。An Evening Worth Staying For.",
     "slogan": "Good Food. Good Wine. Good Times.",
-    "url": "https://www.dtownbyatrain.com/",
-    "logo": "https://www.dtownbyatrain.com/logo.jpg",
+    "url": "https://natyang1234.github.io/dtownbyatrain-website/",
+    "logo": "https://natyang1234.github.io/dtownbyatrain-website/logo.jpg",
     "telephone": "+886-2-2721-2772",
-    "image": "https://www.dtownbyatrain.com/og-cover.jpg",
+    "image": "https://natyang1234.github.io/dtownbyatrain-website/og-cover.jpg",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "忠孝東路四段49巷2號2樓",
@@ -74,7 +74,7 @@
     "priceRange": "$$",
     "currenciesAccepted": "TWD",
     "paymentAccepted": "現金, 信用卡, 行動支付",
-    "menu": "https://www.dtownbyatrain.com/#menu",
+    "menu": "https://natyang1234.github.io/dtownbyatrain-website/#menu",
     "reservations": "https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2",
     "aggregateRating": {
       "@type": "AggregateRating",
@@ -181,12 +181,12 @@
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": "https://www.dtownbyatrain.com/#website",
-    "url": "https://www.dtownbyatrain.com/",
+    "@id": "https://natyang1234.github.io/dtownbyatrain-website/#website",
+    "url": "https://natyang1234.github.io/dtownbyatrain-website/",
     "name": "D Town by A Train",
     "description": "台北東區餐酒館，忠孝復興站步行 2 分鐘，主打日本和牛、茶嗨波與特調雞尾酒。",
     "publisher": {
-      "@id": "https://www.dtownbyatrain.com/#restaurant"
+      "@id": "https://natyang1234.github.io/dtownbyatrain-website/#restaurant"
     }
   }
   </script>
@@ -2269,7 +2269,7 @@
 
       <!-- Lightbox -->
       <div id="cocktail-lightbox" onclick="closeLightbox()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;padding:1rem;">
-        <img id="lb-img" src="" alt="" style="max-width:90vw;max-height:82vh;object-fit:contain;border-radius:4px;box-shadow:0 8px 48px rgba(0,0,0,.6);">
+        <img id="lb-img" src="" alt="D Town by A Train 餐點放大圖" style="max-width:90vw;max-height:82vh;object-fit:contain;border-radius:4px;box-shadow:0 8px 48px rgba(0,0,0,.6);">
         <div id="lb-tea-cell" style="display:none;"></div>
         <p id="lb-cap" style="color:#ccc;margin-top:1rem;font-size:0.85rem;letter-spacing:.12em;"></p>
         <p style="color:#666;font-size:0.7rem;margin-top:0.5rem;">點擊任意處關閉</p>
@@ -2362,6 +2362,7 @@
       const lbImg = document.getElementById('lb-img');
       const lbTea = document.getElementById('lb-tea-cell');
       lbImg.src = src;
+      lbImg.alt = (caption ? caption + ' ' : '') + 'D Town by A Train 餐點放大圖';
       lbImg.style.display = '';
       lbTea.style.display = 'none';
       document.getElementById('lb-cap').textContent = caption;

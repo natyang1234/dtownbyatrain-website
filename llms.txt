@@ -11,7 +11,7 @@
 - 最近捷運站：忠孝復興站 4 號出口，步行約 2 分鐘
 - 電話：02-2721-2772
 - Google Maps：https://maps.google.com/?q=台北市大安區忠孝東路四段49巷2號2樓
-- 官網：https://www.dtownbyatrain.com/
+- 官網：https://natyang1234.github.io/dtownbyatrain-website/
 
 ## 營業時間
 
