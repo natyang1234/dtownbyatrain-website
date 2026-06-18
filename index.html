@@ -1602,7 +1602,8 @@
         padding-bottom: 0.8rem;
         margin-bottom: 0.5rem;
       }
-      .menu-img-wrap img { max-height: 38vh; object-fit: cover; object-position: center; }
+      /* 餐點圖是 3:4 直式設計卡，完整顯示不裁切（contain 不切，限高避免過高擠壓列表） */
+      .menu-img-wrap img { max-height: 52vh; object-fit: contain; }
 
       #tea .inner { grid-template-columns: 1fr; gap: 3rem; }
 
