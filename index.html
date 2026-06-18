@@ -1592,8 +1592,17 @@
       .about-content { padding: 3.5rem clamp(1.5rem, 5vw, 4rem); }
 
       .menu-cat { grid-template-columns: 1fr; }
-      /* 手機單欄：取消圖片 sticky，否則列表往上滑會蓋住被釘住的圖 */
-      .menu-img-wrap { position: static; top: auto; margin-bottom: 1.5rem; }
+      /* 手機單欄：圖片釘在 nav 下方當頂部橫幅，列表從圖片下層滑過
+         （wrap 不透明 + z-index 高 → 圖片蓋在列表上層，文字不會壓到圖） */
+      .menu-img-wrap {
+        position: sticky;
+        top: 60px;
+        z-index: 5;
+        background: var(--black);
+        padding-bottom: 0.8rem;
+        margin-bottom: 0.5rem;
+      }
+      .menu-img-wrap img { max-height: 38vh; object-fit: cover; object-position: center; }
 
       #tea .inner { grid-template-columns: 1fr; gap: 3rem; }
 
