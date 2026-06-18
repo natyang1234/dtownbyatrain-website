@@ -1122,7 +1122,7 @@
     .tea-cell {
       position: relative;
       aspect-ratio: 1 / 1;
-      background-image: url('茶嗨波.jpg');
+      background-image: url('webp/茶嗨波.webp');
       background-size: 402% 302%;
       background-repeat: no-repeat;
       cursor: zoom-in;
@@ -1159,7 +1159,7 @@
     #lb-tea-cell {
       width: min(80vw, 480px);
       aspect-ratio: 1 / 1;
-      background-image: url('茶嗨波.jpg');
+      background-image: url('webp/茶嗨波.webp');
       background-size: 400% 300%;
       background-repeat: no-repeat;
       border-radius: 4px;
@@ -1592,7 +1592,8 @@
       .about-content { padding: 3.5rem clamp(1.5rem, 5vw, 4rem); }
 
       .menu-cat { grid-template-columns: 1fr; }
-      .menu-cat-img { aspect-ratio: 16/9; }
+      /* 手機單欄：取消圖片 sticky，否則列表往上滑會蓋住被釘住的圖 */
+      .menu-img-wrap { position: static; top: auto; margin-bottom: 1.5rem; }
 
       #tea .inner { grid-template-columns: 1fr; gap: 3rem; }
 
