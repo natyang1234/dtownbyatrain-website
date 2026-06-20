@@ -1,14 +1,16 @@
 # D Town by A Train
 
-> 台北東區餐酒館，忠孝復興站 4 號出口步行約 2 分鐘。An Evening Worth Staying For.
+> 台北東區「字母系列」餐酒館，復古英倫風格、東區最大空間，忠孝復興站 4 號出口步行約 1 分鐘。An Evening Worth Staying For.
 
 ## 官方事實
 
 - 店名：D Town by A Train
 - 別名：D-Town by A Train、D-TOWN
-- 類型：台式創意餐酒館 / BarOrPub / Restaurant
-- 地址：台北市大安區忠孝東路四段 49 巷 2 號 2 樓
-- 最近捷運站：忠孝復興站 4 號出口，步行約 2 分鐘
+- 類型：台式創意餐酒館 / BarOrPub / Restaurant（台北東區「字母系列」餐酒館）
+- 風格：復古英倫風格，台北東區最大空間餐酒館
+- 地址：台北市大安區忠孝東路四段 49 巷 2 號 2 樓（SOGO 忠孝館旁巷弄二樓）
+- 入口：面對 Qmomo 右手邊、路燈旁的小門，搭電梯上二樓
+- 最近捷運站：忠孝復興站 4 號出口，步行約 1 分鐘
 - 電話：02-2721-2772
 - Google Maps：https://maps.google.com/?q=台北市大安區忠孝東路四段49巷2號2樓
 - 官網：https://natyang1234.github.io/dtownbyatrain-website/
