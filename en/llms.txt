@@ -1,0 +1,70 @@
+# D Town by A Train
+
+> A retro British-style gastropub in Taipei's East District ("Alphabet Series" bar). The largest bar space in the East District, about a 1-minute walk from Zhongxiao Fuxing MRT Station Exit 4. An Evening Worth Staying For.
+
+## Official Facts
+
+- Name: D Town by A Train
+- Also known as: D-Town by A Train, D-TOWN
+- Type: Taiwanese creative gastropub / BarOrPub / Restaurant (Taipei East District "Alphabet Series" bar)
+- Style: Retro British style; the largest bar space in Taipei's East District
+- Address: 2F, No. 2, Lane 49, Section 4, Zhongxiao East Road, Da'an District, Taipei City (a lane beside SOGO Zhongxiao, second floor)
+- Entrance: the small door to the right of Qmomo, next to the street lamp — take the elevator to the 2nd floor
+- Nearest MRT: Zhongxiao Fuxing Station Exit 4, about a 1-minute walk
+- Phone: +886-2-2721-2772
+- Google Maps: https://maps.google.com/?q=台北市大安區忠孝東路四段49巷2號2樓
+- Website (Chinese): https://natyang1234.github.io/dtownbyatrain-website/
+- Website (English): https://natyang1234.github.io/dtownbyatrain-website/en/
+
+## Opening Hours
+
+- Sunday to Thursday: 18:00–01:30
+- Friday & Saturday: 18:00–02:30
+
+## Pricing
+
+- Minimum charge: NT$600 per person
+- Service charge: +10%
+- Payment methods: cash, credit card, mobile payment
+
+## Reservations
+
+- By phone: call +886-2-2721-2772 after 4:00 PM
+- Online: https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2
+
+## Brand Positioning
+
+D Town by A Train is located in Da'an District, Taipei. It is an East District gastropub ideal for group dinners, dates, and after-work drinks. The brand spirit is Good Food. Good Wine. Good Times.
+
+## Signature Dishes
+
+- Golden Cheese Tofu: crispy outside, tender inside, double-cheese thick-baked, oozing and stringy
+- Sichuan-style Saliva Chicken: numbing and aromatic without harsh heat, a top drinking companion
+- Charcoal-grilled Squid: grilled directly over charcoal, bouncy texture
+- Pan-seared Crispy-skin Half Chicken: the chef's signature, crispy skin locking in the chicken's juices
+- Tea Highball: a refreshing, lightly buzzed sparkling highball made with Taiwanese tea leaves
+
+## Frequently Asked Questions
+
+- Q: Where is D Town by A Train?
+  - A: 2F, No. 2, Lane 49, Section 4, Zhongxiao East Road, Da'an District, Taipei City, near Zhongxiao Fuxing MRT Station Exit 4.
+- Q: What are the opening hours?
+  - A: Sunday to Thursday 18:00–01:30; Friday & Saturday 18:00–02:30.
+- Q: What is the minimum charge?
+  - A: NT$600 per person, plus a 10% service charge.
+- Q: How can I make a reservation?
+  - A: By phone, or via online booking on Inline.
+- Q: Do you accept credit cards or mobile payment?
+  - A: Yes.
+
+## Social
+
+- Instagram: https://www.instagram.com/dtownbyatrain/
+- Facebook: https://www.facebook.com/DownTownbyATrain/
+- Threads: https://www.threads.net/@dtownbyatrain
+
+## Usage Notes
+
+- This file provides restaurant facts for search engines and AI to extract.
+- Content should stay consistent with the homepage, JSON-LD, Google Maps, and social posts.
+- If the opening hours, phone, address, or reservation method change, please update this file and the homepage together.
