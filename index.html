@@ -1781,11 +1781,16 @@
         font-size: 0.78rem; letter-spacing: 0.05em;
       }
       .news-video-wrap {
-        max-width: 760px; margin: 0 auto; border-radius: 6px; overflow: hidden;
+        max-width: 360px; margin: 0 auto; border-radius: 6px; overflow: hidden;
         background: #000; border: 1px solid var(--gold-dim);
         box-shadow: 0 10px 48px rgba(0,0,0,0.45);
       }
       .news-video-wrap video { display: block; width: 100%; height: auto; }
+      /* 手機：縮小 hero 下方與本區的間距 */
+      @media (max-width: 700px) {
+        #hero { min-height: 80vh; }
+        #latest-news { padding-top: 2.4rem; padding-bottom: 3rem; }
+      }
     </style>
     <div class="section-inner">
       <span class="section-kicker">What's New</span>
@@ -1802,7 +1807,7 @@
       <p class="news-intro">每盒另附專業級「調酒 Peel 噴霧」（口味隨機），讓微醺的層次再進化一步。</p>
       <div class="news-video-wrap">
         <video id="dtown-news-video" muted loop playsinline preload="metadata"
-               poster="webp/店內場景.webp"
+               poster="dtown-gift-poster.jpg"
                aria-label="字母系列聯名・微醺調酒禮盒影片">
           <source src="dtown-ambient.mp4" type="video/mp4">
         </video>
