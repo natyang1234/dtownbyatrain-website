@@ -389,6 +389,13 @@
 
     .nav-links a:hover { color: var(--gold); }
 
+    .nav-right { display: flex; align-items: center; gap: 1.6rem; }
+    .nav-lang {
+      color: var(--grey); text-decoration: none; font-size: 0.78rem;
+      letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s;
+    }
+    .nav-lang:hover { color: var(--gold); }
+
     .nav-cta {
       padding: 0.5rem 1.3rem;
       border: 1px solid var(--gold);
@@ -1681,7 +1688,8 @@
 
     @media (max-width: 600px) {
       nav { padding: 1rem 1.2rem; }
-      .nav-links { gap: 1rem; }
+      .nav-right { gap: 0.75rem; }
+      .nav-lang { font-size: 0.72rem; }
       .nav-toggle { display: flex; align-items: center; }
       .nav-links {
         position: absolute; top: 100%; left: 0; right: 0;
@@ -1693,7 +1701,7 @@
       .nav-links.open { display: flex; }
       .nav-links li { display: block; }
       .nav-links a { display: block; padding: 0.9rem 1.4rem; font-size: 0.82rem; }
-      .nav-cta { border: none; }
+      .nav-cta { padding: 0.4rem 0.85rem; font-size: 0.72rem; }
       .visit-grid { grid-template-columns: 1fr; }
 
       #food { grid-template-columns: 1fr; }
@@ -1740,15 +1748,17 @@
     <a class="nav-logo" href="#hero">
       <img src="../webp/favicon.webp" alt="D Town by A Train gold logo" class="nav-logo-img">
     </a>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="../">中文</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#menu">Menu</a></li>
-      <li><a href="#visit">Visit</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#booking" class="nav-cta">Reserve</a></li>
-    </ul>
-    <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    <div class="nav-right">
+      <a class="nav-lang" href="../">中文</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#visit">Visit</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <a href="#booking" class="nav-cta">Reserve</a>
+      <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    </div>
   </nav>
   <script>
     (function () {
