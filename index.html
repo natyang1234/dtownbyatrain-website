@@ -1823,8 +1823,10 @@
         if (reduce || !('IntersectionObserver' in window)) return;
         var io = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) {
-            if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
-            else { v.pause(); }
+            if (e.isIntersecting) {
+              try { v.currentTime = 0; } catch (err) {}
+              var p = v.play(); if (p && p.catch) p.catch(function () {});
+            } else { v.pause(); }
           });
         }, { threshold: 0.5 });
         io.observe(v);
