@@ -1781,11 +1781,24 @@
         font-size: 0.78rem; letter-spacing: 0.05em;
       }
       .news-video-wrap {
+        position: relative;
         max-width: 360px; margin: 0 auto; border-radius: 6px; overflow: hidden;
         background: #000; border: 1px solid var(--gold-dim);
         box-shadow: 0 10px 48px rgba(0,0,0,0.45);
       }
       .news-video-wrap video { display: block; width: 100%; height: auto; }
+      .video-sound-btn {
+        position: absolute; bottom: 12px; right: 12px; z-index: 2;
+        width: 44px; height: 44px; border-radius: 50%; font-size: 1.15rem; line-height: 1;
+        background: rgba(0,0,0,0.55); border: 1px solid var(--gold-dim); cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); transition: transform .1s;
+      }
+      .video-sound-btn:active { transform: scale(0.94); }
+      .video-sound-hint {
+        margin: 0.7rem auto 0; color: rgba(240,235,224,0.45);
+        font-size: 0.75rem; letter-spacing: 0.04em;
+      }
       /* 手機：縮小 hero 下方與本區的間距 */
       @media (max-width: 700px) {
         #hero { min-height: 80vh; }
@@ -1811,7 +1824,9 @@
                aria-label="字母系列聯名・微醺調酒禮盒影片">
           <source src="dtown-ambient.mp4" type="video/mp4">
         </video>
+        <button type="button" id="news-video-sound" class="video-sound-btn" aria-label="開啟聲音">🔇</button>
       </div>
+      <p class="video-sound-hint">影片預設靜音 · 點右下角喇叭開啟聲音</p>
       <p class="news-note">本站僅提供商品資訊，不提供線上交易；建議售價與購買請洽實體門市現場選購。</p>
       <p class="news-warn">禁止酒駕　•　飲酒過量有害健康　•　未滿十八歲禁止飲酒</p>
     </div>
@@ -1819,15 +1834,27 @@
       (function () {
         var v = document.getElementById('dtown-news-video');
         if (!v) return;
+        var soundOn = false;                 // 使用者是否已開啟聲音
         v.muted = true;
         var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
         tryPlay();
+        // 聲音 / 播放備援按鈕：點一下開聲音（並確保播放）；再點關聲音
+        var btn = document.getElementById('news-video-sound');
+        if (btn) {
+          btn.addEventListener('click', function () {
+            soundOn = !soundOn;
+            v.muted = !soundOn;
+            if (soundOn) tryPlay();
+            btn.textContent = soundOn ? '🔊' : '🔇';
+            btn.setAttribute('aria-label', soundOn ? '關閉聲音' : '開啟聲音');
+          });
+        }
         if (!('IntersectionObserver' in window)) return;
         var io = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) {
             if (e.isIntersecting) {
               try { v.currentTime = 0; } catch (err) {}
-              v.muted = true;
+              v.muted = !soundOn;            // 尊重使用者的聲音選擇
               tryPlay();
             } else { v.pause(); }
           });
