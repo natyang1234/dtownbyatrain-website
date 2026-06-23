@@ -401,6 +401,14 @@
       color: var(--black) !important;
     }
 
+    .nav-toggle {
+      display: none;
+      background: none; border: none; color: var(--gold);
+      font-size: 1.5rem; line-height: 1; cursor: pointer; padding: 0.2rem 0.4rem;
+    }
+
+    .vn-pos-mobile { display: none; }
+
     /* ─── HERO ─── */
     #hero {
       position: relative;
@@ -1642,6 +1650,8 @@
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       .section-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .vn-pos-desktop { display: none; }
+      .vn-pos-mobile { display: inline; }
       .visit-grid { grid-template-columns: 1fr 1fr; }
       #about { grid-template-columns: 1fr; }
       .about-images { height: 55vw; }
@@ -1672,7 +1682,18 @@
     @media (max-width: 600px) {
       nav { padding: 1rem 1.2rem; }
       .nav-links { gap: 1rem; }
-      .nav-links li:not(:last-child):not(:first-child) { display: none; }  /* 手機保留 EN(第一個) 與 訂位(最後) */
+      .nav-toggle { display: flex; align-items: center; }
+      .nav-links {
+        position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; align-items: stretch; gap: 0;
+        background: rgba(8,8,8,0.98); padding: 0.4rem 0;
+        border-bottom: 1px solid rgba(200,169,110,0.15);
+        display: none;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { display: block; }
+      .nav-links a { display: block; padding: 0.9rem 1.4rem; font-size: 0.82rem; }
+      .nav-cta { border: none; }
       .visit-grid { grid-template-columns: 1fr; }
 
       #food { grid-template-columns: 1fr; }
@@ -1719,7 +1740,7 @@
     <a class="nav-logo" href="#hero">
       <img src="webp/favicon.webp" alt="D Town by A Train 金色 logo" class="nav-logo-img">
     </a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links">
       <li><a href="en/">EN</a></li>
       <li><a href="#about">關於</a></li>
       <li><a href="#menu">菜單</a></li>
@@ -1727,7 +1748,27 @@
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#booking" class="nav-cta">訂位</a></li>
     </ul>
+    <button type="button" class="nav-toggle" aria-label="開啟選單" aria-expanded="false" aria-controls="nav-links">☰</button>
   </nav>
+  <script>
+    (function () {
+      var t = document.querySelector('.nav-toggle');
+      var links = document.getElementById('nav-links');
+      if (!t || !links) return;
+      t.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        t.setAttribute('aria-expanded', open ? 'true' : 'false');
+        t.textContent = open ? '✕' : '☰';
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          links.classList.remove('open');
+          t.setAttribute('aria-expanded', 'false');
+          t.textContent = '☰';
+        }
+      });
+    })();
+  </script>
 
   <!-- HERO -->
   <section id="hero">
@@ -1920,7 +1961,7 @@
         <div class="gold-line"></div>
         <p>D Town by A Train 位於台北市大安區忠孝東路四段 49 巷 2 號 2 樓（SOGO 忠孝館旁巷弄），從忠孝復興站 4 號出口步行約 1 分鐘即可抵達。</p>
         <p>如果你正在找一間適合朋友聚餐、同事聚會、生日慶生的東區餐酒館，先看這一區最重要：地址、交通、營業時間、低消、付款方式和訂位方式都整理好了。</p>
-        <p class="visit-notes">你可以先快速看右邊卡片，確認要不要訂位，再往下看菜單和 FAQ。</p>
+        <p class="visit-notes">你可以先快速看<span class="vn-pos-desktop">右邊</span><span class="vn-pos-mobile">下面</span>卡片，確認要不要訂位，再往下看菜單和 FAQ。</p>
       </div>
       <div class="visit-grid">
         <div class="visit-card">
