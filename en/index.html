@@ -401,6 +401,14 @@
       color: var(--black) !important;
     }
 
+    .nav-toggle {
+      display: none;
+      background: none; border: none; color: var(--gold);
+      font-size: 1.5rem; line-height: 1; cursor: pointer; padding: 0.2rem 0.4rem;
+    }
+
+    .vn-pos-mobile { display: none; }
+
     /* ─── HERO ─── */
     #hero {
       position: relative;
@@ -1642,6 +1650,8 @@
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       .section-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .vn-pos-desktop { display: none; }
+      .vn-pos-mobile { display: inline; }
       .visit-grid { grid-template-columns: 1fr 1fr; }
       #about { grid-template-columns: 1fr; }
       .about-images { height: 55vw; }
@@ -1672,7 +1682,18 @@
     @media (max-width: 600px) {
       nav { padding: 1rem 1.2rem; }
       .nav-links { gap: 1rem; }
-      .nav-links li:not(:last-child) { display: none; }
+      .nav-toggle { display: flex; align-items: center; }
+      .nav-links {
+        position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; align-items: stretch; gap: 0;
+        background: rgba(8,8,8,0.98); padding: 0.4rem 0;
+        border-bottom: 1px solid rgba(200,169,110,0.15);
+        display: none;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { display: block; }
+      .nav-links a { display: block; padding: 0.9rem 1.4rem; font-size: 0.82rem; }
+      .nav-cta { border: none; }
       .visit-grid { grid-template-columns: 1fr; }
 
       #food { grid-template-columns: 1fr; }
@@ -1719,7 +1740,7 @@
     <a class="nav-logo" href="#hero">
       <img src="../webp/favicon.webp" alt="D Town by A Train gold logo" class="nav-logo-img">
     </a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links">
       <li><a href="../">中文</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#menu">Menu</a></li>
@@ -1727,7 +1748,27 @@
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#booking" class="nav-cta">Reserve</a></li>
     </ul>
+    <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">☰</button>
   </nav>
+  <script>
+    (function () {
+      var t = document.querySelector('.nav-toggle');
+      var links = document.getElementById('nav-links');
+      if (!t || !links) return;
+      t.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        t.setAttribute('aria-expanded', open ? 'true' : 'false');
+        t.textContent = open ? '✕' : '☰';
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          links.classList.remove('open');
+          t.setAttribute('aria-expanded', 'false');
+          t.textContent = '☰';
+        }
+      });
+    })();
+  </script>
 
   <!-- HERO -->
   <section id="hero">
@@ -1747,6 +1788,119 @@
         <a href="#menu" class="btn-outline">View Menu</a>
       </div>
     </div>
+  </section>
+
+  <!-- Latest News: Letter Series Craft Cocktail Gift Box (video autoplays on scroll) -->
+  <section id="latest-news" class="page-section page-section-alt">
+    <style>
+      #latest-news .section-inner { text-align: center; }
+      #latest-news .gold-line { margin-left: auto; margin-right: auto; }
+      #latest-news .news-sub {
+        color: var(--gold); font-size: 1.35rem; letter-spacing: 0.06em;
+        margin: 0.4rem 0 1.1rem; font-weight: 600;
+      }
+      #latest-news .news-intro {
+        max-width: 60ch; margin: 0 auto 1.8rem;
+        color: var(--grey-light); font-size: 0.98rem; line-height: 2;
+      }
+      #latest-news .news-flavors {
+        list-style: none; padding: 0; max-width: 560px;
+        margin: 0 auto 1.8rem; text-align: left;
+      }
+      #latest-news .news-flavors li {
+        display: flex; flex-direction: column;
+        padding: 0.7rem 0; border-bottom: 1px solid var(--gold-dim);
+      }
+      #latest-news .fl-name { color: var(--gold); font-weight: 600; letter-spacing: 0.04em; }
+      #latest-news .fl-desc { color: var(--grey-light); font-size: 0.9rem; margin-top: 0.25rem; }
+      #latest-news .news-note {
+        max-width: 60ch; margin: 1.6rem auto 0;
+        color: var(--grey-light); font-size: 0.85rem; line-height: 1.9;
+      }
+      #latest-news .news-warn {
+        margin-top: 0.6rem; color: rgba(240,235,224,0.45);
+        font-size: 0.78rem; letter-spacing: 0.05em;
+      }
+      .news-video-wrap {
+        position: relative;
+        max-width: 360px; margin: 0 auto; border-radius: 6px; overflow: hidden;
+        background: #000; border: 1px solid var(--gold-dim);
+        box-shadow: 0 10px 48px rgba(0,0,0,0.45);
+      }
+      .news-video-wrap video { display: block; width: 100%; height: auto; }
+      .video-sound-btn {
+        position: absolute; bottom: 12px; right: 12px; z-index: 2;
+        width: 44px; height: 44px; border-radius: 50%; font-size: 1.15rem; line-height: 1;
+        background: rgba(0,0,0,0.55); border: 1px solid var(--gold-dim); cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); transition: transform .1s;
+      }
+      .video-sound-btn:active { transform: scale(0.94); }
+      .video-sound-hint {
+        margin: 0.7rem auto 0; color: rgba(240,235,224,0.45);
+        font-size: 0.75rem; letter-spacing: 0.04em;
+      }
+      @media (max-width: 700px) {
+        #hero { min-height: 80vh; }
+        #latest-news { padding-top: 2.4rem; padding-bottom: 3rem; }
+      }
+    </style>
+    <div class="section-inner">
+      <span class="section-kicker">What's New</span>
+      <h2>Latest News</h2>
+      <div class="gold-line"></div>
+      <p class="news-sub">Letter Series Collab · Craft Cocktail Gift Box</p>
+      <p class="news-intro">The Letter Series comes together for the first time. A Train, B Line, D Town and U Square miniaturise their most iconic signature flavours into a collaborative "Craft Cocktail Gift Box" — no need to wait for a table; open your own Home Bar right at home.</p>
+      <ul class="news-flavors">
+        <li><span class="fl-name">A Train · Susan</span><span class="fl-desc">Rich, deep grape aromatics</span></li>
+        <li><span class="fl-name">B Line · Oolong &amp; Apple</span><span class="fl-desc">Tea and fruit in perfect balance</span></li>
+        <li><span class="fl-name">D Town · Grapefruit &amp; Elderflower</span><span class="fl-desc">Fresh and crisp — the ideal opener</span></li>
+        <li><span class="fl-name">U Square · Pouchong Tea &amp; Guava</span><span class="fl-desc">An elegant tea-liqueur full of Taiwanese character</span></li>
+      </ul>
+      <p class="news-intro">Each box also comes with a professional-grade "cocktail peel mist" (flavour at random) to take the experience one step further.</p>
+      <div class="news-video-wrap">
+        <video id="dtown-news-video" autoplay muted loop playsinline webkit-playsinline preload="auto"
+               poster="../dtown-gift-poster.jpg"
+               aria-label="Letter Series · Craft Cocktail Gift Box video">
+          <source src="../dtown-ambient.mp4" type="video/mp4">
+        </video>
+        <button type="button" id="news-video-sound" class="video-sound-btn" aria-label="Turn on sound">🔇</button>
+      </div>
+      <p class="video-sound-hint">Video is muted by default · tap the speaker to turn on sound</p>
+      <p class="news-note">This site provides product information only and does not offer online transactions; for the suggested price and to purchase, please visit our physical store.</p>
+      <p class="news-warn">No drink driving　•　Excessive drinking harms your health　•　No alcohol under 18</p>
+    </div>
+    <script>
+      (function () {
+        var v = document.getElementById('dtown-news-video');
+        if (!v) return;
+        var soundOn = false;
+        v.muted = true;
+        var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+        tryPlay();
+        var btn = document.getElementById('news-video-sound');
+        if (btn) {
+          btn.addEventListener('click', function () {
+            soundOn = !soundOn;
+            v.muted = !soundOn;
+            if (soundOn) tryPlay();
+            btn.textContent = soundOn ? '🔊' : '🔇';
+            btn.setAttribute('aria-label', soundOn ? 'Turn off sound' : 'Turn on sound');
+          });
+        }
+        if (!('IntersectionObserver' in window)) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              try { v.currentTime = 0; } catch (err) {}
+              v.muted = !soundOn;
+              tryPlay();
+            } else { v.pause(); }
+          });
+        }, { threshold: 0.35 });
+        io.observe(v);
+      })();
+    </script>
   </section>
 
   <!-- ABOUT -->
@@ -1805,7 +1959,7 @@
         <div class="gold-line"></div>
         <p>D Town by A Train is at 2F, No. 2, Lane 49, Sec. 4, Zhongxiao E. Rd., Da'an Dist., Taipei (in the lane beside SOGO), about a 1-minute walk from MRT Zhongxiao Fuxing Station Exit 4.</p>
         <p>If you're looking for an East District bistro & cocktail bar for friends' dinners, after-work gatherings or birthday celebrations, this is the section that matters most — address, getting here, opening hours, minimum charge, payment and reservations all in one place.</p>
-        <p class="visit-notes">Take a quick look at the cards on the right to decide whether to book, then scroll on to the menu and FAQ.</p>
+        <p class="visit-notes">Take a quick look at the cards <span class="vn-pos-desktop">on the right</span><span class="vn-pos-mobile">below</span> to decide whether to book, then scroll on to the menu and FAQ.</p>
       </div>
       <div class="visit-grid">
         <div class="visit-card">
