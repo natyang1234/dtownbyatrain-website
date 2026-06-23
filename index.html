@@ -1672,7 +1672,7 @@
     @media (max-width: 600px) {
       nav { padding: 1rem 1.2rem; }
       .nav-links { gap: 1rem; }
-      .nav-links li:not(:last-child) { display: none; }
+      .nav-links li:not(:last-child):not(:first-child) { display: none; }  /* 手機保留 EN(第一個) 與 訂位(最後) */
       .visit-grid { grid-template-columns: 1fr; }
 
       #food { grid-template-columns: 1fr; }
