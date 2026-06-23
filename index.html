@@ -1806,7 +1806,7 @@
       </ul>
       <p class="news-intro">每盒另附專業級「調酒 Peel 噴霧」（口味隨機），讓微醺的層次再進化一步。</p>
       <div class="news-video-wrap">
-        <video id="dtown-news-video" muted loop playsinline preload="metadata"
+        <video id="dtown-news-video" autoplay muted loop playsinline webkit-playsinline preload="auto"
                poster="dtown-gift-poster.jpg"
                aria-label="字母系列聯名・微醺調酒禮盒影片">
           <source src="dtown-ambient.mp4" type="video/mp4">
@@ -1819,16 +1819,19 @@
       (function () {
         var v = document.getElementById('dtown-news-video');
         if (!v) return;
-        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (reduce || !('IntersectionObserver' in window)) return;
+        v.muted = true;
+        var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+        tryPlay();
+        if (!('IntersectionObserver' in window)) return;
         var io = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) {
             if (e.isIntersecting) {
               try { v.currentTime = 0; } catch (err) {}
-              var p = v.play(); if (p && p.catch) p.catch(function () {});
+              v.muted = true;
+              tryPlay();
             } else { v.pause(); }
           });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.35 });
         io.observe(v);
       })();
     </script>
