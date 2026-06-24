@@ -131,7 +131,7 @@
             "@type": "MenuItem",
             "name": "嫩煎脆皮烤半雞",
             "description": "主廚推薦招牌，脆皮鎖住雞肉原汁，搭配特製醬汁",
-            "offers": { "@type": "Offer", "price": "600", "priceCurrency": "TWD" }
+            "offers": { "@type": "Offer", "price": "480", "priceCurrency": "TWD" }
           }
         },
         {
@@ -319,7 +319,7 @@
       --gold-light: #e2c98a;
       --gold-dim: rgba(200,169,110,0.15);
       --white: #f0ebe0;
-      --grey: #777;
+      --grey: #8a8a8a;
       --grey-light: rgba(240,235,224,0.6);
       --border: #222;
     }
@@ -2044,21 +2044,21 @@
                   <div class="item-name">美國 Prime 肋眼牛排 (6oz)<span class="item-badge">人氣</span></div>
                   <div class="item-sub">U.S. Prime Ribeye Steak</div>
                 </div>
-                <span class="item-price">NT. 1,000</span>
+                <span class="item-price">NT. 800</span>
               </li>
               <li class="menu-item" onclick="switchImg('recommend','鱘龍魚排.jpg','香煎鱘龍魚菲力',this)">
                 <div class="item-left">
                   <div class="item-name">香煎鱘龍魚菲力佐法式檸檬奶油醬</div>
                   <div class="item-sub">Pan-Seared Sturgeon Fillet, Lemon Beurre Blanc</div>
                 </div>
-                <span class="item-price">NT. 580</span>
+                <span class="item-price">NT. 520</span>
               </li>
               <li class="menu-item active" onclick="switchImg('recommend','嫩煎脆皮烤半雞.jpg','嫩煎脆皮烤半雞',this)">
                 <div class="item-left">
                   <div class="item-name">嫩煎脆皮烤半雞</div>
                   <div class="item-sub">Crispy Roasted Half Chicken</div>
                 </div>
-                <span class="item-price">NT. 600</span>
+                <span class="item-price">NT. 480</span>
               </li>
             </ul>
           </div>
@@ -2761,7 +2761,7 @@
   </footer>
 
   <!-- 手機常駐訂位浮動鈕 -->
-  <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2" class="book-fab" target="_blank" rel="noopener" aria-label="線上訂位">立即訂位</a>
+  <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2" class="book-fab" target="_blank" rel="noopener" aria-label="線上訂位"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zm0-13H5V6h14v1zM7 11h5v5H7z"/></svg></a>
 
   <style>
   /* ── 轉換升級 2026-06-24 ── */
@@ -2774,8 +2774,10 @@
   .booking-primary{display:inline-block;margin:0 auto .9rem;background:var(--gold);color:var(--black);text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;padding:1rem 2.8rem;transition:background .2s,transform .15s}
   .booking-primary:hover{background:var(--gold-light);transform:translateY(-2px)}
   .booking-or{color:var(--grey);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;margin:.2rem 0 .4rem}
-  .book-fab{position:fixed;right:1rem;bottom:1rem;z-index:300;display:none;align-items:center;justify-content:center;background:var(--gold);color:var(--black);text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:.15em;padding:.85rem 1.5rem;border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.45);text-transform:uppercase}
-  .book-fab:active{transform:scale(.96)}
+  .book-fab{position:fixed;right:1rem;bottom:1rem;z-index:300;display:none;align-items:center;justify-content:center;width:48px;height:48px;padding:0;border-radius:50%;background:var(--gold);color:var(--black);text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.4);opacity:.92}
+  .book-fab svg{width:22px;height:22px;fill:currentColor}
+  .book-fab:hover{opacity:1}
+  .book-fab:active{transform:scale(.92)}
   @media(max-width:768px){.book-fab{display:inline-flex}}
   </style>
 
