@@ -1792,6 +1792,9 @@
       </h1>
       <p class="hero-tagline">An Evening Worth Staying For.</p>
       <p class="hero-subtitle">忠孝復興站 4 號出口・步行 1 分鐘</p>
+      <a href="https://www.google.com/search?q=D+Town+by+A+Train&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOWm7pRB70ES1G7Scgm0FV9e0nZz1-HX-AzQVXFidlG17MU-knjfilEflLqiell-NQy8XS8UqgsTmuTH5CvxKy0Z7amUvaCZ5mFSOj5Vhqo3vTYf3Lw%3D%3D" class="hero-rating" target="_blank" rel="noopener" aria-label="Google 評論 4.6 顆星，共 1,879 則">
+        <span class="stars">★★★★★</span><span>4.6</span><span class="rc">· 1,879 則 Google 評論</span>
+      </a>
       <div class="btn-group">
         <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2"
            class="btn-gold" target="_blank" rel="noopener">立即訂位</a>
@@ -2502,6 +2505,12 @@
     </div>
   </div>
 
+  <!-- 中段訂位 CTA（看完菜單就能訂） -->
+  <div class="mid-cta">
+    <p>看完菜單，想好要點什麼了嗎？</p>
+    <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2" class="btn-gold" target="_blank" rel="noopener">立即線上訂位</a>
+  </div>
+
   <!-- FAQ -->
   <section id="faq" class="page-section">
     <div class="section-inner">
@@ -2682,6 +2691,8 @@
       <span class="sec-label" style="justify-content:center; margin-bottom:1.5rem;">Reservations</span>
       <h2>An Evening<br>Worth Staying For.</h2>
       <p class="slogan">Good Food <span>·</span> Good Wine <span>·</span> Good Times</p>
+      <a class="booking-primary" href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2" target="_blank" rel="noopener">線上即時訂位</a>
+      <p class="booking-or">或致電訂位</p>
       <a href="tel:+886227212772" class="tel-display">02-2721-2772</a>
       <p class="tel-hint">下午 4 點後致電訂位</p>
       <p class="tel-info">週日到四　18:00-01:30　／　週五六　18:00-02:30<br>低消 NT.600／人　·　+10% 服務費　·　現金・刷卡・行動支付</p>
@@ -2748,6 +2759,25 @@
     </div>
     <p class="footer-copy">© 2026 D Town by A Train · 台北東區餐酒館 · 忠孝復興站</p>
   </footer>
+
+  <!-- 手機常駐訂位浮動鈕 -->
+  <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2" class="book-fab" target="_blank" rel="noopener" aria-label="線上訂位">立即訂位</a>
+
+  <style>
+  /* ── 轉換升級 2026-06-24 ── */
+  .hero-rating{display:inline-flex;align-items:center;gap:.45rem;margin:0 auto 1.6rem;font-size:.82rem;letter-spacing:.04em;color:var(--white);text-decoration:none;border-bottom:1px solid rgba(200,169,110,.25);padding-bottom:.25rem;flex-wrap:wrap;justify-content:center}
+  .hero-rating .stars{color:var(--gold);letter-spacing:.1em}
+  .hero-rating .rc{color:var(--grey-light)}
+  .hero-rating:hover{color:var(--gold-light)}
+  .mid-cta{background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center;padding:3.5rem clamp(1.5rem,5vw,4rem)}
+  .mid-cta p{color:var(--grey-light);font-size:.95rem;letter-spacing:.04em;margin-bottom:1.4rem}
+  .booking-primary{display:inline-block;margin:0 auto .9rem;background:var(--gold);color:var(--black);text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;padding:1rem 2.8rem;transition:background .2s,transform .15s}
+  .booking-primary:hover{background:var(--gold-light);transform:translateY(-2px)}
+  .booking-or{color:var(--grey);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;margin:.2rem 0 .4rem}
+  .book-fab{position:fixed;right:1rem;bottom:1rem;z-index:300;display:none;align-items:center;justify-content:center;background:var(--gold);color:var(--black);text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:.15em;padding:.85rem 1.5rem;border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.45);text-transform:uppercase}
+  .book-fab:active{transform:scale(.96)}
+  @media(max-width:768px){.book-fab{display:inline-flex}}
+  </style>
 
 </body>
 </html>
