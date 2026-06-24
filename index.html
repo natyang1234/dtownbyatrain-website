@@ -2494,7 +2494,7 @@
       </div>
 
       <!-- Lightbox -->
-      <div id="cocktail-lightbox" onclick="closeLightbox()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;padding:1rem;">
+      <div id="cocktail-lightbox" role="dialog" aria-modal="true" aria-label="餐點圖片放大檢視" onclick="closeLightbox()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;padding:1rem;">
         <img id="lb-img" src="" alt="D Town by A Train 餐點放大圖" style="max-width:90vw;max-height:82vh;object-fit:contain;border-radius:4px;box-shadow:0 8px 48px rgba(0,0,0,.6);">
         <div id="lb-tea-cell" style="display:none;"></div>
         <p id="lb-cap" style="color:#ccc;margin-top:1rem;font-size:0.85rem;letter-spacing:.12em;"></p>
@@ -2779,6 +2779,24 @@
   .book-fab:hover{opacity:1}
   .book-fab:active{transform:scale(.92)}
   @media(max-width:768px){.book-fab{display:inline-flex}}
+  </style>
+
+  <script>
+  /* 鍵盤可操作增強 2026-06-24：讓 onclick 元素可用 Tab + Enter/Space 操作 */
+  (function(){
+    var sel='.menu-item[onclick],.cocktail-menu-card[onclick],.tea-cell[onclick],.menu-img-wrap[onclick]';
+    document.querySelectorAll(sel).forEach(function(el){
+      if(el.classList.contains('no-img'))return;
+      if(!el.hasAttribute('tabindex'))el.setAttribute('tabindex','0');
+      if(!el.hasAttribute('role'))el.setAttribute('role','button');
+      el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}});
+    });
+  })();
+  </script>
+  <style>
+  /* 無障礙 focus 樣式 + CLS 防版位位移 */
+  a:focus-visible,button:focus-visible,[role="button"]:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+  .news-video-wrap video{aspect-ratio:9/16}
   </style>
 
 </body>
