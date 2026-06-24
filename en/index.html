@@ -1731,14 +1731,14 @@
     }
   </style>
 
-  <!-- Google Analytics 4 — 換成你的 Measurement ID (格式: G-XXXXXXXXXX) -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <!-- Google Analytics 4 (G-PDTWFFHRPV) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PDTWFFHRPV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script> -->
+    gtag('config', 'G-PDTWFFHRPV');
+  </script>
 </head>
 
 <body>
@@ -2796,6 +2796,34 @@
   a:focus-visible,button:focus-visible,[role="button"]:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
   .news-video-wrap video{aspect-ratio:9/16}
   </style>
+
+  <!-- GA4 訂位/來電/地圖 轉換事件追蹤 -->
+  <script>
+  (function(){
+    if(typeof gtag!=='function')return;
+    var lang=(document.documentElement.lang||'').toLowerCase().indexOf('en')===0?'en':'zh';
+    var device=window.matchMedia('(max-width:768px)').matches?'mobile':'desktop';
+    function loc(a){
+      if(a.classList.contains('book-fab'))return'sticky_fab';
+      if(a.classList.contains('nav-cta'))return'nav';
+      if(a.closest('.mid-cta'))return'mid_cta';
+      if(a.closest('#hero'))return'hero';
+      if(a.closest('#booking'))return'booking';
+      if(a.closest('#visit'))return'visit';
+      if(a.closest('#faq'))return'faq';
+      if(a.closest('footer'))return'footer';
+      return'other';
+    }
+    document.addEventListener('click',function(e){
+      var a=e.target.closest&&e.target.closest('a');if(!a)return;
+      var h=a.getAttribute('href')||'',ev=null;
+      if(h.indexOf('inline.app')>-1)ev='reserve_click';
+      else if(h.indexOf('tel:')===0)ev='tel_click';
+      else if(h.indexOf('maps.google')>-1||h.indexOf('/maps')>-1)ev='map_click';
+      if(ev)gtag('event',ev,{cta_location:loc(a),language:lang,device:device});
+    },true);
+  })();
+  </script>
 
 </body>
 </html>
