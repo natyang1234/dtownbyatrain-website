@@ -1675,8 +1675,10 @@
         padding-bottom: 0.8rem;
         margin-bottom: 0.5rem;
       }
-      /* 餐點圖是 3:4 直式設計卡，完整顯示不裁切（contain 不切，限高避免過高擠壓列表） */
-      .menu-img-wrap img { max-height: 52vh; object-fit: contain; }
+      /* 餐點圖是 3:4 直式設計卡，完整顯示不裁切（contain 不切，限高避免過高擠壓列表）
+         ⚠️ 用 svh 不用 vh：手機滾動時網址列隱藏/顯示會改變 vh → 圖片忽大忽小；
+         svh(small viewport height)是固定值不隨滾動變，避免閃動。px 為舊瀏覽器後備。 */
+      .menu-img-wrap img { max-height: 440px; max-height: 52svh; object-fit: contain; }
 
       #tea .inner { grid-template-columns: 1fr; gap: 3rem; }
 
