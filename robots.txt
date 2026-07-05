@@ -13,4 +13,7 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
 Sitemap: https://natyang1234.github.io/dtownbyatrain-website/sitemap.xml

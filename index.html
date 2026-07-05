@@ -94,7 +94,7 @@
         "@type": "EntryPoint",
         "urlTemplate": "https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2",
         "inLanguage": "zh-TW",
-        "actionPlatform": ["http://schema.org/DesktopWebPlatform","http://schema.org/MobileWebPlatform"]
+        "actionPlatform": ["https://schema.org/DesktopWebPlatform","https://schema.org/MobileWebPlatform"]
       },
       "result": {"@type": "Reservation", "name": "訂位 D Town by A Train"}
     },
@@ -109,14 +109,22 @@
       "https://www.instagram.com/dtownbyatrain/",
       "https://www.facebook.com/DownTownbyATrain/",
       "https://www.threads.net/@dtownbyatrain",
-      "https://maps.google.com/?q=台北市大安區忠孝東路四段49巷2號2樓",
-      "https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2"
+      "https://maps.google.com/?q=台北市大安區忠孝東路四段49巷2號2樓"
     ],
     "amenityFeature": [
       {"@type": "LocationFeatureSpecification", "name": "Pets Allowed", "value": true},
       {"@type": "LocationFeatureSpecification", "name": "Parking", "value": false}
     ],
     "hasMap": "https://maps.google.com/?q=台北市大安區忠孝東路四段49巷2號2樓",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [
+        ".about-content p",
+        "#faq .faq-item:nth-of-type(1)",
+        "#faq .faq-item:nth-of-type(2)",
+        "#faq .faq-item:nth-of-type(3)"
+      ]
+    },
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "D Town 菜單",
