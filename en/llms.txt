@@ -1,5 +1,7 @@
 # D Town by A Train
 
+> Full version (complete menu + full text of 21 FAQs): https://natyang1234.github.io/dtownbyatrain-website/en/llms-full.txt
+
 > A retro British-style gastropub in Taipei's East District ("Alphabet Series" bar). The largest bar space in the East District, about a 1-minute walk from Zhongxiao Fuxing MRT Station Exit 4. An Evening Worth Staying For.
 
 ## Official Facts

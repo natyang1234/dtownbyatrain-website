@@ -1,0 +1,181 @@
+# D Town by A Train — 完整資料（LLM 完整版）
+
+> 本檔為 llms.txt 的完整延伸版，供 AI / LLM 抓取完整店家資訊、全菜單與常見問題全文。內容應與首頁 HTML、JSON-LD 保持一致。
+
+## 店家基本資料
+
+- 店名：D Town by A Train
+- 別名：D-Town by A Train、D-TOWN、字母系列餐酒館 D Town
+- 類型：台式創意餐酒館 / BarOrPub / Restaurant（台北東區「字母系列」餐酒館）
+- 風格：復古英倫風格，台北東區最大空間餐酒館之一
+- 地址：台北市大安區忠孝東路四段 49 巷 2 號 2 樓（SOGO 忠孝館旁巷弄二樓）
+- 入口：面對 Qmomo 右手邊、路燈旁的小門，搭電梯上二樓
+- 最近捷運站：忠孝復興站 4 號出口，步行約 1 分鐘
+- 電話：02-2721-2772（下午 4 點後可撥打訂位）
+- Google Maps：https://maps.google.com/?q=台北市大安區忠孝東路四段49巷2號2樓
+- 官網（中文）：https://natyang1234.github.io/dtownbyatrain-website/
+- 官網（英文）：https://natyang1234.github.io/dtownbyatrain-website/en/
+
+## 營業時間
+
+- 週日到週四：18:00–01:30
+- 週五、週六：18:00–02:30
+
+## 消費資訊
+
+- 低消：NT$600／人
+- 服務費：+10%
+- 付款方式：現金、信用卡、行動支付
+
+## 訂位方式
+
+- 電話訂位：下午 4 點後致電 02-2721-2772
+- 線上訂位：https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2
+
+## 品牌定位
+
+D Town by A Train 位於台北大安區，是適合朋友聚餐、同事聚會、生日慶生與團體包場的東區餐酒館。主打手工特色調酒（可調整甜度／酒感／酸度）、日本和牛、碳烤串燒、生蠔，以及台灣茶葉調製的茶嗨波 Tea Highball（11 種口味）。品牌精神是 Good Food. Good Wine. Good Times.
+
+## 完整菜單（共 45 品項，價格為新台幣）
+
+### 主廚推薦
+
+- 美國 Prime 肋眼牛排 (6oz)（U.S. Prime Ribeye Steak）— NT. 800
+- 香煎鱘龍魚菲力佐法式檸檬奶油醬（Pan-Seared Sturgeon Fillet, Lemon Beurre Blanc）— NT. 520
+- 嫩煎脆皮烤半雞（Crispy Roasted Half Chicken）— NT. 480
+
+### 熱湯
+
+- 清燉牛肉蛤蜊湯（Beef & Clam Clear Soup）— NT. 280
+
+### 甜點
+
+- D Town 特製甜點（D Town Signature Dessert）— NT. 300
+
+### 小點
+
+- 川味口水雞（Sichuan Chilled Chicken with Chili Sauce）— 200 / 300
+- 碳烤櫻桃鴨肉串（Grilled Duck Skewers）— 180 / 320
+- 日式明太子雞肉串（Japanese Mentaiko Chicken Skewers）— 180 / 320
+- 碳烤沙爹雞肉串燒（Charcoal-Grilled Chicken Satay）— 180 / 320
+- 碳烤美國極黑豬里肌（Grilled U.S. Berkshire Pork）— NT. 360
+- 美國牛小排佐油封蒜香醬（Grilled U.S. Prime Short Ribs）— NT. 450
+- 香酥蒜片骰子牛（日本和牛）（Japanese Wagyu Beef Cubes with Crispy Garlic）— NT. 450
+- 嫩煎櫻桃鴨胸佐白蘭地蘋果醬（Pan-seared Cherry Duck Breast with Brandy Apple Sauce）— NT. 380
+- 日本兵庫縣生蠔（Japan Hyōgo Prefecture Oysters）— 160 / 顆
+- 烤澎湖生蠔（5顆）（Grilled Penghu Oysters · 青辣椒醬 / 蒜蓉醬）— NT. 440
+- 碳烤槍烏賊（Chargrilled Cuttlefish）— NT. 380
+- 義式香料炒蛤蜊（Clams Sautéed in Garlic and Italian Herbs）— NT. 380
+- 義式肉丸佐軟法（Italian Meatballs with Baguette）— NT. 260
+- 烤青花筍佐荷蘭醬（Grilled Broccolini with Hollandaise Sauce）— NT. 280
+- 香煎奶油櫛瓜（Pan-seared Zucchini with Butter）— NT. 280
+- XO醬炒花椰菜（Stir-fried Broccoli with XO Sauce）— NT. 300
+- 義式培根炒球芽甘藍（Brussels Sprouts with Italian Bacon）— NT. 320
+- 蒜香炒鮮蝦野菇（Sauteed Mushrooms and Shrimps）— NT. 280
+- 金磚起司豆腐（Deep-Fried Egg Tofu with Cheese Sauce）— NT. 280
+- 德州風味雞翅（Texas Style Chicken Wings）— 200 / 350
+- 韓式奶油蒜香雞翅（Garlic Butter Chicken Wings - Korean Style）— 200 / 350
+- 日式南蠻炸雞（Japanese Fried Chicken Nanban Style）— 200 / 360
+- 饕客雞軟骨（Deep-Fried Chicken Cartilage）— NT. 280
+- 松露薯條（French Fries with Black Truffle Sauce）— 180 / 340
+- 風味薯條（French Fries）— 160 / 280
+- 手作洋芋切片佐莎莎醬（Handmade Potato Chips with Tomato Salsa）— 160 / 280
+- 起司火腿拼盤（Cheese and Charcuterie Platter）— NT. 420
+
+### 輕食沙拉
+
+- 布拉塔起司沙拉羅勒油醋醬（Burrata Salad with Basil Vinaigrette）— NT. 380
+- 燻鮭魚沙拉佐酪梨醬（Smoked Salmon Salad with Avocado）— NT. 400
+- 炭烤牛排凱薩沙拉（Charcoal Steak Caesar Salad）— NT. 420
+- 香煎雞胸凱薩沙拉（Pan-Seared Chicken Caesar Salad）— NT. 360
+
+### 飽食主餐
+
+- 主廚牛排炒飯（Chef's Steak Fried Rice）— NT. 450
+- 日式和牛炊飯（Japanese Wagyu Rice Pot）— NT. 420
+- 無骨牛小排奶油燉飯（Boneless Short Rib Butter Risotto）— NT. 450
+- 干貝鮮蝦青醬燉飯（Scallop & Shrimp Pesto Risotto）— NT. 450
+- 青花椒奶油鮮蝦義大利麵（Sichuan Pepper Cream Shrimp Pasta）— NT. 420
+- 蒜香白酒鮮蝦蛤蜊義大利麵（White Wine Garlic Shrimp & Clam Pasta）— NT. 400
+- 炭烤極黑豬里肌番茄義大利麵（Charcoal Pork Loin Tomato Pasta）— NT. 380
+- 炙燒比目魚鰭邊肉丼飯（Seared Halibut Fin Donburi）— NT. 380
+- 手工豬肉高麗菜水餃（Handmade Pork & Cabbage Dumplings）— NT. 240
+
+註：手工調酒與茶嗨波 Tea Highball 採圖卡選單呈現，不逐項條列價格；茶嗨波共 11 種口味（紀州梅酒、大分麥燒酎、宮崎伯爵燒酎、花壇茉莉香片、名間四季春、宇治煎茶、鹿野蜜香琥珀紅茶、魚池紅玉紅茶、峨眉東方美人、鹿谷焙火烏龍、木柵鐵觀音），所有調酒可依個人喜好調整甜度／酒感／酸度。
+
+## 常見問題全文（21 題）
+
+### D Town by A Train 在哪裡？
+台北市大安區忠孝東路四段 49 巷 2 號 2 樓，鄰近忠孝復興站 4 號出口，步行約 1 分鐘。
+
+### 入口在哪裡？
+面對 Qmomo 右手邊、路燈旁的小門，搭電梯上二樓即到。
+
+### 營業時間是什麼？
+週日到週四 18:00-01:30，週五、週六 18:00-02:30。
+
+### 低消多少？
+每人低消 NT$600，另收 10% 服務費。
+
+### 可以怎麼訂位？
+可於下午 4 點後致電 02-2721-2772，或使用 Inline 線上訂位。
+
+### 有停車位嗎？
+店內無自有停車位，建議搭捷運（忠孝復興站 4 號出口步行約 1 分鐘）。開車前來可停附近的金普頓大安酒店停車場，步行約 3 分鐘即可抵達。
+
+### 可以帶寵物進入嗎？
+歡迎毛小孩一同前來！為了維護用餐環境，請盡量以推車或外出籠攜帶，感謝配合。
+
+### 適合包場或辦私人聚會嗎？
+可接受小型包場與私人聚餐洽詢，詳情請於下午 4 點後來電 02-2721-2772 詢問。
+
+### 適合幾人聚餐？可以坐大桌嗎？
+無論是一個人來享受微醺的 me time、2 人小酌，還是 6–10 人的朋友聚餐、同事聚會都很適合。想坐大桌或多人聚餐，建議提前以電話或 Inline 線上訂位，我們會安排合適的座位。
+
+### 店內空間多大？可以容納多少人？
+D Town by A Train 是台北東區最大空間的餐酒館之一，復古英倫風格、座位寬敞，從 2 人小桌到多人大桌都坐得下，很適合團體聚餐與包場。確切容納人數與包場方案，歡迎於下午 4 點後來電 02-2721-2772 洽詢。
+
+### 可以辦生日慶生或團體聚會嗎？
+可以！生日慶生、團體聚會與私人聚餐都歡迎，能依人數安排座位、調酒與餐點。請於下午 4 點後來電 02-2721-2772 一起規劃。
+
+### 有素食或特殊飲食選項嗎？
+菜單以肉類、海鮮料理為主，素食選項有限。如有特殊需求，建議訂位時先來電告知，我們會盡量協助安排。
+
+### 調酒可以客製化甜度或酒感嗎？
+可以。所有手工特色調酒都可依個人喜好調整甜度、酒感與酸度，讓每一杯更符合你的口味。不知道點什麼，直接告訴服務人員你喜歡的風格，我們幫你推薦。
+
+### D Town 和 A Train 是同一家嗎？
+不是同一家，但是同一個品牌集團旗下的姊妹店。「字母系列」目前共有 A Train、B Line by A Train、C Park by A Train、D Town by A Train、E Village by A Train（東村）、F Gallery by A Train、U Square by A Train 七間，各自獨立運營、各有風格。D Town by A Train 位於忠孝復興站，是其中空間最大的一間。
+
+### 可以自帶生日蛋糕嗎？
+歡迎自帶生日蛋糕前來慶生，不另收切蛋糕服務費。如有特殊慶生需求，歡迎訂位時一併告知。
+
+### 未滿 18 歲可以入場嗎？
+D Town by A Train 為餐酒館，依法未滿 18 歲不提供酒精飲料。歡迎未成年朋友點選非酒精飲品與餐點，陪同成年人一起用餐。
+
+### 茶嗨波 Tea Highball 有哪些口味？
+茶嗨波以台灣各地名茶搭配日本燒酎或梅酒調製，共 11 種口味：01 紀州梅酒、02 大分麥燒酎、03 宮崎伯爵燒酎、04 花壇茉莉香片、05 名間四季春、06 宇治煎茶、07 鹿野蜜香琥珀紅茶、08 魚池紅玉紅茶、09 峨眉東方美人、10 鹿谷焙火烏龍、11 木柵鐵觀音。
+
+### 不訂位可以直接來嗎？
+可以，但週五六與節慶前後座位競爭較激烈，建議提前訂位。若要確保有位，建議於下午 4 點後來電 02-2721-2772，或使用 Inline 線上訂位。現場候位視當日狀況而定。
+
+### 要提前多久訂位？
+平日建議提前 2–3 天，週末建議提前 4–6 天，生日慶生或 6 人以上的聚會建議更早安排。下午 4 點後致電 02-2721-2772 或 Inline 線上訂位。
+
+### 適合約會或情侶嗎？
+適合。燈光偏暗、空間夠大所以不吵，雙人小桌有自己的角落感。如果是第一次來、不確定點什麼，可以直接跟服務人員說喜歡的風格，調酒可以調整甜度和酒感，不用怕踩雷。
+
+### 有沒有包廂？
+沒有獨立包廂，但空間夠大、座位有分區。若有座位上的需求或包場，歡迎下午 4 點後來電 02-2721-2772 討論。
+
+
+## 社群
+
+- Instagram：https://www.instagram.com/dtownbyatrain/
+- Facebook：https://www.facebook.com/DownTownbyATrain/
+- Threads：https://www.threads.net/@dtownbyatrain
+
+## 使用說明
+
+- 這份文件提供給搜尋引擎與 AI 完整抽取餐廳事實、菜單與 FAQ，內容應與首頁、JSON-LD、llms.txt 保持一致。
+- 若營業時間、電話、地址、訂位方式或菜單價格更改，請同步更新本檔、llms.txt 與首頁。

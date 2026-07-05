@@ -1,0 +1,181 @@
+# D Town by A Train — Full Reference (LLM Full Version)
+
+> This file is the extended full version of llms.txt, providing AI/LLM crawlers with complete restaurant facts, the full menu, and the complete FAQ text. Content should stay consistent with the homepage HTML and JSON-LD.
+
+## Restaurant Facts
+
+- Name: D Town by A Train
+- Also known as: D-Town by A Train, D-TOWN
+- Type: Taiwanese creative gastropub / BarOrPub / Restaurant (Taipei East District "Alphabet Series" bar)
+- Style: Retro British style; one of the largest bar spaces in Taipei's East District
+- Address: 2F, No. 2, Lane 49, Section 4, Zhongxiao East Road, Da'an District, Taipei City (a lane beside SOGO Zhongxiao, second floor)
+- Entrance: the small door to the right of Qmomo, next to the street lamp — take the elevator to the 2nd floor
+- Nearest MRT: Zhongxiao Fuxing Station Exit 4, about a 1-minute walk
+- Phone: +886-2-2721-2772 (reservations accepted by phone after 4:00 PM)
+- Google Maps: https://maps.google.com/?q=台北市大安區忠孝東路四段49巷2號2樓
+- Website (Chinese): https://natyang1234.github.io/dtownbyatrain-website/
+- Website (English): https://natyang1234.github.io/dtownbyatrain-website/en/
+
+## Opening Hours
+
+- Sunday to Thursday: 18:00–01:30
+- Friday & Saturday: 18:00–02:30
+
+## Pricing
+
+- Minimum charge: NT$600 per person
+- Service charge: +10%
+- Payment methods: cash, credit card, mobile payment
+
+## Reservations
+
+- By phone: call +886-2-2721-2772 after 4:00 PM
+- Online: https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2
+
+## Brand Positioning
+
+D Town by A Train is located in Da'an District, Taipei. It is an East District gastropub ideal for group dinners, coworker get-togethers, birthday celebrations, and private buyouts. It features handcrafted signature cocktails (sweetness/strength/sourness adjustable to taste), Japanese wagyu, charcoal-grilled skewers, oysters, and Tea Highball made with Taiwanese tea leaves (11 flavors). The brand spirit is Good Food. Good Wine. Good Times.
+
+## Full Menu (45 items total, prices in New Taiwan Dollars)
+
+### Chef's Picks
+
+- U.S. Prime Ribeye Steak (美國 Prime 肋眼牛排 (6oz)) — NT. 800
+- Pan-Seared Sturgeon Fillet, Lemon Beurre Blanc (香煎鱘龍魚菲力佐法式檸檬奶油醬) — NT. 520
+- Crispy Roasted Half Chicken (嫩煎脆皮烤半雞) — NT. 480
+
+### Hot Soup
+
+- Beef & Clam Clear Soup (清燉牛肉蛤蜊湯) — NT. 280
+
+### Dessert
+
+- D Town Signature Dessert (D Town 特製甜點) — NT. 300
+
+### Snack
+
+- Sichuan Chilled Chicken with Chili Sauce (川味口水雞) — 200 / 300
+- Grilled Duck Skewers (碳烤櫻桃鴨肉串) — 180 / 320
+- Japanese Mentaiko Chicken Skewers (日式明太子雞肉串) — 180 / 320
+- Charcoal-Grilled Chicken Satay (碳烤沙爹雞肉串燒) — 180 / 320
+- Grilled U.S. Berkshire Pork (碳烤美國極黑豬里肌) — NT. 360
+- Grilled U.S. Prime Short Ribs (美國牛小排佐油封蒜香醬) — NT. 450
+- Japanese Wagyu Beef Cubes with Crispy Garlic (香酥蒜片骰子牛（日本和牛）) — NT. 450
+- Pan-seared Cherry Duck Breast with Brandy Apple Sauce (嫩煎櫻桃鴨胸佐白蘭地蘋果醬) — NT. 380
+- Japan Hyōgo Prefecture Oysters (日本兵庫縣生蠔) — 160 / 顆
+- Grilled Penghu Oysters · 青辣椒醬 / 蒜蓉醬 (烤澎湖生蠔（5顆）) — NT. 440
+- Chargrilled Cuttlefish (碳烤槍烏賊) — NT. 380
+- Clams Sautéed in Garlic and Italian Herbs (義式香料炒蛤蜊) — NT. 380
+- Italian Meatballs with Baguette (義式肉丸佐軟法) — NT. 260
+- Grilled Broccolini with Hollandaise Sauce (烤青花筍佐荷蘭醬) — NT. 280
+- Pan-seared Zucchini with Butter (香煎奶油櫛瓜) — NT. 280
+- Stir-fried Broccoli with XO Sauce (XO醬炒花椰菜) — NT. 300
+- Brussels Sprouts with Italian Bacon (義式培根炒球芽甘藍) — NT. 320
+- Sauteed Mushrooms and Shrimps (蒜香炒鮮蝦野菇) — NT. 280
+- Deep-Fried Egg Tofu with Cheese Sauce (金磚起司豆腐) — NT. 280
+- Texas Style Chicken Wings (德州風味雞翅) — 200 / 350
+- Garlic Butter Chicken Wings - Korean Style (韓式奶油蒜香雞翅) — 200 / 350
+- Japanese Fried Chicken Nanban Style (日式南蠻炸雞) — 200 / 360
+- Deep-Fried Chicken Cartilage (饕客雞軟骨) — NT. 280
+- French Fries with Black Truffle Sauce (松露薯條) — 180 / 340
+- French Fries (風味薯條) — 160 / 280
+- Handmade Potato Chips with Tomato Salsa (手作洋芋切片佐莎莎醬) — 160 / 280
+- Cheese and Charcuterie Platter (起司火腿拼盤) — NT. 420
+
+### Salads & Light Bites
+
+- Burrata Salad with Basil Vinaigrette (布拉塔起司沙拉羅勒油醋醬) — NT. 380
+- Smoked Salmon Salad with Avocado (燻鮭魚沙拉佐酪梨醬) — NT. 400
+- Charcoal Steak Caesar Salad (炭烤牛排凱薩沙拉) — NT. 420
+- Pan-Seared Chicken Caesar Salad (香煎雞胸凱薩沙拉) — NT. 360
+
+### Main Courses
+
+- Chef's Steak Fried Rice (主廚牛排炒飯) — NT. 450
+- Japanese Wagyu Rice Pot (日式和牛炊飯) — NT. 420
+- Boneless Short Rib Butter Risotto (無骨牛小排奶油燉飯) — NT. 450
+- Scallop & Shrimp Pesto Risotto (干貝鮮蝦青醬燉飯) — NT. 450
+- Sichuan Pepper Cream Shrimp Pasta (青花椒奶油鮮蝦義大利麵) — NT. 420
+- White Wine Garlic Shrimp & Clam Pasta (蒜香白酒鮮蝦蛤蜊義大利麵) — NT. 400
+- Charcoal Pork Loin Tomato Pasta (炭烤極黑豬里肌番茄義大利麵) — NT. 380
+- Seared Halibut Fin Donburi (炙燒比目魚鰭邊肉丼飯) — NT. 380
+- Handmade Pork & Cabbage Dumplings (手工豬肉高麗菜水餃) — NT. 240
+
+Note: Cocktails and Tea Highball are presented as image-card menus without individually listed prices; Tea Highball comes in 11 flavors (Kishu plum wine, Oita barley shochu, Miyazaki earl grey shochu, Huatan jasmine, Mingjian four seasons spring, Uji sencha, Luye honey amber black tea, Yuchi ruby black tea, Emei oriental beauty, Lugu roasted oolong, Muzha tieguanyin). All cocktails can be adjusted for sweetness/strength/sourness to taste.
+
+## Full FAQ (21 questions)
+
+### Where is D Town by A Train located?
+2F, No. 2, Lane 49, Sec. 4, Zhongxiao E. Rd., Da'an Dist., Taipei. It's about a 1-minute walk from MRT Zhongxiao Fuxing Station Exit 4.
+
+### Where is the entrance?
+Facing Qmomo, look to your right for the small door next to the street lamp. Take the elevator up to the 2nd floor and you're here.
+
+### What are the opening hours?
+Sunday to Thursday 18:00–01:30, Friday and Saturday 18:00–02:30.
+
+### What is the minimum charge?
+There is a minimum charge of NT$600 per person, plus a 10% service charge.
+
+### How can I make a reservation?
+Call us at 02-2721-2772 after 4 PM, or book online through Inline.
+
+### Is there parking available?
+We don't have our own parking, so we recommend taking the MRT (about a 1-minute walk from Zhongxiao Fuxing Station Exit 4). If you're driving, you can park at the nearby Kimpton Da An Hotel car park, about a 3-minute walk away.
+
+### Are pets allowed?
+Furry friends are welcome! To keep the dining environment comfortable for everyone, please bring them in a pet stroller or carrier where possible. Thank you for your cooperation.
+
+### Do you host private events and gatherings?
+We welcome enquiries for small private buyouts and private dining. For details, please call us at 02-2721-2772 after 4 PM.
+
+### How many people is it suited for, and can you seat large tables?
+Whether you're coming solo for a little me time over a drink, sharing a quiet round for two, or gathering 6–10 friends or colleagues, it's a great fit. For large tables or bigger groups, we recommend booking ahead by phone or via Inline so we can arrange the right seating for you.
+
+### How big is the venue and how many people can it hold?
+D Town by A Train is one of the largest bistro & cocktail bars in Taipei's East District — retro-British in style with generous, spacious seating that suits everything from a table for two to large group tables, making it ideal for group dining and private buyouts. For exact capacity and buyout options, please call us at 02-2721-2772 after 4 PM.
+
+### Can I host a birthday celebration or group party?
+Absolutely! Birthday celebrations, group parties and private dinners are all welcome — we can arrange seating, cocktails and food to match your party size. Call us at 02-2721-2772 after 4 PM and let's plan it together.
+
+### Are there vegetarian or special dietary options?
+Our menu centres on meat and seafood dishes, so vegetarian options are limited. If you have special dietary needs, we recommend letting us know by phone when you book, and we'll do our best to accommodate you.
+
+### Can I customise the sweetness or alcohol level of my cocktail?
+Yes. All handcrafted cocktails can be adjusted for sweetness, strength and acidity to match your taste. Not sure what to order? Just tell the staff what style you enjoy and they'll recommend something.
+
+### Is D Town the same restaurant as A Train?
+They're not the same venue, but they're sister restaurants under the same brand group. The Alphabet Series currently has seven locations: A Train, B Line by A Train, C Park by A Train, D Town by A Train, E Village by A Train, F Gallery by A Train, and U Square by A Train — each independently operated with its own style. D Town by A Train at Zhongxiao Fuxing is the largest of the group.
+
+### Can I bring my own birthday cake?
+You're welcome to bring a birthday cake — no cake-cutting fee applies. If you have special birthday arrangements in mind, feel free to mention it when you reserve.
+
+### Are guests under 18 allowed?
+D Town by A Train is a gastropub. By law, alcohol cannot be served to guests under 18. Minors are welcome to dine alongside adults and enjoy non-alcoholic drinks and food.
+
+### What flavours does the Tea Highball come in?
+The Tea Highball series pairs Taiwanese specialty teas with Japanese shochu or plum wine, across 11 flavours: Kishu Plum Wine, Oita Wheat Shochu, Miyazaki Earl Grey Shochu, Huatan Jasmine, Mingjian Four Seasons Oolong, Uji Sencha, Luye Honey-Scented Amber, Yuchi Ruby Black Tea, Emei Oriental Beauty, Lugu Roasted Oolong, and Muzha Tieguanyin.
+
+### Can I walk in without a reservation?
+Yes, but Friday and Saturday nights and busy holiday periods fill up quickly. To guarantee a seat, call after 4 PM at 02-2721-2772 or book online via Inline. Walk-in availability depends on the day.
+
+### How far in advance should I book?
+For weekdays, 2–3 days ahead is usually enough. For weekends, 4–6 days is recommended. Birthday celebrations or groups of 6 or more should book earlier. Call after 4 PM at 02-2721-2772 or use Inline online booking.
+
+### Is D Town good for a date?
+Yes. The lighting is dim, the space is large enough to keep things quiet, and two-person tables have their own corner feel. If you're not sure what to order, just tell the staff what you enjoy — cocktails can be adjusted for sweetness and strength, so there's no wrong choice.
+
+### Is there a private room?
+There's no separate private room, but the space is large with distinct seating zones. If you have specific seating needs or are interested in a full buyout, call after 4 PM at 02-2721-2772 to discuss.
+
+
+## Social
+
+- Instagram: https://www.instagram.com/dtownbyatrain/
+- Facebook: https://www.facebook.com/DownTownbyATrain/
+- Threads: https://www.threads.net/@dtownbyatrain
+
+## Usage Notes
+
+- This file is provided for search engines and AI systems to extract complete restaurant facts, the full menu, and FAQ. Content should stay consistent with the homepage, JSON-LD, and llms.txt.
+- If opening hours, phone, address, reservation method, or menu prices change, update this file, llms.txt, and the homepage together.
