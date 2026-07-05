@@ -1310,6 +1310,41 @@
       line-height: 1.9;
     }
 
+    .visit-map-wrap {
+      grid-column: 1 / -1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .visit-map-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 260px;
+      border: 0;
+      filter: grayscale(0.2) contrast(1.05);
+    }
+
+    .visit-map-link {
+      display: block;
+      text-align: center;
+      padding: 0.7rem 0.5rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      color: var(--grey-light);
+      text-decoration: none;
+      border-top: 1px solid var(--border);
+    }
+
+    .visit-map-link:hover {
+      color: var(--gold-light);
+    }
+
+    @media (max-width: 700px) {
+      .visit-map-wrap iframe { height: 220px; }
+    }
+
     .faq-list {
       margin-top: 2.2rem;
       border-top: 1px solid var(--border);
@@ -2412,119 +2447,6 @@
     </div>
   </section>
 
-  <!-- Latest News: Letter Series Craft Cocktail Gift Box (video autoplays on scroll) -->
-  <section id="latest-news" class="page-section page-section-alt">
-    <style>
-      #latest-news .section-inner { text-align: center; }
-      #latest-news .gold-line { margin-left: auto; margin-right: auto; }
-      #latest-news .news-sub {
-        color: var(--gold); font-size: 1.35rem; letter-spacing: 0.06em;
-        margin: 0.4rem 0 1.1rem; font-weight: 600;
-      }
-      #latest-news .news-intro {
-        max-width: 60ch; margin: 0 auto 1.8rem;
-        color: var(--grey-light); font-size: 0.98rem; line-height: 2;
-      }
-      #latest-news .news-flavors {
-        list-style: none; padding: 0; max-width: 560px;
-        margin: 0 auto 1.8rem; text-align: left;
-      }
-      #latest-news .news-flavors li {
-        display: flex; flex-direction: column;
-        padding: 0.7rem 0; border-bottom: 1px solid var(--gold-dim);
-      }
-      #latest-news .fl-name { color: var(--gold); font-weight: 600; letter-spacing: 0.04em; }
-      #latest-news .fl-desc { color: var(--grey-light); font-size: 0.9rem; margin-top: 0.25rem; }
-      #latest-news .news-note {
-        max-width: 60ch; margin: 1.6rem auto 0;
-        color: var(--grey-light); font-size: 0.85rem; line-height: 1.9;
-      }
-      #latest-news .news-warn {
-        margin-top: 0.6rem; color: rgba(240,235,224,0.45);
-        font-size: 0.78rem; letter-spacing: 0.05em;
-      }
-      .news-video-wrap {
-        position: relative;
-        max-width: 360px; margin: 0 auto; border-radius: 6px; overflow: hidden;
-        background: #000; border: 1px solid var(--gold-dim);
-        box-shadow: 0 10px 48px rgba(0,0,0,0.45);
-      }
-      .news-video-wrap video { display: block; width: 100%; height: auto; }
-      .video-sound-btn {
-        position: absolute; bottom: 12px; right: 12px; z-index: 2;
-        width: 44px; height: 44px; border-radius: 50%; font-size: 1.15rem; line-height: 1;
-        background: rgba(0,0,0,0.55); border: 1px solid var(--gold-dim); cursor: pointer;
-        display: flex; align-items: center; justify-content: center;
-        -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); transition: transform .1s;
-      }
-      .video-sound-btn:active { transform: scale(0.94); }
-      .video-sound-hint {
-        margin: 0.7rem auto 0; color: rgba(240,235,224,0.45);
-        font-size: 0.75rem; letter-spacing: 0.04em;
-      }
-      @media (max-width: 700px) {
-        #hero { min-height: 80vh; }
-        #latest-news { padding-top: 2.4rem; padding-bottom: 3rem; }
-      }
-    </style>
-    <div class="section-inner">
-      <span class="section-kicker">What's New</span>
-      <h2>Latest News</h2>
-      <div class="gold-line"></div>
-      <p class="news-sub">Letter Series Collab · Craft Cocktail Gift Box</p>
-      <p class="news-intro">The Letter Series comes together for the first time. A Train, B Line, D Town and U Square miniaturise their most iconic signature flavours into a collaborative "Craft Cocktail Gift Box" — no need to wait for a table; open your own Home Bar right at home.</p>
-      <ul class="news-flavors">
-        <li><span class="fl-name">A Train · Susan</span><span class="fl-desc">Rich, deep grape aromatics</span></li>
-        <li><span class="fl-name">B Line · Oolong &amp; Apple</span><span class="fl-desc">Tea and fruit in perfect balance</span></li>
-        <li><span class="fl-name">D Town · Grapefruit &amp; Elderflower</span><span class="fl-desc">Fresh and crisp — the ideal opener</span></li>
-        <li><span class="fl-name">U Square · Pouchong Tea &amp; Guava</span><span class="fl-desc">An elegant tea-liqueur full of Taiwanese character</span></li>
-      </ul>
-      <p class="news-intro">Each box also comes with a professional-grade "cocktail peel mist" (flavour at random) to take the experience one step further.</p>
-      <div class="news-video-wrap">
-        <video id="dtown-news-video" autoplay muted loop playsinline webkit-playsinline preload="auto"
-               poster="../dtown-gift-poster.jpg"
-               aria-label="Letter Series · Craft Cocktail Gift Box video">
-          <source src="../dtown-ambient.mp4" type="video/mp4">
-        </video>
-        <button type="button" id="news-video-sound" class="video-sound-btn" aria-label="Turn on sound">🔇</button>
-      </div>
-      <p class="video-sound-hint">Video is muted by default · tap the speaker to turn on sound</p>
-      <p class="news-note">This site provides product information only and does not offer online transactions; for the suggested price and to purchase, please visit our physical store.</p>
-      <p class="news-warn">No drink driving　•　Excessive drinking harms your health　•　No alcohol under 18</p>
-    </div>
-    <script>
-      (function () {
-        var v = document.getElementById('dtown-news-video');
-        if (!v) return;
-        var soundOn = false;
-        v.muted = true;
-        var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
-        tryPlay();
-        var btn = document.getElementById('news-video-sound');
-        if (btn) {
-          btn.addEventListener('click', function () {
-            soundOn = !soundOn;
-            v.muted = !soundOn;
-            if (soundOn) tryPlay();
-            btn.textContent = soundOn ? '🔊' : '🔇';
-            btn.setAttribute('aria-label', soundOn ? 'Turn off sound' : 'Turn on sound');
-          });
-        }
-        if (!('IntersectionObserver' in window)) return;
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting) {
-              try { v.currentTime = 0; } catch (err) {}
-              v.muted = !soundOn;
-              tryPlay();
-            } else { v.pause(); }
-          });
-        }, { threshold: 0.35 });
-        io.observe(v);
-      })();
-    </script>
-  </section>
-
   <!-- ABOUT -->
   <section id="about">
     <div class="about-images">
@@ -2621,6 +2543,15 @@
         <div class="visit-card">
           <span class="label">Reservations</span>
           <div class="value"><a href="tel:+886227212772">02-2721-2772</a><br>Call after 4 PM, or book online via Inline</div>
+        </div>
+        <div class="visit-map-wrap">
+          <iframe
+            src="https://www.google.com/maps?q=%E5%8F%B0%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E5%BF%A0%E5%AD%9D%E6%9D%B1%E8%B7%AF%E5%9B%9B%E6%AE%B549%E5%B7%B72%E8%99%9F2%E6%A8%93&output=embed"
+            loading="lazy"
+            title="D Town by A Train location map: 2F, No. 2, Lane 49, Sec. 4, Zhongxiao E. Rd., Da'an Dist., Taipei"
+            referrerpolicy="no-referrer-when-downgrade"
+            aria-label="D Town by A Train Google Maps location"></iframe>
+          <a class="visit-map-link" href="https://maps.google.com/?q=台北市大安區忠孝東路四段49巷2號2樓" target="_blank" rel="noopener">Open in Google Maps →</a>
         </div>
       </div>
     </div>
@@ -3138,6 +3069,119 @@
     <p>Seen the menu? Ready to pick your table?</p>
     <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2" class="btn-gold" target="_blank" rel="noopener">Book Online Now</a>
   </div>
+
+  <!-- Latest News: Letter Series Craft Cocktail Gift Box (video autoplays on scroll) -->
+  <section id="latest-news" class="page-section page-section-alt">
+    <style>
+      #latest-news .section-inner { text-align: center; }
+      #latest-news .gold-line { margin-left: auto; margin-right: auto; }
+      #latest-news .news-sub {
+        color: var(--gold); font-size: 1.35rem; letter-spacing: 0.06em;
+        margin: 0.4rem 0 1.1rem; font-weight: 600;
+      }
+      #latest-news .news-intro {
+        max-width: 60ch; margin: 0 auto 1.8rem;
+        color: var(--grey-light); font-size: 0.98rem; line-height: 2;
+      }
+      #latest-news .news-flavors {
+        list-style: none; padding: 0; max-width: 560px;
+        margin: 0 auto 1.8rem; text-align: left;
+      }
+      #latest-news .news-flavors li {
+        display: flex; flex-direction: column;
+        padding: 0.7rem 0; border-bottom: 1px solid var(--gold-dim);
+      }
+      #latest-news .fl-name { color: var(--gold); font-weight: 600; letter-spacing: 0.04em; }
+      #latest-news .fl-desc { color: var(--grey-light); font-size: 0.9rem; margin-top: 0.25rem; }
+      #latest-news .news-note {
+        max-width: 60ch; margin: 1.6rem auto 0;
+        color: var(--grey-light); font-size: 0.85rem; line-height: 1.9;
+      }
+      #latest-news .news-warn {
+        margin-top: 0.6rem; color: rgba(240,235,224,0.45);
+        font-size: 0.78rem; letter-spacing: 0.05em;
+      }
+      .news-video-wrap {
+        position: relative;
+        max-width: 360px; margin: 0 auto; border-radius: 6px; overflow: hidden;
+        background: #000; border: 1px solid var(--gold-dim);
+        box-shadow: 0 10px 48px rgba(0,0,0,0.45);
+      }
+      .news-video-wrap video { display: block; width: 100%; height: auto; }
+      .video-sound-btn {
+        position: absolute; bottom: 12px; right: 12px; z-index: 2;
+        width: 44px; height: 44px; border-radius: 50%; font-size: 1.15rem; line-height: 1;
+        background: rgba(0,0,0,0.55); border: 1px solid var(--gold-dim); cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); transition: transform .1s;
+      }
+      .video-sound-btn:active { transform: scale(0.94); }
+      .video-sound-hint {
+        margin: 0.7rem auto 0; color: rgba(240,235,224,0.45);
+        font-size: 0.75rem; letter-spacing: 0.04em;
+      }
+      @media (max-width: 700px) {
+        #hero { min-height: 80vh; }
+        #latest-news { padding-top: 2.4rem; padding-bottom: 3rem; }
+      }
+    </style>
+    <div class="section-inner">
+      <span class="section-kicker">What's New</span>
+      <h2>Latest News</h2>
+      <div class="gold-line"></div>
+      <p class="news-sub">Letter Series Collab · Craft Cocktail Gift Box</p>
+      <p class="news-intro">The Letter Series comes together for the first time. A Train, B Line, D Town and U Square miniaturise their most iconic signature flavours into a collaborative "Craft Cocktail Gift Box" — no need to wait for a table; open your own Home Bar right at home.</p>
+      <ul class="news-flavors">
+        <li><span class="fl-name">A Train · Susan</span><span class="fl-desc">Rich, deep grape aromatics</span></li>
+        <li><span class="fl-name">B Line · Oolong &amp; Apple</span><span class="fl-desc">Tea and fruit in perfect balance</span></li>
+        <li><span class="fl-name">D Town · Grapefruit &amp; Elderflower</span><span class="fl-desc">Fresh and crisp — the ideal opener</span></li>
+        <li><span class="fl-name">U Square · Pouchong Tea &amp; Guava</span><span class="fl-desc">An elegant tea-liqueur full of Taiwanese character</span></li>
+      </ul>
+      <p class="news-intro">Each box also comes with a professional-grade "cocktail peel mist" (flavour at random) to take the experience one step further.</p>
+      <div class="news-video-wrap">
+        <video id="dtown-news-video" autoplay muted loop playsinline webkit-playsinline preload="auto"
+               poster="../dtown-gift-poster.jpg"
+               aria-label="Letter Series · Craft Cocktail Gift Box video">
+          <source src="../dtown-ambient.mp4" type="video/mp4">
+        </video>
+        <button type="button" id="news-video-sound" class="video-sound-btn" aria-label="Turn on sound">🔇</button>
+      </div>
+      <p class="video-sound-hint">Video is muted by default · tap the speaker to turn on sound</p>
+      <p class="news-note">This site provides product information only and does not offer online transactions; for the suggested price and to purchase, please visit our physical store.</p>
+      <p class="news-warn">No drink driving　•　Excessive drinking harms your health　•　No alcohol under 18</p>
+    </div>
+    <script>
+      (function () {
+        var v = document.getElementById('dtown-news-video');
+        if (!v) return;
+        var soundOn = false;
+        v.muted = true;
+        var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+        tryPlay();
+        var btn = document.getElementById('news-video-sound');
+        if (btn) {
+          btn.addEventListener('click', function () {
+            soundOn = !soundOn;
+            v.muted = !soundOn;
+            if (soundOn) tryPlay();
+            btn.textContent = soundOn ? '🔊' : '🔇';
+            btn.setAttribute('aria-label', soundOn ? 'Turn off sound' : 'Turn on sound');
+          });
+        }
+        if (!('IntersectionObserver' in window)) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              try { v.currentTime = 0; } catch (err) {}
+              v.muted = !soundOn;
+              tryPlay();
+            } else { v.pause(); }
+          });
+        }, { threshold: 0.35 });
+        io.observe(v);
+      })();
+    </script>
+  </section>
 
   <!-- FAQ -->
   <section id="faq" class="page-section">

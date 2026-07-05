@@ -1310,6 +1310,41 @@
       line-height: 1.9;
     }
 
+    .visit-map-wrap {
+      grid-column: 1 / -1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .visit-map-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 260px;
+      border: 0;
+      filter: grayscale(0.2) contrast(1.05);
+    }
+
+    .visit-map-link {
+      display: block;
+      text-align: center;
+      padding: 0.7rem 0.5rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      color: var(--grey-light);
+      text-decoration: none;
+      border-top: 1px solid var(--border);
+    }
+
+    .visit-map-link:hover {
+      color: var(--gold-light);
+    }
+
+    @media (max-width: 700px) {
+      .visit-map-wrap iframe { height: 220px; }
+    }
+
     .faq-list {
       margin-top: 2.2rem;
       border-top: 1px solid var(--border);
@@ -2412,121 +2447,6 @@
     </div>
   </section>
 
-  <!-- 最新動態：字母系列聯名禮盒（影片滑到自動播放） -->
-  <section id="latest-news" class="page-section page-section-alt">
-    <style>
-      #latest-news .section-inner { text-align: center; }
-      #latest-news .gold-line { margin-left: auto; margin-right: auto; }
-      #latest-news .news-sub {
-        color: var(--gold); font-size: 1.35rem; letter-spacing: 0.06em;
-        margin: 0.4rem 0 1.1rem; font-weight: 600;
-      }
-      #latest-news .news-intro {
-        max-width: 60ch; margin: 0 auto 1.8rem;
-        color: var(--grey-light); font-size: 0.98rem; line-height: 2;
-      }
-      #latest-news .news-flavors {
-        list-style: none; padding: 0; max-width: 560px;
-        margin: 0 auto 1.8rem; text-align: left;
-      }
-      #latest-news .news-flavors li {
-        display: flex; flex-direction: column;
-        padding: 0.7rem 0; border-bottom: 1px solid var(--gold-dim);
-      }
-      #latest-news .fl-name { color: var(--gold); font-weight: 600; letter-spacing: 0.04em; }
-      #latest-news .fl-desc { color: var(--grey-light); font-size: 0.9rem; margin-top: 0.25rem; }
-      #latest-news .news-note {
-        max-width: 60ch; margin: 1.6rem auto 0;
-        color: var(--grey-light); font-size: 0.85rem; line-height: 1.9;
-      }
-      #latest-news .news-warn {
-        margin-top: 0.6rem; color: rgba(240,235,224,0.45);
-        font-size: 0.78rem; letter-spacing: 0.05em;
-      }
-      .news-video-wrap {
-        position: relative;
-        max-width: 360px; margin: 0 auto; border-radius: 6px; overflow: hidden;
-        background: #000; border: 1px solid var(--gold-dim);
-        box-shadow: 0 10px 48px rgba(0,0,0,0.45);
-      }
-      .news-video-wrap video { display: block; width: 100%; height: auto; }
-      .video-sound-btn {
-        position: absolute; bottom: 12px; right: 12px; z-index: 2;
-        width: 44px; height: 44px; border-radius: 50%; font-size: 1.15rem; line-height: 1;
-        background: rgba(0,0,0,0.55); border: 1px solid var(--gold-dim); cursor: pointer;
-        display: flex; align-items: center; justify-content: center;
-        -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); transition: transform .1s;
-      }
-      .video-sound-btn:active { transform: scale(0.94); }
-      .video-sound-hint {
-        margin: 0.7rem auto 0; color: rgba(240,235,224,0.45);
-        font-size: 0.75rem; letter-spacing: 0.04em;
-      }
-      /* 手機：縮小 hero 下方與本區的間距 */
-      @media (max-width: 700px) {
-        #hero { min-height: 80vh; }
-        #latest-news { padding-top: 2.4rem; padding-bottom: 3rem; }
-      }
-    </style>
-    <div class="section-inner">
-      <span class="section-kicker">What's New</span>
-      <h2>最新動態</h2>
-      <div class="gold-line"></div>
-      <p class="news-sub">字母系列聯名・微醺調酒禮盒</p>
-      <p class="news-intro">字母系列首度集結。A Train、B Line、D Town、U Square 四間餐酒館，將店內最經典的靈魂風味縮小裝瓶，推出聯名「微醺調酒禮盒」——不必現場候位，在家也能開啟屬於自己的 Home Bar 時光。</p>
-      <ul class="news-flavors">
-        <li><span class="fl-name">A Train · Susan</span><span class="fl-desc">濃郁葡萄香氣，層次深邃</span></li>
-        <li><span class="fl-name">B Line · 烏龍 &amp; 蘋果</span><span class="fl-desc">茶香與果甜，平衡得恰到好處</span></li>
-        <li><span class="fl-name">D Town · 葡萄柚 &amp; 接骨木</span><span class="fl-desc">清新爽口，最適合第一杯的開場</span></li>
-        <li><span class="fl-name">U Square · 包種茶 &amp; 芭樂</span><span class="fl-desc">充滿台灣味的優雅茶酒</span></li>
-      </ul>
-      <p class="news-intro">每盒另附專業級「調酒 Peel 噴霧」（口味隨機），讓微醺的層次再進化一步。</p>
-      <div class="news-video-wrap">
-        <video id="dtown-news-video" autoplay muted loop playsinline webkit-playsinline preload="auto"
-               poster="dtown-gift-poster.jpg"
-               aria-label="字母系列聯名・微醺調酒禮盒影片">
-          <source src="dtown-ambient.mp4" type="video/mp4">
-        </video>
-        <button type="button" id="news-video-sound" class="video-sound-btn" aria-label="開啟聲音">🔇</button>
-      </div>
-      <p class="video-sound-hint">影片預設靜音 · 點右下角喇叭開啟聲音</p>
-      <p class="news-note">本站僅提供商品資訊，不提供線上交易；建議售價與購買請洽實體門市現場選購。</p>
-      <p class="news-warn">禁止酒駕　•　飲酒過量有害健康　•　未滿十八歲禁止飲酒</p>
-    </div>
-    <script>
-      (function () {
-        var v = document.getElementById('dtown-news-video');
-        if (!v) return;
-        var soundOn = false;                 // 使用者是否已開啟聲音
-        v.muted = true;
-        var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
-        tryPlay();
-        // 聲音 / 播放備援按鈕：點一下開聲音（並確保播放）；再點關聲音
-        var btn = document.getElementById('news-video-sound');
-        if (btn) {
-          btn.addEventListener('click', function () {
-            soundOn = !soundOn;
-            v.muted = !soundOn;
-            if (soundOn) tryPlay();
-            btn.textContent = soundOn ? '🔊' : '🔇';
-            btn.setAttribute('aria-label', soundOn ? '關閉聲音' : '開啟聲音');
-          });
-        }
-        if (!('IntersectionObserver' in window)) return;
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting) {
-              try { v.currentTime = 0; } catch (err) {}
-              v.muted = !soundOn;            // 尊重使用者的聲音選擇
-              tryPlay();
-            } else { v.pause(); }
-          });
-        }, { threshold: 0.35 });
-        io.observe(v);
-      })();
-    </script>
-  </section>
-
   <!-- ABOUT -->
   <section id="about">
     <div class="about-images">
@@ -2623,6 +2543,15 @@
         <div class="visit-card">
           <span class="label">訂位</span>
           <div class="value"><a href="tel:+886227212772">02-2721-2772</a><br>下午 4 點後致電，或使用 Inline 線上訂位</div>
+        </div>
+        <div class="visit-map-wrap">
+          <iframe
+            src="https://www.google.com/maps?q=%E5%8F%B0%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E5%BF%A0%E5%AD%9D%E6%9D%B1%E8%B7%AF%E5%9B%9B%E6%AE%B549%E5%B7%B72%E8%99%9F2%E6%A8%93&output=embed"
+            loading="lazy"
+            title="D Town by A Train 地圖位置：台北市大安區忠孝東路四段49巷2號2樓"
+            referrerpolicy="no-referrer-when-downgrade"
+            aria-label="D Town by A Train Google 地圖位置"></iframe>
+          <a class="visit-map-link" href="https://maps.google.com/?q=台北市大安區忠孝東路四段49巷2號2樓" target="_blank" rel="noopener">在 Google 地圖開啟 →</a>
         </div>
       </div>
     </div>
@@ -3140,6 +3069,121 @@
     <p>看完菜單，想好要點什麼了嗎？</p>
     <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2" class="btn-gold" target="_blank" rel="noopener">立即線上訂位</a>
   </div>
+
+  <!-- 最新動態：字母系列聯名禮盒（影片滑到自動播放） -->
+  <section id="latest-news" class="page-section page-section-alt">
+    <style>
+      #latest-news .section-inner { text-align: center; }
+      #latest-news .gold-line { margin-left: auto; margin-right: auto; }
+      #latest-news .news-sub {
+        color: var(--gold); font-size: 1.35rem; letter-spacing: 0.06em;
+        margin: 0.4rem 0 1.1rem; font-weight: 600;
+      }
+      #latest-news .news-intro {
+        max-width: 60ch; margin: 0 auto 1.8rem;
+        color: var(--grey-light); font-size: 0.98rem; line-height: 2;
+      }
+      #latest-news .news-flavors {
+        list-style: none; padding: 0; max-width: 560px;
+        margin: 0 auto 1.8rem; text-align: left;
+      }
+      #latest-news .news-flavors li {
+        display: flex; flex-direction: column;
+        padding: 0.7rem 0; border-bottom: 1px solid var(--gold-dim);
+      }
+      #latest-news .fl-name { color: var(--gold); font-weight: 600; letter-spacing: 0.04em; }
+      #latest-news .fl-desc { color: var(--grey-light); font-size: 0.9rem; margin-top: 0.25rem; }
+      #latest-news .news-note {
+        max-width: 60ch; margin: 1.6rem auto 0;
+        color: var(--grey-light); font-size: 0.85rem; line-height: 1.9;
+      }
+      #latest-news .news-warn {
+        margin-top: 0.6rem; color: rgba(240,235,224,0.45);
+        font-size: 0.78rem; letter-spacing: 0.05em;
+      }
+      .news-video-wrap {
+        position: relative;
+        max-width: 360px; margin: 0 auto; border-radius: 6px; overflow: hidden;
+        background: #000; border: 1px solid var(--gold-dim);
+        box-shadow: 0 10px 48px rgba(0,0,0,0.45);
+      }
+      .news-video-wrap video { display: block; width: 100%; height: auto; }
+      .video-sound-btn {
+        position: absolute; bottom: 12px; right: 12px; z-index: 2;
+        width: 44px; height: 44px; border-radius: 50%; font-size: 1.15rem; line-height: 1;
+        background: rgba(0,0,0,0.55); border: 1px solid var(--gold-dim); cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); transition: transform .1s;
+      }
+      .video-sound-btn:active { transform: scale(0.94); }
+      .video-sound-hint {
+        margin: 0.7rem auto 0; color: rgba(240,235,224,0.45);
+        font-size: 0.75rem; letter-spacing: 0.04em;
+      }
+      /* 手機：縮小 hero 下方與本區的間距 */
+      @media (max-width: 700px) {
+        #hero { min-height: 80vh; }
+        #latest-news { padding-top: 2.4rem; padding-bottom: 3rem; }
+      }
+    </style>
+    <div class="section-inner">
+      <span class="section-kicker">What's New</span>
+      <h2>最新動態</h2>
+      <div class="gold-line"></div>
+      <p class="news-sub">字母系列聯名・微醺調酒禮盒</p>
+      <p class="news-intro">字母系列首度集結。A Train、B Line、D Town、U Square 四間餐酒館，將店內最經典的靈魂風味縮小裝瓶，推出聯名「微醺調酒禮盒」——不必現場候位，在家也能開啟屬於自己的 Home Bar 時光。</p>
+      <ul class="news-flavors">
+        <li><span class="fl-name">A Train · Susan</span><span class="fl-desc">濃郁葡萄香氣，層次深邃</span></li>
+        <li><span class="fl-name">B Line · 烏龍 &amp; 蘋果</span><span class="fl-desc">茶香與果甜，平衡得恰到好處</span></li>
+        <li><span class="fl-name">D Town · 葡萄柚 &amp; 接骨木</span><span class="fl-desc">清新爽口，最適合第一杯的開場</span></li>
+        <li><span class="fl-name">U Square · 包種茶 &amp; 芭樂</span><span class="fl-desc">充滿台灣味的優雅茶酒</span></li>
+      </ul>
+      <p class="news-intro">每盒另附專業級「調酒 Peel 噴霧」（口味隨機），讓微醺的層次再進化一步。</p>
+      <div class="news-video-wrap">
+        <video id="dtown-news-video" autoplay muted loop playsinline webkit-playsinline preload="auto"
+               poster="dtown-gift-poster.jpg"
+               aria-label="字母系列聯名・微醺調酒禮盒影片">
+          <source src="dtown-ambient.mp4" type="video/mp4">
+        </video>
+        <button type="button" id="news-video-sound" class="video-sound-btn" aria-label="開啟聲音">🔇</button>
+      </div>
+      <p class="video-sound-hint">影片預設靜音 · 點右下角喇叭開啟聲音</p>
+      <p class="news-note">本站僅提供商品資訊，不提供線上交易；建議售價與購買請洽實體門市現場選購。</p>
+      <p class="news-warn">禁止酒駕　•　飲酒過量有害健康　•　未滿十八歲禁止飲酒</p>
+    </div>
+    <script>
+      (function () {
+        var v = document.getElementById('dtown-news-video');
+        if (!v) return;
+        var soundOn = false;                 // 使用者是否已開啟聲音
+        v.muted = true;
+        var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+        tryPlay();
+        // 聲音 / 播放備援按鈕：點一下開聲音（並確保播放）；再點關聲音
+        var btn = document.getElementById('news-video-sound');
+        if (btn) {
+          btn.addEventListener('click', function () {
+            soundOn = !soundOn;
+            v.muted = !soundOn;
+            if (soundOn) tryPlay();
+            btn.textContent = soundOn ? '🔊' : '🔇';
+            btn.setAttribute('aria-label', soundOn ? '關閉聲音' : '開啟聲音');
+          });
+        }
+        if (!('IntersectionObserver' in window)) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              try { v.currentTime = 0; } catch (err) {}
+              v.muted = !soundOn;            // 尊重使用者的聲音選擇
+              tryPlay();
+            } else { v.pause(); }
+          });
+        }, { threshold: 0.35 });
+        io.observe(v);
+      })();
+    </script>
+  </section>
 
   <!-- FAQ -->
   <section id="faq" class="page-section">
