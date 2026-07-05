@@ -143,6 +143,15 @@
       {"@type": "LocationFeatureSpecification", "name": "Parking", "value": false}
     ],
     "hasMap": "https://maps.google.com/?q=台北市大安區忠孝東路四段49巷2號2樓",
+    "subjectOf": {
+      "@type": "VideoObject",
+      "name": "入口怎麼走？20 秒帶你走一次",
+      "description": "忠孝復興 4 號出口・SOGO 旁巷子・Qmomo 旁小門上 2 樓，D Town by A Train 入口導覽影片。",
+      "thumbnailUrl": "https://natyang1234.github.io/dtownbyatrain-website/dtown-entrance-poster.jpg",
+      "contentUrl": "https://natyang1234.github.io/dtownbyatrain-website/dtown-entrance.mp4",
+      "uploadDate": "2026-07-06",
+      "duration": "PT17S"
+    },
     "speakable": {
       "@type": "SpeakableSpecification",
       "cssSelector": [
@@ -1447,6 +1456,31 @@
       .visit-map-wrap iframe { height: 220px; }
     }
 
+    .entrance-video-card {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-top: 0.4rem;
+    }
+
+    .entrance-video-title {
+      color: var(--gold);
+      font-size: 0.98rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.35rem;
+    }
+
+    .entrance-video-sub {
+      color: var(--grey-light);
+      font-size: 0.82rem;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .entrance-video-wrap {
+      margin-bottom: 0;
+    }
+
     .faq-list {
       margin-top: 2.2rem;
       border-top: 1px solid var(--border);
@@ -2657,9 +2691,53 @@
             aria-label="D Town by A Train Google 地圖位置"></iframe>
           <a class="visit-map-link" href="https://maps.google.com/?q=台北市大安區忠孝東路四段49巷2號2樓" target="_blank" rel="noopener">在 Google 地圖開啟 →</a>
         </div>
+        <div class="entrance-video-card">
+          <p class="entrance-video-title">入口怎麼走？20 秒帶你走一次</p>
+          <p class="entrance-video-sub">忠孝復興 4 號出口・SOGO 旁巷子・Qmomo 旁小門上 2 樓</p>
+          <div class="news-video-wrap entrance-video-wrap">
+            <video id="entrance-video" autoplay muted loop playsinline webkit-playsinline preload="auto"
+                   poster="dtown-entrance-poster.jpg"
+                   aria-label="D Town by A Train 入口怎麼走影片">
+              <source src="dtown-entrance.mp4" type="video/mp4">
+            </video>
+            <button type="button" id="entrance-video-sound" class="video-sound-btn" aria-label="開啟聲音">🔇</button>
+          </div>
+          <p class="video-sound-hint">影片預設靜音 · 點右下角喇叭開啟聲音</p>
+        </div>
       </div>
     </div>
   </section>
+  <script>
+    (function () {
+      var v = document.getElementById('entrance-video');
+      if (!v) return;
+      var soundOn = false;
+      v.muted = true;
+      var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+      tryPlay();
+      var btn = document.getElementById('entrance-video-sound');
+      if (btn) {
+        btn.addEventListener('click', function () {
+          soundOn = !soundOn;
+          v.muted = !soundOn;
+          if (soundOn) tryPlay();
+          btn.textContent = soundOn ? '🔊' : '🔇';
+          btn.setAttribute('aria-label', soundOn ? '關閉聲音' : '開啟聲音');
+        });
+      }
+      if (!('IntersectionObserver' in window)) return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            try { v.currentTime = 0; } catch (err) {}
+            v.muted = !soundOn;
+            tryPlay();
+          } else { v.pause(); }
+        });
+      }, { threshold: 0.35 });
+      io.observe(v);
+    })();
+  </script>
 
   <!-- FULL MENU -->
   <div id="menu">
