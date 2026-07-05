@@ -125,90 +125,495 @@
         "#faq .faq-item:nth-of-type(3)"
       ]
     },
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
+    "hasMenu": {
+      "@type": "Menu",
       "name": "D Town 菜單",
-      "itemListElement": [
+      "hasMenuSection": [
         {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "MenuItem",
-            "name": "金磚起司豆腐",
-            "description": "外酥內嫩的金磚豆腐，鋪上雙色起司厚烤，鹹香濃郁、牽絲爆漿",
-            "offers": { "@type": "Offer", "price": "280", "priceCurrency": "TWD" }
-          }
+          "@type": "MenuSection",
+          "name": "主廚推薦",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "美國 Prime 肋眼牛排 (6oz)",
+              "description": "U.S. Prime Ribeye Steak",
+              "offers": {
+                "@type": "Offer",
+                "price": "800",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "香煎鱘龍魚菲力佐法式檸檬奶油醬",
+              "description": "Pan-Seared Sturgeon Fillet, Lemon Beurre Blanc",
+              "offers": {
+                "@type": "Offer",
+                "price": "520",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "嫩煎脆皮烤半雞",
+              "description": "Crispy Roasted Half Chicken",
+              "offers": {
+                "@type": "Offer",
+                "price": "480",
+                "priceCurrency": "TWD"
+              }
+            }
+          ]
         },
         {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "MenuItem",
-            "name": "香酥蒜片骰子牛（日本和牛）",
-            "description": "嚴選日本和牛骰子牛，煎至外酥內嫩，搭配酥脆蒜片與時蔬拌炒",
-            "offers": { "@type": "Offer", "price": "450", "priceCurrency": "TWD" }
-          }
+          "@type": "MenuSection",
+          "name": "熱湯",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "清燉牛肉蛤蜊湯",
+              "description": "Beef & Clam Clear Soup",
+              "offers": {
+                "@type": "Offer",
+                "price": "280",
+                "priceCurrency": "TWD"
+              }
+            }
+          ]
         },
         {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "MenuItem",
-            "name": "嫩煎脆皮烤半雞",
-            "description": "主廚推薦招牌，脆皮鎖住雞肉原汁，搭配特製醬汁",
-            "offers": { "@type": "Offer", "price": "480", "priceCurrency": "TWD" }
-          }
+          "@type": "MenuSection",
+          "name": "甜點",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "D Town 特製甜點",
+              "description": "D Town Signature Dessert",
+              "offers": {
+                "@type": "Offer",
+                "price": "300",
+                "priceCurrency": "TWD"
+              }
+            }
+          ]
         },
         {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "MenuItem",
-            "name": "川味口水雞",
-            "description": "必點經典，川式麻辣口水雞，香麻不燥辣",
-            "offers": { "@type": "Offer", "price": "200", "priceCurrency": "TWD" }
-          }
+          "@type": "MenuSection",
+          "name": "小點",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "川味口水雞",
+              "description": "Sichuan Chilled Chicken with Chili Sauce",
+              "offers": {
+                "@type": "Offer",
+                "price": "200 / 300",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "碳烤櫻桃鴨肉串",
+              "description": "Grilled Duck Skewers",
+              "offers": {
+                "@type": "Offer",
+                "price": "180 / 320",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "日式明太子雞肉串",
+              "description": "Japanese Mentaiko Chicken Skewers",
+              "offers": {
+                "@type": "Offer",
+                "price": "180 / 320",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "碳烤沙爹雞肉串燒",
+              "description": "Charcoal-Grilled Chicken Satay",
+              "offers": {
+                "@type": "Offer",
+                "price": "180 / 320",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "碳烤美國極黑豬里肌",
+              "description": "Grilled U.S. Berkshire Pork",
+              "offers": {
+                "@type": "Offer",
+                "price": "360",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "美國牛小排佐油封蒜香醬",
+              "description": "Grilled U.S. Prime Short Ribs",
+              "offers": {
+                "@type": "Offer",
+                "price": "450",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "香酥蒜片骰子牛（日本和牛）",
+              "description": "Japanese Wagyu Beef Cubes with Crispy Garlic",
+              "offers": {
+                "@type": "Offer",
+                "price": "450",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "嫩煎櫻桃鴨胸佐白蘭地蘋果醬",
+              "description": "Pan-seared Cherry Duck Breast with Brandy Apple Sauce",
+              "offers": {
+                "@type": "Offer",
+                "price": "380",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "日本兵庫縣生蠔",
+              "description": "Japan Hyōgo Prefecture Oysters",
+              "offers": {
+                "@type": "Offer",
+                "price": "160 / 顆",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "烤澎湖生蠔（5顆）",
+              "description": "Grilled Penghu Oysters · 青辣椒醬 / 蒜蓉醬",
+              "offers": {
+                "@type": "Offer",
+                "price": "440",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "碳烤槍烏賊",
+              "description": "Chargrilled Cuttlefish",
+              "offers": {
+                "@type": "Offer",
+                "price": "380",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "義式香料炒蛤蜊",
+              "description": "Clams Sautéed in Garlic and Italian Herbs",
+              "offers": {
+                "@type": "Offer",
+                "price": "380",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "義式肉丸佐軟法",
+              "description": "Italian Meatballs with Baguette",
+              "offers": {
+                "@type": "Offer",
+                "price": "260",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "烤青花筍佐荷蘭醬",
+              "description": "Grilled Broccolini with Hollandaise Sauce",
+              "offers": {
+                "@type": "Offer",
+                "price": "280",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "香煎奶油櫛瓜",
+              "description": "Pan-seared Zucchini with Butter",
+              "offers": {
+                "@type": "Offer",
+                "price": "280",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "XO醬炒花椰菜",
+              "description": "Stir-fried Broccoli with XO Sauce",
+              "offers": {
+                "@type": "Offer",
+                "price": "300",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "義式培根炒球芽甘藍",
+              "description": "Brussels Sprouts with Italian Bacon",
+              "offers": {
+                "@type": "Offer",
+                "price": "320",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "蒜香炒鮮蝦野菇",
+              "description": "Sauteed Mushrooms and Shrimps",
+              "offers": {
+                "@type": "Offer",
+                "price": "280",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "金磚起司豆腐",
+              "description": "Deep-Fried Egg Tofu with Cheese Sauce",
+              "offers": {
+                "@type": "Offer",
+                "price": "280",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "德州風味雞翅",
+              "description": "Texas Style Chicken Wings",
+              "offers": {
+                "@type": "Offer",
+                "price": "200 / 350",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "韓式奶油蒜香雞翅",
+              "description": "Garlic Butter Chicken Wings - Korean Style",
+              "offers": {
+                "@type": "Offer",
+                "price": "200 / 350",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "日式南蠻炸雞",
+              "description": "Japanese Fried Chicken Nanban Style",
+              "offers": {
+                "@type": "Offer",
+                "price": "200 / 360",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "饕客雞軟骨",
+              "description": "Deep-Fried Chicken Cartilage",
+              "offers": {
+                "@type": "Offer",
+                "price": "280",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "松露薯條",
+              "description": "French Fries with Black Truffle Sauce",
+              "offers": {
+                "@type": "Offer",
+                "price": "180 / 340",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "風味薯條",
+              "description": "French Fries",
+              "offers": {
+                "@type": "Offer",
+                "price": "160 / 280",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "手作洋芋切片佐莎莎醬",
+              "description": "Handmade Potato Chips with Tomato Salsa",
+              "offers": {
+                "@type": "Offer",
+                "price": "160 / 280",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "起司火腿拼盤",
+              "description": "Cheese and Charcuterie Platter",
+              "offers": {
+                "@type": "Offer",
+                "price": "420",
+                "priceCurrency": "TWD"
+              }
+            }
+          ]
         },
         {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "MenuItem",
-            "name": "碳烤槍烏賊",
-            "description": "必點海鮮，炭火直烤鎖住鮮甜，口感Q彈",
-            "offers": { "@type": "Offer", "price": "380", "priceCurrency": "TWD" }
-          }
+          "@type": "MenuSection",
+          "name": "輕食沙拉",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "布拉塔起司沙拉羅勒油醋醬",
+              "description": "Burrata Salad with Basil Vinaigrette",
+              "offers": {
+                "@type": "Offer",
+                "price": "380",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "燻鮭魚沙拉佐酪梨醬",
+              "description": "Smoked Salmon Salad with Avocado",
+              "offers": {
+                "@type": "Offer",
+                "price": "400",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "炭烤牛排凱薩沙拉",
+              "description": "Charcoal Steak Caesar Salad",
+              "offers": {
+                "@type": "Offer",
+                "price": "420",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "香煎雞胸凱薩沙拉",
+              "description": "Pan-Seared Chicken Caesar Salad",
+              "offers": {
+                "@type": "Offer",
+                "price": "360",
+                "priceCurrency": "TWD"
+              }
+            }
+          ]
         },
         {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "MenuItem",
-            "name": "布拉塔起司沙拉",
-            "description": "新鮮布拉塔起司佐羅勒油醋醬，清爽開胃",
-            "offers": { "@type": "Offer", "price": "380", "priceCurrency": "TWD" }
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "MenuItem",
-            "name": "無骨牛小排奶油燉飯",
-            "description": "慢燉牛小排配奶油燉飯，濃郁滑順飽足感十足",
-            "offers": { "@type": "Offer", "price": "450", "priceCurrency": "TWD" }
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "MenuItem",
-            "name": "清燉牛肉蛤蜊湯",
-            "description": "慢火清燉牛肉與新鮮蛤蜊，湯頭清甜鮮美",
-            "offers": { "@type": "Offer", "price": "280", "priceCurrency": "TWD" }
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "MenuItem",
-            "name": "茶嗨波 Tea Highball",
-            "description": "D Town 招牌特色飲品，台灣茶葉調製氣泡高球，清爽微醺",
-            "offers": { "@type": "Offer", "price": "220", "priceCurrency": "TWD" }
-          }
+          "@type": "MenuSection",
+          "name": "飽食主餐",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "主廚牛排炒飯",
+              "description": "Chef's Steak Fried Rice",
+              "offers": {
+                "@type": "Offer",
+                "price": "450",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "日式和牛炊飯",
+              "description": "Japanese Wagyu Rice Pot",
+              "offers": {
+                "@type": "Offer",
+                "price": "420",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "無骨牛小排奶油燉飯",
+              "description": "Boneless Short Rib Butter Risotto",
+              "offers": {
+                "@type": "Offer",
+                "price": "450",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "干貝鮮蝦青醬燉飯",
+              "description": "Scallop & Shrimp Pesto Risotto",
+              "offers": {
+                "@type": "Offer",
+                "price": "450",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "青花椒奶油鮮蝦義大利麵",
+              "description": "Sichuan Pepper Cream Shrimp Pasta",
+              "offers": {
+                "@type": "Offer",
+                "price": "420",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "蒜香白酒鮮蝦蛤蜊義大利麵",
+              "description": "White Wine Garlic Shrimp & Clam Pasta",
+              "offers": {
+                "@type": "Offer",
+                "price": "400",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "炭烤極黑豬里肌番茄義大利麵",
+              "description": "Charcoal Pork Loin Tomato Pasta",
+              "offers": {
+                "@type": "Offer",
+                "price": "380",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "炙燒比目魚鰭邊肉丼飯",
+              "description": "Seared Halibut Fin Donburi",
+              "offers": {
+                "@type": "Offer",
+                "price": "380",
+                "priceCurrency": "TWD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "手工豬肉高麗菜水餃",
+              "description": "Handmade Pork & Cabbage Dumplings",
+              "offers": {
+                "@type": "Offer",
+                "price": "240",
+                "priceCurrency": "TWD"
+              }
+            }
+          ]
         }
       ]
     }
@@ -399,6 +804,44 @@
           "@type": "Answer",
           "text": "沒有獨立包廂，但空間夠大、座位有分區。若有座位上的需求或包場，歡迎下午 4 點後來電 02-2721-2772 討論。"
         }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "首頁",
+        "item": "https://natyang1234.github.io/dtownbyatrain-website/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "關於",
+        "item": "https://natyang1234.github.io/dtownbyatrain-website/#about"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "菜單",
+        "item": "https://natyang1234.github.io/dtownbyatrain-website/#menu"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "位置",
+        "item": "https://natyang1234.github.io/dtownbyatrain-website/#visit"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "FAQ",
+        "item": "https://natyang1234.github.io/dtownbyatrain-website/#faq"
       }
     ]
   }
