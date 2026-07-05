@@ -949,6 +949,62 @@
       background: linear-gradient(to right, rgba(8,8,8,0) 60%, rgba(8,8,8,0.8) 100%);
     }
 
+    .carousel-controls {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 1.4rem;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    .carousel-dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(240,235,224,0.5);
+      background: rgba(240,235,224,0.15);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s, border-color 0.3s;
+    }
+
+    .carousel-dot.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      transform: scale(1.25);
+    }
+
+    .carousel-pause {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(240,235,224,0.5);
+      background: rgba(8,8,8,0.45);
+      color: var(--white);
+      font-size: 0.6rem;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .carousel-pause:hover,
+    .carousel-pause:focus-visible {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
     .about-content {
       background: var(--dark);
       padding: 5rem 4rem;
@@ -1888,6 +1944,12 @@
       </h1>
       <p class="hero-tagline">An Evening Worth Staying For.</p>
       <p class="hero-subtitle">MRT Zhongxiao Fuxing Exit 4 · 1-minute walk</p>
+      <div class="hero-facts">
+        <span>Largest Space in East District</span>
+        <span>Handcrafted Cocktails, Your Way</span>
+        <span>Japanese Wagyu</span>
+        <span>Open Till 2:30 AM Fri &amp; Sat</span>
+      </div>
       <a href="https://www.google.com/search?q=D+Town+by+A+Train&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOWm7pRB70ES1G7Scgm0FV9e0nZz1-HX-AzQVXFidlG17MU-knjfilEflLqiell-NQy8XS8UqgsTmuTH5CvxKy0Z7amUvaCZ5mFSOj5Vhqo3vTYf3Lw%3D%3D" class="hero-rating" target="_blank" rel="noopener" aria-label="4.6 stars from 1,883 Google reviews">
         <span class="stars">★★★★★</span><span>4.6</span><span class="rc">· 1,883 Google reviews</span>
       </a>
@@ -2025,6 +2087,20 @@
       <img class="carousel-slide" data-src="../webp/封底.webp" alt="D Town by A Train Taipei East District bistro at night">
       <img class="carousel-slide" data-src="../webp/店內場景6.webp" alt="Late-night cocktail ambience at D Town by A Train">
       <div class="about-img-overlay"></div>
+      <div class="carousel-controls">
+        <button type="button" class="carousel-pause" aria-label="Pause slideshow" aria-pressed="false">❚❚</button>
+        <div class="carousel-dots" role="tablist" aria-label="Choose a slide">
+          <button type="button" class="carousel-dot active" data-slide="0" aria-label="Slide 1" role="tab" aria-selected="true"></button>
+          <button type="button" class="carousel-dot" data-slide="1" aria-label="Slide 2" role="tab" aria-selected="false"></button>
+          <button type="button" class="carousel-dot" data-slide="2" aria-label="Slide 3" role="tab" aria-selected="false"></button>
+          <button type="button" class="carousel-dot" data-slide="3" aria-label="Slide 4" role="tab" aria-selected="false"></button>
+          <button type="button" class="carousel-dot" data-slide="4" aria-label="Slide 5" role="tab" aria-selected="false"></button>
+          <button type="button" class="carousel-dot" data-slide="5" aria-label="Slide 6" role="tab" aria-selected="false"></button>
+          <button type="button" class="carousel-dot" data-slide="6" aria-label="Slide 7" role="tab" aria-selected="false"></button>
+          <button type="button" class="carousel-dot" data-slide="7" aria-label="Slide 8" role="tab" aria-selected="false"></button>
+          <button type="button" class="carousel-dot" data-slide="8" aria-label="Slide 9" role="tab" aria-selected="false"></button>
+        </div>
+      </div>
     </div>
     <div class="about-content">
       <span class="sec-label">Our Story</span>
@@ -2713,17 +2789,49 @@
 
   <script>
     // About section carousel — 按需載入：只先載第 1 張，其餘輪到才載（並預載下一張）
+    // 加 dots 進度指示＋暫停/播放鈕，hover 時自動暫停
     (function() {
+      const container = document.querySelector('#about .about-images');
       const slides = document.querySelectorAll('#about .carousel-slide');
+      const dots = document.querySelectorAll('#about .carousel-dot');
+      const pauseBtn = document.querySelector('#about .carousel-pause');
       const load = (i) => { const s = slides[i]; if (s && !s.src && s.dataset.src) s.src = s.dataset.src; };
       let current = 0;
+      let userPaused = false;
+      let hoverPaused = false;
       load(0); load(1); // 目前 + 下一張
-      setInterval(function() {
+
+      function goTo(index) {
+        const next = (index + slides.length) % slides.length;
         slides[current].classList.remove('active');
-        current = (current + 1) % slides.length;
+        if (dots[current]) { dots[current].classList.remove('active'); dots[current].setAttribute('aria-selected', 'false'); }
+        current = next;
         load(current); load((current + 1) % slides.length); // 確保當前與下一張已載
         slides[current].classList.add('active');
+        if (dots[current]) { dots[current].classList.add('active'); dots[current].setAttribute('aria-selected', 'true'); }
+      }
+
+      setInterval(function() {
+        if (!userPaused && !hoverPaused) goTo(current + 1);
       }, 4000);
+
+      dots.forEach(function(dot, i) {
+        dot.addEventListener('click', function() { goTo(i); });
+      });
+
+      if (pauseBtn) {
+        pauseBtn.addEventListener('click', function() {
+          userPaused = !userPaused;
+          pauseBtn.textContent = userPaused ? '►' : '❚❚';
+          pauseBtn.setAttribute('aria-pressed', String(userPaused));
+          pauseBtn.setAttribute('aria-label', userPaused ? 'Play slideshow' : 'Pause slideshow');
+        });
+      }
+
+      if (container) {
+        container.addEventListener('mouseenter', function() { hoverPaused = true; });
+        container.addEventListener('mouseleave', function() { hoverPaused = false; });
+      }
     })();
 
     // Scroll reveal (IntersectionObserver, reduced-motion aware)
