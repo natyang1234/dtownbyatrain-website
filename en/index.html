@@ -104,8 +104,34 @@
       "ratingValue": 4.6,
       "bestRating": "5",
       "worstRating": "1",
-      "ratingCount": 1883
+      "ratingCount": 1885
     },
+    "review": [
+      {
+        "@type": "Review",
+        "author": {"@type": "Person", "name": "Li Chi-shen"},
+        "reviewRating": {"@type": "Rating", "ratingValue": 5, "bestRating": "5"},
+        "reviewBody": "This is a place made for people who understand living well and good taste. If you're looking for a hidden corner in the city, this is the top choice."
+      },
+      {
+        "@type": "Review",
+        "author": {"@type": "Person", "name": "jamie kung"},
+        "reviewRating": {"@type": "Rating", "ratingValue": 5, "bestRating": "5"},
+        "reviewBody": "Great food, great drinks, and real soul — we're definitely coming back!"
+      },
+      {
+        "@type": "Review",
+        "author": {"@type": "Person", "name": "Ning Xiang"},
+        "reviewRating": {"@type": "Rating", "ratingValue": 5, "bestRating": "5"},
+        "reviewBody": "This must be my fourth visit already! Consistently delicious food and drinks — I recommend it without hesitation!!"
+      },
+      {
+        "@type": "Review",
+        "author": {"@type": "Person", "name": "Chung Yi-hsi"},
+        "reviewRating": {"@type": "Rating", "ratingValue": 5, "bestRating": "5"},
+        "reviewBody": "My favorite bar-restaurant in all of Taipei. I honestly can't tell which is better, the food or the drinks — everything we ordered was amazing!"
+      }
+    ],
     "sameAs": [
       "https://www.instagram.com/dtownbyatrain/",
       "https://www.facebook.com/DownTownbyATrain/",
@@ -1310,6 +1336,82 @@
       line-height: 1.9;
     }
 
+    .reviews-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 2.2rem;
+      padding: 0.55rem 1.3rem;
+      border: 1px solid rgba(200,169,110,0.35);
+      border-radius: 50px;
+      font-size: 0.82rem;
+      color: var(--white);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .reviews-badge .stars { color: var(--gold); letter-spacing: 0.1em; }
+    .reviews-badge .rc { color: var(--grey-light); }
+    .reviews-badge:hover { border-color: var(--gold); color: var(--gold-light); }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+
+    .review-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--gold);
+      border-radius: 4px;
+      padding: 1.5rem 1.4rem;
+    }
+
+    .review-stars {
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .review-text {
+      color: var(--white);
+      font-size: 0.94rem;
+      line-height: 1.85;
+      margin-bottom: 1.1rem;
+    }
+
+    .review-text.en {
+      font-style: italic;
+    }
+
+    .review-translated {
+      display: block;
+      color: var(--grey);
+      font-size: 0.68rem;
+      letter-spacing: 0.05em;
+      margin: -0.7rem 0 1.1rem;
+    }
+
+    .review-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.76rem;
+    }
+
+    .review-author {
+      color: var(--gold-light, var(--gold));
+      letter-spacing: 0.03em;
+    }
+
+    .review-source {
+      color: var(--grey);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 0.62rem;
+    }
+
     .visit-map-wrap {
       grid-column: 1 / -1;
       background: var(--card);
@@ -2296,6 +2398,7 @@
       .vn-pos-desktop { display: none; }
       .vn-pos-mobile { display: inline; }
       .visit-grid { grid-template-columns: 1fr 1fr; }
+      .reviews-grid { grid-template-columns: 1fr 1fr; }
       #about { grid-template-columns: 1fr; }
       .about-images { height: 55vw; }
       .about-content { padding: 3.5rem clamp(1.5rem, 5vw, 4rem); }
@@ -2341,6 +2444,7 @@
       .nav-links a { display: block; padding: 0.9rem 1.4rem; font-size: 0.82rem; }
       .nav-cta { padding: 0.4rem 0.85rem; font-size: 0.72rem; }
       .visit-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
 
       #food { grid-template-columns: 1fr; }
       .food-card { aspect-ratio: 4/3; }
@@ -2436,8 +2540,8 @@
         <span>Japanese Wagyu</span>
         <span>Open Till 2:30 AM Fri &amp; Sat</span>
       </div>
-      <a href="https://www.google.com/search?q=D+Town+by+A+Train&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOWm7pRB70ES1G7Scgm0FV9e0nZz1-HX-AzQVXFidlG17MU-knjfilEflLqiell-NQy8XS8UqgsTmuTH5CvxKy0Z7amUvaCZ5mFSOj5Vhqo3vTYf3Lw%3D%3D" class="hero-rating" target="_blank" rel="noopener" aria-label="4.6 stars from 1,883 Google reviews">
-        <span class="stars">★★★★★</span><span>4.6</span><span class="rc">· 1,883 Google reviews</span>
+      <a href="https://www.google.com/search?q=D+Town+by+A+Train&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOWm7pRB70ES1G7Scgm0FV9e0nZz1-HX-AzQVXFidlG17MU-knjfilEflLqiell-NQy8XS8UqgsTmuTH5CvxKy0Z7amUvaCZ5mFSOj5Vhqo3vTYf3Lw%3D%3D" class="hero-rating" target="_blank" rel="noopener" aria-label="4.6 stars from 1,885 Google reviews">
+        <span class="stars">★★★★★</span><span>4.6</span><span class="rc">· 1,885 Google reviews</span>
       </a>
       <div class="btn-group">
         <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2"
@@ -3181,6 +3285,44 @@
         io.observe(v);
       })();
     </script>
+  </section>
+
+  <!-- Reviews -->
+  <section id="reviews" class="page-section">
+    <div class="section-inner">
+      <span class="section-kicker">Reviews</span>
+      <h2>What Guests Say</h2>
+      <div class="gold-line"></div>
+      <a href="https://www.google.com/search?q=D+Town+by+A+Train&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOWm7pRB70ES1G7Scgm0FV9e0nZz1-HX-AzQVXFidlG17MU-knjfilEflLqiell-NQy8XS8UqgsTmuTH5CvxKy0Z7amUvaCZ5mFSOj5Vhqo3vTYf3Lw%3D%3D" class="reviews-badge" target="_blank" rel="noopener" aria-label="4.6 stars from 1,885 Google reviews">
+        <span class="stars">★★★★★</span><span>4.6</span><span class="rc">· 1,885 Google reviews</span>
+      </a>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text en">"This is a place made for people who understand living well and good taste. If you're looking for a hidden corner in the city, this is the top choice."</p>
+          <span class="review-translated">Translated from Google reviews</span>
+          <div class="review-meta"><span class="review-author">Li Chi-shen</span><span class="review-source">Google Review</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text en">"Great food, great drinks, and real soul — we're definitely coming back!"</p>
+          <span class="review-translated">Translated from Google reviews</span>
+          <div class="review-meta"><span class="review-author">jamie kung</span><span class="review-source">Google Review</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text en">"This must be my fourth visit already! Consistently delicious food and drinks — I recommend it without hesitation!!"</p>
+          <span class="review-translated">Translated from Google reviews</span>
+          <div class="review-meta"><span class="review-author">Ning Xiang</span><span class="review-source">Google Review</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text en">"My favorite bar-restaurant in all of Taipei ❤️ I honestly can't tell which is better, the food or the drinks — everything we ordered was amazing!"</p>
+          <span class="review-translated">Translated from Google reviews</span>
+          <div class="review-meta"><span class="review-author">Chung Yi-hsi</span><span class="review-source">Google Review</span></div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- FAQ -->
