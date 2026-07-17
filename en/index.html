@@ -2481,9 +2481,13 @@
         margin-bottom: 0.5rem;
       }
       /* 餐點圖是 3:4 直式設計卡，完整顯示不裁切（contain 不切，限高避免過高擠壓列表）
-         ⚠️ 用 svh 不用 vh：手機滾動時網址列隱藏/顯示會改變 vh → 圖片忽大忽小；
-         svh(small viewport height)是固定值不隨滾動變，避免閃動。px 為舊瀏覽器後備。 */
-      .menu-img-wrap img { max-height: 440px; max-height: 52svh; object-fit: contain; }
+         ⚠️ 限高只用 px＋vw（皆不隨滾動變）。svh 理論上固定，但 iOS 內建瀏覽器
+         （IG/LINE 的 WKWebView）svh 會隨工具列伸縮 → 圖片忽大忽小，實機已驗證，棄用。 */
+      .menu-img-wrap img { max-height: 440px; max-height: min(440px, 120vw); object-fit: contain; }
+
+      /* 分類標籤列換行全顯示：橫向捲動列在手機上按著可拖動、體感怪，改多行不可拖 */
+      .menu-tabs { flex-wrap: wrap; justify-content: center; overflow-x: visible; }
+      .tab-btn { padding: 0.7rem 1rem; }
 
       #tea .inner { grid-template-columns: 1fr; gap: 3rem; }
 
@@ -3679,7 +3683,22 @@
           for (var i = 0; i < items.length; i++) {
             if (items[i].classList.contains('active')) { cur = i; break; }
           }
-          items[(cur + delta + items.length) % items.length].click();
+          var target = items[(cur + delta + items.length) % items.length];
+          target.click();
+          // keep the dish list scrolled to the current dish
+          var r = target.getBoundingClientRect();
+          if (window.matchMedia('(max-width: 900px)').matches) {
+            // mobile: the photo is an opaque sticky top banner, the name must clear its bottom edge to be visible.
+            // Don't compute the distance from the pre-scroll image bottom — the sticky element pins mid-scroll
+            // and its bottom moves, so the scroll falls short. Use the pinned position (sticky top + image height).
+            var pinnedBottom = (parseFloat(getComputedStyle(wrap).top) || 60) + wrap.getBoundingClientRect().height;
+            var wb = wrap.getBoundingClientRect().bottom;
+            if (r.top < wb + 4 || r.bottom > window.innerHeight - 8) {
+              window.scrollTo({ top: Math.max(0, r.top + window.scrollY - pinnedBottom - 10), behavior: 'smooth' });
+            }
+          } else if (r.top < 0 || r.bottom > window.innerHeight) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
         }
 
         // Desktop arrow buttons (CSS shows them on hover-capable devices only)
