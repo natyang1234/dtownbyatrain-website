@@ -3648,6 +3648,9 @@
     }
 
     function openMenuImg(panelId) {
+      // 手機不做點圖放大（已有滑動＋箭頭切換，點擊放大只會誤觸）；桌機保留。
+      // 調酒/茶嗨波九宮格走 openLightbox/openTeaCell，不受影響。
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
       const img = document.getElementById('img-' + panelId);
       const cap = document.getElementById('cap-' + panelId);
       openLightbox(img.src, cap.textContent);

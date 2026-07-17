@@ -3650,6 +3650,9 @@
     }
 
     function openMenuImg(panelId) {
+      // No tap-to-zoom on touch devices (swipe + arrows already cover it; taps were mostly accidental). Desktop keeps it.
+      // Cocktail / Tea Highball grids use openLightbox/openTeaCell directly and are unaffected.
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
       const img = document.getElementById('img-' + panelId);
       const cap = document.getElementById('cap-' + panelId);
       openLightbox(img.src, cap.textContent);
