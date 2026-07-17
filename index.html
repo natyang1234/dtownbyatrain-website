@@ -1766,7 +1766,7 @@
       color: var(--gold);
       font-size: 1.3rem;
       line-height: 1;
-      display: none;
+      display: flex; /* 手機常駐顯示可直接按；桌機由下方 hover 規則淡入 */
       align-items: center;
       justify-content: center;
       cursor: pointer;
@@ -1775,7 +1775,7 @@
     .menu-img-nav.prev { left: 0.7rem; }
     .menu-img-nav.next { right: 0.7rem; }
     @media (hover: hover) and (pointer: fine) {
-      .menu-img-nav { display: flex; opacity: 0; transition: opacity 0.25s ease, background 0.2s ease; }
+      .menu-img-nav { opacity: 0; transition: opacity 0.25s ease, background 0.2s ease; }
       .menu-img-wrap:hover .menu-img-nav,
       .menu-img-nav:focus-visible { opacity: 1; }
       .menu-img-nav:hover { background: rgba(10, 10, 10, 0.8); }
