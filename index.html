@@ -2417,10 +2417,40 @@
     .footer-slogan {
       font-size: 0.68rem;
       letter-spacing: 0.35em;
-      white-space: nowrap;
+      /* 不可 nowrap：字距撐開後在窄螢幕超出視窗，會把整頁撐出橫向捲動（手機整頁可左右拖） */
       color: rgba(119,119,119,0.5);
       text-transform: uppercase;
       margin-bottom: 1rem;
+    }
+
+    /* 保險絲：任何元素意外超寬都不准把頁面撐出橫向捲動。
+       clip 不建立捲動容器（sticky 不受影響）；hidden 為舊瀏覽器後備。 */
+    html, body { overflow-x: hidden; overflow-x: clip; }
+
+    /* Our Story 手機版收合（桌機不收、按鈕不顯示） */
+    .story-toggle { display: none; }
+    @media (max-width: 900px) {
+      .about-story-fold { position: relative; max-height: 10.5em; overflow: hidden; transition: max-height 0.35s ease; }
+      .about-story-fold::after {
+        content: '';
+        position: absolute; left: 0; right: 0; bottom: 0; height: 4em;
+        background: linear-gradient(to bottom, rgba(0,0,0,0), var(--dark));
+        pointer-events: none;
+      }
+      .about-story-fold.expanded { max-height: 200em; }
+      .about-story-fold.expanded::after { display: none; }
+      .story-toggle {
+        display: inline-block;
+        background: none;
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        font-size: 0.78rem;
+        letter-spacing: 0.15em;
+        padding: 0.55rem 1.3rem;
+        margin: 0.2rem auto 1.6rem;
+        cursor: pointer;
+        align-self: flex-start;
+      }
     }
 
     .footer-slogan span { margin: 0 0.6rem; }
@@ -2651,9 +2681,12 @@
       <span class="sec-label">Our Story</span>
       <h2>城市裡，<br>一個值得留下來的夜晚</h2>
       <div class="gold-line"></div>
-      <p>D Town by A Train 是台北大安區的創意餐酒館，屬「字母系列」品牌旗下（A Train、B Line、C Park、D Town、E Village、F Gallery、U Square 共七間），位於 SOGO 忠孝館旁巷弄二樓，距捷運忠孝復興站 4 號出口步行約 1 分鐘。復古英倫風格，台北東區空間最大的餐酒館之一，主打手工特色調酒（可調甜度/酒感/酸度）、日本和牛、碳烤串燒、生蠔，以及台灣茶葉調製的茶嗨波 Tea Highball（11 種口味）。每人低消 NT$600（另加 10% 服務費），週日至週四 18:00–01:30、週五六 18:00–02:30，適合 1 至 10 人聚餐。訂位請於下午 4 點後致電 02-2721-2772 或使用 Inline 線上訂位。Good Food. Good Wine. Good Times.</p>
-      <p>《你需要一杯酒，因為你有話想說》。不需要特別的場合，只要一個想好好吃飯、喝杯酒、把話說出口的夜晚。推開二樓的門，是一片復古英倫風格、東區最大的餐酒館空間，昏暗而通透，每個角落都是屬於你的小天地。</p>
-      <p>捷運忠孝復興站 4 號出口，步行一分鐘，二樓有燈就到了。</p>
+      <div class="about-story-fold" id="story-fold">
+        <p>D Town by A Train 是台北大安區的創意餐酒館，屬「字母系列」品牌旗下（A Train、B Line、C Park、D Town、E Village、F Gallery、U Square 共七間），位於 SOGO 忠孝館旁巷弄二樓，距捷運忠孝復興站 4 號出口步行約 1 分鐘。復古英倫風格，台北東區空間最大的餐酒館之一，主打手工特色調酒（可調甜度/酒感/酸度）、日本和牛、碳烤串燒、生蠔，以及台灣茶葉調製的茶嗨波 Tea Highball（11 種口味）。每人低消 NT$600（另加 10% 服務費），週日至週四 18:00–01:30、週五六 18:00–02:30，適合 1 至 10 人聚餐。訂位請於下午 4 點後致電 02-2721-2772 或使用 Inline 線上訂位。Good Food. Good Wine. Good Times.</p>
+        <p>《你需要一杯酒，因為你有話想說》。不需要特別的場合，只要一個想好好吃飯、喝杯酒、把話說出口的夜晚。推開二樓的門，是一片復古英倫風格、東區最大的餐酒館空間，昏暗而通透，每個角落都是屬於你的小天地。</p>
+        <p>捷運忠孝復興站 4 號出口，步行一分鐘，二樓有燈就到了。</p>
+      </div>
+      <button type="button" class="story-toggle" id="story-toggle" aria-expanded="false" aria-controls="story-fold">閱讀完整故事 ↓</button>
       <div class="content-tags">
         <span>招牌特色調酒</span>
         <span>日本和牛</span>
@@ -3734,6 +3767,19 @@
             step(dx < 0 ? 1 : -1);
           }
         }, { passive: false });
+      });
+    })();
+
+    /* Our Story 手機收合切換 */
+    (function () {
+      var fold = document.getElementById('story-fold');
+      var btn = document.getElementById('story-toggle');
+      if (!fold || !btn) return;
+      btn.addEventListener('click', function () {
+        var open = fold.classList.toggle('expanded');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.textContent = open ? '收合 ↑' : '閱讀完整故事 ↓';
+        if (!open) fold.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
       });
     })();
   </script>

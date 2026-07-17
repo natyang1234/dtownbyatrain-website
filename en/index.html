@@ -2417,10 +2417,40 @@
     .footer-slogan {
       font-size: 0.68rem;
       letter-spacing: 0.35em;
-      white-space: nowrap;
+      /* no nowrap: with the wide tracking this line overflows narrow screens and makes the whole page pannable */
       color: rgba(119,119,119,0.5);
       text-transform: uppercase;
       margin-bottom: 1rem;
+    }
+
+    /* Fuse: no accidentally-wide element may create horizontal page scroll.
+       clip doesn't create a scroll container (sticky unaffected); hidden is the legacy fallback. */
+    html, body { overflow-x: hidden; overflow-x: clip; }
+
+    /* Our Story mobile collapse (desktop stays expanded, button hidden) */
+    .story-toggle { display: none; }
+    @media (max-width: 900px) {
+      .about-story-fold { position: relative; max-height: 10.5em; overflow: hidden; transition: max-height 0.35s ease; }
+      .about-story-fold::after {
+        content: '';
+        position: absolute; left: 0; right: 0; bottom: 0; height: 4em;
+        background: linear-gradient(to bottom, rgba(0,0,0,0), var(--dark));
+        pointer-events: none;
+      }
+      .about-story-fold.expanded { max-height: 200em; }
+      .about-story-fold.expanded::after { display: none; }
+      .story-toggle {
+        display: inline-block;
+        background: none;
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        font-size: 0.78rem;
+        letter-spacing: 0.15em;
+        padding: 0.55rem 1.3rem;
+        margin: 0.2rem auto 1.6rem;
+        cursor: pointer;
+        align-self: flex-start;
+      }
     }
 
     .footer-slogan span { margin: 0 0.6rem; }
@@ -2651,9 +2681,12 @@
       <span class="sec-label">Our Story</span>
       <h2>An evening in the city<br>worth staying for</h2>
       <div class="gold-line"></div>
-      <p>D Town by A Train is a creative gastropub in Taipei's Da'an District, part of the "Alphabet Series" brand (A Train, B Line, C Park, D Town, E Village, F Gallery, U Square — seven venues in total), located on the second floor of a lane beside SOGO Zhongxiao, about a 1-minute walk from MRT Zhongxiao Fuxing Station Exit 4. One of the largest bistro & cocktail bars in Taipei's East District with a retro British aesthetic, specialising in handcrafted cocktails (adjustable sweetness, strength and acidity), Japanese wagyu, charcoal-grilled skewers, oysters, and the Tea Highball series available in 11 flavours. Minimum NT$600 per person (+10% service charge), open Sunday–Thursday 18:00–01:30, Friday–Saturday 18:00–02:30, accommodating 1–10 guests. Reserve by calling 02-2721-2772 after 4 PM or via Inline online booking. Good Food. Good Wine. Good Times.</p>
-      <p>You need a drink, because you have something to say. No special occasion required — just an evening to eat well, share a drink, and finally say what's on your mind. Push open the second-floor door and you'll find a retro-British space, one of the largest bistro & cocktail bars in the East District: dim yet open, with a quiet corner waiting just for you.</p>
-      <p>From MRT Zhongxiao Fuxing Exit 4, it's a one-minute walk — look up for the lights on the second floor.</p>
+      <div class="about-story-fold" id="story-fold">
+        <p>D Town by A Train is a creative gastropub in Taipei's Da'an District, part of the "Alphabet Series" brand (A Train, B Line, C Park, D Town, E Village, F Gallery, U Square — seven venues in total), located on the second floor of a lane beside SOGO Zhongxiao, about a 1-minute walk from MRT Zhongxiao Fuxing Station Exit 4. One of the largest bistro & cocktail bars in Taipei's East District with a retro British aesthetic, specialising in handcrafted cocktails (adjustable sweetness, strength and acidity), Japanese wagyu, charcoal-grilled skewers, oysters, and the Tea Highball series available in 11 flavours. Minimum NT$600 per person (+10% service charge), open Sunday–Thursday 18:00–01:30, Friday–Saturday 18:00–02:30, accommodating 1–10 guests. Reserve by calling 02-2721-2772 after 4 PM or via Inline online booking. Good Food. Good Wine. Good Times.</p>
+        <p>You need a drink, because you have something to say. No special occasion required — just an evening to eat well, share a drink, and finally say what's on your mind. Push open the second-floor door and you'll find a retro-British space, one of the largest bistro & cocktail bars in the East District: dim yet open, with a quiet corner waiting just for you.</p>
+        <p>From MRT Zhongxiao Fuxing Exit 4, it's a one-minute walk — look up for the lights on the second floor.</p>
+      </div>
+      <button type="button" class="story-toggle" id="story-toggle" aria-expanded="false" aria-controls="story-fold">Read the full story ↓</button>
       <div class="content-tags">
         <span>Signature Cocktails</span>
         <span>Japanese Wagyu</span>
@@ -3736,6 +3769,19 @@
             step(dx < 0 ? 1 : -1);
           }
         }, { passive: false });
+      });
+    })();
+
+    /* Our Story mobile collapse toggle */
+    (function () {
+      var fold = document.getElementById('story-fold');
+      var btn = document.getElementById('story-toggle');
+      if (!fold || !btn) return;
+      btn.addEventListener('click', function () {
+        var open = fold.classList.toggle('expanded');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.textContent = open ? 'Show less ↑' : 'Read the full story ↓';
+        if (!open) fold.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
       });
     })();
   </script>
