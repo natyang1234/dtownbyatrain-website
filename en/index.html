@@ -1744,9 +1744,41 @@
       background: var(--black);
     }
 
-    .menu-img-wrap:hover img {
-      transform: scale(1.02);
-      filter: brightness(1.05);
+    /* hover zoom is mouse-only — on touch devices :hover sticks after tap and the image awkwardly zooms/brightens */
+    @media (hover: hover) and (pointer: fine) {
+      .menu-img-wrap:hover img {
+        transform: scale(1.02);
+        filter: brightness(1.05);
+      }
+    }
+
+    /* Prev/next arrows on the dish photo (injected by JS; shown on hover-capable devices, touch uses swipe) */
+    .menu-img-nav {
+      position: absolute;
+      top: calc(50% - 1.6rem);
+      transform: translateY(-50%);
+      z-index: 6;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(201, 169, 110, 0.45);
+      background: rgba(10, 10, 10, 0.55);
+      color: var(--gold);
+      font-size: 1.3rem;
+      line-height: 1;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0 0 3px;
+    }
+    .menu-img-nav.prev { left: 0.7rem; }
+    .menu-img-nav.next { right: 0.7rem; }
+    @media (hover: hover) and (pointer: fine) {
+      .menu-img-nav { display: flex; opacity: 0; transition: opacity 0.25s ease, background 0.2s ease; }
+      .menu-img-wrap:hover .menu-img-nav,
+      .menu-img-nav:focus-visible { opacity: 1; }
+      .menu-img-nav:hover { background: rgba(10, 10, 10, 0.8); }
     }
 
     .menu-img-caption {
@@ -2644,98 +2676,6 @@
     </div>
   </section>
 
-  <!-- VISIT -->
-  <section id="visit" class="page-section page-section-alt">
-    <div class="section-inner section-grid">
-      <div class="section-copy">
-        <span class="section-kicker">Visit</span>
-        <h2>First time here? Start with this</h2>
-        <div class="gold-line"></div>
-        <p>D Town by A Train is at 2F, No. 2, Lane 49, Sec. 4, Zhongxiao E. Rd., Da'an Dist., Taipei (in the lane beside SOGO), about a 1-minute walk from MRT Zhongxiao Fuxing Station Exit 4.</p>
-        <p>If you're looking for an East District bistro & cocktail bar for friends' dinners, after-work gatherings or birthday celebrations, this is the section that matters most — address, getting here, opening hours, minimum charge, payment and reservations all in one place.</p>
-        <p class="visit-notes">Take a quick look at the cards <span class="vn-pos-desktop">on the right</span><span class="vn-pos-mobile">below</span> to decide whether to book, then scroll on to the menu and FAQ.</p>
-      </div>
-      <div class="visit-grid">
-        <div class="visit-card">
-          <span class="label">Address</span>
-          <div class="value">2F, No. 2, Lane 49, Sec. 4, Zhongxiao E. Rd., Da'an Dist., Taipei<br><span style="opacity:.7;">(忠孝東路四段49巷2號2樓)</span></div>
-        </div>
-        <div class="visit-card">
-          <span class="label">Getting Here</span>
-          <div class="value">MRT Zhongxiao Fuxing Station Exit 4, about a 1-minute walk</div>
-        </div>
-        <div class="visit-card">
-          <span class="label">Hours</span>
-          <div class="value">Sun–Thu 18:00–01:30<br>Fri & Sat 18:00–02:30</div>
-        </div>
-        <div class="visit-card">
-          <span class="label">Pricing</span>
-          <div class="value">Minimum NT$600 / person<br>Plus 10% service charge</div>
-        </div>
-        <div class="visit-card">
-          <span class="label">Payment</span>
-          <div class="value">Cash, credit card, mobile payment</div>
-        </div>
-        <div class="visit-card">
-          <span class="label">Reservations</span>
-          <div class="value"><a href="tel:+886227212772">02-2721-2772</a><br>Call after 4 PM, or book online via Inline</div>
-        </div>
-        <div class="visit-map-wrap">
-          <iframe
-            src="https://www.google.com/maps?q=%E5%8F%B0%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E5%BF%A0%E5%AD%9D%E6%9D%B1%E8%B7%AF%E5%9B%9B%E6%AE%B549%E5%B7%B72%E8%99%9F2%E6%A8%93&output=embed"
-            loading="lazy"
-            title="D Town by A Train location map: 2F, No. 2, Lane 49, Sec. 4, Zhongxiao E. Rd., Da'an Dist., Taipei"
-            referrerpolicy="no-referrer-when-downgrade"
-            aria-label="D Town by A Train Google Maps location"></iframe>
-          <a class="visit-map-link" href="https://maps.google.com/?q=台北市大安區忠孝東路四段49巷2號2樓" target="_blank" rel="noopener">Open in Google Maps →</a>
-        </div>
-        <div class="entrance-video-card">
-          <p class="entrance-video-title">How to find us — a 20-second walk-through</p>
-          <p class="entrance-video-sub">MRT Zhongxiao Fuxing Exit 4 · the lane beside SOGO · up to 2F through the small door next to Qmomo</p>
-          <div class="news-video-wrap entrance-video-wrap">
-            <video id="entrance-video" autoplay muted loop playsinline webkit-playsinline preload="auto"
-                   poster="../dtown-entrance-poster.jpg"
-                   aria-label="D Town by A Train entrance walk-through video">
-              <source src="../dtown-entrance.mp4" type="video/mp4">
-            </video>
-            <button type="button" id="entrance-video-sound" class="video-sound-btn" aria-label="Turn on sound">🔇</button>
-          </div>
-          <p class="video-sound-hint">Muted by default · tap the speaker icon to turn on sound</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <script>
-    (function () {
-      var v = document.getElementById('entrance-video');
-      if (!v) return;
-      var soundOn = false;
-      v.muted = true;
-      var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
-      tryPlay();
-      var btn = document.getElementById('entrance-video-sound');
-      if (btn) {
-        btn.addEventListener('click', function () {
-          soundOn = !soundOn;
-          v.muted = !soundOn;
-          if (soundOn) tryPlay();
-          btn.textContent = soundOn ? '🔊' : '🔇';
-          btn.setAttribute('aria-label', soundOn ? 'Turn off sound' : 'Turn on sound');
-        });
-      }
-      if (!('IntersectionObserver' in window)) return;
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            try { v.currentTime = 0; } catch (err) {}
-            v.muted = !soundOn;
-            tryPlay();
-          } else { v.pause(); }
-        });
-      }, { threshold: 0.35 });
-      io.observe(v);
-    })();
-  </script>
 
   <!-- FULL MENU -->
   <div id="menu">
@@ -3250,6 +3190,99 @@
     <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2" class="btn-gold" target="_blank" rel="noopener">Book Online Now</a>
   </div>
 
+  <!-- VISIT -->
+  <section id="visit" class="page-section page-section-alt">
+    <div class="section-inner section-grid">
+      <div class="section-copy">
+        <span class="section-kicker">Visit</span>
+        <h2>First time here? Start with this</h2>
+        <div class="gold-line"></div>
+        <p>D Town by A Train is at 2F, No. 2, Lane 49, Sec. 4, Zhongxiao E. Rd., Da'an Dist., Taipei (in the lane beside SOGO), about a 1-minute walk from MRT Zhongxiao Fuxing Station Exit 4.</p>
+        <p>If you're looking for an East District bistro & cocktail bar for friends' dinners, after-work gatherings or birthday celebrations, this is the section that matters most — address, getting here, opening hours, minimum charge, payment and reservations all in one place.</p>
+        <p class="visit-notes">Take a quick look at the cards <span class="vn-pos-desktop">on the right</span><span class="vn-pos-mobile">below</span> to decide whether to book, then scroll on to the menu and FAQ.</p>
+      </div>
+      <div class="visit-grid">
+        <div class="visit-card">
+          <span class="label">Address</span>
+          <div class="value">2F, No. 2, Lane 49, Sec. 4, Zhongxiao E. Rd., Da'an Dist., Taipei<br><span style="opacity:.7;">(忠孝東路四段49巷2號2樓)</span></div>
+        </div>
+        <div class="visit-card">
+          <span class="label">Getting Here</span>
+          <div class="value">MRT Zhongxiao Fuxing Station Exit 4, about a 1-minute walk</div>
+        </div>
+        <div class="visit-card">
+          <span class="label">Hours</span>
+          <div class="value">Sun–Thu 18:00–01:30<br>Fri & Sat 18:00–02:30</div>
+        </div>
+        <div class="visit-card">
+          <span class="label">Pricing</span>
+          <div class="value">Minimum NT$600 / person<br>Plus 10% service charge</div>
+        </div>
+        <div class="visit-card">
+          <span class="label">Payment</span>
+          <div class="value">Cash, credit card, mobile payment</div>
+        </div>
+        <div class="visit-card">
+          <span class="label">Reservations</span>
+          <div class="value"><a href="tel:+886227212772">02-2721-2772</a><br>Call after 4 PM, or book online via Inline</div>
+        </div>
+        <div class="visit-map-wrap">
+          <iframe
+            src="https://www.google.com/maps?q=%E5%8F%B0%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E5%BF%A0%E5%AD%9D%E6%9D%B1%E8%B7%AF%E5%9B%9B%E6%AE%B549%E5%B7%B72%E8%99%9F2%E6%A8%93&output=embed"
+            loading="lazy"
+            title="D Town by A Train location map: 2F, No. 2, Lane 49, Sec. 4, Zhongxiao E. Rd., Da'an Dist., Taipei"
+            referrerpolicy="no-referrer-when-downgrade"
+            aria-label="D Town by A Train Google Maps location"></iframe>
+          <a class="visit-map-link" href="https://maps.google.com/?q=台北市大安區忠孝東路四段49巷2號2樓" target="_blank" rel="noopener">Open in Google Maps →</a>
+        </div>
+        <div class="entrance-video-card">
+          <p class="entrance-video-title">How to find us — a 20-second walk-through</p>
+          <p class="entrance-video-sub">MRT Zhongxiao Fuxing Exit 4 · the lane beside SOGO · up to 2F through the small door next to Qmomo</p>
+          <div class="news-video-wrap entrance-video-wrap">
+            <video id="entrance-video" autoplay muted loop playsinline webkit-playsinline preload="auto"
+                   poster="../dtown-entrance-poster.jpg"
+                   aria-label="D Town by A Train entrance walk-through video">
+              <source src="../dtown-entrance.mp4" type="video/mp4">
+            </video>
+            <button type="button" id="entrance-video-sound" class="video-sound-btn" aria-label="Turn on sound">🔇</button>
+          </div>
+          <p class="video-sound-hint">Muted by default · tap the speaker icon to turn on sound</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    (function () {
+      var v = document.getElementById('entrance-video');
+      if (!v) return;
+      var soundOn = false;
+      v.muted = true;
+      var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+      tryPlay();
+      var btn = document.getElementById('entrance-video-sound');
+      if (btn) {
+        btn.addEventListener('click', function () {
+          soundOn = !soundOn;
+          v.muted = !soundOn;
+          if (soundOn) tryPlay();
+          btn.textContent = soundOn ? '🔊' : '🔇';
+          btn.setAttribute('aria-label', soundOn ? 'Turn off sound' : 'Turn on sound');
+        });
+      }
+      if (!('IntersectionObserver' in window)) return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            try { v.currentTime = 0; } catch (err) {}
+            v.muted = !soundOn;
+            tryPlay();
+          } else { v.pause(); }
+        });
+      }, { threshold: 0.35 });
+      io.observe(v);
+    })();
+  </script>
+
   <!-- Latest News: Letter Series Craft Cocktail Gift Box (video autoplays on scroll) -->
   <section id="latest-news" class="page-section page-section-alt">
     <style>
@@ -3630,6 +3663,62 @@
       panel.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
       el.classList.add('active');
     }
+
+    /* Dish photo: swipe / arrow buttons cycle prev-next dish in the category (reuses switchImg; list clicks unaffected) */
+    (function () {
+      document.querySelectorAll('.menu-panel').forEach(function (panel) {
+        var wrap = panel.querySelector('.menu-img-wrap');
+        if (!wrap) return;
+        var items = Array.prototype.slice.call(panel.querySelectorAll('.menu-item')).filter(function (it) {
+          return !it.classList.contains('no-img');
+        });
+        if (items.length < 2) return;
+
+        function step(delta) {
+          var cur = 0;
+          for (var i = 0; i < items.length; i++) {
+            if (items[i].classList.contains('active')) { cur = i; break; }
+          }
+          items[(cur + delta + items.length) % items.length].click();
+        }
+
+        // Desktop arrow buttons (CSS shows them on hover-capable devices only)
+        [['prev', -1, 'Previous dish', '‹'], ['next', 1, 'Next dish', '›']].forEach(function (cfg) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'menu-img-nav ' + cfg[0];
+          btn.setAttribute('aria-label', cfg[2]);
+          btn.textContent = cfg[3];
+          btn.addEventListener('click', function (e) {
+            e.stopPropagation(); // don't trigger the photo's zoom lightbox
+            step(cfg[1]);
+          });
+          // keep Enter/Space keydown from bubbling to the wrap (its a11y keydown handler clicks it and opens the lightbox)
+          btn.addEventListener('keydown', function (e) { e.stopPropagation(); });
+          wrap.appendChild(btn);
+        });
+
+        // Touch swipe: only counts when horizontal travel is large and clearly beats vertical, so page scroll is untouched
+        var sx = null, sy = 0;
+        wrap.addEventListener('touchstart', function (e) {
+          if (e.touches.length !== 1) { sx = null; return; }
+          sx = e.touches[0].clientX;
+          sy = e.touches[0].clientY;
+        }, { passive: true });
+        wrap.addEventListener('touchcancel', function () { sx = null; }, { passive: true });
+        wrap.addEventListener('touchend', function (e) {
+          if (sx === null) return;
+          var t = e.changedTouches[0];
+          var dx = t.clientX - sx;
+          var dy = t.clientY - sy;
+          sx = null;
+          if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+            e.preventDefault(); // swallow the follow-up click so the lightbox doesn't open by accident
+            step(dx < 0 ? 1 : -1);
+          }
+        }, { passive: false });
+      });
+    })();
   </script>
 
   <!-- INTERIOR PHOTOS -->

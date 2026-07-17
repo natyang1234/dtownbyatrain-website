@@ -1744,9 +1744,41 @@
       background: var(--black);
     }
 
-    .menu-img-wrap:hover img {
-      transform: scale(1.02);
-      filter: brightness(1.05);
+    /* hover 放大只給滑鼠裝置——觸控裝置 tap 會讓 :hover 黏住，圖片莫名放大變亮不舒服 */
+    @media (hover: hover) and (pointer: fine) {
+      .menu-img-wrap:hover img {
+        transform: scale(1.02);
+        filter: brightness(1.05);
+      }
+    }
+
+    /* 大圖左右切換箭頭（JS 注入；桌機 hover 顯示，觸控裝置改用滑動手勢） */
+    .menu-img-nav {
+      position: absolute;
+      top: calc(50% - 1.6rem);
+      transform: translateY(-50%);
+      z-index: 6;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(201, 169, 110, 0.45);
+      background: rgba(10, 10, 10, 0.55);
+      color: var(--gold);
+      font-size: 1.3rem;
+      line-height: 1;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0 0 3px;
+    }
+    .menu-img-nav.prev { left: 0.7rem; }
+    .menu-img-nav.next { right: 0.7rem; }
+    @media (hover: hover) and (pointer: fine) {
+      .menu-img-nav { display: flex; opacity: 0; transition: opacity 0.25s ease, background 0.2s ease; }
+      .menu-img-wrap:hover .menu-img-nav,
+      .menu-img-nav:focus-visible { opacity: 1; }
+      .menu-img-nav:hover { background: rgba(10, 10, 10, 0.8); }
     }
 
     .menu-img-caption {
@@ -2644,98 +2676,6 @@
     </div>
   </section>
 
-  <!-- VISIT -->
-  <section id="visit" class="page-section page-section-alt">
-    <div class="section-inner section-grid">
-      <div class="section-copy">
-        <span class="section-kicker">Visit</span>
-        <h2>第一次來，先看這裡</h2>
-        <div class="gold-line"></div>
-        <p>D Town by A Train 位於台北市大安區忠孝東路四段 49 巷 2 號 2 樓（SOGO 忠孝館旁巷弄），從忠孝復興站 4 號出口步行約 1 分鐘即可抵達。</p>
-        <p>如果你正在找一間適合朋友聚餐、同事聚會、生日慶生的東區餐酒館，先看這一區最重要：地址、交通、營業時間、低消、付款方式和訂位方式都整理好了。</p>
-        <p class="visit-notes">你可以先快速看<span class="vn-pos-desktop">右邊</span><span class="vn-pos-mobile">下面</span>卡片，確認要不要訂位，再往下看菜單和 FAQ。</p>
-      </div>
-      <div class="visit-grid">
-        <div class="visit-card">
-          <span class="label">地址</span>
-          <div class="value">台北市大安區忠孝東路四段 49 巷 2 號 2 樓</div>
-        </div>
-        <div class="visit-card">
-          <span class="label">交通</span>
-          <div class="value">忠孝復興站 4 號出口，步行約 1 分鐘</div>
-        </div>
-        <div class="visit-card">
-          <span class="label">營業時間</span>
-          <div class="value">週日到週四 18:00-01:30<br>週五、週六 18:00-02:30</div>
-        </div>
-        <div class="visit-card">
-          <span class="label">消費</span>
-          <div class="value">低消 NT$600／人<br>另收 10% 服務費</div>
-        </div>
-        <div class="visit-card">
-          <span class="label">付款</span>
-          <div class="value">現金、信用卡、行動支付</div>
-        </div>
-        <div class="visit-card">
-          <span class="label">訂位</span>
-          <div class="value"><a href="tel:+886227212772">02-2721-2772</a><br>下午 4 點後致電，或使用 Inline 線上訂位</div>
-        </div>
-        <div class="visit-map-wrap">
-          <iframe
-            src="https://www.google.com/maps?q=%E5%8F%B0%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E5%BF%A0%E5%AD%9D%E6%9D%B1%E8%B7%AF%E5%9B%9B%E6%AE%B549%E5%B7%B72%E8%99%9F2%E6%A8%93&output=embed"
-            loading="lazy"
-            title="D Town by A Train 地圖位置：台北市大安區忠孝東路四段49巷2號2樓"
-            referrerpolicy="no-referrer-when-downgrade"
-            aria-label="D Town by A Train Google 地圖位置"></iframe>
-          <a class="visit-map-link" href="https://maps.google.com/?q=台北市大安區忠孝東路四段49巷2號2樓" target="_blank" rel="noopener">在 Google 地圖開啟 →</a>
-        </div>
-        <div class="entrance-video-card">
-          <p class="entrance-video-title">入口怎麼走？20 秒帶你走一次</p>
-          <p class="entrance-video-sub">忠孝復興 4 號出口・SOGO 旁巷子・Qmomo 旁小門上 2 樓</p>
-          <div class="news-video-wrap entrance-video-wrap">
-            <video id="entrance-video" autoplay muted loop playsinline webkit-playsinline preload="auto"
-                   poster="dtown-entrance-poster.jpg"
-                   aria-label="D Town by A Train 入口怎麼走影片">
-              <source src="dtown-entrance.mp4" type="video/mp4">
-            </video>
-            <button type="button" id="entrance-video-sound" class="video-sound-btn" aria-label="開啟聲音">🔇</button>
-          </div>
-          <p class="video-sound-hint">影片預設靜音 · 點右下角喇叭開啟聲音</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <script>
-    (function () {
-      var v = document.getElementById('entrance-video');
-      if (!v) return;
-      var soundOn = false;
-      v.muted = true;
-      var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
-      tryPlay();
-      var btn = document.getElementById('entrance-video-sound');
-      if (btn) {
-        btn.addEventListener('click', function () {
-          soundOn = !soundOn;
-          v.muted = !soundOn;
-          if (soundOn) tryPlay();
-          btn.textContent = soundOn ? '🔊' : '🔇';
-          btn.setAttribute('aria-label', soundOn ? '關閉聲音' : '開啟聲音');
-        });
-      }
-      if (!('IntersectionObserver' in window)) return;
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            try { v.currentTime = 0; } catch (err) {}
-            v.muted = !soundOn;
-            tryPlay();
-          } else { v.pause(); }
-        });
-      }, { threshold: 0.35 });
-      io.observe(v);
-    })();
-  </script>
 
   <!-- FULL MENU -->
   <div id="menu">
@@ -3250,6 +3190,99 @@
     <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2" class="btn-gold" target="_blank" rel="noopener">立即線上訂位</a>
   </div>
 
+  <!-- VISIT -->
+  <section id="visit" class="page-section page-section-alt">
+    <div class="section-inner section-grid">
+      <div class="section-copy">
+        <span class="section-kicker">Visit</span>
+        <h2>第一次來，先看這裡</h2>
+        <div class="gold-line"></div>
+        <p>D Town by A Train 位於台北市大安區忠孝東路四段 49 巷 2 號 2 樓（SOGO 忠孝館旁巷弄），從忠孝復興站 4 號出口步行約 1 分鐘即可抵達。</p>
+        <p>如果你正在找一間適合朋友聚餐、同事聚會、生日慶生的東區餐酒館，先看這一區最重要：地址、交通、營業時間、低消、付款方式和訂位方式都整理好了。</p>
+        <p class="visit-notes">你可以先快速看<span class="vn-pos-desktop">右邊</span><span class="vn-pos-mobile">下面</span>卡片，確認要不要訂位，再往下看菜單和 FAQ。</p>
+      </div>
+      <div class="visit-grid">
+        <div class="visit-card">
+          <span class="label">地址</span>
+          <div class="value">台北市大安區忠孝東路四段 49 巷 2 號 2 樓</div>
+        </div>
+        <div class="visit-card">
+          <span class="label">交通</span>
+          <div class="value">忠孝復興站 4 號出口，步行約 1 分鐘</div>
+        </div>
+        <div class="visit-card">
+          <span class="label">營業時間</span>
+          <div class="value">週日到週四 18:00-01:30<br>週五、週六 18:00-02:30</div>
+        </div>
+        <div class="visit-card">
+          <span class="label">消費</span>
+          <div class="value">低消 NT$600／人<br>另收 10% 服務費</div>
+        </div>
+        <div class="visit-card">
+          <span class="label">付款</span>
+          <div class="value">現金、信用卡、行動支付</div>
+        </div>
+        <div class="visit-card">
+          <span class="label">訂位</span>
+          <div class="value"><a href="tel:+886227212772">02-2721-2772</a><br>下午 4 點後致電，或使用 Inline 線上訂位</div>
+        </div>
+        <div class="visit-map-wrap">
+          <iframe
+            src="https://www.google.com/maps?q=%E5%8F%B0%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E5%BF%A0%E5%AD%9D%E6%9D%B1%E8%B7%AF%E5%9B%9B%E6%AE%B549%E5%B7%B72%E8%99%9F2%E6%A8%93&output=embed"
+            loading="lazy"
+            title="D Town by A Train 地圖位置：台北市大安區忠孝東路四段49巷2號2樓"
+            referrerpolicy="no-referrer-when-downgrade"
+            aria-label="D Town by A Train Google 地圖位置"></iframe>
+          <a class="visit-map-link" href="https://maps.google.com/?q=台北市大安區忠孝東路四段49巷2號2樓" target="_blank" rel="noopener">在 Google 地圖開啟 →</a>
+        </div>
+        <div class="entrance-video-card">
+          <p class="entrance-video-title">入口怎麼走？20 秒帶你走一次</p>
+          <p class="entrance-video-sub">忠孝復興 4 號出口・SOGO 旁巷子・Qmomo 旁小門上 2 樓</p>
+          <div class="news-video-wrap entrance-video-wrap">
+            <video id="entrance-video" autoplay muted loop playsinline webkit-playsinline preload="auto"
+                   poster="dtown-entrance-poster.jpg"
+                   aria-label="D Town by A Train 入口怎麼走影片">
+              <source src="dtown-entrance.mp4" type="video/mp4">
+            </video>
+            <button type="button" id="entrance-video-sound" class="video-sound-btn" aria-label="開啟聲音">🔇</button>
+          </div>
+          <p class="video-sound-hint">影片預設靜音 · 點右下角喇叭開啟聲音</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    (function () {
+      var v = document.getElementById('entrance-video');
+      if (!v) return;
+      var soundOn = false;
+      v.muted = true;
+      var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+      tryPlay();
+      var btn = document.getElementById('entrance-video-sound');
+      if (btn) {
+        btn.addEventListener('click', function () {
+          soundOn = !soundOn;
+          v.muted = !soundOn;
+          if (soundOn) tryPlay();
+          btn.textContent = soundOn ? '🔊' : '🔇';
+          btn.setAttribute('aria-label', soundOn ? '關閉聲音' : '開啟聲音');
+        });
+      }
+      if (!('IntersectionObserver' in window)) return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            try { v.currentTime = 0; } catch (err) {}
+            v.muted = !soundOn;
+            tryPlay();
+          } else { v.pause(); }
+        });
+      }, { threshold: 0.35 });
+      io.observe(v);
+    })();
+  </script>
+
   <!-- 最新動態：字母系列聯名禮盒（影片滑到自動播放） -->
   <section id="latest-news" class="page-section page-section-alt">
     <style>
@@ -3628,6 +3661,62 @@
       panel.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
       el.classList.add('active');
     }
+
+    /* 菜單大圖：左右滑動／箭頭切換同分類上一道・下一道（重用 switchImg，列表點選不受影響） */
+    (function () {
+      document.querySelectorAll('.menu-panel').forEach(function (panel) {
+        var wrap = panel.querySelector('.menu-img-wrap');
+        if (!wrap) return;
+        var items = Array.prototype.slice.call(panel.querySelectorAll('.menu-item')).filter(function (it) {
+          return !it.classList.contains('no-img');
+        });
+        if (items.length < 2) return;
+
+        function step(delta) {
+          var cur = 0;
+          for (var i = 0; i < items.length; i++) {
+            if (items[i].classList.contains('active')) { cur = i; break; }
+          }
+          items[(cur + delta + items.length) % items.length].click();
+        }
+
+        // 桌機箭頭鈕（CSS 限 hover 裝置才顯示）
+        [['prev', -1, '上一道菜', '‹'], ['next', 1, '下一道菜', '›']].forEach(function (cfg) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'menu-img-nav ' + cfg[0];
+          btn.setAttribute('aria-label', cfg[2]);
+          btn.textContent = cfg[3];
+          btn.addEventListener('click', function (e) {
+            e.stopPropagation(); // 別觸發大圖的放大 lightbox
+            step(cfg[1]);
+          });
+          // 鍵盤 Enter/Space 的 keydown 別冒泡到 wrap（wrap 的無障礙 keydown 會 click 開 lightbox）
+          btn.addEventListener('keydown', function (e) { e.stopPropagation(); });
+          wrap.appendChild(btn);
+        });
+
+        // 觸控滑動：水平位移夠大且明顯大於垂直位移才算，避免干擾頁面捲動
+        var sx = null, sy = 0;
+        wrap.addEventListener('touchstart', function (e) {
+          if (e.touches.length !== 1) { sx = null; return; }
+          sx = e.touches[0].clientX;
+          sy = e.touches[0].clientY;
+        }, { passive: true });
+        wrap.addEventListener('touchcancel', function () { sx = null; }, { passive: true });
+        wrap.addEventListener('touchend', function (e) {
+          if (sx === null) return;
+          var t = e.changedTouches[0];
+          var dx = t.clientX - sx;
+          var dy = t.clientY - sy;
+          sx = null;
+          if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+            e.preventDefault(); // 吃掉滑動後續的 click，避免誤開 lightbox
+            step(dx < 0 ? 1 : -1);
+          }
+        }, { passive: false });
+      });
+    })();
   </script>
 
   <!-- INTERIOR PHOTOS -->
