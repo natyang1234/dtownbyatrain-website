@@ -16,4 +16,19 @@ Allow: /
 User-agent: OAI-SearchBot
 Allow: /
 
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
 Sitemap: https://natyang1234.github.io/dtownbyatrain-website/sitemap.xml
