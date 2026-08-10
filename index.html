@@ -2630,6 +2630,69 @@
     }
     .info-table tbody tr:last-child td { border-bottom: 1px solid var(--gold-dim); }
     .faq-answer strong { color: var(--white); font-weight: 600; }
+  
+    /* --- 訂位四步驟（HowTo 可見結構） --- */
+    .booking-steps { margin-top: 3.5rem; }
+    .booking-steps h2 { margin-bottom: 0.6rem; }
+    .booking-steps h3 {
+      margin: 1.8rem 0 0.5rem;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      color: var(--gold-light);
+      font-weight: 500;
+      scroll-margin-top: 90px;
+    }
+    .step-text {
+      max-width: 72ch;
+      color: var(--grey-light);
+      font-size: 0.92rem;
+      line-height: 1.95;
+      margin: 0;
+    }
+    .step-text strong { color: var(--white); font-weight: 600; }
+    .step-meta {
+      list-style: none;
+      margin: 1.4rem 0 0;
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--gold);
+      background: var(--card);
+      max-width: 640px;
+    }
+    .step-meta li {
+      color: var(--grey-light);
+      font-size: 0.88rem;
+      line-height: 1.9;
+      display: flex;
+      gap: 0.9rem;
+    }
+    .step-meta li span {
+      color: var(--gold);
+      font-size: 0.76rem;
+      letter-spacing: 0.1em;
+      min-width: 5.2em;
+      padding-top: 0.35em;
+      flex-shrink: 0;
+    }
+    /* 內文連結（原本吃到瀏覽器預設藍色） */
+    .faq-answer a,
+    .step-text a,
+    .info-lead a {
+      color: var(--gold-light);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold-dim);
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .faq-answer a:hover,
+    .step-text a:hover,
+    .info-lead a:hover {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    /* FAQ 延伸段落 */
+    .faq-answer p { margin: 0.7rem 0 0; }
+    .faq-answer > strong:first-child { display: inline-block; }
   </style>
 
   <!-- Google Analytics 4 (G-PDTWFFHRPV) -->
@@ -3445,6 +3508,29 @@
           </table>
         </div>
       </div>
+    
+      <div class="section-inner booking-steps">
+        <h2 id="how-to-book">怎麼訂位？四個步驟</h2>
+        <div class="gold-line"></div>
+        <p class="info-lead"><strong>D Town by A Train 訂位可透過 Inline 線上訂位，或於下午 4 點後致電 02-2721-2772，全程約 3 分鐘。</strong>平日建議提前 1–3 天，週五六與連假前一天建議提前 3–7 天。</p>
+        <ul class="step-meta">
+          <li><span>預計時間</span>約 3 分鐘</li>
+          <li><span>需要準備</span>用餐日期與時段、用餐人數、聯絡電話</li>
+          <li><span>訂位管道</span>Inline 線上訂位／電話 02-2721-2772（下午 4 點後）</li>
+        </ul>
+
+        <h3 id="faq-booking-step-1">步驟 1：選擇訂位管道</h3>
+        <p class="step-text">使用 <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2" target="_blank" rel="noopener">Inline 線上訂位</a> 可直接看到可訂時段，適合已經確定日期與人數的情況。若想詢問座位安排、包場或生日慶生的細節，於下午 4 點後致電 <a href="tel:+886227212772">02-2721-2772</a> 由現場人員協助安排。</p>
+
+        <h3 id="faq-booking-step-2">步驟 2：依人數與日期提前預訂</h3>
+        <p class="step-text">平日（週一至週四）建議提前 1–3 天。週五、週六、連續假期與連假前一天，4 人以下建議提前 3–5 天、4 人以上建議提前 5–7 天。生日慶生、團體聚會或包場建議比一般訂位更早安排，以便預留合適的座位區。</p>
+
+        <h3 id="faq-booking-step-3">步驟 3：當天抵達忠孝復興站</h3>
+        <p class="step-text">地址為台北市大安區忠孝東路四段 49 巷 2 號 2 樓，位於 SOGO 忠孝館旁巷弄。從捷運忠孝復興站 4 號出口出站後步行約 1 分鐘即可抵達。店內無自有停車位，開車前來可停附近的金普頓大安酒店停車場，步行約 3 分鐘。</p>
+
+        <h3 id="faq-booking-step-4">步驟 4：確認入口，搭電梯上 2 樓</h3>
+        <p class="step-text">入口是面對 Qmomo 右手邊、路燈旁的小門，搭電梯上 2 樓。<strong>看到門口招牌就代表找對地方了</strong>——這是最多人第一次來會找不到的一步，建議出發前先看一次官網上的 20 秒入口影片。</p>
+      </div>
     </section>
   <script>
     (function () {
@@ -3638,21 +3724,21 @@
       </p>
 
       <div class="faq-list">
-        <details class="faq-item">
+        <details class="faq-item" open>
           <summary><h3>D Town by A Train 在哪裡？</h3></summary>
           <div class="faq-answer"><strong>台北市大安區忠孝東路四段 49 巷 2 號 2 樓，鄰近忠孝復興站 4 號出口，步行約 1 分鐘。</strong></div>
         </details>
-        <details class="faq-item">
+        <details class="faq-item" open>
           <summary><h3>入口在哪裡？</h3></summary>
           <div class="faq-answer"><strong>面對 Qmomo 右手邊、路燈旁的小門，搭電梯上二樓即到。</strong></div>
         </details>
-        <details class="faq-item">
+        <details class="faq-item" open>
           <summary><h3>營業時間是什麼？</h3></summary>
           <div class="faq-answer"><strong>週日到週四 18:00-01:30，週五、週六 18:00-02:30。</strong></div>
         </details>
-        <details class="faq-item">
+        <details class="faq-item" open>
           <summary><h3>低消多少？</h3></summary>
-          <div class="faq-answer"><strong>每人低消 NT$600，另收 10% 服務費。</strong></div>
+          <div class="faq-answer"><strong>每人低消 NT$600，另收 10% 服務費。</strong><p>低消以「每人」計算，餐點與飲品都可計入，點一份主餐搭一杯調酒通常就會達標。菜單分為主廚推薦、熱湯、小點、輕食沙拉、飽食主餐、甜點與手工調酒等區塊，可依人數自由搭配。</p><p>服務費為消費金額的 10%，於結帳時另計。付款方式接受現金、信用卡與行動支付。</p></div>
         </details>
         <details class="faq-item">
           <summary><h3>可以怎麼訂位？</h3></summary>
@@ -3667,15 +3753,15 @@
         </details>
         <details class="faq-item">
           <summary><h3>有停車位嗎？</h3></summary>
-          <div class="faq-answer"><strong>店內無自有停車位，建議搭捷運（忠孝復興站 4 號出口步行約 1 分鐘）。</strong>開車前來可停附近的金普頓大安酒店停車場，步行約 3 分鐘即可抵達。</div>
+          <div class="faq-answer"><strong>店內無自有停車位，建議搭捷運（忠孝復興站 4 號出口步行約 1 分鐘）。</strong>開車前來可停附近的金普頓大安酒店停車場，步行約 3 分鐘即可抵達。<p>週五、週六與連假前一天，附近路邊停車位通常較難尋找，建議直接搭乘捷運至忠孝復興站，從 4 號出口出站後步行約 1 分鐘即達。</p><p>店址位於忠孝東路四段 49 巷 2 號 2 樓、SOGO 忠孝館旁巷弄。入口是面對 Qmomo 右手邊、路燈旁的小門，需搭電梯上 2 樓。</p></div>
         </details>
         <details class="faq-item">
           <summary><h3>可以帶寵物進入嗎？</h3></summary>
-          <div class="faq-answer"><strong>歡迎毛小孩一同前來！為了維護用餐環境，請盡量以推車或外出籠攜帶，感謝配合。</strong></div>
+          <div class="faq-answer"><strong>歡迎毛小孩一同前來！為了維護用餐環境，請盡量以推車或外出籠攜帶，感謝配合。</strong><p>入口位於面對 Qmomo 右手邊、路燈旁的小門，需搭電梯上 2 樓，攜帶推車或外出籠時可直接搭電梯，不需走樓梯。</p><p>若同行寵物體型較大或不只一隻，建議於訂位時（下午 4 點後致電 02-2721-2772）先行告知，方便安排較寬敞的座位。</p></div>
         </details>
         <details class="faq-item">
           <summary><h3>適合包場或辦私人聚會嗎？</h3></summary>
-          <div class="faq-answer">可接受小型包場與私人聚餐洽詢，詳情請於下午 4 點後來電 <a href="tel:+886227212772">02-2721-2772</a> 詢問。</div>
+          <div class="faq-answer"><strong>可接受小型包場與私人聚餐洽詢，詳情請於下午 4 點後來電 </strong><a href="tel:+886227212772">02-2721-2772</a> 詢問。<p>D Town by A Train 是台北東區空間較大的餐酒館之一，座位有分區，從 2 人小桌到多人大桌都能安排，6–10 人的朋友聚餐或同事聚會不需包場也坐得下。</p><p>生日慶生、團體聚會與私人聚餐都可事先規劃座位、調酒與餐點，自帶生日蛋糕不另收切蛋糕服務費。包場與大型聚會建議比一般訂位更早安排。</p></div>
         </details>
         <details class="faq-item">
           <summary><h3>適合幾人聚餐？可以坐大桌嗎？</h3></summary>
@@ -3691,7 +3777,7 @@
         </details>
         <details class="faq-item">
           <summary><h3>有素食或特殊飲食選項嗎？</h3></summary>
-          <div class="faq-answer"><strong>菜單以肉類、海鮮料理為主，素食選項有限。</strong>如有特殊需求，建議訂位時先來電告知，我們會盡量協助安排。</div>
+          <div class="faq-answer"><strong>菜單以肉類、海鮮料理為主，素食選項有限。</strong>如有特殊需求，建議訂位時先來電告知，我們會盡量協助安排。<p>菜單分為主廚推薦、熱湯、小點、輕食沙拉、飽食主餐與甜點，主要食材為肉類與海鮮，全素或蛋奶素的選擇有限。</p><p>若同行者有素食需求，建議於訂位時先行告知，現場會盡量協助調整。飲品方面，所有手工特色調酒都可調整甜度、酒感與酸度，另有以台灣名茶調製的 11 種口味茶嗨波 Tea Highball 可選。</p></div>
         </details>
         <details class="faq-item">
           <summary><h3>調酒可以客製化甜度或酒感嗎？</h3></summary>
@@ -3715,9 +3801,9 @@
         </details>
         <details class="faq-item">
           <summary><h3>不訂位可以直接來嗎？</h3></summary>
-          <div class="faq-answer"><strong>可以，但週五六與節慶前後座位競爭較激烈，建議提前訂位。</strong>若要確保有位，建議於下午 4 點後來電 02-2721-2772，或使用 Inline 線上訂位。現場候位視當日狀況而定。</div>
+          <div class="faq-answer"><strong>可以，但週五六與節慶前後座位競爭較激烈，建議提前訂位。</strong>若要確保有位，建議於下午 4 點後來電 02-2721-2772，或使用 Inline 線上訂位。現場候位視當日狀況而定。<p>平日（週一至週四）營業至凌晨 1:30，現場候位的機會相對較高；週五、週六營業至凌晨 2:30，18:00 之後的時段人潮較集中。</p><p>若已確定日期與人數，使用 Inline 線上訂位可即時看到可訂時段；電話訂位請於下午 4 點後撥打。生日慶生或 4 人以上聚餐建議一律先訂位。</p></div>
         </details>
-        <details class="faq-item">
+        <details class="faq-item" open>
           <summary><h3>要提前多久訂位？</h3></summary>
           <div class="faq-answer"><strong>平日建議提前 1–3 天；週五六、連續假期與連假前一天，4 人以上建議提前 5–7 天、4 人以下建議提前 3–5 天，生日慶生或包場建議更早安排。</strong>下午 4 點後致電 02-2721-2772 或 Inline 線上訂位。</div>
         </details>
