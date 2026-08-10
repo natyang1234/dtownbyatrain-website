@@ -1749,6 +1749,8 @@
 
     .menu-img-wrap img {
       width: 100%;
+      /* HTML 的 width/height 屬性（防 CLS）會把高度釘在 1000px，必須拉回 auto 讓 aspect-ratio 生效 */
+      height: auto;
       display: block;
       /* 固定 3:4 圖框，所有分類/菜色大小一致；圖片 contain 完整顯示不裁切
          （少數 2:3 的圖會在框內留極細邊，但框尺寸永遠相同） */
@@ -3308,7 +3310,8 @@
           <span class="label">Reservations</span>
           <div class="value"><a href="tel:+886227212772">02-2721-2772</a><br>Call after 4 PM, or book online via Inline</div>
         </div>
-        <div class="visit-map-wrap">
+      </div>
+      <div class="visit-map-wrap">
           <iframe
             src="https://www.google.com/maps?q=%E5%8F%B0%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E5%BF%A0%E5%AD%9D%E6%9D%B1%E8%B7%AF%E5%9B%9B%E6%AE%B549%E5%B7%B72%E8%99%9F2%E6%A8%93&output=embed"
             loading="lazy"
@@ -3330,7 +3333,6 @@
           </div>
           <p class="video-sound-hint">Muted by default · tap the speaker icon to turn on sound</p>
         </div>
-      </div>
     </div>
   </section>
   <script>
