@@ -1679,16 +1679,23 @@
     }
 
     /* ─── MENU ─── */
-    #menu-section {
+    /* ⚠️ HTML 是 <div id="menu">，此處選擇器原誤寫 #menu-section，整區從無 padding／max-width（全寬攤平）。
+       手機版全寬 sticky 圖為刻意設計，置中約束只加在桌機。 */
+    #menu {
       background: var(--black);
-      padding: 6rem clamp(2rem, 6vw, 6rem);
       position: relative;
       z-index: 1;
     }
 
-    #menu-section .inner {
-      max-width: 1100px;
-      margin: 0 auto;
+    @media (min-width: 901px) {
+      #menu {
+        padding: 5rem clamp(2rem, 6vw, 6rem) 3rem;
+      }
+
+      #menu .inner {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
     }
 
     .menu-header {
@@ -2675,6 +2682,17 @@
       min-width: 5.2em;
       padding-top: 0.35em;
       flex-shrink: 0;
+    }
+
+    /* 桌機置中：與前後區塊（入口影片、最新動態）的置中版式一致，段落內文維持靠左易讀。
+       必須放在 .step-text／.step-meta 定義之後，否則 margin 會被它們蓋回去 */
+    @media (min-width: 901px) {
+      .info-tables h2, .info-tables h3,
+      .booking-steps h2, .booking-steps h3 { text-align: center; }
+      .info-tables .gold-line, .booking-steps .gold-line { margin-left: auto; margin-right: auto; }
+      .info-lead, .step-text { margin-left: auto; margin-right: auto; text-align: left; }
+      .info-table { margin-left: auto; margin-right: auto; }
+      .step-meta { margin-left: auto; margin-right: auto; }
     }
     /* 內文連結（原本吃到瀏覽器預設藍色） */
     .faq-answer a,
