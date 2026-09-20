@@ -2095,6 +2095,9 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 6px;
+      width: 100%;
+      max-width: 960px;
+      margin-inline: auto;
     }
 
     .cocktail-menu-card {
@@ -2106,6 +2109,9 @@
 
     .cocktail-menu-card img {
       width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 5;
+      object-fit: contain;
       display: block;
       transition: transform 0.35s ease, filter 0.3s, box-shadow 0.3s;
       filter: brightness(0.85);
@@ -2232,10 +2238,12 @@
 
     .lightbox-close {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
-      width: 2.5rem;
-      height: 2.5rem;
+      top: max(1rem, env(safe-area-inset-top));
+      right: max(1rem, env(safe-area-inset-right));
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
       border: 1px solid rgba(200,169,110,0.5);
       background: rgba(8,8,8,0.72);
       color: var(--gold);
@@ -2793,7 +2801,12 @@
       /* 餐點圖是 3:4 直式設計卡，完整顯示不裁切（contain 不切，限高避免過高擠壓列表）
          ⚠️ 限高只用 px＋vw（皆不隨滾動變）。svh 理論上固定，但 iOS 內建瀏覽器
          （IG/LINE 的 WKWebView）svh 會隨工具列伸縮 → 圖片忽大忽小，實機已驗證，棄用。 */
-      .menu-img-wrap img { max-height: 440px; max-height: min(440px, 120vw); object-fit: contain; }
+      .menu-img-wrap img { max-height: min(340px, 90vw); object-fit: contain; }
+
+      .cocktail-menu-grid {
+        grid-template-columns: 1fr;
+        max-width: 440px;
+      }
 
       /* 分類標籤列換行全顯示：橫向捲動列在手機上按著可拖動、體感怪，改多行不可拖 */
       .menu-tabs { flex-wrap: wrap; justify-content: center; overflow-x: visible; }
@@ -3115,14 +3128,14 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="about-images">
-      <img class="carousel-slide active" src="webp/店內場景1.webp" alt="D Town by A Train 東區餐酒館內部空間" width="788" height="1400">
-      <img class="carousel-slide" data-src="webp/氛圍燈logo.webp" alt="D Town by A Train 品牌氛圍燈與 DOWNTOWN 標誌" width="1086" height="1448">
-      <img class="carousel-slide" data-src="webp/店內場景.webp" alt="D Town by A Train 黑大理石吧台" width="788" height="1400">
-      <img class="carousel-slide" data-src="webp/店內場景4.webp" alt="D Town by A Train 吧台區聚會" width="788" height="1400">
-      <img class="carousel-slide" data-src="webp/店內場景2.webp" alt="D Town by A Train 用餐空間氛圍" width="1050" height="1400">
-      <img class="carousel-slide" data-src="webp/店內場景5.webp" alt="D Town by A Train 餐酒館用餐實景" width="1086" height="1448">
-      <img class="carousel-slide" data-src="webp/封底.webp" alt="D Town by A Train 台北東區餐酒館夜晚" width="932" height="1400">
-      <img class="carousel-slide" data-src="webp/店內場景6.webp" alt="D Town by A Train 夜晚微醺氛圍" width="788" height="1400">
+      <img class="carousel-slide active" src="webp/店內場景1.webp" alt="D Town by A Train 東區餐酒館內部空間" width="788" height="1400" srcset="webp/responsive/店內場景1-480.webp 480w, webp/店內場景1.webp 788w" sizes="(max-width: 900px) 100vw, 50vw" decoding="async" data-full-src="webp/店內場景1.webp" loading="lazy">
+      <img class="carousel-slide" data-src="webp/氛圍燈logo.webp" alt="D Town by A Train 品牌氛圍燈與 DOWNTOWN 標誌" width="1086" height="1448" data-srcset="webp/responsive/氛圍燈logo-480.webp 480w, webp/氛圍燈logo.webp 1086w" data-sizes="(max-width: 900px) 100vw, 50vw" decoding="async" data-full-src="webp/氛圍燈logo.webp">
+      <img class="carousel-slide" data-src="webp/店內場景.webp" alt="D Town by A Train 黑大理石吧台" width="788" height="1400" data-srcset="webp/responsive/店內場景-480.webp 480w, webp/店內場景.webp 788w" data-sizes="(max-width: 900px) 100vw, 50vw" decoding="async" data-full-src="webp/店內場景.webp">
+      <img class="carousel-slide" data-src="webp/店內場景4.webp" alt="D Town by A Train 吧台區聚會" width="788" height="1400" data-srcset="webp/responsive/店內場景4-480.webp 480w, webp/店內場景4.webp 788w" data-sizes="(max-width: 900px) 100vw, 50vw" decoding="async" data-full-src="webp/店內場景4.webp">
+      <img class="carousel-slide" data-src="webp/店內場景2.webp" alt="D Town by A Train 用餐空間氛圍" width="1050" height="1400" data-srcset="webp/responsive/店內場景2-480.webp 480w, webp/店內場景2.webp 1050w" data-sizes="(max-width: 900px) 100vw, 50vw" decoding="async" data-full-src="webp/店內場景2.webp">
+      <img class="carousel-slide" data-src="webp/店內場景5.webp" alt="D Town by A Train 餐酒館用餐實景" width="1086" height="1448" data-srcset="webp/responsive/店內場景5-480.webp 480w, webp/店內場景5.webp 1086w" data-sizes="(max-width: 900px) 100vw, 50vw" decoding="async" data-full-src="webp/店內場景5.webp">
+      <img class="carousel-slide" data-src="webp/封底.webp" alt="D Town by A Train 台北東區餐酒館夜晚" width="932" height="1400" data-srcset="webp/responsive/封底-480.webp 480w, webp/封底.webp 932w" data-sizes="(max-width: 900px) 100vw, 50vw" decoding="async" data-full-src="webp/封底.webp">
+      <img class="carousel-slide" data-src="webp/店內場景6.webp" alt="D Town by A Train 夜晚微醺氛圍" width="788" height="1400" data-srcset="webp/responsive/店內場景6-480.webp 480w, webp/店內場景6.webp 788w" data-sizes="(max-width: 900px) 100vw, 50vw" decoding="async" data-full-src="webp/店內場景6.webp">
       <div class="about-img-overlay"></div>
       <div class="carousel-controls">
         <button type="button" class="carousel-pause" aria-label="暫停輪播" aria-pressed="false">❚❚</button>
@@ -3201,7 +3214,7 @@
       <div class="menu-panel" id="tab-recommend">
         <div class="menu-cat">
           <div class="menu-img-wrap" onclick="openMenuImg('recommend')">
-            <img id="img-recommend" src="webp/嫩煎脆皮烤半雞.webp" alt="D Town by A Train 主廚推薦 嫩煎脆皮烤半雞" loading="lazy" width="750" height="1000">
+            <img id="img-recommend" src="webp/嫩煎脆皮烤半雞.webp" alt="D Town by A Train 主廚推薦 嫩煎脆皮烤半雞" loading="lazy" width="750" height="1000" srcset="webp/responsive/嫩煎脆皮烤半雞-480.webp 480w, webp/嫩煎脆皮烤半雞.webp 750w" sizes="(max-width: 900px) min(255px, 67.5vw), 400px" decoding="async" data-full-src="webp/嫩煎脆皮烤半雞.webp">
             <div class="menu-img-caption" id="cap-recommend">嫩煎脆皮烤半雞</div>
           </div>
           <div class="menu-cat-list">
@@ -3239,7 +3252,7 @@
       <div class="menu-panel" id="tab-soup">
         <div class="menu-cat">
           <div class="menu-img-wrap" onclick="openMenuImg('soup')">
-            <img id="img-soup" src="webp/清燉牛肉蛤蜊湯.webp" alt="D Town by A Train 清燉牛肉蛤蜊湯" loading="lazy" width="750" height="1000">
+            <img id="img-soup" src="webp/清燉牛肉蛤蜊湯.webp" alt="D Town by A Train 清燉牛肉蛤蜊湯" loading="lazy" width="750" height="1000" srcset="webp/responsive/清燉牛肉蛤蜊湯-480.webp 480w, webp/清燉牛肉蛤蜊湯.webp 750w" sizes="(max-width: 900px) min(255px, 67.5vw), 400px" decoding="async" data-full-src="webp/清燉牛肉蛤蜊湯.webp">
             <div class="menu-img-caption" id="cap-soup">清燉牛肉蛤蜊湯</div>
           </div>
           <div class="menu-cat-list">
@@ -3263,7 +3276,7 @@
       <div class="menu-panel" id="tab-dessert">
         <div class="menu-cat">
           <div class="menu-img-wrap" onclick="openMenuImg('dessert')">
-            <img id="img-dessert" src="webp/甜點.webp" alt="D Town by A Train 特製甜點" loading="lazy" width="750" height="1000">
+            <img id="img-dessert" src="webp/甜點.webp" alt="D Town by A Train 特製甜點" loading="lazy" width="750" height="1000" srcset="webp/responsive/甜點-480.webp 480w, webp/甜點.webp 750w" sizes="(max-width: 900px) min(255px, 67.5vw), 400px" decoding="async" data-full-src="webp/甜點.webp">
             <div class="menu-img-caption" id="cap-dessert">D Town 特製甜點</div>
           </div>
           <div class="menu-cat-list">
@@ -3287,7 +3300,7 @@
       <div class="menu-panel" id="tab-snack">
         <div class="menu-cat">
           <div class="menu-img-wrap" onclick="openMenuImg('snack')">
-            <img id="img-snack" src="webp/金磚起司豆腐.webp" alt="D Town by A Train 必點小點 金磚起司豆腐" loading="lazy" width="750" height="1000">
+            <img id="img-snack" src="webp/金磚起司豆腐.webp" alt="D Town by A Train 必點小點 金磚起司豆腐" loading="lazy" width="750" height="1000" srcset="webp/responsive/金磚起司豆腐-480.webp 480w, webp/金磚起司豆腐.webp 750w" sizes="(max-width: 900px) min(255px, 67.5vw), 400px" decoding="async" data-full-src="webp/金磚起司豆腐.webp">
             <div class="menu-img-caption" id="cap-snack">金磚起司豆腐</div>
           </div>
           <div class="menu-cat-list">
@@ -3494,7 +3507,7 @@
       <div class="menu-panel active" id="tab-salad">
         <div class="menu-cat">
           <div class="menu-img-wrap" onclick="openMenuImg('salad')">
-            <img id="img-salad" src="webp/布拉塔起司沙拉.webp" alt="D Town by A Train 輕食沙拉 布拉塔起司沙拉佐羅勒油醋醬" loading="lazy" width="750" height="1000">
+            <img id="img-salad" src="webp/布拉塔起司沙拉.webp" alt="D Town by A Train 輕食沙拉 布拉塔起司沙拉佐羅勒油醋醬" loading="lazy" width="750" height="1000" srcset="webp/responsive/布拉塔起司沙拉-480.webp 480w, webp/布拉塔起司沙拉.webp 750w" sizes="(max-width: 900px) min(255px, 67.5vw), 400px" decoding="async" data-full-src="webp/布拉塔起司沙拉.webp">
             <div class="menu-img-caption" id="cap-salad">布拉塔起司沙拉羅勒油醋醬</div>
           </div>
           <div class="menu-cat-list">
@@ -3539,7 +3552,7 @@
       <div class="menu-panel" id="tab-main">
         <div class="menu-cat">
           <div class="menu-img-wrap" onclick="openMenuImg('main')">
-            <img id="img-main" src="webp/牛小排燉飯.webp" alt="D Town by A Train 主餐 無骨牛小排奶油燉飯" loading="lazy" width="750" height="1000">
+            <img id="img-main" src="webp/牛小排燉飯.webp" alt="D Town by A Train 主餐 無骨牛小排奶油燉飯" loading="lazy" width="750" height="1000" srcset="webp/responsive/牛小排燉飯-480.webp 480w, webp/牛小排燉飯.webp 750w" sizes="(max-width: 900px) min(255px, 67.5vw), 400px" decoding="async" data-full-src="webp/牛小排燉飯.webp">
             <div class="menu-img-caption" id="cap-main">無骨牛小排奶油燉飯</div>
           </div>
           <div class="menu-cat-list">
@@ -3626,19 +3639,19 @@
           </div>
           <div class="cocktail-menu-grid">
             <div class="cocktail-menu-card" onclick="openLightbox('webp/cocktail-from-the-vine.webp','FROM THE VINE · 葡萄酒與發酵酒基底')">
-              <img src="webp/cocktail-from-the-vine.webp" alt="D Town by A Train FROM THE VINE 葡萄酒基底特調雞尾酒菜單" loading="lazy" width="864" height="1080">
+              <img src="webp/cocktail-from-the-vine.webp" alt="D Town by A Train FROM THE VINE 葡萄酒基底特調雞尾酒菜單" loading="lazy" width="864" height="1080" srcset="webp/responsive/cocktail-from-the-vine-480.webp 480w, webp/cocktail-from-the-vine.webp 864w" sizes="(max-width: 900px) min(100vw, 440px), 477px" decoding="async" data-full-src="webp/cocktail-from-the-vine.webp">
               <div class="cocktail-menu-overlay"><span>點擊放大</span></div>
             </div>
             <div class="cocktail-menu-card" onclick="openLightbox('webp/cocktail-fruit-flora.webp','FRUIT & FLORA · 水果與花香')">
-              <img src="webp/cocktail-fruit-flora.webp" alt="D Town by A Train FRUIT & FLORA 水果花香特調雞尾酒菜單" loading="lazy" width="864" height="1080">
+              <img src="webp/cocktail-fruit-flora.webp" alt="D Town by A Train FRUIT & FLORA 水果花香特調雞尾酒菜單" loading="lazy" width="864" height="1080" srcset="webp/responsive/cocktail-fruit-flora-480.webp 480w, webp/cocktail-fruit-flora.webp 864w" sizes="(max-width: 900px) min(100vw, 440px), 477px" decoding="async" data-full-src="webp/cocktail-fruit-flora.webp">
               <div class="cocktail-menu-overlay"><span>點擊放大</span></div>
             </div>
             <div class="cocktail-menu-card" onclick="openLightbox('webp/cocktail-tea-orchard.webp','TEA & ORCHARD · 茶香與果園')">
-              <img src="webp/cocktail-tea-orchard.webp" alt="D Town by A Train TEA & ORCHARD 茶香特調雞尾酒菜單" loading="lazy" width="864" height="1080">
+              <img src="webp/cocktail-tea-orchard.webp" alt="D Town by A Train TEA & ORCHARD 茶香特調雞尾酒菜單" loading="lazy" width="864" height="1080" srcset="webp/responsive/cocktail-tea-orchard-480.webp 480w, webp/cocktail-tea-orchard.webp 864w" sizes="(max-width: 900px) min(100vw, 440px), 477px" decoding="async" data-full-src="webp/cocktail-tea-orchard.webp">
               <div class="cocktail-menu-overlay"><span>點擊放大</span></div>
             </div>
             <div class="cocktail-menu-card" onclick="openLightbox('webp/cocktail-spirit-forward.webp','SPIRIT FORWARD · 烈酒主導')">
-              <img src="webp/cocktail-spirit-forward.webp" alt="D Town by A Train SPIRIT FORWARD 烈酒主導特調雞尾酒菜單" loading="lazy" width="864" height="1080">
+              <img src="webp/cocktail-spirit-forward.webp" alt="D Town by A Train SPIRIT FORWARD 烈酒主導特調雞尾酒菜單" loading="lazy" width="864" height="1080" srcset="webp/responsive/cocktail-spirit-forward-480.webp 480w, webp/cocktail-spirit-forward.webp 864w" sizes="(max-width: 900px) min(100vw, 440px), 477px" decoding="async" data-full-src="webp/cocktail-spirit-forward.webp">
               <div class="cocktail-menu-overlay"><span>點擊放大</span></div>
             </div>
           </div>
@@ -3806,16 +3819,16 @@
         </div>
       </div>
 
-      <!-- Lightbox -->
-      <div id="cocktail-lightbox" role="dialog" aria-modal="true" aria-label="餐點圖片放大檢視" onclick="closeLightbox()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;padding:1rem;">
-        <img id="lb-img" src="" alt="D Town by A Train 餐點放大圖" style="max-width:90vw;max-height:82vh;object-fit:contain;border-radius:4px;box-shadow:0 8px 48px rgba(0,0,0,.6);">
-        <div id="lb-tea-cell" style="display:none;"></div>
-        <p id="lb-cap" style="color:#ccc;margin-top:1rem;font-size:0.85rem;letter-spacing:.12em;"></p>
-        <p style="color:#666;font-size:0.7rem;margin-top:0.5rem;">點擊任意處關閉</p>
-        <button type="button" class="lightbox-close" aria-label="關閉圖片" onclick="event.stopPropagation(); closeLightbox();">×</button>
-      </div>
-
     </div>
+  </div>
+
+  <!-- Lightbox: body 直屬，避免被 #menu stacking context / nav 遮住 -->
+  <div id="cocktail-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="餐點圖片放大檢視" tabindex="-1" onclick="if(event.target === this) closeLightbox()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;padding:max(1rem,env(safe-area-inset-top)) max(1rem,env(safe-area-inset-right)) max(1rem,env(safe-area-inset-bottom)) max(1rem,env(safe-area-inset-left));">
+    <img id="lb-img" src="" alt="D Town by A Train 餐點放大圖" style="max-width:90vw;max-height:82vh;object-fit:contain;border-radius:4px;box-shadow:0 8px 48px rgba(0,0,0,.6);">
+    <div id="lb-tea-cell" style="display:none;"></div>
+    <p id="lb-cap" style="color:#ccc;margin-top:1rem;font-size:0.85rem;letter-spacing:.12em;"></p>
+    <p style="color:#666;font-size:0.7rem;margin-top:0.5rem;">點擊背景或 × 關閉</p>
+    <button type="button" class="lightbox-close" aria-label="關閉圖片" onclick="event.stopPropagation(); closeLightbox();">×</button>
   </div>
 
   <!-- 中段訂位 CTA（看完菜單就能訂） -->
@@ -3874,10 +3887,10 @@
           <p class="entrance-video-title">入口怎麼走？20 秒帶你走一次</p>
           <p class="entrance-video-sub">忠孝復興 4 號出口・SOGO 旁巷子・Qmomo 旁小門上 2 樓</p>
           <div class="news-video-wrap entrance-video-wrap">
-            <video id="entrance-video" autoplay muted loop playsinline webkit-playsinline preload="auto"
+            <video id="entrance-video" muted loop playsinline webkit-playsinline controls preload="none"
                    poster="dtown-entrance-poster.jpg"
                    aria-label="D Town by A Train 入口怎麼走影片">
-              <source src="dtown-entrance.mp4" type="video/mp4">
+              <source data-src="dtown-entrance.mp4" type="video/mp4">
             </video>
             <button type="button" id="entrance-video-sound" class="video-sound-btn" aria-label="開啟聲音">🔇</button>
           </div>
@@ -3948,31 +3961,57 @@
     (function () {
       var v = document.getElementById('entrance-video');
       if (!v) return;
-      var soundOn = false;
-      v.muted = true;
-      var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
-      tryPlay();
-      var btn = document.getElementById('entrance-video-sound');
-      if (btn) {
-        btn.addEventListener('click', function () {
-          soundOn = !soundOn;
-          v.muted = !soundOn;
-          if (soundOn) tryPlay();
+        var soundOn = false;
+        var loaded = false;
+        v.muted = true;
+        var source = v.querySelector('source[data-src]');
+        var ensureLoad = function () {
+          if (loaded || !source || !source.dataset.src) return;
+          source.src = source.dataset.src;
+          v.preload = 'metadata';
+          loaded = true;
+          v.load();
+        };
+        var tryPlay = function () {
+          ensureLoad();
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        };
+        var btn = document.getElementById('entrance-video-sound');
+        v.addEventListener('volumechange', function () {
+          soundOn = !v.muted && v.volume > 0;
+          if (btn) {
+            btn.textContent = soundOn ? '🔊' : '🔇';
+            btn.setAttribute('aria-label', soundOn ? '關閉聲音' : '開啟聲音');
+          }
+        });
+        if (btn) {
+          btn.addEventListener('click', function () {
+            soundOn = !soundOn;
+            v.muted = !soundOn;
+            if (soundOn) tryPlay();
           btn.textContent = soundOn ? '🔊' : '🔇';
           btn.setAttribute('aria-label', soundOn ? '關閉聲音' : '開啟聲音');
         });
       }
-      if (!('IntersectionObserver' in window)) return;
-      var io = new IntersectionObserver(function (entries) {
+      if (!('IntersectionObserver' in window)) {
+        ensureLoad();
+        return;
+      }
+      var preloadObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) ensureLoad(); });
+      }, { rootMargin: '250px 0px', threshold: 0 });
+      preloadObserver.observe(v);
+      var playObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.35) {
             try { v.currentTime = 0; } catch (err) {}
             v.muted = !soundOn;
             tryPlay();
           } else { v.pause(); }
         });
       }, { threshold: 0.35 });
-      io.observe(v);
+      playObserver.observe(v);
     })();
   </script>
 
@@ -4046,10 +4085,10 @@
       </ul>
       <p class="news-intro">每盒另附專業級「調酒 Peel 噴霧」（口味隨機），讓微醺的層次再進化一步。</p>
       <div class="news-video-wrap">
-        <video id="dtown-news-video" autoplay muted loop playsinline webkit-playsinline preload="auto"
+        <video id="dtown-news-video" muted loop playsinline webkit-playsinline controls preload="none"
                poster="dtown-gift-poster.jpg"
                aria-label="字母系列聯名・微醺調酒禮盒影片">
-          <source src="dtown-ambient.mp4" type="video/mp4">
+          <source data-src="dtown-ambient.mp4" type="video/mp4">
         </video>
         <button type="button" id="news-video-sound" class="video-sound-btn" aria-label="開啟聲音">🔇</button>
       </div>
@@ -4062,11 +4101,30 @@
         var v = document.getElementById('dtown-news-video');
         if (!v) return;
         var soundOn = false;                 // 使用者是否已開啟聲音
+        var loaded = false;
         v.muted = true;
-        var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
-        tryPlay();
+        var source = v.querySelector('source[data-src]');
+        var ensureLoad = function () {
+          if (loaded || !source || !source.dataset.src) return;
+          source.src = source.dataset.src;
+          v.preload = 'metadata';
+          loaded = true;
+          v.load();
+        };
+        var tryPlay = function () {
+          ensureLoad();
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        };
         // 聲音 / 播放備援按鈕：點一下開聲音（並確保播放）；再點關聲音
         var btn = document.getElementById('news-video-sound');
+        v.addEventListener('volumechange', function () {
+          soundOn = !v.muted && v.volume > 0;
+          if (btn) {
+            btn.textContent = soundOn ? '🔊' : '🔇';
+            btn.setAttribute('aria-label', soundOn ? '關閉聲音' : '開啟聲音');
+          }
+        });
         if (btn) {
           btn.addEventListener('click', function () {
             soundOn = !soundOn;
@@ -4076,17 +4134,24 @@
             btn.setAttribute('aria-label', soundOn ? '關閉聲音' : '開啟聲音');
           });
         }
-        if (!('IntersectionObserver' in window)) return;
-        var io = new IntersectionObserver(function (entries) {
+        if (!('IntersectionObserver' in window)) {
+          ensureLoad();
+          return;
+        }
+        var preloadObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) ensureLoad(); });
+        }, { rootMargin: '250px 0px', threshold: 0 });
+        preloadObserver.observe(v);
+        var playObserver = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) {
-            if (e.isIntersecting) {
+            if (e.isIntersecting && e.intersectionRatio >= 0.35) {
               try { v.currentTime = 0; } catch (err) {}
               v.muted = !soundOn;            // 尊重使用者的聲音選擇
               tryPlay();
             } else { v.pause(); }
           });
         }, { threshold: 0.35 });
-        io.observe(v);
+        playObserver.observe(v);
       })();
     </script>
   </section>
@@ -4236,49 +4301,77 @@
   </section>
 
   <script>
-    // About section carousel — 按需載入：只先載第 1 張，其餘輪到才載（並預載下一張）
-    // 加 dots 進度指示＋暫停/播放鈕，hover 時自動暫停
-    (function() {
-      const container = document.querySelector('#about .about-images');
-      const slides = document.querySelectorAll('#about .carousel-slide');
-      const dots = document.querySelectorAll('#about .carousel-dot');
-      const pauseBtn = document.querySelector('#about .carousel-pause');
-      const load = (i) => { const s = slides[i]; if (s && !s.src && s.dataset.src) s.src = s.dataset.src; };
-      let current = 0;
-      let userPaused = false;
-      let hoverPaused = false;
-      load(0); load(1); // 目前 + 下一張
-
-      function goTo(index) {
-        const next = (index + slides.length) % slides.length;
-        slides[current].classList.remove('active');
-        if (dots[current]) { dots[current].classList.remove('active'); dots[current].setAttribute('aria-selected', 'false'); }
-        current = next;
-        load(current); load((current + 1) % slides.length); // 確保當前與下一張已載
-        slides[current].classList.add('active');
-        if (dots[current]) { dots[current].classList.add('active'); dots[current].setAttribute('aria-selected', 'true'); }
-      }
-
-      setInterval(function() {
-        if (!userPaused && !hoverPaused) goTo(current + 1);
-      }, 4000);
-
-      dots.forEach(function(dot, i) {
-        dot.addEventListener('click', function() { goTo(i); });
+    // Responsive display images keep the original as the lightbox source.
+    var mediaWidths = {"webp/cocktail-from-the-vine.webp":864,"webp/cocktail-fruit-flora.webp":864,"webp/cocktail-spirit-forward.webp":864,"webp/cocktail-tea-orchard.webp":864,"webp/xo花椰菜.webp":750,"webp/兵庫縣生蠔.webp":750,"webp/南蠻炸雞.webp":750,"webp/和牛炊飯.webp":750,"webp/奶油香煎櫛瓜.webp":750,"webp/嫩煎脆皮烤半雞.webp":750,"webp/封底.webp":932,"webp/川味口水雞.webp":750,"webp/布拉塔起司沙拉.webp":750,"webp/干貝青醬燉飯.webp":750,"webp/店內場景.webp":788,"webp/店內場景1.webp":788,"webp/店內場景2.webp":1050,"webp/店內場景4.webp":788,"webp/店內場景5.webp":1086,"webp/店內場景6.webp":788,"webp/德州雞翅.webp":750,"webp/明太子雞肉串.webp":750,"webp/松露薯條.webp":750,"webp/比目魚鰭邊肉丼飯.webp":750,"webp/氛圍燈logo.webp":1086,"webp/水餃.webp":750,"webp/沙爹雞肉串.webp":750,"webp/洋芋片.webp":750,"webp/清燉牛肉蛤蜊湯.webp":750,"webp/炒蛤蜊.webp":750,"webp/炒野菇.webp":750,"webp/烤槍烏賊.webp":750,"webp/烤澎湖生蠔.webp":750,"webp/烤豬里肌.webp":750,"webp/烤青花筍.webp":750,"webp/煎櫻桃鴨胸.webp":750,"webp/牛小排.webp":750,"webp/牛小排燉飯.webp":750,"webp/牛排凱薩沙拉.webp":750,"webp/牛排炒飯.webp":750,"webp/球芽甘藍.webp":750,"webp/甜點.webp":750,"webp/白酒蛤蜊麵.webp":750,"webp/義式肉丸.webp":750,"webp/肋眼牛排.webp":750,"webp/豬里肌番茄義大利麵.webp":750,"webp/起司盤.webp":750,"webp/金磚起司豆腐.webp":750,"webp/雞胸凱薩沙拉.webp":750,"webp/青花椒奶油義大利麵.webp":750,"webp/韓式雞翅.webp":750,"webp/風味薯條.webp":750,"webp/饕客雞軟骨.webp":750,"webp/骰子牛.webp":750,"webp/鮭魚沙拉.webp":750,"webp/鱘龍魚排.webp":750,"webp/鴨肉串.webp":750};
+    function imageSources(src, sizes) {
+      var key = src.replace(/^\.\.\//, '');
+      var width = mediaWidths[key];
+      return { src: src, sizes: sizes, srcset: width ? src.replace('webp/', 'webp/responsive/').replace(/\.webp$/, '-480.webp') + ' 480w, ' + src + ' ' + width + 'w' : '' };
+    }
+    function applyImageSources(img, sources) {
+      img.sizes = sources.sizes;
+      img.srcset = sources.srcset;
+      img.src = sources.src;
+      img.dataset.fullSrc = sources.src;
+    }
+    function readyImage(sources) {
+      return new Promise(function (resolve, reject) {
+        var next = new Image();
+        next.onload = function () {
+          if (next.decode) next.decode().then(function () { resolve(next); }, reject);
+          else resolve(next);
+        };
+        next.onerror = reject;
+        applyImageSources(next, sources);
       });
+    }
 
-      if (pauseBtn) {
-        pauseBtn.addEventListener('click', function() {
-          userPaused = !userPaused;
-          pauseBtn.textContent = userPaused ? '►' : '❚❚';
-          pauseBtn.setAttribute('aria-pressed', String(userPaused));
-          pauseBtn.setAttribute('aria-label', userPaused ? '播放輪播' : '暫停輪播');
-        });
+    // Only advance and prefetch the carousel while it is near/inside the viewport.
+    (function () {
+      var container = document.querySelector('#about .about-images');
+      var slides = Array.from(document.querySelectorAll('#about .carousel-slide'));
+      var dots = document.querySelectorAll('#about .carousel-dot');
+      var pauseBtn = document.querySelector('#about .carousel-pause');
+      var current = 0, userPaused = false, hoverPaused = false, visible = false, request = 0;
+      var pending = {};
+      function load(index) {
+        var slide = slides[index];
+        if (slide.complete && slide.naturalWidth) return Promise.resolve();
+        if (pending[index]) return pending[index];
+        var source = imageSources(slide.dataset.fullSrc || slide.dataset.src || slide.getAttribute('src'), '(max-width: 900px) 100vw, 50vw');
+        pending[index] = readyImage(source).then(function () { applyImageSources(slide, source); delete pending[index]; }, function (err) { delete pending[index]; throw err; });
+        return pending[index];
       }
-
-      if (container) {
-        container.addEventListener('mouseenter', function() { hoverPaused = true; });
-        container.addEventListener('mouseleave', function() { hoverPaused = false; });
+      function preloadNext() { load((current + 1) % slides.length).catch(function () {}); }
+      function goTo(index) {
+        var next = (index + slides.length) % slides.length;
+        var token = ++request;
+        load(next).then(function () {
+          if (token !== request) return;
+          slides[current].classList.remove('active');
+          dots[current].classList.remove('active'); dots[current].setAttribute('aria-selected', 'false');
+          current = next;
+          slides[current].classList.add('active');
+          dots[current].classList.add('active'); dots[current].setAttribute('aria-selected', 'true');
+          if (visible) preloadNext();
+        }).catch(function () {});
+      }
+      setInterval(function () { if (visible && !userPaused && !hoverPaused) goTo(current + 1); }, 4000);
+      dots.forEach(function (dot, i) { dot.addEventListener('click', function () { goTo(i); }); });
+      if (pauseBtn) pauseBtn.addEventListener('click', function () {
+        userPaused = !userPaused;
+        pauseBtn.textContent = userPaused ? '►' : '❚❚';
+        pauseBtn.setAttribute('aria-pressed', String(userPaused));
+        pauseBtn.setAttribute('aria-label', userPaused ? '播放輪播' : '暫停輪播');
+      });
+      container.addEventListener('mouseenter', function () { hoverPaused = true; });
+      container.addEventListener('mouseleave', function () { hoverPaused = false; });
+      if ('IntersectionObserver' in window) {
+        var near = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) { if (entry.isIntersecting) { load(current).catch(function () {}); preloadNext(); near.unobserve(container); } });
+        }, { rootMargin: '250px 0px' });
+        near.observe(container);
+        new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.15; }, { threshold: [0, 0.15] }).observe(container);
       }
     })();
 
@@ -4302,6 +4395,22 @@
       if (trigger) trigger.classList.add('active');
     }
 
+    var lightboxReturnFocus = null;
+    var lightboxBodyOverflow = '';
+    var lightboxRootOverflow = '';
+    function showLightbox() {
+      var box = document.getElementById('cocktail-lightbox');
+      if (box.style.display !== 'flex') {
+        lightboxReturnFocus = document.activeElement;
+        lightboxBodyOverflow = document.body.style.overflow;
+        lightboxRootOverflow = document.documentElement.style.overflow;
+      }
+      box.style.display = 'flex';
+      box.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      box.querySelector('.lightbox-close').focus({ preventScroll: true });
+    }
     function openLightbox(src, caption) {
       const lbImg = document.getElementById('lb-img');
       const lbTea = document.getElementById('lb-tea-cell');
@@ -4310,8 +4419,7 @@
       lbImg.style.display = '';
       lbTea.style.display = 'none';
       document.getElementById('lb-cap').textContent = caption;
-      document.getElementById('cocktail-lightbox').style.display = 'flex';
-      document.body.style.overflow = 'hidden';
+      showLightbox();
     }
 
     function openMenuImg(panelId) {
@@ -4320,7 +4428,7 @@
       if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
       const img = document.getElementById('img-' + panelId);
       const cap = document.getElementById('cap-' + panelId);
-      openLightbox(img.src, cap.textContent);
+      openLightbox(img.dataset.fullSrc || img.src, cap.textContent);
     }
 
     function openTeaCell(bgPos, caption) {
@@ -4330,43 +4438,47 @@
       lbTea.style.backgroundPosition = bgPos;
       lbTea.style.display = 'block';
       document.getElementById('lb-cap').textContent = caption;
-      document.getElementById('cocktail-lightbox').style.display = 'flex';
-      document.body.style.overflow = 'hidden';
+      showLightbox();
     }
 
     function closeLightbox() {
-      document.getElementById('cocktail-lightbox').style.display = 'none';
+      var box = document.getElementById('cocktail-lightbox');
+      if (box.style.display !== 'flex') return;
+      box.style.display = 'none';
+      box.setAttribute('aria-hidden', 'true');
       document.getElementById('lb-img').style.display = '';
       document.getElementById('lb-tea-cell').style.display = 'none';
-      document.body.style.overflow = '';
+      document.body.style.overflow = lightboxBodyOverflow;
+      document.documentElement.style.overflow = lightboxRootOverflow;
+      if (lightboxReturnFocus && lightboxReturnFocus.isConnected) lightboxReturnFocus.focus({ preventScroll: true });
     }
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeLightbox();
+    document.addEventListener('keydown', function (event) {
+      var box = document.getElementById('cocktail-lightbox');
+      if (box.style.display !== 'flex') return;
+      if (event.key === 'Escape') closeLightbox();
+      if (event.key === 'Tab') { event.preventDefault(); box.querySelector('.lightbox-close').focus(); }
     });
 
     function switchImg(panelId, src, caption, el) {
-      const img = document.getElementById('img-' + panelId);
-      const cap = document.getElementById('cap-' + panelId);
-
-      // fade out
-      img.style.opacity = '0';
-      cap.style.opacity = '0';
-
-      setTimeout(() => {
-        // 點擊菜色改用已部署的 webp（根目錄 .jpg 未進 git，線上會 404 破圖）
-        img.src = 'webp/' + src.replace(/\.jpg$/i, '.webp');
+      var img = document.getElementById('img-' + panelId);
+      var cap = document.getElementById('cap-' + panelId);
+      var panel = document.getElementById('tab-' + panelId);
+      var token = img._request = (img._request || 0) + 1;
+      var sources = imageSources('webp/' + src.replace(/\.jpg$/i, '.webp'), '(max-width: 900px) min(255px, 67.5vw), 400px');
+      panel._pendingItem = el;
+      readyImage(sources).then(function () {
+        if (token !== img._request) return;
+        applyImageSources(img, sources);
         img.alt = caption + ' D Town by A Train';
         cap.textContent = caption;
-        // fade in
-        img.style.opacity = '1';
-        cap.style.opacity = '1';
-      }, 220);
-
-      // active state
-      const panel = document.getElementById('tab-' + panelId);
-      panel.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
-      el.classList.add('active');
+        panel.querySelectorAll('.menu-item').forEach(function (item) { item.classList.remove('active'); });
+        el.classList.add('active');
+        panel._pendingItem = null;
+        var items = Array.from(panel.querySelectorAll('.menu-item:not(.no-img)'));
+        var next = items[(items.indexOf(el) + 1) % items.length];
+        var match = next && next.getAttribute('onclick').match(/switchImg\('[^']+',\s*'([^']+)'/);
+        if (match) readyImage(imageSources('webp/' + match[1].replace(/\.jpg$/i, '.webp'), sources.sizes)).catch(function () {});
+      }).catch(function () { if (token === img._request) panel._pendingItem = null; });
     }
 
     /* 菜單大圖：左右滑動／箭頭切換同分類上一道・下一道（重用 switchImg，列表點選不受影響） */
@@ -4382,7 +4494,7 @@
         function step(delta) {
           var cur = 0;
           for (var i = 0; i < items.length; i++) {
-            if (items[i].classList.contains('active')) { cur = i; break; }
+            if (panel._pendingItem ? items[i] === panel._pendingItem : items[i].classList.contains('active')) { cur = i; break; }
           }
           var target = items[(cur + delta + items.length) % items.length];
           target.click();
@@ -4456,10 +4568,10 @@
 
   <!-- INTERIOR PHOTOS -->
   <div id="interior">
-    <img src="webp/店內場景.webp" alt="D Town by A Train 黑大理石吧台設計" loading="lazy" width="788" height="1400">
+    <img src="webp/店內場景.webp" alt="D Town by A Train 黑大理石吧台設計" loading="lazy" width="788" height="1400" srcset="webp/responsive/店內場景-480.webp 480w, webp/店內場景.webp 788w" sizes="(max-width: 900px) 100vw, 50vw" decoding="async" data-full-src="webp/店內場景.webp">
     <div class="right">
-      <img src="webp/店內場景1.webp" alt="D Town by A Train 大廳沙發區" loading="lazy" width="788" height="1400">
-      <img src="webp/店內場景2.webp" alt="D Town by A Train 用餐空間氛圍" loading="lazy" width="1050" height="1400">
+      <img src="webp/店內場景1.webp" alt="D Town by A Train 大廳沙發區" loading="lazy" width="788" height="1400" srcset="webp/responsive/店內場景1-480.webp 480w, webp/店內場景1.webp 788w" sizes="(max-width: 900px) 100vw, 50vw" decoding="async" data-full-src="webp/店內場景1.webp">
+      <img src="webp/店內場景2.webp" alt="D Town by A Train 用餐空間氛圍" loading="lazy" width="1050" height="1400" srcset="webp/responsive/店內場景2-480.webp 480w, webp/店內場景2.webp 1050w" sizes="(max-width: 900px) 100vw, 50vw" decoding="async" data-full-src="webp/店內場景2.webp">
     </div>
   </div>
 
@@ -4529,7 +4641,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <img src="logo.jpg" alt="D Town by A Train" class="footer-logo-img" width="940" height="1672" onclick="this.classList.add('logo-glow');setTimeout(()=>this.classList.remove('logo-glow'),1500)">
+    <img src="webp/logo.webp" loading="lazy" decoding="async" alt="D Town by A Train" class="footer-logo-img" width="940" height="1672" onclick="this.classList.add('logo-glow');setTimeout(()=>this.classList.remove('logo-glow'),1500)">
     <address>
       <a href="https://maps.google.com/?q=D+Town+by+A+Train+台北市大安區忠孝東路四段49巷2號" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.3);">台北市大安區忠孝東路四段49巷2號2樓</a><br>
       <a href="tel:+886227212772">02-2721-2772</a>　・　捷運忠孝復興站 4 號出口

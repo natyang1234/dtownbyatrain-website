@@ -1,0 +1,401 @@
+{
+  "webp/cocktail-from-the-vine.webp": {
+    "width": 864,
+    "height": 1080,
+    "small": "webp/responsive/cocktail-from-the-vine-480.webp",
+    "originalBytes": 69814,
+    "smallBytes": 22494
+  },
+  "webp/cocktail-fruit-flora.webp": {
+    "width": 864,
+    "height": 1080,
+    "small": "webp/responsive/cocktail-fruit-flora-480.webp",
+    "originalBytes": 71022,
+    "smallBytes": 22788
+  },
+  "webp/cocktail-spirit-forward.webp": {
+    "width": 864,
+    "height": 1080,
+    "small": "webp/responsive/cocktail-spirit-forward-480.webp",
+    "originalBytes": 73002,
+    "smallBytes": 23218
+  },
+  "webp/cocktail-tea-orchard.webp": {
+    "width": 864,
+    "height": 1080,
+    "small": "webp/responsive/cocktail-tea-orchard-480.webp",
+    "originalBytes": 80052,
+    "smallBytes": 25956
+  },
+  "webp/xo花椰菜.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/xo花椰菜-480.webp",
+    "originalBytes": 121360,
+    "smallBytes": 63266
+  },
+  "webp/兵庫縣生蠔.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/兵庫縣生蠔-480.webp",
+    "originalBytes": 96276,
+    "smallBytes": 51498
+  },
+  "webp/南蠻炸雞.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/南蠻炸雞-480.webp",
+    "originalBytes": 129592,
+    "smallBytes": 68844
+  },
+  "webp/和牛炊飯.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/和牛炊飯-480.webp",
+    "originalBytes": 103630,
+    "smallBytes": 56414
+  },
+  "webp/奶油香煎櫛瓜.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/奶油香煎櫛瓜-480.webp",
+    "originalBytes": 131258,
+    "smallBytes": 72250
+  },
+  "webp/嫩煎脆皮烤半雞.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/嫩煎脆皮烤半雞-480.webp",
+    "originalBytes": 107062,
+    "smallBytes": 58566
+  },
+  "webp/封底.webp": {
+    "width": 932,
+    "height": 1400,
+    "small": "webp/responsive/封底-480.webp",
+    "originalBytes": 104500,
+    "smallBytes": 42534
+  },
+  "webp/川味口水雞.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/川味口水雞-480.webp",
+    "originalBytes": 110220,
+    "smallBytes": 63626
+  },
+  "webp/布拉塔起司沙拉.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/布拉塔起司沙拉-480.webp",
+    "originalBytes": 122488,
+    "smallBytes": 67392
+  },
+  "webp/干貝青醬燉飯.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/干貝青醬燉飯-480.webp",
+    "originalBytes": 120312,
+    "smallBytes": 67400
+  },
+  "webp/店內場景.webp": {
+    "width": 788,
+    "height": 1400,
+    "small": "webp/responsive/店內場景-480.webp",
+    "originalBytes": 117316,
+    "smallBytes": 55342
+  },
+  "webp/店內場景1.webp": {
+    "width": 788,
+    "height": 1400,
+    "small": "webp/responsive/店內場景1-480.webp",
+    "originalBytes": 78900,
+    "smallBytes": 31776
+  },
+  "webp/店內場景2.webp": {
+    "width": 1050,
+    "height": 1400,
+    "small": "webp/responsive/店內場景2-480.webp",
+    "originalBytes": 51818,
+    "smallBytes": 17394
+  },
+  "webp/店內場景4.webp": {
+    "width": 788,
+    "height": 1400,
+    "small": "webp/responsive/店內場景4-480.webp",
+    "originalBytes": 73248,
+    "smallBytes": 33924
+  },
+  "webp/店內場景5.webp": {
+    "width": 1086,
+    "height": 1448,
+    "small": "webp/responsive/店內場景5-480.webp",
+    "originalBytes": 107632,
+    "smallBytes": 32394
+  },
+  "webp/店內場景6.webp": {
+    "width": 788,
+    "height": 1400,
+    "small": "webp/responsive/店內場景6-480.webp",
+    "originalBytes": 63618,
+    "smallBytes": 31610
+  },
+  "webp/德州雞翅.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/德州雞翅-480.webp",
+    "originalBytes": 115136,
+    "smallBytes": 59394
+  },
+  "webp/明太子雞肉串.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/明太子雞肉串-480.webp",
+    "originalBytes": 135440,
+    "smallBytes": 67276
+  },
+  "webp/松露薯條.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/松露薯條-480.webp",
+    "originalBytes": 109032,
+    "smallBytes": 57178
+  },
+  "webp/比目魚鰭邊肉丼飯.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/比目魚鰭邊肉丼飯-480.webp",
+    "originalBytes": 157008,
+    "smallBytes": 77282
+  },
+  "webp/氛圍燈logo.webp": {
+    "width": 1086,
+    "height": 1448,
+    "small": "webp/responsive/氛圍燈logo-480.webp",
+    "originalBytes": 126118,
+    "smallBytes": 27626
+  },
+  "webp/水餃.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/水餃-480.webp",
+    "originalBytes": 135998,
+    "smallBytes": 71644
+  },
+  "webp/沙爹雞肉串.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/沙爹雞肉串-480.webp",
+    "originalBytes": 135954,
+    "smallBytes": 73250
+  },
+  "webp/洋芋片.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/洋芋片-480.webp",
+    "originalBytes": 143872,
+    "smallBytes": 72890
+  },
+  "webp/清燉牛肉蛤蜊湯.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/清燉牛肉蛤蜊湯-480.webp",
+    "originalBytes": 105928,
+    "smallBytes": 54820
+  },
+  "webp/炒蛤蜊.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/炒蛤蜊-480.webp",
+    "originalBytes": 180272,
+    "smallBytes": 89304
+  },
+  "webp/炒野菇.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/炒野菇-480.webp",
+    "originalBytes": 115966,
+    "smallBytes": 60418
+  },
+  "webp/烤槍烏賊.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/烤槍烏賊-480.webp",
+    "originalBytes": 137828,
+    "smallBytes": 75796
+  },
+  "webp/烤澎湖生蠔.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/烤澎湖生蠔-480.webp",
+    "originalBytes": 130736,
+    "smallBytes": 63636
+  },
+  "webp/烤豬里肌.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/烤豬里肌-480.webp",
+    "originalBytes": 130764,
+    "smallBytes": 70068
+  },
+  "webp/烤青花筍.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/烤青花筍-480.webp",
+    "originalBytes": 138696,
+    "smallBytes": 76898
+  },
+  "webp/煎櫻桃鴨胸.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/煎櫻桃鴨胸-480.webp",
+    "originalBytes": 128794,
+    "smallBytes": 72094
+  },
+  "webp/牛小排.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/牛小排-480.webp",
+    "originalBytes": 188298,
+    "smallBytes": 90540
+  },
+  "webp/牛小排燉飯.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/牛小排燉飯-480.webp",
+    "originalBytes": 131526,
+    "smallBytes": 65912
+  },
+  "webp/牛排凱薩沙拉.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/牛排凱薩沙拉-480.webp",
+    "originalBytes": 142886,
+    "smallBytes": 71224
+  },
+  "webp/牛排炒飯.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/牛排炒飯-480.webp",
+    "originalBytes": 112222,
+    "smallBytes": 57572
+  },
+  "webp/球芽甘藍.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/球芽甘藍-480.webp",
+    "originalBytes": 158624,
+    "smallBytes": 80724
+  },
+  "webp/甜點.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/甜點-480.webp",
+    "originalBytes": 118222,
+    "smallBytes": 59874
+  },
+  "webp/白酒蛤蜊麵.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/白酒蛤蜊麵-480.webp",
+    "originalBytes": 118906,
+    "smallBytes": 60956
+  },
+  "webp/義式肉丸.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/義式肉丸-480.webp",
+    "originalBytes": 117372,
+    "smallBytes": 65752
+  },
+  "webp/肋眼牛排.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/肋眼牛排-480.webp",
+    "originalBytes": 106768,
+    "smallBytes": 55034
+  },
+  "webp/豬里肌番茄義大利麵.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/豬里肌番茄義大利麵-480.webp",
+    "originalBytes": 155506,
+    "smallBytes": 78666
+  },
+  "webp/起司盤.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/起司盤-480.webp",
+    "originalBytes": 133394,
+    "smallBytes": 64920
+  },
+  "webp/金磚起司豆腐.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/金磚起司豆腐-480.webp",
+    "originalBytes": 95868,
+    "smallBytes": 50828
+  },
+  "webp/雞胸凱薩沙拉.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/雞胸凱薩沙拉-480.webp",
+    "originalBytes": 121064,
+    "smallBytes": 61256
+  },
+  "webp/青花椒奶油義大利麵.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/青花椒奶油義大利麵-480.webp",
+    "originalBytes": 122428,
+    "smallBytes": 62976
+  },
+  "webp/韓式雞翅.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/韓式雞翅-480.webp",
+    "originalBytes": 99428,
+    "smallBytes": 51822
+  },
+  "webp/風味薯條.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/風味薯條-480.webp",
+    "originalBytes": 124730,
+    "smallBytes": 60066
+  },
+  "webp/饕客雞軟骨.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/饕客雞軟骨-480.webp",
+    "originalBytes": 109590,
+    "smallBytes": 56764
+  },
+  "webp/骰子牛.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/骰子牛-480.webp",
+    "originalBytes": 122782,
+    "smallBytes": 63286
+  },
+  "webp/鮭魚沙拉.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/鮭魚沙拉-480.webp",
+    "originalBytes": 132088,
+    "smallBytes": 70420
+  },
+  "webp/鱘龍魚排.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/鱘龍魚排-480.webp",
+    "originalBytes": 151326,
+    "smallBytes": 77348
+  },
+  "webp/鴨肉串.webp": {
+    "width": 750,
+    "height": 1000,
+    "small": "webp/responsive/鴨肉串-480.webp",
+    "originalBytes": 153490,
+    "smallBytes": 72986
+  }
+}
