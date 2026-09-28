@@ -366,14 +366,17 @@
         '  pos += uMotion * drift * vec3(sin(uTime*1.3 + aRand.x*40.0), cos(uTime*1.1 + aRand.y*40.0), sin(uTime*0.9 + aRand.z*40.0));',
         '  vec4 wp = modelMatrix * vec4(pos, 1.0);',
         '  vec2 dm = wp.xy - uMouse.xy;',
-        '  float f = uMouseOn * smoothstep(0.5, 0.0, length(dm));',   // 滑鼠推開粒子的半徑
-        '  wp.xy += normalize(dm + 1e-4) * f * 0.27;',
-        '  wp.z += f * 0.16;',
+        '  float dist = length(dm);',
+        // 游標附近像放大鏡：位移跟距離成正比（中心不動→不會開洞）、粒子往前浮並放大、變亮，帶一圈圈向外的起伏
+        '  float f = uMouseOn * smoothstep(0.45, 0.0, dist);',
+        '  float wave = sin(dist * 22.0 - uTime * 7.0);',
+        '  wp.xy += dm * f * 0.4;',
+        '  wp.z += f * (0.35 + 0.1 * wave);',
         '  vec4 mv = viewMatrix * wp;',
         '  gl_Position = projectionMatrix * mv;',
         '  float tw = 0.82 + 0.18 * sin(uTime * 2.2 * uMotion + aRand.y * 60.0);',
-        '  gl_PointSize = uSize * uPix * (0.55 + aRand.z * 0.9) * (aKind > 2.5 ? 0.8 : 1.0) / -mv.z;',
-        '  vC = mix(aC0, aC1, e) * tw * (1.0 + f * 0.9);',
+        '  gl_PointSize = uSize * uPix * (0.55 + aRand.z * 0.9) * (aKind > 2.5 ? 0.8 : 1.0) * (1.0 + f * (0.6 + 0.25 * wave)) / -mv.z;',
+        '  vC = mix(mix(aC0, aC1, e) * tw * (1.0 + f * 0.35), vec3(0.85, 0.92, 1.0), f * 0.1);',
         '  vA = aKind > 2.5 ? 0.35 : 0.95;',
         '}'
       ].join('\n'),
