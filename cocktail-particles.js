@@ -11,11 +11,11 @@
 
   var THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js';
   var scriptSrc = (document.currentScript && document.currentScript.src) || location.href;
-  var ATLAS_URL = new URL('webp/cocktail-particles-atlas.webp?v=3', scriptSrc).href; // 換圖集記得改 v
+  var ATLAS_URL = new URL('webp/cocktail-particles-atlas.webp?v=4', scriptSrc).href; // 換圖集記得改 v
   var ATLAS_W = 1080, ATLAS_H = 800;
   // 圖集內每杯的位置 [x, y, w, h]，順序＝酒單順序（每系列 6 杯）
   var RECTS = [
-    [62, 4, 56, 194], [216, 32, 107, 166], [409, 30, 82, 168], [587, 31, 86, 167], [751, 44, 117, 154], [940, 34, 100, 164],
+    [62, 4, 56, 194], [216, 32, 107, 166], [409, 30, 82, 168], [587, 31, 86, 167], [755, 44, 110, 154], [940, 34, 100, 164],
     [44, 237, 92, 161], [200, 248, 140, 150], [414, 217, 71, 181], [559, 237, 141, 161], [752, 234, 115, 164], [937, 258, 105, 140],
     [35, 428, 109, 170], [184, 434, 172, 164], [376, 446, 147, 152], [588, 441, 83, 157], [752, 435, 116, 163], [931, 471, 117, 127],
     [64, 617, 51, 181], [195, 630, 150, 168], [382, 639, 135, 159], [602, 617, 55, 181], [756, 637, 108, 161], [951, 626, 77, 172]
@@ -70,12 +70,10 @@
   sprite.setAttribute('aria-hidden', 'true');
   stage.insertBefore(sprite, el.info);
 
-  // ---- 選單（系列＋酒名） ----
+  // ---- 系列分頁（酒名直接點下方文字酒單） ----
   var seriesRow = document.createElement('div');
   seriesRow.className = 'cs-picker-series';
-  var drinkRow = document.createElement('div');
-  drinkRow.className = 'cs-picker-drinks';
-  if (picker) { picker.appendChild(seriesRow); picker.appendChild(drinkRow); }
+  if (picker) picker.appendChild(seriesRow);
 
   seriesList.forEach(function (s) {
     var b = document.createElement('button');
@@ -85,22 +83,6 @@
     b.addEventListener('click', function () { select(s.first); });
     seriesRow.appendChild(b);
   });
-
-  function renderDrinkRow(si) {
-    if (drinkRow.dataset.series === String(si)) return;
-    drinkRow.dataset.series = String(si);
-    drinkRow.innerHTML = '';
-    drinks.forEach(function (d, i) {
-      if (d.series !== si) return;
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.textContent = d.name;
-      b.dataset.index = String(i);
-      b.setAttribute('aria-pressed', 'false');
-      b.addEventListener('click', function () { select(i); });
-      drinkRow.appendChild(b);
-    });
-  }
 
   // 文字酒單每一項都可點 → 捲回舞台並換酒
   drinks.forEach(function (d, i) {
@@ -161,10 +143,6 @@
 
     seriesRow.querySelectorAll('button').forEach(function (b, si) {
       b.setAttribute('aria-pressed', si === d.series ? 'true' : 'false');
-    });
-    renderDrinkRow(d.series);
-    drinkRow.querySelectorAll('button').forEach(function (b) {
-      b.setAttribute('aria-pressed', b.dataset.index === String(i) ? 'true' : 'false');
     });
     drinks.forEach(function (x, k) {
       x.el.classList.toggle('is-active', k === i);
@@ -258,7 +236,8 @@
       var sr = 0, sg = 0, sb = 0, x, y;
       var mask = new Uint8Array(W * H);
       for (y = 0; y < H; y++) for (x = 0; x < W; x++) {
-        if (px[((r[1] + y) * AW + r[0] + x) * 4 + 3] >= 128) mask[y * W + x] = 1;
+        // 門檻放低到 35：玻璃杯緣、杯腳在原圖是半透明的（投影已在製作圖集時擦掉）
+        if (px[((r[1] + y) * AW + r[0] + x) * 4 + 3] >= 35) mask[y * W + x] = 1;
       }
       // 厚度≈所在橫向連續段與縱向連續段到端點距離的較小值（近似，非真正的距離轉換）：杯身中央厚、杯緣／橋桁／竹籤／葉片薄
       var th = new Float32Array(W * H);
@@ -280,14 +259,23 @@
           for (var yy = y0; yy < y; yy++) th[yy * W + x] = Math.min(th[yy * W + x], Math.min(yy - y0, y - 1 - yy) + 0.5);
         }
       }
+      // 細節權重：跟四鄰亮度差越大（花瓣、葉脈、杯緣）分到越多粒子；半透明的細杯緣也加權，免得只剩稀疏的點
+      var lum = function (xx, yy) { var o2 = ((r[1] + yy) * AW + r[0] + xx) * 4; return px[o2] * 0.3 + px[o2 + 1] * 0.59 + px[o2 + 2] * 0.11; };
+      var wsum = 0, cum = [];
       for (y = 0; y < H; y++) for (x = 0; x < W; x++) {
         if (!mask[y * W + x]) continue;
-        var o = ((r[1] + y) * AW + r[0] + x) * 4;
+        var o = ((r[1] + y) * AW + r[0] + x) * 4, L = lum(x, y), dv = 0;
+        if (x > 0) dv += Math.abs(L - lum(x - 1, y));
+        if (x < W - 1) dv += Math.abs(L - lum(x + 1, y));
+        if (y > 0) dv += Math.abs(L - lum(x, y - 1));
+        if (y < H - 1) dv += Math.abs(L - lum(x, y + 1));
+        var wgt = 1 + Math.min(1, dv / 90) * 2 + (px[o + 3] < 128 ? 1.5 : 0);
         list.push(x, y, px[o], px[o + 1], px[o + 2], th[y * W + x]);
+        wsum += wgt; cum.push(wsum);
         sr += px[o]; sg += px[o + 1]; sb += px[o + 2];
       }
       var n = list.length / 6 || 1;
-      var info = { list: list, w: r[2], h: r[3] };
+      var info = { list: list, cum: cum, total: wsum, w: r[2], h: r[3] };
       d.tint = 'rgb(' + Math.round(sr / n) + ',' + Math.round(sg / n) + ',' + Math.round(sb / n) + ')';
       cache[d.index] = info;
       return info;
@@ -405,15 +393,18 @@
       var u = Math.min(HEIGHT / info.h, MAXW / info.w);
       var pos = new Float32Array(N * 3), col = new Float32Array(N * 3);
       for (var k = 0; k < NDrink; k++) {
-        // 粒子均勻鋪滿整張插圖（亂數取樣會留下空洞）。⚠️ 不能用 k % cnt：手機粒子數少於像素數時，
-        // 只會分到上半部的像素，杯子下半截被切掉。改成依比例跨步取樣。perm 打散粒子編號，變形時才會四處飛
-        var o = Math.min(cnt - 1, Math.floor(k * cnt / NDrink)) * 6;
+        // 依細節權重的累積分布等距取樣，鋪滿整張插圖。⚠️ 不能用 k % cnt：手機粒子數少於像素數時
+        // 只會分到上半部，杯子下半截被切掉。perm 打散粒子編號，變形時才會四處飛
+        var goal = (k + 0.5) / NDrink * info.total, lo = 0, hi = cnt - 1;
+        while (lo < hi) { var mid = (lo + hi) >> 1; if (info.cum[mid] < goal) lo = mid + 1; else hi = mid; }
+        var o = lo * 6;
         var x = list[o] + Math.random(), y = list[o + 1] + Math.random();
         var depth = Math.min(list[o + 5] * u, 0.55);
         var j = perm[k] * 3;
         pos[j] = (x - info.w / 2) * u;
         pos[j + 1] = (info.h - y) * u - HEIGHT / 2;
-        pos[j + 2] = depth * (Math.random() * 2 - 1);
+        // 粒子貼在一層朝前的曲面上（不是整塊體積）：前面的粒子才不會蓋住花瓣、葉脈等細節
+        pos[j + 2] = depth * (0.8 + Math.random() * 0.2);
         // 深色部位（銅杯、橋、深色杯墊）在黑底疊加下會消失 → 墊一層底光，保留原色相
         col[j] = 0.06 + list[o + 2] / 255 * 0.94;
         col[j + 1] = 0.055 + list[o + 3] / 255 * 0.94;
