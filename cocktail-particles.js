@@ -20,6 +20,11 @@
     [35, 428, 109, 170], [184, 434, 172, 164], [376, 446, 147, 152], [588, 441, 83, 157], [752, 435, 116, 163], [931, 471, 117, 127],
     [64, 617, 51, 181], [195, 630, 150, 168], [382, 639, 135, 159], [602, 617, 55, 181], [756, 637, 108, 161], [951, 626, 77, 172]
   ];
+  // 原圖解析度不夠、要用粒子重畫的裝飾物（座標為該杯插圖內的像素座標）
+  // Snow White：酒單原圖的三瓣玫瑰只有約 28×9px，粒子重現不出來 → 擦掉改畫
+  var GARNISH = {
+    1: { erase: [34, 8, 71, 25], foam: [252, 249, 243], petals: { cx: 52, cy: 19, len: 16, wid: 9 } }
+  };
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---- 從文字酒單收集 24 杯 ----
@@ -270,7 +275,11 @@
         if (y > 0) dv += Math.abs(L - lum(x, y - 1));
         if (y < H - 1) dv += Math.abs(L - lum(x, y + 1));
         var wgt = 1 + Math.min(1, dv / 90) * 2 + (px[o + 3] < 128 ? 1.5 : 0);
-        list.push(x, y, px[o], px[o + 1], px[o + 2], th[y * W + x]);
+        var cr = px[o], cg = px[o + 1], cb = px[o + 2], ga = GARNISH[d.index];
+        if (ga && x >= ga.erase[0] && x <= ga.erase[2] && y >= ga.erase[1] && y <= ga.erase[3] && (cr - cb > 20 || cr + cg + cb < 690)) {
+          cr = ga.foam[0]; cg = ga.foam[1]; cb = ga.foam[2]; wgt = 1;   // 原本的褐色小團改成泡沫
+        }
+        list.push(x, y, cr, cg, cb, th[y * W + x]);
         wsum += wgt; cum.push(wsum);
         sr += px[o]; sg += px[o + 1]; sb += px[o + 2];
       }
@@ -392,10 +401,11 @@
       var info = pixels(d), list = info.list, cnt = list.length / 6;
       var u = Math.min(HEIGHT / info.h, MAXW / info.w);
       var pos = new Float32Array(N * 3), col = new Float32Array(N * 3);
-      for (var k = 0; k < NDrink; k++) {
+      var ga = GARNISH[d.index], NP = ga ? Math.floor(NDrink * 0.12) : 0, NI = NDrink - NP;
+      for (var k = 0; k < NI; k++) {
         // 依細節權重的累積分布等距取樣，鋪滿整張插圖。⚠️ 不能用 k % cnt：手機粒子數少於像素數時
         // 只會分到上半部，杯子下半截被切掉。perm 打散粒子編號，變形時才會四處飛
-        var goal = (k + 0.5) / NDrink * info.total, lo = 0, hi = cnt - 1;
+        var goal = (k + 0.5) / NI * info.total, lo = 0, hi = cnt - 1;
         while (lo < hi) { var mid = (lo + hi) >> 1; if (info.cum[mid] < goal) lo = mid + 1; else hi = mid; }
         var o = lo * 6;
         var x = list[o] + Math.random(), y = list[o + 1] + Math.random();
@@ -410,6 +420,7 @@
         col[j + 1] = 0.055 + list[o + 3] / 255 * 0.94;
         col[j + 2] = 0.05 + list[o + 4] / 255 * 0.94;
       }
+      if (NP) drawPetals(ga.petals, info, u, pos, col, NI, NDrink);
       var gold = hex('#c8a96e');
       for (k = NDrink; k < N; k++) {
         var sp = randSphere(2.8 + Math.random() * 3.2), jj = perm[k] * 3;
@@ -417,6 +428,35 @@
         col[jj] = gold[0] * 0.5; col[jj + 1] = gold[1] * 0.5; col[jj + 2] = gold[2] * 0.5;
       }
       return { pos: pos, col: col };
+    }
+
+    // 三瓣玫瑰：左、中（後）、右三片平鋪在泡沫上，深紅根部→粉色邊緣，外框加深讓三片分得開
+    var PETAL_BASE = hex('#8e1b2e'), PETAL_MID = hex('#c23a52'), PETAL_EDGE = hex('#e27a8f'), PETAL_LINE = hex('#5e0f1c');
+    function drawPetals(pt, info, u, pos, col, from, to) {
+      var petals = [
+        { ang: Math.PI * 0.96, dx: -3, layer: 1 },     // 左
+        { ang: Math.PI * 0.5, dx: 0, layer: 0 },       // 中（往後，被兩側壓住）
+        { ang: Math.PI * 0.04, dx: 3, layer: 1 }       // 右
+      ];
+      function mix3(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
+      for (var k = from; k < to; k++) {
+        var p = petals[k % 3], t, s, half;
+        do {
+          t = Math.random(); s = Math.random() * 2 - 1;
+          half = Math.sin(Math.PI * Math.pow(t, 0.62)) * (1 - 0.12 * t);   // 圓潤、靠尖端較寬的花瓣形
+        } while (Math.abs(s) > half);
+        var ax = Math.cos(p.ang), az = Math.sin(p.ang);                    // 花瓣在泡沫平面上的方向
+        var sx = pt.len * t * ax - pt.wid * s * az, sz = pt.len * t * az + pt.wid * s * ax;
+        var ix = pt.cx + p.dx + sx;
+        var iy = pt.cy - sz * 0.62 - t * t * 2.5;                          // 平面透視壓扁＋尖端微翹
+        var j = perm[k] * 3;
+        pos[j] = (ix - info.w / 2) * u;
+        pos[j + 1] = (info.h - iy) * u - HEIGHT / 2;
+        pos[j + 2] = 0.34 + p.layer * 0.03 + Math.random() * 0.01;
+        var edge = Math.abs(s) / Math.max(half, 1e-3);
+        var c = edge > 0.8 || t > 0.94 ? PETAL_LINE : mix3(mix3(PETAL_BASE, PETAL_MID, Math.min(1, t * 1.6)), PETAL_EDGE, Math.max(0, edge - 0.45) * 1.2);
+        col[j] = c[0]; col[j + 1] = c[1]; col[j + 2] = c[2];
+      }
     }
 
     // ---- 變形 ----
