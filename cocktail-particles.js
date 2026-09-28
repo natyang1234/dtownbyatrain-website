@@ -366,9 +366,9 @@
         '  pos += uMotion * drift * vec3(sin(uTime*1.3 + aRand.x*40.0), cos(uTime*1.1 + aRand.y*40.0), sin(uTime*0.9 + aRand.z*40.0));',
         '  vec4 wp = modelMatrix * vec4(pos, 1.0);',
         '  vec2 dm = wp.xy - uMouse.xy;',
-        '  float f = uMouseOn * smoothstep(1.15, 0.0, length(dm));',
-        '  wp.xy += normalize(dm + 1e-4) * f * 0.6;',
-        '  wp.z += f * 0.35;',
+        '  float f = uMouseOn * smoothstep(0.4, 0.0, length(dm));',   // 滑鼠推開粒子的半徑
+        '  wp.xy += normalize(dm + 1e-4) * f * 0.18;',
+        '  wp.z += f * 0.12;',
         '  vec4 mv = viewMatrix * wp;',
         '  gl_Position = projectionMatrix * mv;',
         '  float tw = 0.82 + 0.18 * sin(uTime * 2.2 * uMotion + aRand.y * 60.0);',
