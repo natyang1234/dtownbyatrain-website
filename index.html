@@ -2198,21 +2198,18 @@
     .cs-nav:focus-visible { border-color: var(--gold); background: rgba(200,169,110,0.12); }
     .cs-prev { left: 12px; }
     .cs-next { right: 12px; }
-    /* 無 WebGL / three.js 載入失敗：文字卡＋酒色杯形色塊 */
-    .cocktail-stage.is-fallback canvas { display: none; }
-    .cocktail-stage.is-fallback::before {
-      content: '';
+    /* 無 WebGL / three.js 載入失敗：顯示該杯原插圖（取自粒子圖集）＋文字 */
+    .cs-sprite {
+      display: none;
       position: absolute;
       left: 66%;
       top: 50%;
-      width: 110px;
-      height: 190px;
-      border-radius: 6px 6px 42px 42px;
+      z-index: 1;
+      background-repeat: no-repeat;
       transform: translate(-50%, -50%);
-      background: linear-gradient(to top, var(--cs-bottom), var(--cs-top));
-      box-shadow: 0 0 60px var(--cs-top);
-      opacity: 0.85;
     }
+    .cocktail-stage.is-fallback canvas { display: none; }
+    .cocktail-stage.is-fallback .cs-sprite { display: block; }
     .cocktail-stage-picker {
       display: flex;
       flex-direction: column;
@@ -2948,7 +2945,7 @@
       .cs-name { font-size: 1.9rem; }
       .cs-glow { left: 50%; top: 38%; width: 80%; }
       .cs-nav { top: 38%; }
-      .cocktail-stage.is-fallback::before { left: 50%; top: 36%; }
+      .cs-sprite { left: 50%; top: 36%; }
 
       /* 分類標籤列換行全顯示：橫向捲動列在手機上按著可拖動、體感怪，改多行不可拖 */
       .menu-tabs { flex-wrap: wrap; justify-content: center; overflow-x: visible; }
@@ -4860,6 +4857,6 @@
   })();
   </script>
 
-<script src="cocktail-particles.js?v=20260929e" defer></script>
+<script src="cocktail-particles.js?v=20260929q" defer></script>
 </body>
 </html>
