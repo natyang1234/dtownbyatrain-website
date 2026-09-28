@@ -111,7 +111,7 @@
     d.el.setAttribute('aria-controls', 'cocktail-stage');
     function activate(fromKey) {
       select(i);
-      stage.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+      revealStage();
       if (fromKey) stage.focus({ preventScroll: true }); // 鍵盤使用者跟著焦點到舞台
     }
     d.el.addEventListener('click', function () { activate(false); });
@@ -119,6 +119,15 @@
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(true); }
     });
   });
+
+  // 捲到舞台：扣掉固定導覽列；舞台比可視區高（小手機）就頂齊導覽列下緣，否則在剩餘空間置中
+  function revealStage() {
+    var nav = document.querySelector('nav');
+    var navBottom = nav && getComputedStyle(nav).position === 'fixed' ? nav.getBoundingClientRect().bottom : 0;
+    var r = stage.getBoundingClientRect(), avail = window.innerHeight - navBottom;
+    var want = r.height >= avail ? navBottom + 4 : navBottom + (avail - r.height) / 2;
+    window.scrollBy({ top: r.top - want, behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
 
   if (el.prev) el.prev.addEventListener('click', function () { select((current - 1 + drinks.length) % drinks.length); });
   if (el.next) el.next.addEventListener('click', function () { select((current + 1) % drinks.length); });
@@ -396,8 +405,9 @@
       var u = Math.min(HEIGHT / info.h, MAXW / info.w);
       var pos = new Float32Array(N * 3), col = new Float32Array(N * 3);
       for (var k = 0; k < NDrink; k++) {
-        // 每個像素平均分到粒子（亂數取樣會留下空洞）；perm 打散粒子編號，變形時才會四處飛
-        var o = (k % cnt) * 6;
+        // 粒子均勻鋪滿整張插圖（亂數取樣會留下空洞）。⚠️ 不能用 k % cnt：手機粒子數少於像素數時，
+        // 只會分到上半部的像素，杯子下半截被切掉。改成依比例跨步取樣。perm 打散粒子編號，變形時才會四處飛
+        var o = Math.min(cnt - 1, Math.floor(k * cnt / NDrink)) * 6;
         var x = list[o] + Math.random(), y = list[o + 1] + Math.random();
         var depth = Math.min(list[o + 5] * u, 0.55);
         var j = perm[k] * 3;
