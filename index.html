@@ -57,7 +57,7 @@
     "telephone": "+886-2-2721-2772",
     "image": "https://natyang1234.github.io/dtownbyatrain-website/og-cover.jpg",
     "datePublished": "2026-06-18",
-    "dateModified": "2026-09-20",
+    "dateModified": "2026-09-29",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "忠孝東路四段49巷2號2樓",
@@ -2090,60 +2090,201 @@
       margin-bottom: 1.8rem;
     }
 
-    /* 4-image cocktail menu grid */
-    .cocktail-menu-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
+    /* 特調粒子舞台（cocktail-particles.js 驅動；海報收成下方連結） */
+    .cocktail-stage {
+      --cs-top: #c8a96e;
+      --cs-bottom: #6b4a1f;
+      position: relative;
       width: 100%;
       max-width: 960px;
+      height: clamp(460px, 60vw, 600px);
       margin-inline: auto;
-    }
-
-    .cocktail-menu-card {
-      position: relative;
-      cursor: pointer;
       overflow: hidden;
-      background: #111;
+      border: 1px solid var(--border);
+      background: radial-gradient(ellipse at 55% 60%, #10141c 0%, #050608 72%);
     }
-
-    .cocktail-menu-card img {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 4 / 5;
-      object-fit: contain;
-      display: block;
-      transition: transform 0.35s ease, filter 0.3s, box-shadow 0.3s;
-      filter: brightness(0.85);
+    .cs-glow {
+      position: absolute;
+      left: 62%;
+      top: 55%;
+      width: 55%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--cs-top);
+      opacity: 0.12;
+      filter: blur(80px);
+      transition: background-color 0.9s ease;
+      pointer-events: none;
     }
-
-    .cocktail-menu-card:hover img {
-      transform: scale(1.06);
-      filter: brightness(1.15);
-      box-shadow: 0 0 24px rgba(200,169,110,0.35);
-    }
-
-    .cocktail-menu-overlay {
+    .cocktail-stage canvas {
       position: absolute;
       inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 100%;
+      height: 100%;
+      display: block;
+      touch-action: pan-y;
       opacity: 0;
-      transition: opacity 0.3s;
+      transition: opacity 1.2s ease;
     }
-
-    .cocktail-menu-card:hover .cocktail-menu-overlay {
-      opacity: 1;
+    .cocktail-stage.is-live canvas { opacity: 1; }
+    .cs-info {
+      position: absolute;
+      left: clamp(1.2rem, 4vw, 2.6rem);
+      bottom: clamp(1.2rem, 4vw, 2.4rem);
+      z-index: 2;
+      max-width: min(340px, 42%);
+      pointer-events: none;
     }
-
-    .cocktail-menu-overlay span {
-      background: rgba(0,0,0,0.6);
+    .cs-info.is-in { animation: csIn 0.7s ease both; }
+    @keyframes csIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
+    }
+    .cs-series {
+      color: var(--gold);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      margin-bottom: 0.5rem;
+    }
+    .cs-name {
+      color: var(--white);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(1.8rem, 4.2vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.05;
+      margin-bottom: 0.6rem;
+    }
+    .cs-desc {
+      color: var(--grey-light);
+      font-size: 0.82rem;
+      line-height: 1.7;
+      margin-bottom: 0.45rem;
+    }
+    .cs-price {
+      color: var(--gold);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+    }
+    .cs-hint {
+      position: absolute;
+      top: 1rem;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      color: var(--grey);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-align: center;
+      pointer-events: none;
+    }
+    .cs-nav {
+      position: absolute;
+      top: 50%;
+      z-index: 3;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(200,169,110,0.35);
+      border-radius: 50%;
+      background: rgba(8,8,8,0.45);
+      color: var(--gold);
+      font-size: 1.4rem;
+      line-height: 1;
+      cursor: pointer;
+      transform: translateY(-50%);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .cs-nav:hover,
+    .cs-nav:focus-visible { border-color: var(--gold); background: rgba(200,169,110,0.12); }
+    .cs-prev { left: 12px; }
+    .cs-next { right: 12px; }
+    /* 無 WebGL / three.js 載入失敗：文字卡＋酒色杯形色塊 */
+    .cocktail-stage.is-fallback canvas { display: none; }
+    .cocktail-stage.is-fallback::before {
+      content: '';
+      position: absolute;
+      left: 66%;
+      top: 50%;
+      width: 110px;
+      height: 190px;
+      border-radius: 6px 6px 42px 42px;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(to top, var(--cs-bottom), var(--cs-top));
+      box-shadow: 0 0 60px var(--cs-top);
+      opacity: 0.85;
+    }
+    .cocktail-stage-picker {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      max-width: 960px;
+      margin: 1rem auto 0;
+    }
+    .cs-picker-series,
+    .cs-picker-drinks {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+    .cs-picker-series button {
+      padding: 0.4rem 0.6rem;
+      border: none;
+      border-bottom: 1px solid transparent;
+      background: none;
+      color: var(--grey);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      cursor: pointer;
+    }
+    .cs-picker-series button[aria-pressed="true"] { color: var(--gold); border-bottom-color: var(--gold); }
+    .cs-picker-drinks button {
+      padding: 0.4rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--grey-light);
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .cs-picker-drinks button:hover { border-color: var(--gold-dim); color: var(--white); }
+    .cs-picker-drinks button[aria-pressed="true"] { border-color: var(--gold); background: var(--gold); color: var(--black); }
+    .cocktail-poster-links {
+      max-width: 960px;
+      margin: 1.2rem auto 0;
+      color: var(--grey);
+      font-size: 0.74rem;
+      text-align: center;
+    }
+    .cocktail-poster-links span { margin-right: 0.4rem; letter-spacing: 0.1em; }
+    .cocktail-poster-links button {
+      padding: 0.3rem 0.5rem;
+      border: none;
+      background: none;
       color: var(--gold);
       font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      padding: 0.4rem 1rem;
-      border: 1px solid var(--gold);
+      letter-spacing: 0.08em;
+      text-decoration: underline;
+      text-decoration-color: rgba(200,169,110,0.4);
+      text-underline-offset: 3px;
+      cursor: pointer;
+    }
+    .cocktail-text-item.is-selectable {
+      margin-inline: -0.6rem;
+      padding-inline: 0.6rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .cocktail-text-item.is-selectable:hover { background: rgba(200,169,110,0.06); }
+    .cocktail-text-item.is-selectable:focus-visible { background: rgba(200,169,110,0.06); outline: 1px solid var(--gold); outline-offset: 2px; }
+    .cocktail-stage:focus { outline: none; }
+    .cocktail-stage:focus-visible { outline: 1px solid var(--gold); }
+    .cocktail-text-item.is-active { box-shadow: inset 2px 0 0 var(--gold); }
+    .cocktail-text-item.is-active h5 { color: var(--gold-light); }
+    @media (prefers-reduced-motion: reduce) {
+      .cs-info.is-in { animation: none; }
     }
 
     .cocktail-text-link {
@@ -2315,7 +2456,6 @@
     }
 
     @media (max-width: 700px) {
-      .cocktail-menu-grid { grid-template-columns: 1fr; }
       .cocktail-text-series-grid { grid-template-columns: 1fr; }
       .cocktail-text-menu {
         padding-left: 16px;
@@ -2803,10 +2943,12 @@
          （IG/LINE 的 WKWebView）svh 會隨工具列伸縮 → 圖片忽大忽小，實機已驗證，棄用。 */
       .menu-img-wrap img { max-height: min(340px, 90vw); object-fit: contain; }
 
-      .cocktail-menu-grid {
-        grid-template-columns: 1fr;
-        max-width: 440px;
-      }
+      .cocktail-stage { height: 540px; }
+      .cs-info { right: 1.2rem; max-width: none; }
+      .cs-name { font-size: 1.9rem; }
+      .cs-glow { left: 50%; top: 38%; width: 80%; }
+      .cs-nav { top: 38%; }
+      .cocktail-stage.is-fallback::before { left: 50%; top: 36%; }
 
       /* 分類標籤列換行全顯示：橫向捲動列在手機上按著可拖動、體感怪，改多行不可拖 */
       .menu-tabs { flex-wrap: wrap; justify-content: center; overflow-x: visible; }
@@ -3637,24 +3779,21 @@
             <p class="menu-cat-desc">全新特調酒單上線，24 款招牌調酒均一價 NT$380，分為 FROM THE VINE、FRUIT &amp; FLORA、TEA &amp; ORCHARD、SPIRIT FORWARD 四大類。所有調酒可依個人喜好調整甜度、酒感、酸度。</p>
             <a class="cocktail-text-link" href="#cocktail-text-menu">查看 24 款文字酒單 ↓</a>
           </div>
-          <div class="cocktail-menu-grid">
-            <div class="cocktail-menu-card" onclick="openLightbox('webp/cocktail-from-the-vine.webp','FROM THE VINE · 葡萄酒與發酵酒基底')">
-              <img src="webp/cocktail-from-the-vine.webp" alt="D Town by A Train FROM THE VINE 葡萄酒基底特調雞尾酒菜單" loading="lazy" width="864" height="1080" srcset="webp/responsive/cocktail-from-the-vine-480.webp 480w, webp/cocktail-from-the-vine.webp 864w" sizes="(max-width: 900px) min(100vw, 440px), 477px" decoding="async" data-full-src="webp/cocktail-from-the-vine.webp">
-              <div class="cocktail-menu-overlay"><span>點擊放大</span></div>
+          <div class="cocktail-stage" id="cocktail-stage" role="region" aria-label="特調粒子展示">
+            <div class="cs-glow" aria-hidden="true"></div>
+            <canvas aria-hidden="true"></canvas>
+            <div class="cs-info" aria-live="polite">
+              <div class="cs-series"></div>
+              <h4 class="cs-name"></h4>
+              <p class="cs-desc"></p>
+              <span class="cs-price"></span>
             </div>
-            <div class="cocktail-menu-card" onclick="openLightbox('webp/cocktail-fruit-flora.webp','FRUIT & FLORA · 水果與花香')">
-              <img src="webp/cocktail-fruit-flora.webp" alt="D Town by A Train FRUIT & FLORA 水果花香特調雞尾酒菜單" loading="lazy" width="864" height="1080" srcset="webp/responsive/cocktail-fruit-flora-480.webp 480w, webp/cocktail-fruit-flora.webp 864w" sizes="(max-width: 900px) min(100vw, 440px), 477px" decoding="async" data-full-src="webp/cocktail-fruit-flora.webp">
-              <div class="cocktail-menu-overlay"><span>點擊放大</span></div>
-            </div>
-            <div class="cocktail-menu-card" onclick="openLightbox('webp/cocktail-tea-orchard.webp','TEA & ORCHARD · 茶香與果園')">
-              <img src="webp/cocktail-tea-orchard.webp" alt="D Town by A Train TEA & ORCHARD 茶香特調雞尾酒菜單" loading="lazy" width="864" height="1080" srcset="webp/responsive/cocktail-tea-orchard-480.webp 480w, webp/cocktail-tea-orchard.webp 864w" sizes="(max-width: 900px) min(100vw, 440px), 477px" decoding="async" data-full-src="webp/cocktail-tea-orchard.webp">
-              <div class="cocktail-menu-overlay"><span>點擊放大</span></div>
-            </div>
-            <div class="cocktail-menu-card" onclick="openLightbox('webp/cocktail-spirit-forward.webp','SPIRIT FORWARD · 烈酒主導')">
-              <img src="webp/cocktail-spirit-forward.webp" alt="D Town by A Train SPIRIT FORWARD 烈酒主導特調雞尾酒菜單" loading="lazy" width="864" height="1080" srcset="webp/responsive/cocktail-spirit-forward-480.webp 480w, webp/cocktail-spirit-forward.webp 864w" sizes="(max-width: 900px) min(100vw, 440px), 477px" decoding="async" data-full-src="webp/cocktail-spirit-forward.webp">
-              <div class="cocktail-menu-overlay"><span>點擊放大</span></div>
-            </div>
+            <button type="button" class="cs-nav cs-prev" aria-label="上一杯">‹</button>
+            <button type="button" class="cs-nav cs-next" aria-label="下一杯">›</button>
+            <p class="cs-hint">點任一杯，粒子為你重新調一杯</p>
           </div>
+          <div class="cocktail-stage-picker" id="cocktail-stage-picker" role="group" aria-label="選擇特調"></div>
+          <p class="cocktail-poster-links"><span>原版酒單圖</span><button type="button" onclick="openLightbox('webp/cocktail-from-the-vine.webp','FROM THE VINE · 葡萄酒與發酵酒基底')">FROM THE VINE</button><button type="button" onclick="openLightbox('webp/cocktail-fruit-flora.webp','FRUIT & FLORA · 水果與花香')">FRUIT &amp; FLORA</button><button type="button" onclick="openLightbox('webp/cocktail-tea-orchard.webp','TEA & ORCHARD · 茶香與果園')">TEA &amp; ORCHARD</button><button type="button" onclick="openLightbox('webp/cocktail-spirit-forward.webp','SPIRIT FORWARD · 烈酒主導')">SPIRIT FORWARD</button></p>
           <section class="cocktail-text-menu" id="cocktail-text-menu" aria-labelledby="cocktail-text-menu-title">
             <div class="cocktail-text-menu-header">
               <h3 id="cocktail-text-menu-title">24 款文字酒單</h3>
@@ -4651,7 +4790,7 @@
     </div>
     <p class="footer-copy">© 2026 D Town by A Train · 台北東區餐酒館 · 忠孝復興站</p>
     <!-- ⚠️ 改版鐵則：每次更新網站內容，此行日期＋schema dateModified＋sitemap lastmod 三處同步改 -->
-    <p class="footer-copy">資訊最後更新：2026-09-20</p>
+    <p class="footer-copy">資訊最後更新：2026-09-29</p>
   </footer>
 
   <!-- 手機常駐訂位浮動鈕 -->
@@ -4721,5 +4860,6 @@
   })();
   </script>
 
+<script src="cocktail-particles.js?v=20260929e" defer></script>
 </body>
 </html>
