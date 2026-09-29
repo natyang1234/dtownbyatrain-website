@@ -4231,7 +4231,7 @@
           <p class="entrance-video-sub">忠孝復興 4 號出口・SOGO 旁巷子・Qmomo 旁小門上 2 樓</p>
           <div class="news-video-wrap entrance-video-wrap">
             <video id="entrance-video" muted loop playsinline webkit-playsinline controls preload="none"
-                   poster="dtown-entrance-poster.jpg"
+                   data-poster="dtown-entrance-poster.jpg"
                    aria-label="D Town by A Train 入口怎麼走影片">
               <source data-src="dtown-entrance.mp4" type="video/mp4">
             </video>
@@ -4428,7 +4428,7 @@
       <p class="news-intro">每盒另附專業級「調酒 Peel 噴霧」（口味隨機），讓微醺的層次再進化一步。</p>
       <div class="news-video-wrap">
         <video id="dtown-news-video" muted loop playsinline webkit-playsinline controls preload="none"
-               poster="dtown-gift-poster.jpg"
+               data-poster="dtown-gift-poster.jpg"
                aria-label="字母系列聯名・微醺調酒禮盒影片">
           <source data-src="dtown-ambient.mp4" type="video/mp4">
         </video>
@@ -5070,11 +5070,21 @@
   /* 畫面外背景圖延遲載入：距離畫面 600px 內才加 .bg-ready 讓 CSS 背景圖生效 */
   (function () {
     var els = document.querySelectorAll('[data-lazy-bg]');
-    if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('bg-ready'); }); return; }
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('bg-ready'); });
+      document.querySelectorAll('video[data-poster]').forEach(function (v) { v.poster = v.getAttribute('data-poster'); });
+      return;
+    }
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('bg-ready'); io.unobserve(e.target); } });
     }, { rootMargin: '600px 0px' });
     els.forEach(function (el) { io.observe(el); });
+    // 影片封面（poster 屬性不吃 loading=lazy，會跟首屏搶頻寬）：滑近才補上
+    var vids = document.querySelectorAll('video[data-poster]');
+    var vio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.poster = e.target.getAttribute('data-poster'); vio.unobserve(e.target); } });
+    }, { rootMargin: '800px 0px' });
+    vids.forEach(function (v) { vio.observe(v); });
   })();
 </script>
 <noscript><style>.tea-cell-grid[data-lazy-bg] .tea-cell { background-image: url('webp/茶嗨波.webp') !important; } .booking-bg[data-lazy-bg] { background-image: url('webp/新菜單封面.webp') !important; }</style></noscript>
