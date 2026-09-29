@@ -107,8 +107,8 @@
     var t = (now - t0) / 1000;
     pointer.x += (pointer.tx - pointer.x) * 0.06;
     pointer.y += (pointer.ty - pointer.y) * 0.06;
-    var ry = (Math.sin(t * 0.45) * 7 + pointer.x * 10) * tiltAmt;
-    var rx = (2.5 + Math.sin(t * 0.33) * 2 - pointer.y * 7) * tiltAmt;
+    var ry = (Math.sin(t * 0.45) * 3.5 + pointer.x * 6) * tiltAmt;   // 擺動幅度（2026-09-29 nat 要求減半）
+    var rx = (1.5 + Math.sin(t * 0.33) * 1 - pointer.y * 4) * tiltAmt;
     rig.style.transform = 'rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
     if (tiltAmt > 0 && heroVisible && !document.hidden) swayRaf = requestAnimationFrame(sway);
   }
