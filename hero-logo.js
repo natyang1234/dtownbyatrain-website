@@ -74,6 +74,9 @@
 
     if (p > 0.02) upgradeImage();
     tiltAmt = 1 - seg(p, 0.02, 0.08);
+    // 牆上的背光／木框／頂燈平時在字後方 70px（擺動時才有前後錯位）；一開始放大就收回同一平面，
+    // 否則透視會讓它們跟字的放大位置越差越遠（放大 9 倍時偏差也放大 9 倍）
+    if (rig) rig.style.setProperty('--gz', (-70 * tiltAmt).toFixed(1));
     var sideOp = tiltAmt.toFixed(3);
     for (var i = 0; i < sides.length; i++) {
       sides[i].style.opacity = sideOp;

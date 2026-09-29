@@ -1177,9 +1177,7 @@
     .hero-wall {
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse 55% 34% at 50% 6%, rgba(255,214,150,0.16), transparent 70%),
-        radial-gradient(ellipse at 50% 40%, #251d16 0%, #110d0a 48%, #050404 100%);
+      background: radial-gradient(ellipse at 50% 40%, #1d1712 0%, #0e0b09 50%, #050404 100%);
     }
     .hero-logo {
       position: relative;
@@ -1213,14 +1211,22 @@
       left: -28.892%; top: -33.12%;
       width: 160.514%; height: 160%;
       max-width: none;
-      transform: translateZ(-70px);
+    }
+    /* 牆上的東西（背光、木框、頂燈）跟 logo 同一組一起放大；--gz 由 hero-logo.js 控制：待機 -70px、放大時歸 0 */
+    .hero-logo-glow,
+    .hero-logo-frame,
+    .hero-logo-light { transform: translateZ(calc(var(--gz, -70) * 1px)); }
+    .hero-logo-light {   /* 玄關頂燈打在牆上的光（原本固定在背景，放大時不會跟著前進） */
+      position: absolute;
+      left: -90%; right: -90%; top: -95%; bottom: 10%;
+      background: radial-gradient(ellipse 34% 40% at 50% 28%, rgba(255,214,150,0.17), rgba(255,200,130,0.05) 55%, transparent 75%);
+      pointer-events: none;
     }
     .hero-logo-side { transform: translateZ(calc(var(--d) * -1px)); }
     @media (max-width: 700px) { .hero-logo-side-extra { display: none !important; } }   /* 手機只留兩層側面，省合成記憶體 */
     .hero-logo-sheen { transform: translateZ(1px); }
     .hero-logo-frame {   /* 玄關牆面的木作框，跟著 logo 一起放大，增加前進的距離感 */
       position: absolute;
-      transform: translateZ(-70px);
       left: -42%; right: -42%; top: -30%; bottom: -400%;   /* 下緣延伸到畫面外，不會橫切過文字 */
       border: 1px solid rgba(255,225,170,0.07);
       box-shadow: inset 0 0 0 7px rgba(0,0,0,0.35), inset 0 0 0 8px rgba(255,225,170,0.05), 0 0 0 1px rgba(0,0,0,0.6);
@@ -3160,6 +3166,7 @@
       <div class="hero-wall" aria-hidden="true"></div>
       <div class="hero-logo" aria-hidden="true">
         <div class="hero-logo-3d">
+          <div class="hero-logo-light"></div>
           <div class="hero-logo-frame"></div>
           <img class="hero-logo-glow" src="../webp/hero-logo-glow.webp" alt="" width="600" height="518" decoding="async">
           <img class="hero-logo-side hero-logo-side-extra" style="--d:24" src="../webp/hero-logo-side.webp" alt="" width="1400" height="1213" decoding="async">
@@ -4744,6 +4751,6 @@
   </script>
 
 <script src="../cocktail-particles.js?v=20260930f" defer></script>
-<script src="../hero-logo.js?v=20260929g" defer></script>
+<script src="../hero-logo.js?v=20260929h" defer></script>
 </body>
 </html>
