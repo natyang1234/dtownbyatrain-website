@@ -2901,6 +2901,8 @@
          （IG/LINE 的 WKWebView）svh 會隨工具列伸縮 → 圖片忽大忽小，實機已驗證，棄用。 */
       .menu-img-wrap img { max-height: min(340px, 90vw); object-fit: contain; }
 
+      #drinks { padding: 5.5rem 1rem 4rem; }   /* 上方留給固定導覽列（71px），導覽列跳過來時小標不被蓋住 */
+      #drinks .cocktail-stage { width: calc(100% + 2rem); margin-inline: -1rem; }
       .cocktail-stage { height: 540px; }
       /* 手機：文字區接手觸控，在這裡滑才會捲動頁面（杯子區域鎖給粒子互動） */
       .cs-info { right: 0; left: 0; bottom: 0; max-width: none; padding: 1rem 1.2rem 1.2rem; }
@@ -3169,6 +3171,7 @@
       <a class="nav-lang" href="en/">EN</a>
       <ul class="nav-links" id="nav-links">
         <li><a href="#about">關於</a></li>
+        <li><a href="#drinks">調酒</a></li>
         <li><a href="#menu">菜單</a></li>
         <li><a href="#visit">位置</a></li>
         <li><a href="#faq">FAQ</a></li>
@@ -3289,6 +3292,204 @@
   </section>
 
 
+  <!-- SIGNATURE DRINKS：調酒粒子舞台＋茶嗨波（2026-09-29 從菜單分頁拉出，放在餐點菜單前獨立展示） -->
+  <section id="drinks" class="page-section page-section-alt">
+    <div class="section-inner">
+      <div class="menu-header">
+        <span class="sec-label">Signature Drinks</span>
+        <h2>招牌調酒・茶嗨波</h2>
+        <p>24 款特調與 11 款茶嗨波・點一杯，看它在眼前成形</p>
+      </div>
+
+        <div class="drink-group">
+          <div class="drink-group-header">
+            <div class="menu-cat-title">Special Cocktails</div>
+            <h3 class="menu-cat-h">手工調酒</h3>
+            <p class="menu-cat-desc">全新特調酒單上線，24 款招牌調酒均一價 NT$380，分為 FROM THE VINE、FRUIT &amp; FLORA、TEA &amp; ORCHARD、SPIRIT FORWARD 四大類。所有調酒可依個人喜好調整甜度、酒感、酸度。</p>
+            <a class="cocktail-text-link" href="#cocktail-text-menu">查看 24 款文字酒單 ↓</a>
+          </div>
+          <div class="cocktail-stage" id="cocktail-stage" role="region" aria-label="特調粒子展示">
+            <div class="cs-glow" aria-hidden="true"></div>
+            <canvas aria-hidden="true"></canvas>
+            <div class="cs-info" aria-live="polite">
+              <div class="cs-series"></div>
+              <h4 class="cs-name"></h4>
+              <p class="cs-desc"></p>
+              <span class="cs-price"></span>
+            </div>
+            <button type="button" class="cs-nav cs-prev" aria-label="上一杯">‹</button>
+            <button type="button" class="cs-nav cs-next" aria-label="下一杯">›</button>
+            <p class="cs-hint">點任一杯，粒子為你重新調一杯</p>
+          </div>
+          <p class="cocktail-poster-links"><button type="button" id="cs-poster-link" data-posters="[[&quot;webp/cocktail-from-the-vine.webp&quot;, &quot;FROM THE VINE · 葡萄酒與發酵酒基底&quot;], [&quot;webp/cocktail-fruit-flora.webp&quot;, &quot;FRUIT &amp; FLORA · 水果與花香&quot;], [&quot;webp/cocktail-tea-orchard.webp&quot;, &quot;TEA &amp; ORCHARD · 茶香與果園&quot;], [&quot;webp/cocktail-spirit-forward.webp&quot;, &quot;SPIRIT FORWARD · 烈酒主導&quot;]]">看原版酒單圖</button></p>
+          <section class="cocktail-text-menu" id="cocktail-text-menu" aria-labelledby="cocktail-text-menu-title">
+            <div class="cocktail-text-menu-header">
+              <h3 id="cocktail-text-menu-title">24 款文字酒單</h3>
+              <p>四大系列・每杯 NT$380</p>
+            </div>
+            <div class="cocktail-text-series-grid">
+              <section class="cocktail-text-series">
+                <h4>FROM THE VINE <span>葡萄酒與發酵酒基底</span></h4>
+                <article class="cocktail-text-item">
+                  <h5>Gummy Bear <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：草莓・甜酒・黑刺李琴酒</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Snow White <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：荔枝・伏特加・白酒</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Zeal <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：百香果・莓果・可可・白酒</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Green Day <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：奇異果・白酒・萬壽菊</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Ibuki <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：清酒・哈密瓜・馬告</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Memory <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：葡萄・紅酒・Prosecco</p>
+                </article>
+              </section>
+              <section class="cocktail-text-series">
+                <h4>FRUIT &amp; FLORA <span>水果與花香</span></h4>
+                <article class="cocktail-text-item">
+                  <h5>Dusk <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：芭樂・白酒・伯爵茶</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Trinity <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：葡萄・白蘭地・白酒</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Orange Valley <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：白酒・Aperol・柳橙</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Wings On Field <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：葡萄柚・接骨木花・琴酒</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Wave <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：西瓜・Umami Gin・羅勒</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Tokyo Banana <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：波本威士忌・香蕉・白可可</p>
+                </article>
+              </section>
+              <section class="cocktail-text-series">
+                <h4>TEA &amp; ORCHARD <span>茶香與果園</span></h4>
+                <article class="cocktail-text-item">
+                  <h5>Sunday Morning <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：伯爵琴酒・荔枝（可選經典伯爵或荔枝伯爵）</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Destination <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：烏龍琴酒・蘋果或蜜桃或莓果（三選一）</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Yoasobi <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：茉莉・檜木琴酒・熱帶水果</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Treasure <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：金萱茶・蘭姆酒・鳳梨</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Arashiyama <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：玄米茶・柚子・檜木琴酒</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Twilight <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：紅玉紅茶・檸檬</p>
+                </article>
+              </section>
+              <section class="cocktail-text-series">
+                <h4>SPIRIT FORWARD <span>烈酒主導</span></h4>
+                <article class="cocktail-text-item">
+                  <h5>French 69 <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：玫瑰琴酒・莓果・氣泡酒</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Ciao! <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：蒔蘿琴酒・檸檬甜酒・Prosecco</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Under the Bridge <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：VSOP 白蘭地・接骨木花・柳橙</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Geisha <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：清酒・白桃・玫瑰</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Ember <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：梅斯卡爾・梅・松</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Boogie Wonderland <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">原料：多香果・威士忌・百香果</p>
+                </article>
+              </section>
+            </div>
+          </section>
+          <p style="font-size:0.78rem; color:var(--grey); margin-top:2rem; line-height:1.9; border-top:1px solid var(--border); padding-top:1.5rem;">
+            ✦ 點選任一杯特調，上方粒子會為你重新調一杯　✦ 所有調酒可依喜好調整甜度 / 酒感 / 酸度
+          </p>
+        </div>
+
+
+      <script>
+        (function () {
+          document.querySelectorAll('.cocktail-text-link').forEach(function (link) {
+            link.addEventListener('click', function (event) {
+              var target = document.getElementById('cocktail-text-menu');
+              if (!target) return;
+              event.preventDefault();
+              if (window.history && window.history.pushState) {
+                window.history.pushState(null, '', link.getAttribute('href'));
+              } else {
+                window.location.hash = link.hash;
+              }
+              var top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - 90);
+              window.scrollTo({ top: top, behavior: 'instant' });
+            });
+          });
+        })();
+      </script>
+
+      <!-- 茶嗨波 TEA HIGHBALL -->
+      <div class="drink-group drink-group-tea">
+
+        <div class="tea-grid-section">
+          <div class="menu-cat-title" style="text-align:center;margin-bottom:.5rem;">Signature Series</div>
+          <h3 class="menu-cat-h" style="text-align:center;margin-bottom:.4rem;">茶嗨波 <span style="font-size:0.7em;color:var(--gold);letter-spacing:.15em;">Tea Highball</span></h3>
+          <p class="menu-cat-desc" style="text-align:center;margin-bottom:1.5rem;">點擊每一格放大查看</p>
+          <div class="tea-cell-grid">
+            <div class="tea-cell" style="background-position:0% 0%"       onclick="openTeaCell('0% 0%','茶嗨波 Tea Highball')"><div class="tea-cell-label">茶嗨波</div></div>
+            <div class="tea-cell" style="background-position:33.33% 0%"   onclick="openTeaCell('33.33% 0%','01 紀州・梅酒')"><div class="tea-cell-label">01 梅酒</div></div>
+            <div class="tea-cell" style="background-position:66.67% 0%"   onclick="openTeaCell('66.67% 0%','02 大分・麥燒酎')"><div class="tea-cell-label">02 麥燒酎</div></div>
+            <div class="tea-cell" style="background-position:100% 0%"     onclick="openTeaCell('100% 0%','03 宮崎・伯爵燒酎')"><div class="tea-cell-label">03 伯爵燒酎</div></div>
+            <div class="tea-cell" style="background-position:0% 50%"      onclick="openTeaCell('0% 50%','04 花壇・茉莉香片')"><div class="tea-cell-label">04 茉莉香片</div></div>
+            <div class="tea-cell" style="background-position:33.33% 50%"  onclick="openTeaCell('33.33% 50%','05 名間・四季春')"><div class="tea-cell-label">05 四季春</div></div>
+            <div class="tea-cell" style="background-position:66.67% 50%"  onclick="openTeaCell('66.67% 50%','06 宇治・煎茶')"><div class="tea-cell-label">06 煎茶</div></div>
+            <div class="tea-cell" style="background-position:100% 50%"    onclick="openTeaCell('100% 50%','07 鹿野・蜜香琥珀紅茶')"><div class="tea-cell-label">07 蜜香琥珀</div></div>
+            <div class="tea-cell" style="background-position:0% 100%"     onclick="openTeaCell('0% 100%','08 魚池・紅玉紅茶')"><div class="tea-cell-label">08 紅玉紅茶</div></div>
+            <div class="tea-cell" style="background-position:33.33% 100%" onclick="openTeaCell('33.33% 100%','09 峨眉・東方美人')"><div class="tea-cell-label">09 東方美人</div></div>
+            <div class="tea-cell" style="background-position:66.67% 100%" onclick="openTeaCell('66.67% 100%','10 鹿谷・焙火烏龍')"><div class="tea-cell-label">10 焙火烏龍</div></div>
+            <div class="tea-cell" style="background-position:100% 100%"   onclick="openTeaCell('100% 100%','11 木柵・鐵觀音')"><div class="tea-cell-label">11 鐵觀音</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- FULL MENU -->
   <div id="menu">
     <div class="inner">
@@ -3307,8 +3508,6 @@
         <button class="tab-btn" onclick="showTab('soup', this)">熱湯</button>
         <button class="tab-btn" onclick="showTab('dessert', this)">甜點</button>
         <button class="tab-btn" onclick="showTab('snack', this)">小點</button>
-        <button class="tab-btn" onclick="showTab('cocktail', this)">調酒</button>
-        <button class="tab-btn" onclick="showTab('tea', this)">茶嗨波</button>
       </div>
 
       <!-- 主廚推薦 -->
@@ -3730,192 +3929,6 @@
       </div>
 
       <!-- 調酒 COCKTAILS -->
-      <div class="menu-panel" id="tab-cocktail">
-        <div class="drink-group">
-          <div class="drink-group-header">
-            <div class="menu-cat-title">Special Cocktails</div>
-            <h3 class="menu-cat-h">手工調酒</h3>
-            <p class="menu-cat-desc">全新特調酒單上線，24 款招牌調酒均一價 NT$380，分為 FROM THE VINE、FRUIT &amp; FLORA、TEA &amp; ORCHARD、SPIRIT FORWARD 四大類。所有調酒可依個人喜好調整甜度、酒感、酸度。</p>
-            <a class="cocktail-text-link" href="#cocktail-text-menu">查看 24 款文字酒單 ↓</a>
-          </div>
-          <div class="cocktail-stage" id="cocktail-stage" role="region" aria-label="特調粒子展示">
-            <div class="cs-glow" aria-hidden="true"></div>
-            <canvas aria-hidden="true"></canvas>
-            <div class="cs-info" aria-live="polite">
-              <div class="cs-series"></div>
-              <h4 class="cs-name"></h4>
-              <p class="cs-desc"></p>
-              <span class="cs-price"></span>
-            </div>
-            <button type="button" class="cs-nav cs-prev" aria-label="上一杯">‹</button>
-            <button type="button" class="cs-nav cs-next" aria-label="下一杯">›</button>
-            <p class="cs-hint">點任一杯，粒子為你重新調一杯</p>
-          </div>
-          <p class="cocktail-poster-links"><button type="button" id="cs-poster-link" data-posters="[[&quot;webp/cocktail-from-the-vine.webp&quot;, &quot;FROM THE VINE · 葡萄酒與發酵酒基底&quot;], [&quot;webp/cocktail-fruit-flora.webp&quot;, &quot;FRUIT &amp; FLORA · 水果與花香&quot;], [&quot;webp/cocktail-tea-orchard.webp&quot;, &quot;TEA &amp; ORCHARD · 茶香與果園&quot;], [&quot;webp/cocktail-spirit-forward.webp&quot;, &quot;SPIRIT FORWARD · 烈酒主導&quot;]]">看原版酒單圖</button></p>
-          <section class="cocktail-text-menu" id="cocktail-text-menu" aria-labelledby="cocktail-text-menu-title">
-            <div class="cocktail-text-menu-header">
-              <h3 id="cocktail-text-menu-title">24 款文字酒單</h3>
-              <p>四大系列・每杯 NT$380</p>
-            </div>
-            <div class="cocktail-text-series-grid">
-              <section class="cocktail-text-series">
-                <h4>FROM THE VINE <span>葡萄酒與發酵酒基底</span></h4>
-                <article class="cocktail-text-item">
-                  <h5>Gummy Bear <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：草莓・甜酒・黑刺李琴酒</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Snow White <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：荔枝・伏特加・白酒</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Zeal <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：百香果・莓果・可可・白酒</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Green Day <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：奇異果・白酒・萬壽菊</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Ibuki <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：清酒・哈密瓜・馬告</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Memory <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：葡萄・紅酒・Prosecco</p>
-                </article>
-              </section>
-              <section class="cocktail-text-series">
-                <h4>FRUIT &amp; FLORA <span>水果與花香</span></h4>
-                <article class="cocktail-text-item">
-                  <h5>Dusk <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：芭樂・白酒・伯爵茶</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Trinity <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：葡萄・白蘭地・白酒</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Orange Valley <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：白酒・Aperol・柳橙</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Wings On Field <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：葡萄柚・接骨木花・琴酒</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Wave <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：西瓜・Umami Gin・羅勒</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Tokyo Banana <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：波本威士忌・香蕉・白可可</p>
-                </article>
-              </section>
-              <section class="cocktail-text-series">
-                <h4>TEA &amp; ORCHARD <span>茶香與果園</span></h4>
-                <article class="cocktail-text-item">
-                  <h5>Sunday Morning <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：伯爵琴酒・荔枝（可選經典伯爵或荔枝伯爵）</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Destination <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：烏龍琴酒・蘋果或蜜桃或莓果（三選一）</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Yoasobi <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：茉莉・檜木琴酒・熱帶水果</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Treasure <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：金萱茶・蘭姆酒・鳳梨</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Arashiyama <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：玄米茶・柚子・檜木琴酒</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Twilight <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：紅玉紅茶・檸檬</p>
-                </article>
-              </section>
-              <section class="cocktail-text-series">
-                <h4>SPIRIT FORWARD <span>烈酒主導</span></h4>
-                <article class="cocktail-text-item">
-                  <h5>French 69 <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：玫瑰琴酒・莓果・氣泡酒</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Ciao! <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：蒔蘿琴酒・檸檬甜酒・Prosecco</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Under the Bridge <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：VSOP 白蘭地・接骨木花・柳橙</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Geisha <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：清酒・白桃・玫瑰</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Ember <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：梅斯卡爾・梅・松</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Boogie Wonderland <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">原料：多香果・威士忌・百香果</p>
-                </article>
-              </section>
-            </div>
-          </section>
-          <p style="font-size:0.78rem; color:var(--grey); margin-top:2rem; line-height:1.9; border-top:1px solid var(--border); padding-top:1.5rem;">
-            ✦ 點擊調酒菜單可放大查看　✦ 所有調酒可依喜好調整甜度 / 酒感 / 酸度
-          </p>
-        </div>
-      </div>
-
-      <script>
-        (function () {
-          document.querySelectorAll('.cocktail-text-link').forEach(function (link) {
-            link.addEventListener('click', function (event) {
-              var target = document.getElementById('cocktail-text-menu');
-              if (!target) return;
-              event.preventDefault();
-              if (window.history && window.history.pushState) {
-                window.history.pushState(null, '', link.getAttribute('href'));
-              } else {
-                window.location.hash = link.hash;
-              }
-              var top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - 90);
-              window.scrollTo({ top: top, behavior: 'instant' });
-            });
-          });
-        })();
-      </script>
-
-      <!-- 茶嗨波 TEA HIGHBALL -->
-      <div class="menu-panel" id="tab-tea">
-        <div class="tea-grid-section">
-          <div class="menu-cat-title" style="text-align:center;margin-bottom:.5rem;">Signature Series</div>
-          <h3 class="menu-cat-h" style="text-align:center;margin-bottom:.4rem;">茶嗨波 <span style="font-size:0.7em;color:var(--gold);letter-spacing:.15em;">Tea Highball</span></h3>
-          <p class="menu-cat-desc" style="text-align:center;margin-bottom:1.5rem;">點擊每一格放大查看</p>
-          <div class="tea-cell-grid">
-            <div class="tea-cell" style="background-position:0% 0%"       onclick="openTeaCell('0% 0%','茶嗨波 Tea Highball')"><div class="tea-cell-label">茶嗨波</div></div>
-            <div class="tea-cell" style="background-position:33.33% 0%"   onclick="openTeaCell('33.33% 0%','01 紀州・梅酒')"><div class="tea-cell-label">01 梅酒</div></div>
-            <div class="tea-cell" style="background-position:66.67% 0%"   onclick="openTeaCell('66.67% 0%','02 大分・麥燒酎')"><div class="tea-cell-label">02 麥燒酎</div></div>
-            <div class="tea-cell" style="background-position:100% 0%"     onclick="openTeaCell('100% 0%','03 宮崎・伯爵燒酎')"><div class="tea-cell-label">03 伯爵燒酎</div></div>
-            <div class="tea-cell" style="background-position:0% 50%"      onclick="openTeaCell('0% 50%','04 花壇・茉莉香片')"><div class="tea-cell-label">04 茉莉香片</div></div>
-            <div class="tea-cell" style="background-position:33.33% 50%"  onclick="openTeaCell('33.33% 50%','05 名間・四季春')"><div class="tea-cell-label">05 四季春</div></div>
-            <div class="tea-cell" style="background-position:66.67% 50%"  onclick="openTeaCell('66.67% 50%','06 宇治・煎茶')"><div class="tea-cell-label">06 煎茶</div></div>
-            <div class="tea-cell" style="background-position:100% 50%"    onclick="openTeaCell('100% 50%','07 鹿野・蜜香琥珀紅茶')"><div class="tea-cell-label">07 蜜香琥珀</div></div>
-            <div class="tea-cell" style="background-position:0% 100%"     onclick="openTeaCell('0% 100%','08 魚池・紅玉紅茶')"><div class="tea-cell-label">08 紅玉紅茶</div></div>
-            <div class="tea-cell" style="background-position:33.33% 100%" onclick="openTeaCell('33.33% 100%','09 峨眉・東方美人')"><div class="tea-cell-label">09 東方美人</div></div>
-            <div class="tea-cell" style="background-position:66.67% 100%" onclick="openTeaCell('66.67% 100%','10 鹿谷・焙火烏龍')"><div class="tea-cell-label">10 焙火烏龍</div></div>
-            <div class="tea-cell" style="background-position:100% 100%"   onclick="openTeaCell('100% 100%','11 木柵・鐵觀音')"><div class="tea-cell-label">11 鐵觀音</div></div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 

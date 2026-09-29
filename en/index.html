@@ -2901,6 +2901,8 @@
          （IG/LINE 的 WKWebView）svh 會隨工具列伸縮 → 圖片忽大忽小，實機已驗證，棄用。 */
       .menu-img-wrap img { max-height: min(340px, 90vw); object-fit: contain; }
 
+      #drinks { padding: 5.5rem 1rem 4rem; }   /* 上方留給固定導覽列（71px），導覽列跳過來時小標不被蓋住 */
+      #drinks .cocktail-stage { width: calc(100% + 2rem); margin-inline: -1rem; }
       .cocktail-stage { height: 540px; }
       /* 手機：文字區接手觸控，在這裡滑才會捲動頁面（杯子區域鎖給粒子互動） */
       .cs-info { right: 0; left: 0; bottom: 0; max-width: none; padding: 1rem 1.2rem 1.2rem; }
@@ -3018,6 +3020,7 @@
       <a class="nav-lang" href="../">中文</a>
       <ul class="nav-links" id="nav-links">
         <li><a href="#about">About</a></li>
+        <li><a href="#drinks">Drinks</a></li>
         <li><a href="#menu">Menu</a></li>
         <li><a href="#visit">Visit</a></li>
         <li><a href="#faq">FAQ</a></li>
@@ -3138,6 +3141,204 @@
   </section>
 
 
+  <!-- SIGNATURE DRINKS：調酒粒子舞台＋茶嗨波（2026-09-29 從菜單分頁拉出，放在餐點菜單前獨立展示） -->
+  <section id="drinks" class="page-section page-section-alt">
+    <div class="section-inner">
+      <div class="menu-header">
+        <span class="sec-label">Signature Drinks</span>
+        <h2>Cocktails &amp; Tea Highballs</h2>
+        <p>24 signature cocktails and 11 tea highballs — tap one and watch it take shape</p>
+      </div>
+
+        <div class="drink-group">
+          <div class="drink-group-header">
+            <div class="menu-cat-title">Special Cocktails</div>
+            <h3 class="menu-cat-h">Handcrafted Cocktails</h3>
+            <p class="menu-cat-desc">Our new signature cocktail list is here: 24 signatures at a flat NT$380, across four families — FROM THE VINE, FRUIT &amp; FLORA, TEA &amp; ORCHARD and SPIRIT FORWARD. Every cocktail can be adjusted to your taste — sweetness, strength and acidity.</p>
+            <a class="cocktail-text-link" href="#cocktail-text-menu">View all 24 cocktails ↓</a>
+          </div>
+          <div class="cocktail-stage" id="cocktail-stage" role="region" aria-label="Signature cocktail particle showcase">
+            <div class="cs-glow" aria-hidden="true"></div>
+            <canvas aria-hidden="true"></canvas>
+            <div class="cs-info" aria-live="polite">
+              <div class="cs-series"></div>
+              <h4 class="cs-name"></h4>
+              <p class="cs-desc"></p>
+              <span class="cs-price"></span>
+            </div>
+            <button type="button" class="cs-nav cs-prev" aria-label="Previous cocktail">‹</button>
+            <button type="button" class="cs-nav cs-next" aria-label="Next cocktail">›</button>
+            <p class="cs-hint">Pick any cocktail — the particles will mix it for you</p>
+          </div>
+          <p class="cocktail-poster-links"><button type="button" id="cs-poster-link" data-posters="[[&quot;../webp/cocktail-from-the-vine.webp&quot;, &quot;FROM THE VINE · Wine-Based&quot;], [&quot;../webp/cocktail-fruit-flora.webp&quot;, &quot;FRUIT &amp; FLORA · Fruit and Floral&quot;], [&quot;../webp/cocktail-tea-orchard.webp&quot;, &quot;TEA &amp; ORCHARD · Tea-Infused&quot;], [&quot;../webp/cocktail-spirit-forward.webp&quot;, &quot;SPIRIT FORWARD · Spirit-Led&quot;]]">View the original menu card</button></p>
+          <section class="cocktail-text-menu" id="cocktail-text-menu" aria-labelledby="cocktail-text-menu-title">
+            <div class="cocktail-text-menu-header">
+              <h3 id="cocktail-text-menu-title">24 Cocktail Text Menu</h3>
+              <p>Four families · NT$380 per cocktail</p>
+            </div>
+            <div class="cocktail-text-series-grid">
+              <section class="cocktail-text-series">
+                <h4>FROM THE VINE <span>Wine &amp; Fermented Bases</span></h4>
+                <article class="cocktail-text-item">
+                  <h5>Gummy Bear <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Strawberry, Sweet Wine, Sloe Gin</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Snow White <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Lychee, Vodka, White Wine</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Zeal <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Passion Fruit, Berry, Cocoa, White Wine</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Green Day <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Kiwi, White Wine, Sweet Marigold</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Ibuki <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Sake, Melon, Makao</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Memory <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Grape, Red Wine, Prosecco</p>
+                </article>
+              </section>
+              <section class="cocktail-text-series">
+                <h4>FRUIT &amp; FLORA <span>Fruit &amp; Floral</span></h4>
+                <article class="cocktail-text-item">
+                  <h5>Dusk <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Guava, White Wine, Earl Grey</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Trinity <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Grape, Brandy, White Wine</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Orange Valley <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: White Wine, Aperol, Orange</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Wings On Field <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Grapefruit, Elderflower, Gin</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Wave <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Watermelon, Umami Gin, Basil</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Tokyo Banana <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Bourbon, Banana, White Cacao</p>
+                </article>
+              </section>
+              <section class="cocktail-text-series">
+                <h4>TEA &amp; ORCHARD <span>Tea &amp; Orchard</span></h4>
+                <article class="cocktail-text-item">
+                  <h5>Sunday Morning <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Earl Grey Gin, Lychee (classic Earl Grey or lychee Earl Grey)</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Destination <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Oolong Gin, Apple or Peach or Berry (choose one)</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Yoasobi <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Jasmine, Hinoki Gin, Tropical Fruits</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Treasure <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Jin Xuan Tea, Rum, Pineapple</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Arashiyama <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Genmaicha, Yuzu, Hinoki Gin</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Twilight <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Red Jade Tea, Lemon</p>
+                </article>
+              </section>
+              <section class="cocktail-text-series">
+                <h4>SPIRIT FORWARD <span>Spirit-Led</span></h4>
+                <article class="cocktail-text-item">
+                  <h5>French 69 <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Rose Gin, Berry, Sparkling Wine</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Ciao! <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Dill Gin, Limoncello, Prosecco</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Under the Bridge <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: V.S.O.P Brandy, Elderflower, Orange</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Geisha <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Sake, White Peach, Rose</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Ember <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Mezcal, Plum, Pine</p>
+                </article>
+                <article class="cocktail-text-item">
+                  <h5>Boogie Wonderland <span class="cocktail-text-price">NT$380</span></h5>
+                  <p class="cocktail-text-description">Ingredients: Allspice, Whisky, Passion Fruit</p>
+                </article>
+              </section>
+            </div>
+          </section>
+          <p style="font-size:0.78rem; color:var(--grey); margin-top:2rem; line-height:1.9; border-top:1px solid var(--border); padding-top:1.5rem;">
+            ✦ Tap any cocktail and the particles above will mix it for you　✦ Every cocktail can be adjusted to taste — sweetness / strength / acidity
+          </p>
+        </div>
+
+
+      <script>
+        (function () {
+          document.querySelectorAll('.cocktail-text-link').forEach(function (link) {
+            link.addEventListener('click', function (event) {
+              var target = document.getElementById('cocktail-text-menu');
+              if (!target) return;
+              event.preventDefault();
+              if (window.history && window.history.pushState) {
+                window.history.pushState(null, '', link.getAttribute('href'));
+              } else {
+                window.location.hash = link.hash;
+              }
+              var top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - 90);
+              window.scrollTo({ top: top, behavior: 'instant' });
+            });
+          });
+        })();
+      </script>
+
+      <!-- 茶嗨波 TEA HIGHBALL -->
+      <div class="drink-group drink-group-tea">
+
+        <div class="tea-grid-section">
+          <div class="menu-cat-title" style="text-align:center;margin-bottom:.5rem;">Signature Series</div>
+          <h3 class="menu-cat-h" style="text-align:center;margin-bottom:.4rem;">茶嗨波 <span style="font-size:0.7em;color:var(--gold);letter-spacing:.15em;">Tea Highball</span></h3>
+          <p class="menu-cat-desc" style="text-align:center;margin-bottom:1.5rem;">Tap any cell to enlarge</p>
+          <div class="tea-cell-grid">
+            <div class="tea-cell" style="background-position:0% 0%"       onclick="openTeaCell('0% 0%','Tea Highball')"><div class="tea-cell-label">Tea Highball</div></div>
+            <div class="tea-cell" style="background-position:33.33% 0%"   onclick="openTeaCell('33.33% 0%','01 Kishu · Plum Wine')"><div class="tea-cell-label">01 Plum Wine</div></div>
+            <div class="tea-cell" style="background-position:66.67% 0%"   onclick="openTeaCell('66.67% 0%','02 Oita · Barley Shochu')"><div class="tea-cell-label">02 Barley Shochu</div></div>
+            <div class="tea-cell" style="background-position:100% 0%"     onclick="openTeaCell('100% 0%','03 Miyazaki · Earl Grey Shochu')"><div class="tea-cell-label">03 Earl Grey Shochu</div></div>
+            <div class="tea-cell" style="background-position:0% 50%"      onclick="openTeaCell('0% 50%','04 Huatan · Jasmine Green Tea')"><div class="tea-cell-label">04 Jasmine Green Tea</div></div>
+            <div class="tea-cell" style="background-position:33.33% 50%"  onclick="openTeaCell('33.33% 50%','05 Mingjian · Four Seasons Oolong')"><div class="tea-cell-label">05 Four Seasons Oolong</div></div>
+            <div class="tea-cell" style="background-position:66.67% 50%"  onclick="openTeaCell('66.67% 50%','06 Uji · Sencha')"><div class="tea-cell-label">06 Sencha</div></div>
+            <div class="tea-cell" style="background-position:100% 50%"    onclick="openTeaCell('100% 50%','07 Luye · Honey Amber Black Tea')"><div class="tea-cell-label">07 Honey Amber</div></div>
+            <div class="tea-cell" style="background-position:0% 100%"     onclick="openTeaCell('0% 100%','08 Yuchi · Ruby Black Tea')"><div class="tea-cell-label">08 Ruby Black Tea</div></div>
+            <div class="tea-cell" style="background-position:33.33% 100%" onclick="openTeaCell('33.33% 100%','09 Emei · Oriental Beauty')"><div class="tea-cell-label">09 Oriental Beauty</div></div>
+            <div class="tea-cell" style="background-position:66.67% 100%" onclick="openTeaCell('66.67% 100%','10 Lugu · Roasted Oolong')"><div class="tea-cell-label">10 Roasted Oolong</div></div>
+            <div class="tea-cell" style="background-position:100% 100%"   onclick="openTeaCell('100% 100%','11 Muzha · Tieguanyin')"><div class="tea-cell-label">11 Tieguanyin</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- FULL MENU -->
   <div id="menu">
     <div class="inner">
@@ -3156,8 +3357,6 @@
         <button class="tab-btn" onclick="showTab('soup', this)">Soups</button>
         <button class="tab-btn" onclick="showTab('dessert', this)">Desserts</button>
         <button class="tab-btn" onclick="showTab('snack', this)">Bites</button>
-        <button class="tab-btn" onclick="showTab('cocktail', this)">Cocktails</button>
-        <button class="tab-btn" onclick="showTab('tea', this)">Tea Highball</button>
       </div>
 
       <!-- 主廚推薦 -->
@@ -3579,192 +3778,6 @@
       </div>
 
       <!-- 調酒 COCKTAILS -->
-      <div class="menu-panel" id="tab-cocktail">
-        <div class="drink-group">
-          <div class="drink-group-header">
-            <div class="menu-cat-title">Special Cocktails</div>
-            <h3 class="menu-cat-h">Handcrafted Cocktails</h3>
-            <p class="menu-cat-desc">Our new signature cocktail list is here: 24 signatures at a flat NT$380, across four families — FROM THE VINE, FRUIT &amp; FLORA, TEA &amp; ORCHARD and SPIRIT FORWARD. Every cocktail can be adjusted to your taste — sweetness, strength and acidity.</p>
-            <a class="cocktail-text-link" href="#cocktail-text-menu">View all 24 cocktails ↓</a>
-          </div>
-          <div class="cocktail-stage" id="cocktail-stage" role="region" aria-label="Signature cocktail particle showcase">
-            <div class="cs-glow" aria-hidden="true"></div>
-            <canvas aria-hidden="true"></canvas>
-            <div class="cs-info" aria-live="polite">
-              <div class="cs-series"></div>
-              <h4 class="cs-name"></h4>
-              <p class="cs-desc"></p>
-              <span class="cs-price"></span>
-            </div>
-            <button type="button" class="cs-nav cs-prev" aria-label="Previous cocktail">‹</button>
-            <button type="button" class="cs-nav cs-next" aria-label="Next cocktail">›</button>
-            <p class="cs-hint">Pick any cocktail — the particles will mix it for you</p>
-          </div>
-          <p class="cocktail-poster-links"><button type="button" id="cs-poster-link" data-posters="[[&quot;../webp/cocktail-from-the-vine.webp&quot;, &quot;FROM THE VINE · Wine-Based&quot;], [&quot;../webp/cocktail-fruit-flora.webp&quot;, &quot;FRUIT &amp; FLORA · Fruit and Floral&quot;], [&quot;../webp/cocktail-tea-orchard.webp&quot;, &quot;TEA &amp; ORCHARD · Tea-Infused&quot;], [&quot;../webp/cocktail-spirit-forward.webp&quot;, &quot;SPIRIT FORWARD · Spirit-Led&quot;]]">View the original menu card</button></p>
-          <section class="cocktail-text-menu" id="cocktail-text-menu" aria-labelledby="cocktail-text-menu-title">
-            <div class="cocktail-text-menu-header">
-              <h3 id="cocktail-text-menu-title">24 Cocktail Text Menu</h3>
-              <p>Four families · NT$380 per cocktail</p>
-            </div>
-            <div class="cocktail-text-series-grid">
-              <section class="cocktail-text-series">
-                <h4>FROM THE VINE <span>Wine &amp; Fermented Bases</span></h4>
-                <article class="cocktail-text-item">
-                  <h5>Gummy Bear <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Strawberry, Sweet Wine, Sloe Gin</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Snow White <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Lychee, Vodka, White Wine</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Zeal <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Passion Fruit, Berry, Cocoa, White Wine</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Green Day <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Kiwi, White Wine, Sweet Marigold</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Ibuki <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Sake, Melon, Makao</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Memory <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Grape, Red Wine, Prosecco</p>
-                </article>
-              </section>
-              <section class="cocktail-text-series">
-                <h4>FRUIT &amp; FLORA <span>Fruit &amp; Floral</span></h4>
-                <article class="cocktail-text-item">
-                  <h5>Dusk <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Guava, White Wine, Earl Grey</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Trinity <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Grape, Brandy, White Wine</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Orange Valley <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: White Wine, Aperol, Orange</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Wings On Field <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Grapefruit, Elderflower, Gin</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Wave <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Watermelon, Umami Gin, Basil</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Tokyo Banana <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Bourbon, Banana, White Cacao</p>
-                </article>
-              </section>
-              <section class="cocktail-text-series">
-                <h4>TEA &amp; ORCHARD <span>Tea &amp; Orchard</span></h4>
-                <article class="cocktail-text-item">
-                  <h5>Sunday Morning <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Earl Grey Gin, Lychee (classic Earl Grey or lychee Earl Grey)</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Destination <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Oolong Gin, Apple or Peach or Berry (choose one)</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Yoasobi <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Jasmine, Hinoki Gin, Tropical Fruits</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Treasure <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Jin Xuan Tea, Rum, Pineapple</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Arashiyama <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Genmaicha, Yuzu, Hinoki Gin</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Twilight <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Red Jade Tea, Lemon</p>
-                </article>
-              </section>
-              <section class="cocktail-text-series">
-                <h4>SPIRIT FORWARD <span>Spirit-Led</span></h4>
-                <article class="cocktail-text-item">
-                  <h5>French 69 <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Rose Gin, Berry, Sparkling Wine</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Ciao! <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Dill Gin, Limoncello, Prosecco</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Under the Bridge <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: V.S.O.P Brandy, Elderflower, Orange</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Geisha <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Sake, White Peach, Rose</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Ember <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Mezcal, Plum, Pine</p>
-                </article>
-                <article class="cocktail-text-item">
-                  <h5>Boogie Wonderland <span class="cocktail-text-price">NT$380</span></h5>
-                  <p class="cocktail-text-description">Ingredients: Allspice, Whisky, Passion Fruit</p>
-                </article>
-              </section>
-            </div>
-          </section>
-          <p style="font-size:0.78rem; color:var(--grey); margin-top:2rem; line-height:1.9; border-top:1px solid var(--border); padding-top:1.5rem;">
-            ✦ Tap a cocktail menu to enlarge　✦ Every cocktail can be adjusted to taste — sweetness / strength / acidity
-          </p>
-        </div>
-      </div>
-
-      <script>
-        (function () {
-          document.querySelectorAll('.cocktail-text-link').forEach(function (link) {
-            link.addEventListener('click', function (event) {
-              var target = document.getElementById('cocktail-text-menu');
-              if (!target) return;
-              event.preventDefault();
-              if (window.history && window.history.pushState) {
-                window.history.pushState(null, '', link.getAttribute('href'));
-              } else {
-                window.location.hash = link.hash;
-              }
-              var top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - 90);
-              window.scrollTo({ top: top, behavior: 'instant' });
-            });
-          });
-        })();
-      </script>
-
-      <!-- 茶嗨波 TEA HIGHBALL -->
-      <div class="menu-panel" id="tab-tea">
-        <div class="tea-grid-section">
-          <div class="menu-cat-title" style="text-align:center;margin-bottom:.5rem;">Signature Series</div>
-          <h3 class="menu-cat-h" style="text-align:center;margin-bottom:.4rem;">茶嗨波 <span style="font-size:0.7em;color:var(--gold);letter-spacing:.15em;">Tea Highball</span></h3>
-          <p class="menu-cat-desc" style="text-align:center;margin-bottom:1.5rem;">Tap any cell to enlarge</p>
-          <div class="tea-cell-grid">
-            <div class="tea-cell" style="background-position:0% 0%"       onclick="openTeaCell('0% 0%','Tea Highball')"><div class="tea-cell-label">Tea Highball</div></div>
-            <div class="tea-cell" style="background-position:33.33% 0%"   onclick="openTeaCell('33.33% 0%','01 Kishu · Plum Wine')"><div class="tea-cell-label">01 Plum Wine</div></div>
-            <div class="tea-cell" style="background-position:66.67% 0%"   onclick="openTeaCell('66.67% 0%','02 Oita · Barley Shochu')"><div class="tea-cell-label">02 Barley Shochu</div></div>
-            <div class="tea-cell" style="background-position:100% 0%"     onclick="openTeaCell('100% 0%','03 Miyazaki · Earl Grey Shochu')"><div class="tea-cell-label">03 Earl Grey Shochu</div></div>
-            <div class="tea-cell" style="background-position:0% 50%"      onclick="openTeaCell('0% 50%','04 Huatan · Jasmine Green Tea')"><div class="tea-cell-label">04 Jasmine Green Tea</div></div>
-            <div class="tea-cell" style="background-position:33.33% 50%"  onclick="openTeaCell('33.33% 50%','05 Mingjian · Four Seasons Oolong')"><div class="tea-cell-label">05 Four Seasons Oolong</div></div>
-            <div class="tea-cell" style="background-position:66.67% 50%"  onclick="openTeaCell('66.67% 50%','06 Uji · Sencha')"><div class="tea-cell-label">06 Sencha</div></div>
-            <div class="tea-cell" style="background-position:100% 50%"    onclick="openTeaCell('100% 50%','07 Luye · Honey Amber Black Tea')"><div class="tea-cell-label">07 Honey Amber</div></div>
-            <div class="tea-cell" style="background-position:0% 100%"     onclick="openTeaCell('0% 100%','08 Yuchi · Ruby Black Tea')"><div class="tea-cell-label">08 Ruby Black Tea</div></div>
-            <div class="tea-cell" style="background-position:33.33% 100%" onclick="openTeaCell('33.33% 100%','09 Emei · Oriental Beauty')"><div class="tea-cell-label">09 Oriental Beauty</div></div>
-            <div class="tea-cell" style="background-position:66.67% 100%" onclick="openTeaCell('66.67% 100%','10 Lugu · Roasted Oolong')"><div class="tea-cell-label">10 Roasted Oolong</div></div>
-            <div class="tea-cell" style="background-position:100% 100%"   onclick="openTeaCell('100% 100%','11 Muzha · Tieguanyin')"><div class="tea-cell-label">11 Tieguanyin</div></div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 
