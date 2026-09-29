@@ -1384,8 +1384,8 @@
       .hero-logo-sheen { animation: heroSheen 7s 2s ease-in-out infinite; }
       .hero-scroll-hint::after { animation: heroHint 1.8s ease-in-out infinite; }
     }
-    @keyframes heroLightOn { 0% { opacity: 0.35; } 12% { opacity: 0.8; } 18% { opacity: 0.3; } 30% { opacity: 0.9; } 36% { opacity: 0.45; } 100% { opacity: 1; } }   /* 不從 0 開始：透明元素不算 LCP，從 0 閃會把 LCP 拖到動畫結束 */
-    @keyframes heroBreath { from { opacity: 1; } to { opacity: 0.78; } }
+    @keyframes heroLightOn { 0% { filter: brightness(0.05); } 12% { filter: brightness(0.75); } 18% { filter: brightness(0.15); } 30% { filter: brightness(0.9); } 36% { filter: brightness(0.35); } 100% { filter: brightness(1); } }   /* 用亮度閃，不用透明度：Chrome 會等透明度動畫跑完才算 LCP（背光圖正是最大元素） */
+    @keyframes heroBreath { from { filter: brightness(1); } to { filter: brightness(0.8); } }
     @keyframes heroMetalOn { from { filter: brightness(0.25); } to { filter: brightness(1); } }
     @keyframes heroSheen { 0% { background-position: 120% 0; } 45%, 100% { background-position: -20% 0; } }
     @keyframes heroHint { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
@@ -3056,7 +3056,7 @@
     }
     .tel-info {
       font-size: 0.72rem;
-      color: rgba(240,235,224,0.4);
+      color: rgba(240,235,224,0.62);   /* 原 0.4 對比 3.3，未達 4.5 */
       letter-spacing: 0.04em;
       line-height: 2;
       margin-top: 0.2rem;
@@ -3444,8 +3444,8 @@
         <span>Japanese Wagyu</span>
         <span>Open Till 2:30 AM Fri &amp; Sat</span>
       </div>
-      <a href="https://www.google.com/search?q=D+Town+by+A+Train&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOWm7pRB70ES1G7Scgm0FV9e0nZz1-HX-AzQVXFidlG17MU-knjfilEflLqiell-NQy8XS8UqgsTmuTH5CvxKy0Z7amUvaCZ5mFSOj5Vhqo3vTYf3Lw%3D%3D" class="hero-rating" target="_blank" rel="noopener" aria-label="4.6 · 1,901 Google reviews (out of 5 stars)">
-        <span class="stars">★★★★★</span><span>4.6</span><span class="rc">· 1,901 Google reviews</span>
+      <a href="https://www.google.com/search?q=D+Town+by+A+Train&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOWm7pRB70ES1G7Scgm0FV9e0nZz1-HX-AzQVXFidlG17MU-knjfilEflLqiell-NQy8XS8UqgsTmuTH5CvxKy0Z7amUvaCZ5mFSOj5Vhqo3vTYf3Lw%3D%3D" class="hero-rating" target="_blank" rel="noopener">
+        <span class="stars" aria-hidden="true">★★★★★</span><span>4.6</span><span class="rc">· 1,901 Google reviews</span>
       </a>
       <div class="btn-group">
         <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2"
