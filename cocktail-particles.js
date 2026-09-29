@@ -341,7 +341,7 @@
     var uniforms = {
       uP: { value: 1 }, uTime: { value: 0 }, uScatter: { value: 1.7 },
       uSize: { value: small || lowEnd ? 48 : 40 }, uPix: { value: dpr },
-      uMouse: { value: new THREE.Vector3(99, 99, 0) }, uMouseOn: { value: 0 },
+      uMouse: { value: new THREE.Vector3(99, 99, 0) }, uMouseOn: { value: 0 }, uRadius: { value: 0.5 },
       uMotion: { value: reduceMotion ? 0 : 1 }
     };
 
@@ -353,7 +353,7 @@
       vertexShader: [
         'attribute vec3 aStart; attribute vec3 aTarget; attribute vec3 aC0; attribute vec3 aC1;',
         'attribute vec4 aRand; attribute float aKind;',
-        'uniform float uP, uTime, uScatter, uSize, uPix, uMouseOn, uMotion;',
+        'uniform float uP, uTime, uScatter, uSize, uPix, uMouseOn, uMotion, uRadius;',
         'uniform vec3 uMouse;',
         'varying vec3 vC; varying float vA;',
         'float ease(float t){ return t < 0.5 ? 4.0*t*t*t : 1.0 - pow(-2.0*t + 2.0, 3.0) / 2.0; }',
@@ -368,8 +368,8 @@
         '  vec2 dm = wp.xy - uMouse.xy;',
         '  float dist = length(dm);',
         // 游標附近像放大鏡：位移跟距離成正比（中心不動→不會開洞）、粒子往前浮並放大、變亮，帶一圈圈向外的起伏
-        '  float f = uMouseOn * smoothstep(0.45, 0.0, dist);',
-        '  float wave = sin(dist * 22.0 - uTime * 7.0);',
+        '  float f = uMouseOn * smoothstep(uRadius, 0.0, dist);',
+        '  float wave = sin(dist / uRadius * 10.0 - uTime * 7.0);',
         '  wp.xy += dm * f * 0.4;',
         '  wp.z += f * (0.35 + 0.1 * wave);',
         '  vec4 mv = viewMatrix * wp;',
@@ -518,6 +518,7 @@
     canvas.addEventListener('pointerdown', onMove);
     canvas.addEventListener('pointerleave', function () { mouseTarget = 0; });
     canvas.addEventListener('pointerup', function (e) { if (e.pointerType !== 'mouse') mouseTarget = 0; });
+    canvas.addEventListener('pointercancel', function () { mouseTarget = 0; });
 
     // ---- 尺寸 ----
     function resize() {
@@ -528,6 +529,9 @@
       var narrow = w / h < 0.9;
       camera.position.z = narrow ? 11 : 9.8;
       camera.lookAt(0, 0.2, 0);
+      // 起伏範圍固定為螢幕上直徑 100px（換算成 3D 單位；桌機／手機鏡頭距離不同）
+      var pxPerUnit = h / (2 * camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)));
+      uniforms.uRadius.value = 50 / pxPerUnit;
       // 桌機杯子偏右讓出左下文字區；手機杯子上移讓出底部文字區
       group.position.set(narrow ? 0 : 1.15, narrow ? 0.75 : 0.1, 0);
       camera.updateProjectionMatrix();
