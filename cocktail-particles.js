@@ -65,7 +65,6 @@
     next: stage.querySelector('.cs-next')
   };
   if (!stage.hasAttribute('tabindex')) stage.tabIndex = -1;
-  var picker = document.getElementById('cocktail-stage-picker');
   var current = -1;
   var engine = null;      // three.js＋圖集就緒後才有
 
@@ -75,19 +74,16 @@
   sprite.setAttribute('aria-hidden', 'true');
   stage.insertBefore(sprite, el.info);
 
-  // ---- 系列分頁（酒名直接點下方文字酒單） ----
-  var seriesRow = document.createElement('div');
-  seriesRow.className = 'cs-picker-series';
-  if (picker) picker.appendChild(seriesRow);
-
-  seriesList.forEach(function (s) {
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.textContent = s.title;
-    b.setAttribute('aria-pressed', 'false');
-    b.addEventListener('click', function () { select(s.first); });
-    seriesRow.appendChild(b);
-  });
+  // ---- 「看原版酒單圖」：打開目前這杯所屬系列的酒單海報（海報清單寫在按鈕的 data-posters） ----
+  var posterBtn = document.getElementById('cs-poster-link');
+  if (posterBtn && typeof window.openLightbox === 'function') {
+    var posters = [];
+    try { posters = JSON.parse(posterBtn.getAttribute('data-posters') || '[]'); } catch (e) {}
+    posterBtn.addEventListener('click', function () {
+      var p = posters[drinks[current].series] || posters[0];
+      if (p) window.openLightbox(p[0], p[1]);
+    });
+  }
 
   // 文字酒單每一項都可點 → 捲回舞台並換酒
   drinks.forEach(function (d, i) {
@@ -146,9 +142,6 @@
     el.price.textContent = d.price;
     el.info.classList.add('is-in');
 
-    seriesRow.querySelectorAll('button').forEach(function (b, si) {
-      b.setAttribute('aria-pressed', si === d.series ? 'true' : 'false');
-    });
     drinks.forEach(function (x, k) {
       x.el.classList.toggle('is-active', k === i);
       x.el.setAttribute('aria-pressed', k === i ? 'true' : 'false');

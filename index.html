@@ -2210,39 +2210,13 @@
     }
     .cocktail-stage.is-fallback canvas { display: none; }
     .cocktail-stage.is-fallback .cs-sprite { display: block; }
-    .cocktail-stage-picker {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.6rem;
-      max-width: 960px;
-      margin: 1rem auto 0;
-    }
-    .cs-picker-series {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.4rem;
-    }
-    .cs-picker-series button {
-      padding: 0.4rem 0.6rem;
-      border: none;
-      border-bottom: 1px solid transparent;
-      background: none;
-      color: var(--grey);
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      cursor: pointer;
-    }
-    .cs-picker-series button[aria-pressed="true"] { color: var(--gold); border-bottom-color: var(--gold); }
     .cocktail-poster-links {
       max-width: 960px;
-      margin: 1.2rem auto 0;
+      margin: 1rem auto 0;
       color: var(--grey);
       font-size: 0.74rem;
       text-align: center;
     }
-    .cocktail-poster-links span { margin-right: 0.4rem; letter-spacing: 0.1em; }
     .cocktail-poster-links button {
       padding: 0.3rem 0.5rem;
       border: none;
@@ -3777,8 +3751,7 @@
             <button type="button" class="cs-nav cs-next" aria-label="下一杯">›</button>
             <p class="cs-hint">點任一杯，粒子為你重新調一杯</p>
           </div>
-          <div class="cocktail-stage-picker" id="cocktail-stage-picker" role="group" aria-label="選擇特調"></div>
-          <p class="cocktail-poster-links"><span>原版酒單圖</span><button type="button" onclick="openLightbox('webp/cocktail-from-the-vine.webp','FROM THE VINE · 葡萄酒與發酵酒基底')">FROM THE VINE</button><button type="button" onclick="openLightbox('webp/cocktail-fruit-flora.webp','FRUIT & FLORA · 水果與花香')">FRUIT &amp; FLORA</button><button type="button" onclick="openLightbox('webp/cocktail-tea-orchard.webp','TEA & ORCHARD · 茶香與果園')">TEA &amp; ORCHARD</button><button type="button" onclick="openLightbox('webp/cocktail-spirit-forward.webp','SPIRIT FORWARD · 烈酒主導')">SPIRIT FORWARD</button></p>
+          <p class="cocktail-poster-links"><button type="button" id="cs-poster-link" data-posters="[[&quot;webp/cocktail-from-the-vine.webp&quot;, &quot;FROM THE VINE · 葡萄酒與發酵酒基底&quot;], [&quot;webp/cocktail-fruit-flora.webp&quot;, &quot;FRUIT &amp; FLORA · 水果與花香&quot;], [&quot;webp/cocktail-tea-orchard.webp&quot;, &quot;TEA &amp; ORCHARD · 茶香與果園&quot;], [&quot;webp/cocktail-spirit-forward.webp&quot;, &quot;SPIRIT FORWARD · 烈酒主導&quot;]]">看原版酒單圖</button></p>
           <section class="cocktail-text-menu" id="cocktail-text-menu" aria-labelledby="cocktail-text-menu-title">
             <div class="cocktail-text-menu-header">
               <h3 id="cocktail-text-menu-title">24 款文字酒單</h3>
@@ -4845,6 +4818,6 @@
   })();
   </script>
 
-<script src="cocktail-particles.js?v=20260930e" defer></script>
+<script src="cocktail-particles.js?v=20260930f" defer></script>
 </body>
 </html>
