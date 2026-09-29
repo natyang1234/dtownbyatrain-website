@@ -24,7 +24,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;600;700&display=swap"></noscript>
   <!-- 預載 hero 首屏 LCP 背景圖，加速最大內容繪製 -->
-  <link rel="preload" as="image" href="../webp/hero-logo-metal.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="../webp/hero-logo-metal-1200.webp" imagesrcset="../webp/hero-logo-metal-1200.webp 1200w, ../webp/hero-logo-metal.webp 2400w" imagesizes="(max-width: 900px) 82vw, 720px" fetchpriority="high">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="D Town by A Train｜Taipei East District Bistro & Cocktail Bar">
@@ -1166,6 +1166,7 @@
       gap: clamp(0.6rem, 2.4vh, 2rem);
       padding: 76px 1.2rem 3.8rem;   /* 底部留給 SCROLL 提示 */
       text-align: center;
+      perspective: 1400px;
     }
     #hero.hero-js .hero-pin {
       position: sticky;
@@ -1184,27 +1185,50 @@
       position: relative;
       z-index: 1;
       flex: 0 0 auto;
-      width: min(84vw, calc(var(--hero-vh, 100vh) * 0.42 * 1.187), 600px);
-      aspect-ratio: 2800 / 2358;
-      transform-origin: 52.38% 30.47%;   /* D 上半部中空處：往前進時從這裡穿過去 */
+      width: min(82vw, calc(var(--hero-vh, 100vh) * 0.56 * 1.1544), 720px);
+      aspect-ratio: 2400 / 2079;
+      transform-origin: 53.73% 21.19%;   /* D 上半部中空處：往前進時從這裡穿過去 */
+      transform-style: preserve-3d;
     }
-    .hero-logo img,
+    .hero-logo-3d {   /* 立體結構：背光＋木框在牆上（最後）→ 側面 → 金屬正面；hero-logo.js 讓它緩慢擺動 */
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+      transform: rotateX(2.5deg);
+    }
+    .hero-logo-metal,
+    .hero-logo-side,
     .hero-logo-sheen {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
     }
+    /* 背光圖比金屬圖大（含四周暈開的光），用百分比對齊同一個位置。
+       對位來源：同一張渲染畫布（4680×4040 單位），金屬／側面圖裁在畫布的 x 18.0%–80.3%、y 20.7%–83.2%，
+       背光圖是整張畫布 → left = -18.0/62.3、top = -20.7/62.5、width = 100/62.3、height = 100/62.5（%）。
+       換素材時照這組比例重算，工具在 SecondBrain 附件-DTown金屬背光logo-2026-09-29/render2.html。 */
+    .hero-logo-glow {
+      position: absolute;
+      left: -28.892%; top: -33.12%;
+      width: 160.514%; height: 160%;
+      max-width: none;
+      transform: translateZ(-70px);
+    }
+    .hero-logo-side { transform: translateZ(calc(var(--d) * -1px)); }
+    @media (max-width: 700px) { .hero-logo-side-extra { display: none !important; } }   /* 手機只留兩層側面，省合成記憶體 */
+    .hero-logo-sheen { transform: translateZ(1px); }
     .hero-logo-frame {   /* 玄關牆面的木作框，跟著 logo 一起放大，增加前進的距離感 */
       position: absolute;
+      transform: translateZ(-70px);
       left: -42%; right: -42%; top: -30%; bottom: -400%;   /* 下緣延伸到畫面外，不會橫切過文字 */
       border: 1px solid rgba(255,225,170,0.07);
       box-shadow: inset 0 0 0 7px rgba(0,0,0,0.35), inset 0 0 0 8px rgba(255,225,170,0.05), 0 0 0 1px rgba(0,0,0,0.6);
       pointer-events: none;
     }
     .hero-logo-sheen {   /* 金屬面上掃過的一道反光（用 logo 本身當遮罩） */
-      -webkit-mask: url('../webp/hero-logo-metal.webp') center / 100% 100% no-repeat;
-              mask: url('../webp/hero-logo-metal.webp') center / 100% 100% no-repeat;
+      -webkit-mask: url('../webp/hero-logo-metal-1200.webp') center / 100% 100% no-repeat;
+              mask: url('../webp/hero-logo-metal-1200.webp') center / 100% 100% no-repeat;
       background: linear-gradient(112deg, transparent 42%, rgba(255,246,222,0.55) 50%, transparent 58%) 120% 0 / 300% 100% no-repeat;
       mix-blend-mode: screen;
     }
@@ -1217,8 +1241,16 @@
     }
     .hero-flare { z-index: 2; background: radial-gradient(circle at 50% 50%, rgba(255,226,170,0.5), rgba(255,190,110,0.16) 38%, transparent 72%); }
     .hero-fade { z-index: 4; background: var(--black); }
-    .hero-copy { position: relative; z-index: 3; }
-    .hero-content { max-width: 720px; }
+    /* 首頁文字：放在金屬 logo 的下一層（#welcome） */
+    .hero-intro {
+      position: relative;
+      z-index: 1;
+      padding: 4.5rem 1.2rem 4rem;
+      background: var(--black);
+      text-align: center;
+    }
+    .hero-intro .hero-content { max-width: 720px; margin: 0 auto; }
+    .hero-intro .hero-label { margin-bottom: 1.2rem; }
     .hero-sr {
       position: absolute;
       width: 1px; height: 1px;
@@ -1244,7 +1276,6 @@
       margin: 0.45rem auto 0;
       background: linear-gradient(var(--gold), transparent);
     }
-    #hero .hero-label { margin-bottom: 1rem; }
     /* 開燈：背光閃兩下亮起、金屬面由暗轉亮，之後光暈緩慢呼吸、反光定期掃過 */
     @media (prefers-reduced-motion: no-preference) {
       .hero-logo-glow { animation: heroLightOn 1.8s 0.25s both, heroBreath 4.5s 2.2s ease-in-out infinite alternate; }
@@ -1261,14 +1292,6 @@
       #hero.hero-js { height: auto; }
       #hero.hero-js .hero-pin { position: relative; height: auto; min-height: var(--hero-vh, 100vh); }
       .hero-scroll-hint { display: none; }
-    }
-    /* 矮螢幕（IG／LINE 內建瀏覽器）：精簡首屏文字 */
-    @media (max-height: 740px) {
-      #hero .hero-facts, #hero .hero-subtitle { display: none; }   /* 要用 #hero 提高優先權，否則被後面的 .hero-facts 蓋回 */
-      #hero .hero-tagline { margin-bottom: 0.6rem; }
-      .hero-logo { width: min(80vw, calc(var(--hero-vh, 100vh) * 0.36 * 1.187), 600px); }
-      .hero-scroll-hint { display: none; }
-      .hero-pin { padding-bottom: 1.6rem; }
     }
 
     .hero-label {
@@ -3136,36 +3159,44 @@
     <div class="hero-pin">
       <div class="hero-wall" aria-hidden="true"></div>
       <div class="hero-logo" aria-hidden="true">
-        <div class="hero-logo-frame"></div>
-        <img class="hero-logo-glow" src="../webp/hero-logo-glow.webp" alt="" width="500" height="421" decoding="async">
-        <img class="hero-logo-metal" src="../webp/hero-logo-metal.webp" alt="" width="2800" height="2358" fetchpriority="high">
-        <div class="hero-logo-sheen"></div>
-      </div>
-      <div class="hero-flare" aria-hidden="true"></div>
-      <div class="hero-copy">
-        <div class="hero-content">
-          <div class="hero-label">Taipei East District Bistro & Cocktail Bar · MRT Zhongxiao Fuxing</div>
-          <h1 class="hero-title hero-sr">D Town by A Train｜Taipei East District Bistro &amp; Cocktail Bar near MRT Zhongxiao Fuxing</h1>
-          <p class="hero-tagline">An Evening Worth Staying For.</p>
-          <p class="hero-subtitle">MRT Zhongxiao Fuxing Exit 4 · 1-minute walk</p>
-          <div class="hero-facts">
-            <span>Largest Space in East District</span>
-            <span>Handcrafted Cocktails, Your Way</span>
-            <span>Japanese Wagyu</span>
-            <span>Open Till 2:30 AM Fri &amp; Sat</span>
-          </div>
-          <a href="https://www.google.com/search?q=D+Town+by+A+Train&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOWm7pRB70ES1G7Scgm0FV9e0nZz1-HX-AzQVXFidlG17MU-knjfilEflLqiell-NQy8XS8UqgsTmuTH5CvxKy0Z7amUvaCZ5mFSOj5Vhqo3vTYf3Lw%3D%3D" class="hero-rating" target="_blank" rel="noopener" aria-label="4.6 stars from 1,901 Google reviews">
-            <span class="stars">★★★★★</span><span>4.6</span><span class="rc">· 1,901 Google reviews</span>
-          </a>
-          <div class="btn-group">
-            <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2"
-               class="btn-gold" target="_blank" rel="noopener">Book Now</a>
-            <a href="#menu" class="btn-outline">View Menu</a>
-          </div>
+        <div class="hero-logo-3d">
+          <div class="hero-logo-frame"></div>
+          <img class="hero-logo-glow" src="../webp/hero-logo-glow.webp" alt="" width="600" height="518" decoding="async">
+          <img class="hero-logo-side hero-logo-side-extra" style="--d:24" src="../webp/hero-logo-side.webp" alt="" width="1400" height="1213" decoding="async">
+          <img class="hero-logo-side" style="--d:18" src="../webp/hero-logo-side.webp" alt="" width="1400" height="1213" decoding="async">
+          <img class="hero-logo-side hero-logo-side-extra" style="--d:12" src="../webp/hero-logo-side.webp" alt="" width="1400" height="1213" decoding="async">
+          <img class="hero-logo-side" style="--d:6" src="../webp/hero-logo-side.webp" alt="" width="1400" height="1213" decoding="async">
+          <img class="hero-logo-metal" src="../webp/hero-logo-metal-1200.webp" srcset="../webp/hero-logo-metal-1200.webp 1200w, ../webp/hero-logo-metal.webp 2400w" sizes="(max-width: 900px) 82vw, 720px" data-zoom-src="../webp/hero-logo-metal.webp" alt="" width="2400" height="2079" fetchpriority="high">
+          <div class="hero-logo-sheen"></div>
         </div>
       </div>
+      <div class="hero-flare" aria-hidden="true"></div>
+      <h1 class="hero-title hero-sr">D Town by A Train｜Taipei East District Bistro &amp; Cocktail Bar near MRT Zhongxiao Fuxing</h1>
       <div class="hero-scroll-hint" aria-hidden="true">SCROLL</div>
       <div class="hero-fade" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- Hero copy (moved below the metal logo on 2026-09-29) -->
+  <section id="welcome" class="hero-intro">
+    <div class="hero-content">
+      <div class="hero-label">Taipei East District Bistro & Cocktail Bar · MRT Zhongxiao Fuxing</div>
+      <p class="hero-tagline">An Evening Worth Staying For.</p>
+      <p class="hero-subtitle">MRT Zhongxiao Fuxing Exit 4 · 1-minute walk</p>
+      <div class="hero-facts">
+        <span>Largest Space in East District</span>
+        <span>Handcrafted Cocktails, Your Way</span>
+        <span>Japanese Wagyu</span>
+        <span>Open Till 2:30 AM Fri &amp; Sat</span>
+      </div>
+      <a href="https://www.google.com/search?q=D+Town+by+A+Train&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOWm7pRB70ES1G7Scgm0FV9e0nZz1-HX-AzQVXFidlG17MU-knjfilEflLqiell-NQy8XS8UqgsTmuTH5CvxKy0Z7amUvaCZ5mFSOj5Vhqo3vTYf3Lw%3D%3D" class="hero-rating" target="_blank" rel="noopener" aria-label="4.6 stars from 1,901 Google reviews">
+        <span class="stars">★★★★★</span><span>4.6</span><span class="rc">· 1,901 Google reviews</span>
+      </a>
+      <div class="btn-group">
+        <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2"
+           class="btn-gold" target="_blank" rel="noopener">Book Now</a>
+        <a href="#menu" class="btn-outline">View Menu</a>
+      </div>
     </div>
   </section>
 
@@ -4694,7 +4725,7 @@
       if(a.classList.contains('book-fab'))return'sticky_fab';
       if(a.classList.contains('nav-cta'))return'nav';
       if(a.closest('.mid-cta'))return'mid_cta';
-      if(a.closest('#hero'))return'hero';
+      if(a.closest('#hero')||a.closest('#welcome'))return'hero';
       if(a.closest('#booking'))return'booking';
       if(a.closest('#visit'))return'visit';
       if(a.closest('#faq'))return'faq';
@@ -4713,6 +4744,6 @@
   </script>
 
 <script src="../cocktail-particles.js?v=20260930f" defer></script>
-<script src="../hero-logo.js?v=20260929d" defer></script>
+<script src="../hero-logo.js?v=20260929f" defer></script>
 </body>
 </html>
