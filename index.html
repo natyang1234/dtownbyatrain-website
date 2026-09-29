@@ -1257,6 +1257,24 @@
     }
     .hero-intro .hero-content { max-width: 720px; margin: 0 auto; }
     .hero-intro .hero-label { margin-bottom: 1.2rem; }
+    /* 首頁唯一的 H1（小字金色標題樣式，不用 h1 預設的大字） */
+    .hero-intro h1.hero-label {
+      display: block;
+      font-family: inherit;
+      font-size: 0.68rem;
+      font-weight: 400;
+      line-height: 1.9;
+      letter-spacing: 0.3em;
+      text-wrap: balance;
+    }
+    .hero-intro h1.hero-label::before,
+    .hero-intro h1.hero-label::after { display: none; }
+    .hero-intro h1.hero-label .h1-brand {   /* 店名獨立一行，類型描述在下一行（斷行只落在分隔點） */
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.4em;
+    }
     .hero-sr {
       position: absolute;
       width: 1px; height: 1px;
@@ -1289,7 +1307,7 @@
       .hero-logo-sheen { animation: heroSheen 7s 2s ease-in-out infinite; }
       .hero-scroll-hint::after { animation: heroHint 1.8s ease-in-out infinite; }
     }
-    @keyframes heroLightOn { 0% { opacity: 0; } 12% { opacity: 0.7; } 18% { opacity: 0.1; } 30% { opacity: 0.85; } 36% { opacity: 0.35; } 100% { opacity: 1; } }
+    @keyframes heroLightOn { 0% { opacity: 0.35; } 12% { opacity: 0.8; } 18% { opacity: 0.3; } 30% { opacity: 0.9; } 36% { opacity: 0.45; } 100% { opacity: 1; } }   /* 不從 0 開始：透明元素不算 LCP，從 0 閃會把 LCP 拖到動畫結束 */
     @keyframes heroBreath { from { opacity: 1; } to { opacity: 0.78; } }
     @keyframes heroMetalOn { from { filter: brightness(0.25); } to { filter: brightness(1); } }
     @keyframes heroSheen { 0% { background-position: 120% 0; } 45%, 100% { background-position: -20% 0; } }
@@ -3329,7 +3347,6 @@
         </div>
       </div>
       <div class="hero-flare" aria-hidden="true"></div>
-      <h1 class="hero-title hero-sr">D Town by A Train｜台北東區餐酒館・忠孝復興站</h1>
       <div class="hero-scroll-hint" aria-hidden="true">SCROLL</div>
       <div class="hero-fade" aria-hidden="true"></div>
     </div>
@@ -3338,7 +3355,7 @@
   <!-- 首頁文字（2026-09-29 從 hero 移到金屬 logo 的下一層） -->
   <section id="welcome" class="hero-intro">
     <div class="hero-content">
-      <div class="hero-label">台北東區餐酒館・忠孝復興站</div>
+      <h1 class="hero-label"><span class="h1-brand">D Town by A Train</span>台北東區餐酒館・忠孝復興站</h1>
       <p class="hero-tagline">An Evening Worth Staying For.</p>
       <p class="hero-subtitle">忠孝復興站 4 號出口・步行 1 分鐘</p>
       <div class="hero-facts">
@@ -4960,6 +4977,6 @@
   </script>
 
 <script src="cocktail-particles.js?v=20260930f" defer></script>
-<script src="hero-logo.js?v=20260929h" defer></script>
+<script src="hero-logo.js?v=20260929i" defer></script>
 </body>
 </html>
