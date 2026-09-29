@@ -12,7 +12,8 @@
 - Entrance: the small door to the right of Qmomo, next to the street lamp — take the elevator to the 2nd floor
 - Nearest MRT: Zhongxiao Fuxing Station Exit 4, about a 1-minute walk
 - Phone: +886-2-2721-2772 (reservations accepted by phone after 4:00 PM)
-- Google Maps: https://maps.google.com/?q=台北市大安區忠孝東路四段49巷2號2樓
+- Google Maps: https://maps.google.com/?q=D+Town+by+A+Train+台北市大安區忠孝東路四段49巷2號2樓
+- Google Business Profile: https://www.google.com/search?kgmid=/g/11dz1zjhq4
 - Website (Chinese): https://natyang1234.github.io/dtownbyatrain-website/
 - Website (English): https://natyang1234.github.io/dtownbyatrain-website/en/
 
