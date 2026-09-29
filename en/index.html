@@ -24,7 +24,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;600;700&display=swap"></noscript>
   <!-- 預載 hero 首屏 LCP 背景圖，加速最大內容繪製 -->
-  <link rel="preload" as="image" href="../webp/店內場景1.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="../webp/hero-logo-metal.webp" fetchpriority="high">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="D Town by A Train｜Taipei East District Bistro & Cocktail Bar">
@@ -1149,44 +1149,126 @@
     .vn-pos-mobile { display: none; }
 
     /* ─── HERO ─── */
+    /* ─── HERO：金屬背光 logo＋滾動往前進（hero-logo.js 驅動；logo 為向量描出後渲染的金屬圖層） ─── */
     #hero {
       position: relative;
-      min-height: 100vh;
+      background: #050404;
+    }
+    #hero.hero-js { height: calc(var(--hero-vh, 100vh) * 2.2); }   /* JS 成功執行才拉長並釘住 */
+    .hero-pin {
+      position: relative;
+      min-height: var(--hero-vh, 100vh);
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      gap: clamp(0.6rem, 2.4vh, 2rem);
+      padding: 76px 1.2rem 3.8rem;   /* 底部留給 SCROLL 提示 */
       text-align: center;
-      overflow: hidden;
     }
-
-    .hero-bg {
+    #hero.hero-js .hero-pin {
+      position: sticky;
+      top: 0;
+      height: var(--hero-pin-h, var(--hero-vh, 100vh));
+      min-height: 0;
+    }
+    .hero-wall {
       position: absolute;
       inset: 0;
-      background-image: url('../webp/店內場景1.webp');
-      background-size: cover;
-      background-position: center 30%;
-      filter: brightness(0.35);
-      transform: scale(1.03);
+      background:
+        radial-gradient(ellipse 55% 34% at 50% 6%, rgba(255,214,150,0.16), transparent 70%),
+        radial-gradient(ellipse at 50% 40%, #251d16 0%, #110d0a 48%, #050404 100%);
     }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(8,8,8,0.72) 0%,
-        rgba(8,8,8,0.55) 40%,
-        rgba(8,8,8,0.8) 80%,
-        rgba(8,8,8,1) 100%
-      );
-    }
-
-    .hero-content {
+    .hero-logo {
       position: relative;
-      z-index: 2;
-      padding: 8rem clamp(2rem, 6vw, 6rem) 4rem;
-      max-width: 720px;
+      z-index: 1;
+      flex: 0 0 auto;
+      width: min(84vw, calc(var(--hero-vh, 100vh) * 0.42 * 1.187), 600px);
+      aspect-ratio: 2800 / 2358;
+      transform-origin: 52.38% 30.47%;   /* D 上半部中空處：往前進時從這裡穿過去 */
+    }
+    .hero-logo img,
+    .hero-logo-sheen {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .hero-logo-frame {   /* 玄關牆面的木作框，跟著 logo 一起放大，增加前進的距離感 */
+      position: absolute;
+      left: -42%; right: -42%; top: -30%; bottom: -400%;   /* 下緣延伸到畫面外，不會橫切過文字 */
+      border: 1px solid rgba(255,225,170,0.07);
+      box-shadow: inset 0 0 0 7px rgba(0,0,0,0.35), inset 0 0 0 8px rgba(255,225,170,0.05), 0 0 0 1px rgba(0,0,0,0.6);
+      pointer-events: none;
+    }
+    .hero-logo-sheen {   /* 金屬面上掃過的一道反光（用 logo 本身當遮罩） */
+      -webkit-mask: url('../webp/hero-logo-metal.webp') center / 100% 100% no-repeat;
+              mask: url('../webp/hero-logo-metal.webp') center / 100% 100% no-repeat;
+      background: linear-gradient(112deg, transparent 42%, rgba(255,246,222,0.55) 50%, transparent 58%) 120% 0 / 300% 100% no-repeat;
+      mix-blend-mode: screen;
+    }
+    .hero-flare,
+    .hero-fade {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+    }
+    .hero-flare { z-index: 2; background: radial-gradient(circle at 50% 50%, rgba(255,226,170,0.5), rgba(255,190,110,0.16) 38%, transparent 72%); }
+    .hero-fade { z-index: 4; background: var(--black); }
+    .hero-copy { position: relative; z-index: 3; }
+    .hero-content { max-width: 720px; }
+    .hero-sr {
+      position: absolute;
+      width: 1px; height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+    .hero-scroll-hint {
+      position: absolute;
+      left: 50%;
+      bottom: 12px;
+      z-index: 3;
+      transform: translateX(-50%);
+      color: rgba(200,169,110,0.6);
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+    }
+    .hero-scroll-hint::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 22px;
+      margin: 0.45rem auto 0;
+      background: linear-gradient(var(--gold), transparent);
+    }
+    #hero .hero-label { margin-bottom: 1rem; }
+    /* 開燈：背光閃兩下亮起、金屬面由暗轉亮，之後光暈緩慢呼吸、反光定期掃過 */
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-logo-glow { animation: heroLightOn 1.8s 0.25s both, heroBreath 4.5s 2.2s ease-in-out infinite alternate; }
+      .hero-logo-metal { animation: heroMetalOn 1.6s 0.2s both; }
+      .hero-logo-sheen { animation: heroSheen 7s 2s ease-in-out infinite; }
+      .hero-scroll-hint::after { animation: heroHint 1.8s ease-in-out infinite; }
+    }
+    @keyframes heroLightOn { 0% { opacity: 0; } 12% { opacity: 0.7; } 18% { opacity: 0.1; } 30% { opacity: 0.85; } 36% { opacity: 0.35; } 100% { opacity: 1; } }
+    @keyframes heroBreath { from { opacity: 1; } to { opacity: 0.78; } }
+    @keyframes heroMetalOn { from { filter: brightness(0.25); } to { filter: brightness(1); } }
+    @keyframes heroSheen { 0% { background-position: 120% 0; } 45%, 100% { background-position: -20% 0; } }
+    @keyframes heroHint { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+    @media (prefers-reduced-motion: reduce) {
+      #hero.hero-js { height: auto; }
+      #hero.hero-js .hero-pin { position: relative; height: auto; min-height: var(--hero-vh, 100vh); }
+      .hero-scroll-hint { display: none; }
+    }
+    /* 矮螢幕（IG／LINE 內建瀏覽器）：精簡首屏文字 */
+    @media (max-height: 740px) {
+      #hero .hero-facts, #hero .hero-subtitle { display: none; }   /* 要用 #hero 提高優先權，否則被後面的 .hero-facts 蓋回 */
+      #hero .hero-tagline { margin-bottom: 0.6rem; }
+      .hero-logo { width: min(80vw, calc(var(--hero-vh, 100vh) * 0.36 * 1.187), 600px); }
+      .hero-scroll-hint { display: none; }
+      .hero-pin { padding-bottom: 1.6rem; }
     }
 
     .hero-label {
@@ -3051,30 +3133,39 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-label">Taipei East District Bistro & Cocktail Bar · MRT Zhongxiao Fuxing</div>
-      <h1 class="hero-title" aria-label="D Town by A Train｜Taipei East District Bistro & Cocktail Bar near MRT Zhongxiao Fuxing">
-        <span class="hero-mark-d">D</span>
-        <span class="hero-mark-word">DOWNTOWN</span>
-      </h1>
-      <p class="hero-tagline">An Evening Worth Staying For.</p>
-      <p class="hero-subtitle">MRT Zhongxiao Fuxing Exit 4 · 1-minute walk</p>
-      <div class="hero-facts">
-        <span>Largest Space in East District</span>
-        <span>Handcrafted Cocktails, Your Way</span>
-        <span>Japanese Wagyu</span>
-        <span>Open Till 2:30 AM Fri &amp; Sat</span>
+    <div class="hero-pin">
+      <div class="hero-wall" aria-hidden="true"></div>
+      <div class="hero-logo" aria-hidden="true">
+        <div class="hero-logo-frame"></div>
+        <img class="hero-logo-glow" src="../webp/hero-logo-glow.webp" alt="" width="500" height="421" decoding="async">
+        <img class="hero-logo-metal" src="../webp/hero-logo-metal.webp" alt="" width="2800" height="2358" fetchpriority="high">
+        <div class="hero-logo-sheen"></div>
       </div>
-      <a href="https://www.google.com/search?q=D+Town+by+A+Train&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOWm7pRB70ES1G7Scgm0FV9e0nZz1-HX-AzQVXFidlG17MU-knjfilEflLqiell-NQy8XS8UqgsTmuTH5CvxKy0Z7amUvaCZ5mFSOj5Vhqo3vTYf3Lw%3D%3D" class="hero-rating" target="_blank" rel="noopener" aria-label="4.6 stars from 1,901 Google reviews">
-        <span class="stars">★★★★★</span><span>4.6</span><span class="rc">· 1,901 Google reviews</span>
-      </a>
-      <div class="btn-group">
-        <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2"
-           class="btn-gold" target="_blank" rel="noopener">Book Now</a>
-        <a href="#menu" class="btn-outline">View Menu</a>
+      <div class="hero-flare" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <div class="hero-content">
+          <div class="hero-label">Taipei East District Bistro & Cocktail Bar · MRT Zhongxiao Fuxing</div>
+          <h1 class="hero-title hero-sr">D Town by A Train｜Taipei East District Bistro &amp; Cocktail Bar near MRT Zhongxiao Fuxing</h1>
+          <p class="hero-tagline">An Evening Worth Staying For.</p>
+          <p class="hero-subtitle">MRT Zhongxiao Fuxing Exit 4 · 1-minute walk</p>
+          <div class="hero-facts">
+            <span>Largest Space in East District</span>
+            <span>Handcrafted Cocktails, Your Way</span>
+            <span>Japanese Wagyu</span>
+            <span>Open Till 2:30 AM Fri &amp; Sat</span>
+          </div>
+          <a href="https://www.google.com/search?q=D+Town+by+A+Train&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOWm7pRB70ES1G7Scgm0FV9e0nZz1-HX-AzQVXFidlG17MU-knjfilEflLqiell-NQy8XS8UqgsTmuTH5CvxKy0Z7amUvaCZ5mFSOj5Vhqo3vTYf3Lw%3D%3D" class="hero-rating" target="_blank" rel="noopener" aria-label="4.6 stars from 1,901 Google reviews">
+            <span class="stars">★★★★★</span><span>4.6</span><span class="rc">· 1,901 Google reviews</span>
+          </a>
+          <div class="btn-group">
+            <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2"
+               class="btn-gold" target="_blank" rel="noopener">Book Now</a>
+            <a href="#menu" class="btn-outline">View Menu</a>
+          </div>
+        </div>
       </div>
+      <div class="hero-scroll-hint" aria-hidden="true">SCROLL</div>
+      <div class="hero-fade" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -3966,7 +4057,6 @@
         font-size: 0.75rem; letter-spacing: 0.04em;
       }
       @media (max-width: 700px) {
-        #hero { min-height: 80vh; }
         #latest-news { padding-top: 2.4rem; padding-bottom: 3rem; }
       }
     </style>
@@ -4623,5 +4713,6 @@
   </script>
 
 <script src="../cocktail-particles.js?v=20260930f" defer></script>
+<script src="../hero-logo.js?v=20260929d" defer></script>
 </body>
 </html>
