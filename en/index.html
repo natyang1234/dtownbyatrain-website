@@ -21,8 +21,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- 字型改非阻擋載入：頁面先用系統字立即繪製，網路字型載好再替換（大幅改善 FCP/LCP） -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;600;700&display=swap"></noscript>
+  <!-- 內文 Sans：一般載入（字多，無法裁子集） -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <!-- 標題 Serif（h1–h3、.hero-tagline）：只載 500 字重、只下載標題用到的字（text= 子集），原本十幾個 ~95KB 分片 → 1 個小檔。
+       ⚠️ 改標題文字後若出現新字，會自動退回 Georgia／宋體顯示（不會破版）；要補字就把新字加進 text= 參數。 -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500&display=swap&text=%20%21%24%25%26%27%28%29%2B%2C-.%2F0123456789%3A%3B%3FABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz%7C%C2%B7%E2%80%93%E2%80%94%E2%80%99%E2%80%9C%E2%80%9D%E3%83%BB%E4%B8%80%E4%B8%8A%E4%B8%8B%E4%B8%BB%E4%BA%BA%E4%BB%80%E4%BD%8D%E4%BE%86%E4%BE%9D%E5%80%8B%E5%80%BC%E5%85%88%E5%85%A5%E5%89%8D%E5%8B%95%E5%8F%A3%E5%95%8F%E5%96%AE%E5%97%A8%E5%9A%B4%E5%9B%9B%E5%9F%8E%E5%A4%9C%E5%A4%A9%E5%AD%97%E5%AD%9D%E5%AE%A2%E5%B0%8F%E5%B7%A5%E5%B8%82%E5%B8%B8%E5%BB%9A%E5%BB%BA%E5%BE%97%E5%BE%A9%E5%BF%83%E5%BF%A0%E6%80%8E%E6%85%8B%E6%89%8B%E6%8A%B5%E6%8B%89%E6%8B%9B%E6%8E%A8%E6%8F%90%E6%90%AD%E6%93%87%E6%95%B8%E6%96%87%E6%96%99%E6%96%B0%E6%97%A5%E6%99%82%E6%99%9A%E6%9C%80%E6%9C%9F%E6%9D%90%E6%A2%AF%E6%A5%AD%E6%A8%93%E6%AC%A1%E6%AC%BE%E6%AD%A5%E6%B2%99%E6%B3%A2%E6%B9%AF%E7%86%B1%E7%87%9F%E7%89%8C%E7%90%86%E7%94%9C%E7%94%A8%E7%95%99%E7%95%B6%E7%9A%84%E7%9F%A5%E7%A2%BA%E7%AB%99%E7%AC%AC%E7%AE%A1%E8%88%87%E8%88%88%E8%8C%B6%E8%96%A6%E8%A3%A1%E8%A6%81%E8%A6%BD%E8%A8%82%E8%AA%8D%E8%AA%AA%E8%AA%BF%E8%AD%B0%E8%BC%95%E9%81%93%E9%81%94%E9%81%B8%E9%85%92%E9%96%93%E9%9B%BB%E9%A0%90%E9%A1%8C%E9%A3%9F%E9%A3%BD%E9%A4%90%E9%A9%9F%E9%BA%BC%E9%BB%9E%EF%BC%8C%EF%BC%9A%EF%BC%9F" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500&display=swap&text=%20%21%24%25%26%27%28%29%2B%2C-.%2F0123456789%3A%3B%3FABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz%7C%C2%B7%E2%80%93%E2%80%94%E2%80%99%E2%80%9C%E2%80%9D%E3%83%BB%E4%B8%80%E4%B8%8A%E4%B8%8B%E4%B8%BB%E4%BA%BA%E4%BB%80%E4%BD%8D%E4%BE%86%E4%BE%9D%E5%80%8B%E5%80%BC%E5%85%88%E5%85%A5%E5%89%8D%E5%8B%95%E5%8F%A3%E5%95%8F%E5%96%AE%E5%97%A8%E5%9A%B4%E5%9B%9B%E5%9F%8E%E5%A4%9C%E5%A4%A9%E5%AD%97%E5%AD%9D%E5%AE%A2%E5%B0%8F%E5%B7%A5%E5%B8%82%E5%B8%B8%E5%BB%9A%E5%BB%BA%E5%BE%97%E5%BE%A9%E5%BF%83%E5%BF%A0%E6%80%8E%E6%85%8B%E6%89%8B%E6%8A%B5%E6%8B%89%E6%8B%9B%E6%8E%A8%E6%8F%90%E6%90%AD%E6%93%87%E6%95%B8%E6%96%87%E6%96%99%E6%96%B0%E6%97%A5%E6%99%82%E6%99%9A%E6%9C%80%E6%9C%9F%E6%9D%90%E6%A2%AF%E6%A5%AD%E6%A8%93%E6%AC%A1%E6%AC%BE%E6%AD%A5%E6%B2%99%E6%B3%A2%E6%B9%AF%E7%86%B1%E7%87%9F%E7%89%8C%E7%90%86%E7%94%9C%E7%94%A8%E7%95%99%E7%95%B6%E7%9A%84%E7%9F%A5%E7%A2%BA%E7%AB%99%E7%AC%AC%E7%AE%A1%E8%88%87%E8%88%88%E8%8C%B6%E8%96%A6%E8%A3%A1%E8%A6%81%E8%A6%BD%E8%A8%82%E8%AA%8D%E8%AA%AA%E8%AA%BF%E8%AD%B0%E8%BC%95%E9%81%93%E9%81%94%E9%81%B8%E9%85%92%E9%96%93%E9%9B%BB%E9%A0%90%E9%A1%8C%E9%A3%9F%E9%A3%BD%E9%A4%90%E9%A9%9F%E9%BA%BC%E9%BB%9E%EF%BC%8C%EF%BC%9A%EF%BC%9F"></noscript>
   <!-- 預載 hero 首屏 LCP 背景圖，加速最大內容繪製 -->
   <link rel="preload" as="image" href="../webp/hero-logo-metal-1200.webp" imagesrcset="../webp/hero-logo-metal-1200.webp 1200w, ../webp/hero-logo-metal.webp 2400w" imagesizes="(max-width: 900px) 82vw, 720px" fetchpriority="high">
 
@@ -2874,6 +2878,9 @@
       overflow: hidden;
     }
 
+    /* 畫面外的大背景圖（茶嗨波拼圖 256KB、訂位區背景 154KB）：快滑到才載入，由底部小腳本加 .bg-ready */
+    .tea-cell-grid[data-lazy-bg]:not(.bg-ready) .tea-cell,
+    .booking-bg[data-lazy-bg]:not(.bg-ready) { background-image: none; }
     .booking-bg {
       position: absolute;
       inset: 0;
@@ -3538,7 +3545,7 @@
           <div class="menu-cat-title" style="text-align:center;margin-bottom:.5rem;">Signature Series</div>
           <h3 class="menu-cat-h" style="text-align:center;margin-bottom:.4rem;">茶嗨波 <span style="font-size:0.7em;color:var(--gold);letter-spacing:.15em;">Tea Highball</span></h3>
           <p class="menu-cat-desc" style="text-align:center;margin-bottom:1.5rem;">Tap any cell to enlarge</p>
-          <div class="tea-cell-grid">
+          <div class="tea-cell-grid" data-lazy-bg>
             <div class="tea-cell" style="background-position:0% 0%"       onclick="openTeaCell('0% 0%','Tea Highball')"><div class="tea-cell-label">Tea Highball</div></div>
             <div class="tea-cell" style="background-position:33.33% 0%"   onclick="openTeaCell('33.33% 0%','01 Kishu · Plum Wine')"><div class="tea-cell-label">01 Plum Wine</div></div>
             <div class="tea-cell" style="background-position:66.67% 0%"   onclick="openTeaCell('66.67% 0%','02 Oita · Barley Shochu')"><div class="tea-cell-label">02 Barley Shochu</div></div>
@@ -4696,7 +4703,7 @@
 
   <!-- BOOKING CTA -->
   <div id="booking">
-    <div class="booking-bg"></div>
+    <div class="booking-bg" data-lazy-bg></div>
     <div class="booking-overlay"></div>
     <div class="booking-content">
       <span class="sec-label" style="justify-content:center; margin-bottom:1.5rem;">Reservations</span>
@@ -4841,6 +4848,18 @@
   </script>
 
 <script src="../cocktail-particles.js?v=20260930f" defer></script>
-<script src="../hero-logo.js?v=20260929i" defer></script>
+<script src="../hero-logo.js?v=20260929j" defer></script>
+<script>
+  /* 畫面外背景圖延遲載入：距離畫面 600px 內才加 .bg-ready 讓 CSS 背景圖生效 */
+  (function () {
+    var els = document.querySelectorAll('[data-lazy-bg]');
+    if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('bg-ready'); }); return; }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('bg-ready'); io.unobserve(e.target); } });
+    }, { rootMargin: '600px 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+<noscript><style>.tea-cell-grid[data-lazy-bg] .tea-cell { background-image: url('../webp/茶嗨波.webp') !important; } .booking-bg[data-lazy-bg] { background-image: url('../webp/新菜單封面.webp') !important; }</style></noscript>
 </body>
 </html>
