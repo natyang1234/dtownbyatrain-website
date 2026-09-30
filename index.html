@@ -68,7 +68,7 @@
     "telephone": "+886-2-2721-2772",
     "image": "https://natyang1234.github.io/dtownbyatrain-website/og-cover.jpg",
     "datePublished": "2026-06-18",
-    "dateModified": "2026-09-29",
+    "dateModified": "2026-09-30",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "忠孝東路四段49巷2號2樓",
@@ -1340,6 +1340,12 @@
       text-align: center;
     }
     .hero-intro .hero-content { max-width: 720px; margin: 0 auto; }
+    /* 放大動畫尾段（淡出成黑）時文字就從底部浮上來，不用等全黑後再滑半個螢幕（2026-09-30）
+       疊進 logo 區的高度＝0.22 螢幕（淡出區段）＋原本上方留白；疊進去那段背景透明、透出後面變黑的畫面 */
+    #hero.hero-js + #welcome {
+      margin-top: calc(var(--hero-vh, 100vh) * -0.22 - 4.5rem);
+      background: linear-gradient(to bottom, transparent calc(var(--hero-vh, 100vh) * 0.22 + 4.5rem), var(--black) 0);
+    }
     .hero-intro .hero-label { margin-bottom: 1.2rem; }
     /* 首頁唯一的 H1（小字金色標題樣式，不用 h1 預設的大字） */
     .hero-intro h1.hero-label {
@@ -1398,6 +1404,7 @@
     @keyframes heroHint { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
     @media (prefers-reduced-motion: reduce) {
       #hero.hero-js { height: auto; }
+      #hero.hero-js + #welcome { margin-top: 0; background: var(--black); }
       #hero.hero-js .hero-pin { position: relative; height: auto; min-height: var(--hero-vh, 100vh); }
       .hero-scroll-hint { display: none; }
     }
@@ -4995,7 +5002,7 @@
     </div>
     <p class="footer-copy">© 2026 D Town by A Train · 台北東區餐酒館 · 忠孝復興站</p>
     <!-- ⚠️ 改版鐵則：每次更新網站內容，此行日期＋schema dateModified＋sitemap lastmod 三處同步改 -->
-    <p class="footer-copy">資訊最後更新：2026-09-29</p>
+    <p class="footer-copy">資訊最後更新：2026-09-30</p>
   </footer>
 
   <!-- 手機常駐訂位浮動鈕 -->
