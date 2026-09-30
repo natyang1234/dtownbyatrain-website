@@ -3461,6 +3461,33 @@
 
     /* ⑤ 地圖轉暗色（濾鏡；仍是可互動的 Google 地圖） */
     .visit-map-wrap iframe { filter: invert(0.9) hue-rotate(180deg) grayscale(0.4) contrast(0.92) brightness(0.92); }
+
+    /* ════ P1b 長頁導航（2026-09-30）：不縮短頁面，讓長頁好逛 ════ */
+    .nav-progress { position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%; background: var(--gold); transform-origin: 0 50%; transform: scaleX(0); opacity: 0.7; pointer-events: none; }
+    .nav-links a.is-current { color: var(--gold); }
+    .chapter-rail { position: fixed; right: clamp(0.9rem, 1.6vw, 1.8rem); top: 50%; transform: translateY(-50%); z-index: 90; display: flex; flex-direction: column; gap: 0.2rem; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+    .chapter-rail.is-on { opacity: 1; pointer-events: auto; }
+    .chapter-rail a { position: relative; display: flex; align-items: center; justify-content: flex-end; gap: 0.7rem; padding: 0.35rem 0; color: var(--grey); text-decoration: none; font-size: 0.66rem; letter-spacing: 0.18em; }
+    .chapter-rail .cr-label { opacity: 0; transform: translateX(6px); transition: opacity 0.25s ease, transform 0.25s ease; white-space: nowrap; }
+    .chapter-rail .cr-num { font-family: 'Noto Serif TC', Georgia, serif; font-size: 0.7rem; min-width: 1.6em; text-align: right; transition: color 0.25s ease; }
+    .chapter-rail .cr-tick { width: 14px; height: 1px; background: currentColor; transition: width 0.3s ease, background 0.3s ease; }
+    .chapter-rail a:hover .cr-label, .chapter-rail a:focus-visible .cr-label, .chapter-rail a.is-current .cr-label { opacity: 1; transform: none; }
+    .chapter-rail a.is-current { color: var(--gold); }
+    .chapter-rail a.is-current .cr-tick { width: 28px; }
+    .chapter-rail a:hover { color: var(--gold-light); }
+    .nav-chapter { display: none; }
+    @media (max-width: 600px) {   /* 主選單收合成 ☰ 後才有空間放章節標籤 */
+      .nav-chapter { display: inline-flex; align-items: baseline; gap: 0.45rem; margin-left: 0.8rem; margin-right: auto; font-size: 0.68rem; letter-spacing: 0.2em; color: var(--gold); opacity: 0; transition: opacity 0.3s ease; }
+      .nav-chapter.is-on { opacity: 1; }
+      .nav-chapter b { font-family: 'Noto Serif TC', Georgia, serif; font-weight: 400; color: var(--grey); letter-spacing: 0.08em; }
+    }
+    @media (max-width: 1199px) { .chapter-rail { display: none; } }   /* 窄桌機內容會碰到右側，只留導覽列目前位置 */
+    @media (max-width: 900px) {
+      .chapter-rail { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .chapter-rail, .chapter-rail *, .nav-chapter { transition: none !important; }
+    }
   </style>
 
   <!-- Google Analytics 4 (G-PDTWFFHRPV) -->
@@ -3543,6 +3570,8 @@
     <a class="nav-logo" href="#hero">
       <img src="../webp/favicon.webp" alt="D Town by A Train gold logo" class="nav-logo-img" width="101" height="180">
     </a>
+    <span class="nav-chapter" aria-hidden="true" data-aeo-ignore><b></b><span></span></span>
+    <span class="nav-progress" aria-hidden="true" data-aeo-ignore></span>
     <div class="nav-right">
       <a class="nav-lang" href="../">中文</a>
       <ul class="nav-links" id="nav-links">
@@ -3556,6 +3585,15 @@
       <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">☰</button>
     </div>
   </nav>
+  <div class="chapter-rail" role="navigation" aria-label="Section navigation" data-aeo-ignore>
+    <a href="#about" data-label="About"><span class="cr-label">About</span><span class="cr-num">01</span><span class="cr-tick" aria-hidden="true"></span></a>
+    <a href="#drinks" data-label="Drinks"><span class="cr-label">Drinks</span><span class="cr-num">02</span><span class="cr-tick" aria-hidden="true"></span></a>
+    <a href="#menu" data-label="Menu"><span class="cr-label">Menu</span><span class="cr-num">03</span><span class="cr-tick" aria-hidden="true"></span></a>
+    <a href="#visit" data-label="Visit"><span class="cr-label">Visit</span><span class="cr-num">04</span><span class="cr-tick" aria-hidden="true"></span></a>
+    <a href="#latest-news" data-label="News"><span class="cr-label">News</span><span class="cr-num">05</span><span class="cr-tick" aria-hidden="true"></span></a>
+    <a href="#reviews" data-label="Reviews"><span class="cr-label">Reviews</span><span class="cr-num">06</span><span class="cr-tick" aria-hidden="true"></span></a>
+    <a href="#faq" data-label="FAQ"><span class="cr-label">FAQ</span><span class="cr-num">07</span><span class="cr-tick" aria-hidden="true"></span></a>
+  </div>
   <script>
     (function () {
       var t = document.querySelector('.nav-toggle');
@@ -5294,5 +5332,44 @@
   })();
 </script>
 <noscript><style>.tea-cell-grid[data-lazy-bg] .tea-cell { background-image: url('../webp/茶嗨波.webp') !important; } .booking-bg[data-lazy-bg] { background-image: url('../webp/新菜單封面.webp') !important; }</style></noscript>
+
+  <script>
+  /* P1b 長頁導航：目前章節（導覽列＋桌機章節軌＋手機章節標籤）與閱讀進度線 */
+  (function () {
+    var ids = ["about", "drinks", "menu", "visit", "latest-news", "reviews", "faq"];
+    var secs = ids.map(function (id) { return document.getElementById(id); });
+    var rail = document.querySelector('.chapter-rail');
+    var chip = document.querySelector('.nav-chapter');
+    var bar = document.querySelector('.nav-progress');
+    var welcome = document.getElementById('welcome');
+    var navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+    var railLinks = rail ? rail.querySelectorAll('a') : [];
+    var cur = -1, ticking = false;
+    function update() {
+      ticking = false;
+      var y = window.scrollY, vh = window.innerHeight;
+      var docH = document.documentElement.scrollHeight - vh;
+      if (bar) bar.style.transform = 'scaleX(' + (docH > 0 ? Math.min(1, y / docH) : 0).toFixed(4) + ')';
+      var on = !welcome || welcome.getBoundingClientRect().top < vh * 0.4;
+      if (rail) rail.classList.toggle('is-on', on);
+      if (chip) chip.classList.toggle('is-on', on && cur >= 0);
+      var idx = -1;
+      for (var i = 0; i < secs.length; i++) { if (secs[i] && secs[i].getBoundingClientRect().top <= vh * 0.45) idx = i; }
+      if (idx === cur) return;
+      cur = idx;
+      var id = idx >= 0 ? ids[idx] : '';
+      function mark(a, on) { a.classList.toggle('is-current', on); if (on) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); }
+      for (var j = 0; j < railLinks.length; j++) mark(railLinks[j], j === idx);
+      for (var k = 0; k < navLinks.length; k++) mark(navLinks[k], navLinks[k].getAttribute('href') === '#' + id);
+      if (chip) {
+        if (idx >= 0) { chip.querySelector('b').textContent = ('0' + (idx + 1)).slice(-2); chip.querySelector('span').textContent = railLinks[idx] ? railLinks[idx].getAttribute('data-label') : ''; }
+        chip.classList.toggle('is-on', on && idx >= 0);
+      }
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+  </script>
 </body>
 </html>
