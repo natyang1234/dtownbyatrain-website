@@ -3417,50 +3417,50 @@
   "desktop:index.html": {
    "hero": 0,
    "welcome": 0,
-   "about": 4,
-   "drinks": 65,
-   "cocktail-text-menu": 54,
-   "menu": 51,
-   "visit": 58,
-   "latest-news": 11,
-   "reviews": 5,
-   "faq": 48
+   "about": 18,
+   "drinks": 114,
+   "cocktail-text-menu": 82,
+   "menu": 207,
+   "visit": 84,
+   "latest-news": 17,
+   "reviews": 21,
+   "faq": 33
   },
   "desktop:en/index.html": {
    "hero": 0,
    "welcome": 0,
-   "about": 4,
-   "drinks": 65,
-   "cocktail-text-menu": 54,
-   "menu": 51,
-   "visit": 58,
-   "latest-news": 11,
-   "reviews": 5,
-   "faq": 46
+   "about": 18,
+   "drinks": 114,
+   "cocktail-text-menu": 82,
+   "menu": 207,
+   "visit": 85,
+   "latest-news": 17,
+   "reviews": 25,
+   "faq": 25
   },
   "mobile:index.html": {
    "hero": 0,
    "welcome": 0,
-   "about": 4,
-   "drinks": 65,
-   "cocktail-text-menu": 54,
-   "menu": 51,
-   "visit": 58,
-   "latest-news": 11,
-   "reviews": 5,
-   "faq": 48
+   "about": 18,
+   "drinks": 114,
+   "cocktail-text-menu": 82,
+   "menu": 207,
+   "visit": 84,
+   "latest-news": 17,
+   "reviews": 21,
+   "faq": 33
   },
   "mobile:en/index.html": {
    "hero": 0,
    "welcome": 0,
-   "about": 4,
-   "drinks": 65,
-   "cocktail-text-menu": 54,
-   "menu": 51,
-   "visit": 58,
-   "latest-news": 11,
-   "reviews": 5,
-   "faq": 46
+   "about": 18,
+   "drinks": 114,
+   "cocktail-text-menu": 82,
+   "menu": 207,
+   "visit": 85,
+   "latest-news": 17,
+   "reviews": 25,
+   "faq": 25
   }
  }
 }

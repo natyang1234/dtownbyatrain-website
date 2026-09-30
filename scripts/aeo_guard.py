@@ -14,7 +14,7 @@ nat 規則：不為評審刪 SEO／GEO／AIO 設計——AEO 文字逐字不動�
   3. 基線中的每個 id 都還在（可以新增，不能少）
   4. JSON-LD 內容相同（忽略 dateModified）
   5. 瀏覽器實測（桌機＋手機、初始未捲動）：各 section 內「有文字卻被隱藏」的元素數
-     不得比基線多（display:none／visibility:hidden／opacity:0；已關閉的 <details> 內容不算）
+     不得比基線多（display:none／visibility:hidden／opacity:0／clip-path 裁到 50%、100%；已關閉的 <details> 內容不算）
 """
 import json, re, subprocess, sys, time, socket
 from pathlib import Path
@@ -66,14 +66,16 @@ HIDDEN_JS = r"""
       if (cs.display === 'none') return 'display';
       if (cs.visibility === 'hidden') return 'visibility';
       if (parseFloat(cs.opacity) === 0) return 'opacity';
+      if (/inset\((?:[^)]*\b(?:50|100)%)/.test(cs.clipPath.split(' round')[0])) return 'clip-path';
     }
     return '';
   };
   for (const sec of document.querySelectorAll('section[id], div#menu')) {
     let n = 0;
-    for (const el of sec.querySelectorAll('h1,h2,h3,h4,h5,h6,p,li,td,th,dd,dt,summary,figcaption,blockquote')) {
-      if (el.closest('[data-aeo-ignore]')) continue;
-      if (!el.textContent.trim()) continue;
+    for (const el of [sec, ...sec.querySelectorAll('*')]) {
+      if (el.closest('[data-aeo-ignore]') || /^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE)$/.test(el.tagName)) continue;
+      // 只算「自己直接含有文字」的元素（不依賴標籤名稱，div／span 內的文字也涵蓋）
+      if (![...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim())) continue;
       const r = hiddenBy(el);
       if (r) n++;
     }
