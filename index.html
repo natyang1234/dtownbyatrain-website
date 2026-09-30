@@ -3482,7 +3482,8 @@
       .nav-chapter b { font-family: 'Noto Serif TC', Georgia, serif; font-weight: 400; color: var(--grey); letter-spacing: 0.08em; }
     }
     @media (max-width: 1399px) { .chapter-rail { display: none; } }   /* 內容最寬 1100px，1400 以下右側放不下章節軌，只留導覽列目前位置 */
-    @media (min-width: 1400px) { .about-content { padding-right: 9rem; } }   /* About 滿版右欄讓出章節軌位置 */
+    @media (min-width: 1400px) { .about-content { padding-right: 9rem; } }
+    @media (max-width: 600px) { .info-table th, .info-table td { white-space: normal; } }   /* 手機表格可換行，英文長欄不被橫向裁掉 */   /* About 滿版右欄讓出章節軌位置 */
 
     /* ════ P3 動態敘事＋微互動（2026-09-30）════
        規則：動畫只作用在圖片／影片與互動回饋上；文字一開始就在 HTML 裡且可見，不被動畫延遲。 */
@@ -3522,12 +3523,15 @@
       position: absolute; z-index: -1; left: -0.06em; top: -0.42em;
       font-family: 'Noto Serif TC', Georgia, serif; font-weight: 400;
       font-size: clamp(3.6rem, 7.5vw, 7rem); line-height: 1; letter-spacing: 0;
-      color: transparent; -webkit-text-stroke: 1px rgba(200,169,110,0.34);
+      color: transparent; -webkit-text-stroke: 1px rgba(200,169,110,0.26);
       pointer-events: none;
     }
     #drinks .sec-label::before, #menu .menu-header .sec-label::before, #latest-news .section-kicker::before { left: 50%; transform: translateX(-50%); }
 
     /* ② 評論：第一則放大成精選引言，其餘三則並排 */
+    /* 小標壓在大數字線條上時加深色光暈，保持可讀（驗收回饋） */
+    #about .sec-label, #drinks .sec-label, #menu .menu-header .sec-label, #visit .section-kicker, #latest-news .section-kicker, #reviews .section-kicker, #faq .section-kicker { text-shadow: 0 0 6px #0b0b0b, 0 0 12px #0b0b0b; }
+
     #reviews .review-card:first-child .review-text {
       font-family: 'Noto Serif TC', Georgia, 'Songti TC', serif;
       font-size: clamp(1.1rem, 1.9vw, 1.55rem); line-height: 1.8;
@@ -4671,7 +4675,7 @@
       }
       .news-video-wrap video { display: block; width: 100%; height: auto; }
       .video-sound-btn {
-        position: absolute; bottom: 12px; right: 12px; z-index: 2;
+        position: absolute; bottom: 56px; right: 12px; z-index: 2;   /* 讓出原生控制列（驗收回饋 2026-09-30） */
         width: 44px; height: 44px; border-radius: 50%; font-size: 1.15rem; line-height: 1;
         background: rgba(0,0,0,0.55); border: 1px solid var(--gold-dim); cursor: pointer;
         display: flex; align-items: center; justify-content: center;
