@@ -2895,6 +2895,20 @@
     /* 畫面外的大背景圖（茶嗨波拼圖 256KB、訂位區背景 154KB）：快滑到才載入，由底部小腳本加 .bg-ready */
     .tea-cell-grid[data-lazy-bg]:not(.bg-ready) .tea-cell,
     .booking-bg[data-lazy-bg]:not(.bg-ready) { background-image: none; }
+    /* 載入狀態（2026-09-30）：茶嗨波拼圖下載完成（.bg-loaded）前顯示骨架掃光；粒子舞台 is-loading 時一道金光掃過 */
+    .tea-cell-grid[data-lazy-bg]:not(.bg-loaded) .tea-cell { background-color: #15120e; }
+    .tea-cell-grid[data-lazy-bg]:not(.bg-loaded) .tea-cell::before,
+    .cocktail-stage.is-loading::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(100deg, transparent 30%, rgba(200,169,110,.10) 50%, transparent 70%);
+      background-size: 250% 100%;
+      animation: dtShimmer 1.6s ease-in-out infinite;
+    }
+    @keyframes dtShimmer { from { background-position: 120% 0; } to { background-position: -120% 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .tea-cell-grid[data-lazy-bg]:not(.bg-loaded) .tea-cell::before,
+      .cocktail-stage.is-loading::after { animation: none; }
+    }
     .booking-bg {
       position: absolute;
       inset: 0;
@@ -3137,6 +3151,8 @@
       /* 分類標籤列換行全顯示：橫向捲動列在手機上按著可拖動、體感怪，改多行不可拖 */
       .menu-tabs { flex-wrap: wrap; justify-content: center; overflow-x: visible; }
       .tab-btn { padding: 0.7rem 1rem; }
+      /* 菜色列表自帶內距，但圖說與分類標題原本貼齊螢幕邊（2026-09-30 修）；全寬 sticky 圖不動 */
+      .menu-img-caption, .menu-cat-title, .menu-cat-h, .menu-cat-desc { padding-inline: 1.2rem; }
 
       #tea .inner { grid-template-columns: 1fr; gap: 3rem; }
 
@@ -3147,6 +3163,9 @@
     }
 
     @media (max-width: 600px) {
+      /* 6 個分類排成整齊兩排，不再 5＋1 孤行（維持 7/17 決議：換行、不可拖） */
+      .menu-tabs { display: grid; grid-template-columns: repeat(3, 1fr); }
+      .tab-btn { padding: 0.7rem 0.4rem; text-align: center; margin-bottom: 0; }
       nav { padding: 1rem 1.2rem; }
       .nav-right { gap: 0.75rem; }
       .nav-lang { font-size: 0.72rem; }
@@ -5021,12 +5040,29 @@
   .booking-primary{display:inline-block;margin:0 auto .9rem;background:var(--gold);color:var(--black);text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;padding:1rem 2.8rem;transition:background .2s,transform .15s}
   .booking-primary:hover{background:var(--gold-light);transform:translateY(-2px)}
   .booking-or{color:var(--grey);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;margin:.2rem 0 .4rem}
-  .book-fab{position:fixed;right:1rem;bottom:1rem;z-index:300;display:none;align-items:center;justify-content:center;width:48px;height:48px;padding:0;border-radius:50%;background:var(--gold);color:var(--black);text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.4);opacity:.92}
+  .book-fab{position:fixed;right:1rem;bottom:calc(1rem + env(safe-area-inset-bottom, 0px));transition:opacity .25s ease,transform .25s ease;z-index:300;display:none;align-items:center;justify-content:center;width:48px;height:48px;padding:0;border-radius:50%;background:var(--gold);color:var(--black);text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.4);opacity:.92}
   .book-fab svg{width:22px;height:22px;fill:currentColor}
   .book-fab:hover{opacity:1}
   .book-fab:active{transform:scale(.92)}
   @media(max-width:768px){.book-fab{display:inline-flex}}
+  /* 往下捲時讓出靠右的價格／文字，停下或往上捲就回來（2026-09-30） */
+  .book-fab.is-away{opacity:0;transform:translateY(12px) scale(.9);pointer-events:none}
+  @media (prefers-reduced-motion: reduce){.book-fab{transition:none}.book-fab.is-away{transform:none}}
   </style>
+  <script>
+  /* 浮動訂位鈕：往下捲時淡出讓出內容，停下 0.7 秒或往上捲就回來（只影響手機，桌機本來就不顯示） */
+  (function(){
+    var fab=document.querySelector('.book-fab'); if(!fab) return;
+    var lastY=window.scrollY, t=null;
+    window.addEventListener('scroll',function(){
+      var y=window.scrollY;
+      if(y>lastY+4) fab.classList.add('is-away');
+      else if(y<lastY-4) fab.classList.remove('is-away');
+      lastY=y;
+      clearTimeout(t); t=setTimeout(function(){ fab.classList.remove('is-away'); },700);
+    },{passive:true});
+  })();
+  </script>
 
   <script>
   /* 鍵盤可操作增強 2026-06-24：讓 onclick 元素可用 Tab + Enter/Space 操作 */
@@ -5094,14 +5130,24 @@
   /* 畫面外背景圖延遲載入：距離畫面 600px 內才加 .bg-ready 讓 CSS 背景圖生效 */
   (function () {
     var els = document.querySelectorAll('[data-lazy-bg]');
+    // 加 .bg-ready 讓背景圖開始下載；真正下載完再加 .bg-loaded 收掉骨架（茶嗨波格子用）
+    function markReady(el) {
+      el.classList.add('bg-ready');
+      var cell = el.querySelector('.tea-cell') || el;
+      var m = /url\(["']?([^"')]+)["']?\)/.exec(getComputedStyle(cell).backgroundImage || '');
+      if (!m) { el.classList.add('bg-loaded'); return; }
+      var im = new Image();
+      im.onload = im.onerror = function () { el.classList.add('bg-loaded'); };
+      im.src = m[1];
+    }
     if (!('IntersectionObserver' in window)) {
       var i, vs = document.querySelectorAll('video[data-poster]');
-      for (i = 0; i < els.length; i++) els[i].classList.add('bg-ready');
+      for (i = 0; i < els.length; i++) markReady(els[i]);
       for (i = 0; i < vs.length; i++) vs[i].poster = vs[i].getAttribute('data-poster');
       return;
     }
     var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('bg-ready'); io.unobserve(e.target); } });
+      es.forEach(function (e) { if (e.isIntersecting) { markReady(e.target); io.unobserve(e.target); } });
     }, { rootMargin: '600px 0px' });
     els.forEach(function (el) { io.observe(el); });
     // 影片封面（poster 屬性不吃 loading=lazy，會跟首屏搶頻寬）：滑近才補上
