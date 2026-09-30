@@ -3327,6 +3327,140 @@
     /* FAQ 延伸段落 */
     .faq-answer p { margin: 0.7rem 0 0; }
     .faq-answer > strong:first-child { display: inline-block; }
+
+    /* ════ P1 把資訊排成設計（2026-09-30）════
+       規則：AEO 文字逐字不動、DOM 順序不動，全部用 CSS 重新排版；
+       標籤、編號、節點一律用偽元素（不是文字節點，不進 AEO 內容）。
+       Speakable 選擇器 .about-content p／#faq .faq-item:nth-of-type(n) 仍有效，class 不可改名。 */
+
+    /* ① About：第一段＝AEO 定義段 → 店家檔案卡；第二段 → 襯線大字；第三段 → 金色落款 */
+    .about-story-fold > p:first-child {
+      font-size: 0.86rem;
+      line-height: 2;
+      color: rgba(240,235,224,0.7);
+      padding: 1.1rem 0 1.2rem;
+      border-top: 1px solid var(--gold-dim);
+      border-bottom: 1px solid var(--gold-dim);
+      margin-bottom: 1.8rem;
+    }
+    .about-story-fold > p:first-child::before {
+      content: 'FACT FILE';
+      content: 'FACT FILE' / "";
+      display: block;
+      margin-bottom: 0.7rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+    }
+    .about-story-fold > p:nth-child(2) {
+      font-family: 'Noto Serif TC', Georgia, 'Songti TC', serif;
+      font-size: clamp(1.02rem, 1.25vw, 1.18rem);
+      line-height: 2;
+      color: rgba(240,235,224,0.92);
+    }
+    .about-story-fold > p:nth-child(3) {
+      color: var(--gold);
+      font-size: 0.86rem;
+      letter-spacing: 0.08em;
+    }
+    .about-story-fold > p:nth-child(3)::before {
+      content: '';
+      display: inline-block;
+      width: 1.6rem;
+      height: 1px;
+      background: var(--gold);
+      vertical-align: middle;
+      margin-right: 0.7rem;
+    }
+
+    /* ② 兩張表 → 時刻表：等寬數字、細線、營業時間表的週五六標深夜場、訂位表「建議提前」金色 */
+    .info-table { font-variant-numeric: tabular-nums; }
+    .info-table td { padding: 0.8rem 1.2rem 0.8rem 0; }
+    .info-table td:last-child {
+      font-family: 'Noto Serif TC', Georgia, 'Songti TC', serif;
+      color: var(--white);
+      letter-spacing: 0.04em;
+    }
+    .info-table:not(:has(th:nth-child(3))) tbody tr:nth-child(5) td,
+    .info-table:not(:has(th:nth-child(3))) tbody tr:nth-child(6) td { color: var(--gold-light); }
+    .info-table:not(:has(th:nth-child(3))) tbody tr:nth-child(5) td:last-child::after,
+    .info-table:not(:has(th:nth-child(3))) tbody tr:nth-child(6) td:last-child::after {
+      content: ' · LATE';
+      content: ' · LATE' / "";
+      font-family: inherit;
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-left: 0.4rem;
+    }
+    .info-table:has(th:nth-child(3)) td:nth-child(3) { color: var(--gold); font-weight: 600; }
+    .info-table tbody tr { transition: background 0.2s ease; }
+    @media (hover: hover) { .info-table tbody tr:hover { background: rgba(200,169,110,0.04); } }
+
+    /* ③ 訂位四步驟 → 時間軸；規格三項 → 橫向規格列 */
+    .booking-steps h3[id^="faq-booking-step"],
+    .booking-steps .step-text {
+      position: relative;
+      box-sizing: border-box;
+      max-width: 640px;
+      padding-left: 2.2rem;
+      border-left: 1px solid rgba(200,169,110,0.28);
+      text-align: left;
+    }
+    .booking-steps h3[id^="faq-booking-step"] { margin: 0; padding-top: 1.8rem; padding-bottom: 0.5rem; }
+    .booking-steps h3[id^="faq-booking-step"]::before {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: calc(1.8rem + 0.55em);
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 5px rgba(200,169,110,0.12);
+    }
+    .booking-steps .step-text:last-child { border-left-color: transparent; }
+    @media (min-width: 901px) {
+      .booking-steps h3[id^="faq-booking-step"], .booking-steps .step-text { margin-left: auto; margin-right: auto; text-align: left; }
+      .step-meta {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0 1.6rem;
+        padding: 1.2rem 0;
+        background: none;
+        border: 0;
+        border-top: 1px solid var(--gold-dim);
+        border-bottom: 1px solid var(--gold-dim);
+        margin-bottom: 0.6rem;
+      }
+      .step-meta li { flex-direction: column; gap: 0.2rem; }
+      .step-meta li span { padding-top: 0; }
+    }
+
+    /* ④ FAQ：01–21 編號（CSS 計數器）；桌機雙欄，縮短每行長度 */
+    #faq .faq-list { counter-reset: faq; }
+    #faq .faq-item summary h3::before {
+      counter-increment: faq;
+      content: counter(faq, decimal-leading-zero);
+      content: counter(faq, decimal-leading-zero) / "";
+      display: inline-block;
+      min-width: 2.6em;
+      font-family: 'Noto Serif TC', Georgia, serif;
+      font-size: 0.74rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      vertical-align: 0.12em;
+    }
+    #faq .faq-item .faq-answer { padding-left: 2.6rem; }
+    #faq .faq-item summary { transition: color 0.2s ease; }
+    @media (hover: hover) { #faq .faq-item summary:hover { color: var(--gold-light); } }
+    @media (min-width: 1000px) {
+      #faq .faq-list { column-count: 2; column-gap: 4rem; border-top: 0; }
+      #faq .faq-item { break-inside: avoid; }
+    }
+
+    /* ⑤ 地圖轉暗色（濾鏡；仍是可互動的 Google 地圖） */
+    .visit-map-wrap iframe { filter: invert(0.9) hue-rotate(180deg) grayscale(0.4) contrast(0.92) brightness(0.92); }
   </style>
 
   <!-- Google Analytics 4 (G-PDTWFFHRPV) -->
