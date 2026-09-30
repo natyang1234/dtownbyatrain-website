@@ -3481,7 +3481,56 @@
       .nav-chapter.is-on { opacity: 1; }
       .nav-chapter b { font-family: 'Noto Serif TC', Georgia, serif; font-weight: 400; color: var(--grey); letter-spacing: 0.08em; }
     }
-    @media (max-width: 1199px) { .chapter-rail { display: none; } }   /* 窄桌機內容會碰到右側，只留導覽列目前位置 */
+    @media (max-width: 1399px) { .chapter-rail { display: none; } }   /* 內容最寬 1100px，1400 以下右側放不下章節軌，只留導覽列目前位置 */
+    @media (min-width: 1400px) { .about-content { padding-right: 9rem; } }   /* About 滿版右欄讓出章節軌位置 */
+
+    /* ════ P2 版型（2026-09-30）════ */
+    /* ① 章節大數字：與右側章節軌同編號；空心描邊壓在標題後方（偽元素，對輔助技術靜音） */
+    #about .sec-label, #drinks .sec-label, #menu .menu-header .sec-label, #visit .section-kicker, #latest-news .section-kicker, #reviews .section-kicker, #faq .section-kicker { position: relative; isolation: isolate; }
+    #about .sec-label::before { content: '01'; content: '01' / ""; }
+    #drinks .sec-label::before { content: '02'; content: '02' / ""; }
+    #menu .menu-header .sec-label::before { content: '03'; content: '03' / ""; }
+    #visit .section-kicker::before { content: '04'; content: '04' / ""; }
+    #latest-news .section-kicker::before { content: '05'; content: '05' / ""; }
+    #reviews .section-kicker::before { content: '06'; content: '06' / ""; }
+    #faq .section-kicker::before { content: '07'; content: '07' / ""; }
+    #about .sec-label::before, #drinks .sec-label::before, #menu .menu-header .sec-label::before, #visit .section-kicker::before, #latest-news .section-kicker::before, #reviews .section-kicker::before, #faq .section-kicker::before {
+      position: absolute; z-index: -1; left: -0.06em; top: -0.42em;
+      font-family: 'Noto Serif TC', Georgia, serif; font-weight: 400;
+      font-size: clamp(3.6rem, 7.5vw, 7rem); line-height: 1; letter-spacing: 0;
+      color: transparent; -webkit-text-stroke: 1px rgba(200,169,110,0.34);
+      pointer-events: none;
+    }
+    #drinks .sec-label::before, #menu .menu-header .sec-label::before, #latest-news .section-kicker::before { left: 50%; transform: translateX(-50%); }
+
+    /* ② 評論：第一則放大成精選引言，其餘三則並排 */
+    #reviews .review-card:first-child .review-text {
+      font-family: 'Noto Serif TC', Georgia, 'Songti TC', serif;
+      font-size: clamp(1.1rem, 1.9vw, 1.55rem); line-height: 1.8;
+    }
+    @media (min-width: 901px) {
+      #reviews .reviews-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      #reviews .review-card:first-child {
+        grid-column: 1 / -1; padding: 2.4rem 2.6rem;
+        background: linear-gradient(90deg, rgba(200,169,110,0.06), transparent 70%), var(--card);
+      }
+    }
+
+    /* ③ 最新動態：桌機左文右影片（CSS 格線，DOM 順序不動） */
+    @media (min-width: 1000px) {
+      section#latest-news .section-inner {
+        display: grid; grid-template-columns: minmax(0, 1fr) 340px;
+        column-gap: clamp(3rem, 6vw, 6rem); text-align: left; align-items: start;
+      }
+      section#latest-news .section-inner > * { grid-column: 1; }
+      section#latest-news .section-inner > .news-video-wrap { grid-column: 2; grid-row: 1 / span 7; align-self: center; margin: 0; }
+      section#latest-news .section-inner > .video-sound-hint { grid-column: 2; grid-row: 8; }
+      section#latest-news .section-inner > .news-note,
+      section#latest-news .section-inner > .news-warn { grid-column: 1 / -1; text-align: center; }
+      section#latest-news .gold-line { margin-left: 0; }
+      section#latest-news .news-intro, section#latest-news .news-flavors { margin-left: 0; }
+      section#latest-news .section-kicker::before { left: -0.06em; transform: none; }
+    }
     @media (max-width: 900px) {
       .chapter-rail { display: none; }
     }
