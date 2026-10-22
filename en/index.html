@@ -4636,7 +4636,7 @@
     })();
   </script>
 
-  <!-- Latest News: Letter Series Craft Cocktail Gift Box (video autoplays on scroll) -->
+  <!-- Latest News: 24 Signature Cocktails list video (autoplays on scroll; replaced the gift box on 2026-10-22) -->
   <section id="latest-news" class="page-section page-section-alt">
     <style>
       #latest-news .section-inner { text-align: center; }
@@ -4674,6 +4674,9 @@
         box-shadow: 0 10px 48px rgba(0,0,0,0.45);
       }
       .news-video-wrap video { display: block; width: 100%; height: auto; }
+      /* 4:5 特調影片（2026-10-22）：只調本區，入口影片共用 .news-video-wrap 不動 */
+      #latest-news .news-video-wrap { max-width: 440px; }
+      #latest-news .news-video-wrap video { aspect-ratio: 4 / 5; }
       .video-sound-btn {
         position: absolute; bottom: 56px; right: 12px; z-index: 2;   /* 讓出原生控制列（驗收回饋 2026-09-30） */
         width: 44px; height: 44px; border-radius: 50%; font-size: 1.15rem; line-height: 1;
@@ -4694,26 +4697,18 @@
       <span class="section-kicker">What's New</span>
       <h2>Latest News</h2>
       <div class="gold-line"></div>
-      <p class="news-sub">Letter Series Collab · Craft Cocktail Gift Box</p>
-      <p class="news-intro">The Letter Series comes together for the first time. A Train, B Line, D Town and U Square miniaturise their most iconic signature flavours into a collaborative "Craft Cocktail Gift Box" — no need to wait for a table; open your own Home Bar right at home.</p>
-      <ul class="news-flavors">
-        <li><span class="fl-name">A Train · Susan</span><span class="fl-desc">Rich, deep grape aromatics</span></li>
-        <li><span class="fl-name">B Line · Oolong &amp; Apple</span><span class="fl-desc">Tea and fruit in perfect balance</span></li>
-        <li><span class="fl-name">D Town · Grapefruit &amp; Elderflower</span><span class="fl-desc">Fresh and crisp — the ideal opener</span></li>
-        <li><span class="fl-name">U Square · Pouchong Tea &amp; Guava</span><span class="fl-desc">An elegant tea-liqueur full of Taiwanese character</span></li>
-      </ul>
-      <p class="news-intro">Each box also comes with a professional-grade "cocktail peel mist" (flavour at random) to take the experience one step further.</p>
+      <p class="news-sub">24 Signature Cocktails</p>
+      <p class="news-intro">24 signature cocktails across four flavour families: FRUIT &amp; FLORA, FROM THE VINE (wine and fermented bases), TEA &amp; ORCHARD, and SPIRIT FORWARD. First time here and not sure what to order? Start with Dusk, our most-ordered drink.</p>
       <div class="news-video-wrap">
-        <noscript><img src="../dtown-gift-poster.jpg" alt="D Town by A Train video cover" loading="lazy" style="width:100%;display:block"></noscript>
+        <noscript><img src="../dtown-signature-24-poster.jpg" alt="D Town by A Train 24 Signature Cocktails video cover" loading="lazy" style="width:100%;display:block"></noscript>
 <video id="dtown-news-video" muted loop playsinline webkit-playsinline controls preload="none"
-               data-poster="../dtown-gift-poster.jpg"
-               aria-label="Letter Series · Craft Cocktail Gift Box video">
-          <source data-src="../dtown-ambient.mp4" type="video/mp4">
+               data-poster="../dtown-signature-24-poster.jpg"
+               aria-label="24 Signature Cocktails list video">
+          <source data-src="../dtown-signature-24.mp4" type="video/mp4">
         </video>
         <button type="button" id="news-video-sound" class="video-sound-btn" aria-label="Turn on sound">🔇</button>
       </div>
       <p class="video-sound-hint">Video is muted by default · tap the speaker to turn on sound</p>
-      <p class="news-note">This site provides product information only and does not offer online transactions; for the suggested price and to purchase, please visit our physical store.</p>
       <p class="news-warn">No drink driving　•　Excessive drinking harms your health　•　No alcohol under 18</p>
     </div>
     <script>

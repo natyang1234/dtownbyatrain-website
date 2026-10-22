@@ -4636,7 +4636,7 @@
     })();
   </script>
 
-  <!-- 最新動態：字母系列聯名禮盒（影片滑到自動播放） -->
+  <!-- 最新動態：招牌特調 24 款清單影片（影片滑到自動播放；2026-10-22 取代聯名禮盒） -->
   <section id="latest-news" class="page-section page-section-alt">
     <style>
       #latest-news .section-inner { text-align: center; }
@@ -4674,6 +4674,9 @@
         box-shadow: 0 10px 48px rgba(0,0,0,0.45);
       }
       .news-video-wrap video { display: block; width: 100%; height: auto; }
+      /* 4:5 特調影片（2026-10-22）：只調本區，入口影片共用 .news-video-wrap 不動 */
+      #latest-news .news-video-wrap { max-width: 440px; }
+      #latest-news .news-video-wrap video { aspect-ratio: 4 / 5; }
       .video-sound-btn {
         position: absolute; bottom: 56px; right: 12px; z-index: 2;   /* 讓出原生控制列（驗收回饋 2026-09-30） */
         width: 44px; height: 44px; border-radius: 50%; font-size: 1.15rem; line-height: 1;
@@ -4695,26 +4698,18 @@
       <span class="section-kicker">What's New</span>
       <h2>最新動態</h2>
       <div class="gold-line"></div>
-      <p class="news-sub">字母系列聯名・微醺調酒禮盒</p>
-      <p class="news-intro">字母系列首度集結。A Train、B Line、D Town、U Square 四間餐酒館，將店內最經典的靈魂風味縮小裝瓶，推出聯名「微醺調酒禮盒」——不必現場候位，在家也能開啟屬於自己的 Home Bar 時光。</p>
-      <ul class="news-flavors">
-        <li><span class="fl-name">A Train · Susan</span><span class="fl-desc">濃郁葡萄香氣，層次深邃</span></li>
-        <li><span class="fl-name">B Line · 烏龍 &amp; 蘋果</span><span class="fl-desc">茶香與果甜，平衡得恰到好處</span></li>
-        <li><span class="fl-name">D Town · 葡萄柚 &amp; 接骨木</span><span class="fl-desc">清新爽口，最適合第一杯的開場</span></li>
-        <li><span class="fl-name">U Square · 包種茶 &amp; 芭樂</span><span class="fl-desc">充滿台灣味的優雅茶酒</span></li>
-      </ul>
-      <p class="news-intro">每盒另附專業級「調酒 Peel 噴霧」（口味隨機），讓微醺的層次再進化一步。</p>
+      <p class="news-sub">招牌特調 24 款</p>
+      <p class="news-intro">24 杯特調，分成四種風味：FRUIT &amp; FLORA 水果與花香、FROM THE VINE 葡萄酒與發酵酒基底、TEA &amp; ORCHARD 茶香與果園、SPIRIT FORWARD 烈酒主導。第一次來不知道點什麼，從店裡被點最多次的 Dusk 開始。</p>
       <div class="news-video-wrap">
-        <noscript><img src="dtown-gift-poster.jpg" alt="D Town by A Train 影片封面" loading="lazy" style="width:100%;display:block"></noscript>
+        <noscript><img src="dtown-signature-24-poster.jpg" alt="D Town by A Train 招牌特調 24 款影片封面" loading="lazy" style="width:100%;display:block"></noscript>
 <video id="dtown-news-video" muted loop playsinline webkit-playsinline controls preload="none"
-               data-poster="dtown-gift-poster.jpg"
-               aria-label="字母系列聯名・微醺調酒禮盒影片">
-          <source data-src="dtown-ambient.mp4" type="video/mp4">
+               data-poster="dtown-signature-24-poster.jpg"
+               aria-label="招牌特調 24 款清單影片">
+          <source data-src="dtown-signature-24.mp4" type="video/mp4">
         </video>
         <button type="button" id="news-video-sound" class="video-sound-btn" aria-label="開啟聲音">🔇</button>
       </div>
       <p class="video-sound-hint">影片預設靜音 · 點右下角喇叭開啟聲音</p>
-      <p class="news-note">本站僅提供商品資訊，不提供線上交易；建議售價與購買請洽實體門市現場選購。</p>
       <p class="news-warn">禁止酒駕　•　飲酒過量有害健康　•　未滿十八歲禁止飲酒</p>
     </div>
     <script>
