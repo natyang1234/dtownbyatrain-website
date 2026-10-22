@@ -360,12 +360,19 @@
     "lb-cap",
     "lb-img",
     "lb-tea-cell",
+    "main",
     "menu",
     "nav-links",
     "news-video-sound",
     "reviews",
     "story-fold",
     "story-toggle",
+    "tab-btn-dessert",
+    "tab-btn-main",
+    "tab-btn-recommend",
+    "tab-btn-salad",
+    "tab-btn-snack",
+    "tab-btn-soup",
     "tab-dessert",
     "tab-main",
     "tab-recommend",
@@ -396,7 +403,6 @@
      "logo": "https://natyang1234.github.io/dtownbyatrain-website/logo.jpg",
      "telephone": "+886-2-2721-2772",
      "image": "https://natyang1234.github.io/dtownbyatrain-website/og-cover.jpg",
-     "datePublished": "2026-06-18",
      "address": {
       "@type": "PostalAddress",
       "streetAddress": "忠孝東路四段49巷2號2樓",
@@ -549,15 +555,6 @@
       "uploadDate": "2026-07-06",
       "duration": "PT17S"
      },
-     "speakable": {
-      "@type": "SpeakableSpecification",
-      "cssSelector": [
-       ".about-content p",
-       "#faq .faq-item:nth-of-type(1)",
-       "#faq .faq-item:nth-of-type(2)",
-       "#faq .faq-item:nth-of-type(3)"
-      ]
-     },
      "hasMenu": {
       "@type": "Menu",
       "name": "D Town 菜單",
@@ -638,41 +635,69 @@
           "@type": "MenuItem",
           "name": "川味口水雞",
           "description": "Sichuan Chilled Chicken with Chili Sauce",
-          "offers": {
-           "@type": "Offer",
-           "price": "200 / 300",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "200",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "300",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
           "name": "碳烤櫻桃鴨肉串",
           "description": "Grilled Duck Skewers",
-          "offers": {
-           "@type": "Offer",
-           "price": "180 / 320",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "180",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "320",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
           "name": "日式明太子雞肉串",
           "description": "Japanese Mentaiko Chicken Skewers",
-          "offers": {
-           "@type": "Offer",
-           "price": "180 / 320",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "180",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "320",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
           "name": "碳烤沙爹雞肉串燒",
           "description": "Charcoal-Grilled Chicken Satay",
-          "offers": {
-           "@type": "Offer",
-           "price": "180 / 320",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "180",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "320",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
@@ -720,8 +745,13 @@
           "description": "Japan Hyōgo Prefecture Oysters",
           "offers": {
            "@type": "Offer",
-           "price": "160 / 顆",
-           "priceCurrency": "TWD"
+           "priceCurrency": "TWD",
+           "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "160",
+            "priceCurrency": "TWD",
+            "unitText": "顆"
+           }
           }
          },
          {
@@ -828,31 +858,52 @@
           "@type": "MenuItem",
           "name": "德州風味雞翅",
           "description": "Texas Style Chicken Wings",
-          "offers": {
-           "@type": "Offer",
-           "price": "200 / 350",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "200",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "350",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
           "name": "韓式奶油蒜香雞翅",
           "description": "Garlic Butter Chicken Wings - Korean Style",
-          "offers": {
-           "@type": "Offer",
-           "price": "200 / 350",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "200",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "350",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
           "name": "日式南蠻炸雞",
           "description": "Japanese Fried Chicken Nanban Style",
-          "offers": {
-           "@type": "Offer",
-           "price": "200 / 360",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "200",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "360",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
@@ -868,31 +919,52 @@
           "@type": "MenuItem",
           "name": "松露薯條",
           "description": "French Fries with Black Truffle Sauce",
-          "offers": {
-           "@type": "Offer",
-           "price": "180 / 340",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "180",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "340",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
           "name": "風味薯條",
           "description": "French Fries",
-          "offers": {
-           "@type": "Offer",
-           "price": "160 / 280",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "160",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "280",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
           "name": "手作洋芋切片佐莎莎醬",
           "description": "Handmade Potato Chips with Tomato Salsa",
-          "offers": {
-           "@type": "Offer",
-           "price": "160 / 280",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "160",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "280",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
@@ -1421,8 +1493,35 @@
      "url": "https://natyang1234.github.io/dtownbyatrain-website/",
      "name": "D Town by A Train",
      "description": "台北東區「字母系列」餐酒館，復古英倫風格、東區最大空間，忠孝復興站步行 1 分鐘，主打特色手工調酒、日本和牛與茶嗨波。",
+     "inLanguage": "zh-TW",
      "publisher": {
       "@id": "https://natyang1234.github.io/dtownbyatrain-website/#restaurant"
+     }
+    },
+    {
+     "@context": "https://schema.org",
+     "@type": "WebPage",
+     "@id": "https://natyang1234.github.io/dtownbyatrain-website/#webpage",
+     "url": "https://natyang1234.github.io/dtownbyatrain-website/",
+     "name": "D Town by A Train｜台北東區餐酒館・忠孝復興站｜聚餐聚會推薦",
+     "description": "D Town by A Train｜忠孝復興站 4 號出口步行 1 分鐘，台北東區最大空間餐酒館。24 款特色調酒、茶嗨波、日本和牛，適合聚餐、慶生、包場，每人低消 $600。",
+     "inLanguage": "zh-TW",
+     "isPartOf": {
+      "@id": "https://natyang1234.github.io/dtownbyatrain-website/#website"
+     },
+     "about": {
+      "@id": "https://natyang1234.github.io/dtownbyatrain-website/#restaurant"
+     },
+     "primaryImageOfPage": "https://natyang1234.github.io/dtownbyatrain-website/og-ambient-wide.jpg",
+     "datePublished": "2026-06-18",
+     "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [
+       ".about-content p",
+       "#faq .faq-item:nth-of-type(1)",
+       "#faq .faq-item:nth-of-type(2)",
+       "#faq .faq-item:nth-of-type(3)"
+      ]
      }
     },
     {
@@ -2066,12 +2165,19 @@
     "lb-cap",
     "lb-img",
     "lb-tea-cell",
+    "main",
     "menu",
     "nav-links",
     "news-video-sound",
     "reviews",
     "story-fold",
     "story-toggle",
+    "tab-btn-dessert",
+    "tab-btn-main",
+    "tab-btn-recommend",
+    "tab-btn-salad",
+    "tab-btn-snack",
+    "tab-btn-soup",
     "tab-dessert",
     "tab-main",
     "tab-recommend",
@@ -2084,7 +2190,7 @@
    "schema": [
     {
      "@context": "https://schema.org",
-     "@id": "https://natyang1234.github.io/dtownbyatrain-website/en/#restaurant",
+     "@id": "https://natyang1234.github.io/dtownbyatrain-website/#restaurant",
      "@type": [
       "Restaurant",
       "BarOrPub"
@@ -2102,7 +2208,6 @@
      "logo": "https://natyang1234.github.io/dtownbyatrain-website/logo.jpg",
      "telephone": "+886-2-2721-2772",
      "image": "https://natyang1234.github.io/dtownbyatrain-website/og-cover.jpg",
-     "datePublished": "2026-06-18",
      "address": {
       "@type": "PostalAddress",
       "streetAddress": "2F, No. 2, Lane 49, Sec. 4, Zhongxiao E. Rd.",
@@ -2255,15 +2360,6 @@
       "uploadDate": "2026-07-06",
       "duration": "PT17S"
      },
-     "speakable": {
-      "@type": "SpeakableSpecification",
-      "cssSelector": [
-       ".about-content p",
-       "#faq .faq-item:nth-of-type(1)",
-       "#faq .faq-item:nth-of-type(2)",
-       "#faq .faq-item:nth-of-type(3)"
-      ]
-     },
      "hasMenu": {
       "@type": "Menu",
       "name": "D Town Menu",
@@ -2344,41 +2440,69 @@
           "@type": "MenuItem",
           "name": "Sichuan Chilled Chicken with Chili Sauce",
           "description": "川味口水雞",
-          "offers": {
-           "@type": "Offer",
-           "price": "200 / 300",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "200",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "300",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
           "name": "Grilled Duck Skewers",
           "description": "碳烤櫻桃鴨肉串",
-          "offers": {
-           "@type": "Offer",
-           "price": "180 / 320",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "180",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "320",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
           "name": "Japanese Mentaiko Chicken Skewers",
           "description": "日式明太子雞肉串",
-          "offers": {
-           "@type": "Offer",
-           "price": "180 / 320",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "180",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "320",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
           "name": "Charcoal-Grilled Chicken Satay",
           "description": "碳烤沙爹雞肉串燒",
-          "offers": {
-           "@type": "Offer",
-           "price": "180 / 320",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "180",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "320",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
@@ -2426,8 +2550,13 @@
           "description": "日本兵庫縣生蠔",
           "offers": {
            "@type": "Offer",
-           "price": "160 / 顆",
-           "priceCurrency": "TWD"
+           "priceCurrency": "TWD",
+           "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "160",
+            "priceCurrency": "TWD",
+            "unitText": "piece"
+           }
           }
          },
          {
@@ -2534,31 +2663,52 @@
           "@type": "MenuItem",
           "name": "Texas Style Chicken Wings",
           "description": "德州風味雞翅",
-          "offers": {
-           "@type": "Offer",
-           "price": "200 / 350",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "200",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "350",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
           "name": "Garlic Butter Chicken Wings - Korean Style",
           "description": "韓式奶油蒜香雞翅",
-          "offers": {
-           "@type": "Offer",
-           "price": "200 / 350",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "200",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "350",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
           "name": "Japanese Fried Chicken Nanban Style",
           "description": "日式南蠻炸雞",
-          "offers": {
-           "@type": "Offer",
-           "price": "200 / 360",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "200",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "360",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
@@ -2574,31 +2724,52 @@
           "@type": "MenuItem",
           "name": "French Fries with Black Truffle Sauce",
           "description": "松露薯條",
-          "offers": {
-           "@type": "Offer",
-           "price": "180 / 340",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "180",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "340",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
           "name": "French Fries",
           "description": "風味薯條",
-          "offers": {
-           "@type": "Offer",
-           "price": "160 / 280",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "160",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "280",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
           "name": "Handmade Potato Chips with Tomato Salsa",
           "description": "手作洋芋切片佐莎莎醬",
-          "offers": {
-           "@type": "Offer",
-           "price": "160 / 280",
-           "priceCurrency": "TWD"
-          }
+          "offers": [
+           {
+            "@type": "Offer",
+            "price": "160",
+            "priceCurrency": "TWD"
+           },
+           {
+            "@type": "Offer",
+            "price": "280",
+            "priceCurrency": "TWD"
+           }
+          ]
          },
          {
           "@type": "MenuItem",
@@ -3123,12 +3294,39 @@
     {
      "@context": "https://schema.org",
      "@type": "WebSite",
-     "@id": "https://natyang1234.github.io/dtownbyatrain-website/en/#website",
+     "@id": "https://natyang1234.github.io/dtownbyatrain-website/#website",
      "url": "https://natyang1234.github.io/dtownbyatrain-website/en/",
      "name": "D Town by A Train",
      "description": "A retro-British style bistro & cocktail bar in Taipei's East District, one of the largest in the area and just 1 minute from MRT Zhongxiao Fuxing — featuring signature handcrafted cocktails, Japanese wagyu and Tea Highball.",
+     "inLanguage": "en",
      "publisher": {
-      "@id": "https://natyang1234.github.io/dtownbyatrain-website/en/#restaurant"
+      "@id": "https://natyang1234.github.io/dtownbyatrain-website/#restaurant"
+     }
+    },
+    {
+     "@context": "https://schema.org",
+     "@type": "WebPage",
+     "@id": "https://natyang1234.github.io/dtownbyatrain-website/en/#webpage",
+     "url": "https://natyang1234.github.io/dtownbyatrain-website/en/",
+     "name": "D Town by A Train | Cocktail Bar & Bistro, Taipei East",
+     "description": "D Town by A Train: retro-British bistro & cocktail bar near MRT Zhongxiao Fuxing, Taipei. Handcrafted cocktails, Japanese wagyu, Tea Highball. Reserve now.",
+     "inLanguage": "en",
+     "isPartOf": {
+      "@id": "https://natyang1234.github.io/dtownbyatrain-website/#website"
+     },
+     "about": {
+      "@id": "https://natyang1234.github.io/dtownbyatrain-website/#restaurant"
+     },
+     "primaryImageOfPage": "https://natyang1234.github.io/dtownbyatrain-website/og-ambient-wide.jpg",
+     "datePublished": "2026-06-18",
+     "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [
+       ".about-content p",
+       "#faq .faq-item:nth-of-type(1)",
+       "#faq .faq-item:nth-of-type(2)",
+       "#faq .faq-item:nth-of-type(3)"
+      ]
      }
     },
     {
