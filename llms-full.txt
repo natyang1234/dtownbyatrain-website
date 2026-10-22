@@ -14,8 +14,8 @@
 - 電話：02-2721-2772（下午 4 點後可撥打訂位）
 - Google Maps：https://maps.google.com/?q=D+Town+by+A+Train+台北市大安區忠孝東路四段49巷2號2樓
 - Google 商家：https://www.google.com/search?kgmid=/g/11dz1zjhq4
-- 官網（中文）：https://natyang1234.github.io/dtownbyatrain-website/
-- 官網（英文）：https://natyang1234.github.io/dtownbyatrain-website/en/
+- 官網（中文）：https://dtownbyatrain.com/
+- 官網（英文）：https://dtownbyatrain.com/en/
 
 ## 營業時間
 

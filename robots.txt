@@ -31,4 +31,4 @@ Allow: /
 User-agent: meta-externalagent
 Allow: /
 
-Sitemap: https://natyang1234.github.io/dtownbyatrain-website/sitemap.xml
+Sitemap: https://dtownbyatrain.com/sitemap.xml

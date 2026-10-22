@@ -2,20 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://natyang1234.github.io/dtownbyatrain-website/</loc>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://natyang1234.github.io/dtownbyatrain-website/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://natyang1234.github.io/dtownbyatrain-website/en/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://natyang1234.github.io/dtownbyatrain-website/"/>
-    <lastmod>2026-09-30</lastmod>
+    <loc>https://dtownbyatrain.com/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://dtownbyatrain.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dtownbyatrain.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dtownbyatrain.com/"/>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://natyang1234.github.io/dtownbyatrain-website/en/</loc>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://natyang1234.github.io/dtownbyatrain-website/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://natyang1234.github.io/dtownbyatrain-website/en/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://natyang1234.github.io/dtownbyatrain-website/"/>
-    <lastmod>2026-09-30</lastmod>
+    <loc>https://dtownbyatrain.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://dtownbyatrain.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dtownbyatrain.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dtownbyatrain.com/"/>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
