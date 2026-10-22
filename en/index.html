@@ -56,7 +56,7 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@id": "https://natyang1234.github.io/dtownbyatrain-website/en/#restaurant",
+    "@id": "https://natyang1234.github.io/dtownbyatrain-website/#restaurant",
     "@type": ["Restaurant", "BarOrPub"],
     "acceptsReservations": true,
     "name": "D Town by A Train",
@@ -67,8 +67,6 @@
     "logo": "https://natyang1234.github.io/dtownbyatrain-website/logo.jpg",
     "telephone": "+886-2-2721-2772",
     "image": "https://natyang1234.github.io/dtownbyatrain-website/og-cover.jpg",
-    "datePublished": "2026-06-18",
-    "dateModified": "2026-09-30",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "2F, No. 2, Lane 49, Sec. 4, Zhongxiao E. Rd.",
@@ -164,15 +162,6 @@
       "uploadDate": "2026-07-06",
       "duration": "PT17S"
     },
-    "speakable": {
-      "@type": "SpeakableSpecification",
-      "cssSelector": [
-        ".about-content p",
-        "#faq .faq-item:nth-of-type(1)",
-        "#faq .faq-item:nth-of-type(2)",
-        "#faq .faq-item:nth-of-type(3)"
-      ]
-    },
     "hasMenu": {
       "@type": "Menu",
       "name": "D Town Menu",
@@ -253,41 +242,37 @@
               "@type": "MenuItem",
               "name": "Sichuan Chilled Chicken with Chili Sauce",
               "description": "川味口水雞",
-              "offers": {
-                "@type": "Offer",
-                "price": "200 / 300",
-                "priceCurrency": "TWD"
-              }
+              "offers": [
+                { "@type": "Offer", "price": "200", "priceCurrency": "TWD" },
+                { "@type": "Offer", "price": "300", "priceCurrency": "TWD" }
+              ]
             },
             {
               "@type": "MenuItem",
               "name": "Grilled Duck Skewers",
               "description": "碳烤櫻桃鴨肉串",
-              "offers": {
-                "@type": "Offer",
-                "price": "180 / 320",
-                "priceCurrency": "TWD"
-              }
+              "offers": [
+                { "@type": "Offer", "price": "180", "priceCurrency": "TWD" },
+                { "@type": "Offer", "price": "320", "priceCurrency": "TWD" }
+              ]
             },
             {
               "@type": "MenuItem",
               "name": "Japanese Mentaiko Chicken Skewers",
               "description": "日式明太子雞肉串",
-              "offers": {
-                "@type": "Offer",
-                "price": "180 / 320",
-                "priceCurrency": "TWD"
-              }
+              "offers": [
+                { "@type": "Offer", "price": "180", "priceCurrency": "TWD" },
+                { "@type": "Offer", "price": "320", "priceCurrency": "TWD" }
+              ]
             },
             {
               "@type": "MenuItem",
               "name": "Charcoal-Grilled Chicken Satay",
               "description": "碳烤沙爹雞肉串燒",
-              "offers": {
-                "@type": "Offer",
-                "price": "180 / 320",
-                "priceCurrency": "TWD"
-              }
+              "offers": [
+                { "@type": "Offer", "price": "180", "priceCurrency": "TWD" },
+                { "@type": "Offer", "price": "320", "priceCurrency": "TWD" }
+              ]
             },
             {
               "@type": "MenuItem",
@@ -335,8 +320,8 @@
               "description": "日本兵庫縣生蠔",
               "offers": {
                 "@type": "Offer",
-                "price": "160 / 顆",
-                "priceCurrency": "TWD"
+                "priceCurrency": "TWD",
+                "priceSpecification": { "@type": "UnitPriceSpecification", "price": "160", "priceCurrency": "TWD", "unitText": "piece" }
               }
             },
             {
@@ -443,31 +428,28 @@
               "@type": "MenuItem",
               "name": "Texas Style Chicken Wings",
               "description": "德州風味雞翅",
-              "offers": {
-                "@type": "Offer",
-                "price": "200 / 350",
-                "priceCurrency": "TWD"
-              }
+              "offers": [
+                { "@type": "Offer", "price": "200", "priceCurrency": "TWD" },
+                { "@type": "Offer", "price": "350", "priceCurrency": "TWD" }
+              ]
             },
             {
               "@type": "MenuItem",
               "name": "Garlic Butter Chicken Wings - Korean Style",
               "description": "韓式奶油蒜香雞翅",
-              "offers": {
-                "@type": "Offer",
-                "price": "200 / 350",
-                "priceCurrency": "TWD"
-              }
+              "offers": [
+                { "@type": "Offer", "price": "200", "priceCurrency": "TWD" },
+                { "@type": "Offer", "price": "350", "priceCurrency": "TWD" }
+              ]
             },
             {
               "@type": "MenuItem",
               "name": "Japanese Fried Chicken Nanban Style",
               "description": "日式南蠻炸雞",
-              "offers": {
-                "@type": "Offer",
-                "price": "200 / 360",
-                "priceCurrency": "TWD"
-              }
+              "offers": [
+                { "@type": "Offer", "price": "200", "priceCurrency": "TWD" },
+                { "@type": "Offer", "price": "360", "priceCurrency": "TWD" }
+              ]
             },
             {
               "@type": "MenuItem",
@@ -483,31 +465,28 @@
               "@type": "MenuItem",
               "name": "French Fries with Black Truffle Sauce",
               "description": "松露薯條",
-              "offers": {
-                "@type": "Offer",
-                "price": "180 / 340",
-                "priceCurrency": "TWD"
-              }
+              "offers": [
+                { "@type": "Offer", "price": "180", "priceCurrency": "TWD" },
+                { "@type": "Offer", "price": "340", "priceCurrency": "TWD" }
+              ]
             },
             {
               "@type": "MenuItem",
               "name": "French Fries",
               "description": "風味薯條",
-              "offers": {
-                "@type": "Offer",
-                "price": "160 / 280",
-                "priceCurrency": "TWD"
-              }
+              "offers": [
+                { "@type": "Offer", "price": "160", "priceCurrency": "TWD" },
+                { "@type": "Offer", "price": "280", "priceCurrency": "TWD" }
+              ]
             },
             {
               "@type": "MenuItem",
               "name": "Handmade Potato Chips with Tomato Salsa",
               "description": "手作洋芋切片佐莎莎醬",
-              "offers": {
-                "@type": "Offer",
-                "price": "160 / 280",
-                "priceCurrency": "TWD"
-              }
+              "offers": [
+                { "@type": "Offer", "price": "160", "priceCurrency": "TWD" },
+                { "@type": "Offer", "price": "280", "priceCurrency": "TWD" }
+              ]
             },
             {
               "@type": "MenuItem",
@@ -894,12 +873,38 @@
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": "https://natyang1234.github.io/dtownbyatrain-website/en/#website",
+    "@id": "https://natyang1234.github.io/dtownbyatrain-website/#website",
     "url": "https://natyang1234.github.io/dtownbyatrain-website/en/",
     "name": "D Town by A Train",
     "description": "A retro-British style bistro & cocktail bar in Taipei's East District, one of the largest in the area and just 1 minute from MRT Zhongxiao Fuxing — featuring signature handcrafted cocktails, Japanese wagyu and Tea Highball.",
+    "inLanguage": "en",
     "publisher": {
-      "@id": "https://natyang1234.github.io/dtownbyatrain-website/en/#restaurant"
+      "@id": "https://natyang1234.github.io/dtownbyatrain-website/#restaurant"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://natyang1234.github.io/dtownbyatrain-website/en/#webpage",
+    "url": "https://natyang1234.github.io/dtownbyatrain-website/en/",
+    "name": "D Town by A Train | Cocktail Bar & Bistro, Taipei East",
+    "description": "D Town by A Train: retro-British bistro & cocktail bar near MRT Zhongxiao Fuxing, Taipei. Handcrafted cocktails, Japanese wagyu, Tea Highball. Reserve now.",
+    "inLanguage": "en",
+    "isPartOf": { "@id": "https://natyang1234.github.io/dtownbyatrain-website/#website" },
+    "about": { "@id": "https://natyang1234.github.io/dtownbyatrain-website/#restaurant" },
+    "primaryImageOfPage": "https://natyang1234.github.io/dtownbyatrain-website/og-ambient-wide.jpg",
+    "datePublished": "2026-06-18",
+    "dateModified": "2026-09-30",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [
+        ".about-content p",
+        "#faq .faq-item:nth-of-type(1)",
+        "#faq .faq-item:nth-of-type(2)",
+        "#faq .faq-item:nth-of-type(3)"
+      ]
     }
   }
   </script>
@@ -1161,6 +1166,11 @@
     }
 
     /* ─── NAV ─── */
+    /* 跳到主要內容（鍵盤 Tab 第一下才出現；放 head 以免首屏先排成行內元素造成 CLS；用 top 隱藏而非 transform，reduced-motion 不會把它翻出來） */
+    .skip-link { position: fixed; top: -200px; left: 0; z-index: 1000; padding: .6rem 1rem; background: #0e0e0e; color: var(--gold); font-size: .85rem; letter-spacing: .08em; text-decoration: none; }
+    .skip-link:focus { top: 0; outline: 2px solid var(--gold); outline-offset: 2px; }
+    main:focus { outline: none; }
+
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -1971,21 +1981,33 @@
 
     .carousel-dots {
       display: flex;
-      gap: 0.5rem;
+      gap: 0; /* 點距不變：每顆按鈕 16px 寬（8px 點＋原本 0.5rem 間距），點擊範圍變大、外觀不變 */
     }
 
     .carousel-dot {
+      width: 16px;
+      height: 24px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-dot::before {
+      content: '';
+      display: block;
       width: 8px;
       height: 8px;
-      padding: 0;
       border-radius: 50%;
       border: 1px solid rgba(240,235,224,0.5);
       background: rgba(240,235,224,0.15);
-      cursor: pointer;
       transition: background 0.3s, transform 0.3s, border-color 0.3s;
     }
 
-    .carousel-dot.active {
+    .carousel-dot.active::before {
       background: var(--gold);
       border-color: var(--gold);
       transform: scale(1.25);
@@ -3641,9 +3663,10 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#main" data-aeo-ignore>Skip to main content</a>
 
   <!-- NAV -->
-  <nav>
+  <nav aria-label="Main navigation">
     <a class="nav-logo" href="#hero">
       <img src="../webp/favicon.webp" alt="D Town by A Train gold logo" class="nav-logo-img" width="101" height="180">
     </a>
@@ -3691,6 +3714,7 @@
     })();
   </script>
 
+  <main id="main" tabindex="-1">
   <!-- HERO -->
   <section id="hero">
     <div class="hero-pin">
@@ -4011,17 +4035,17 @@
       </div>
 
       <!-- TABS -->
-      <div class="menu-tabs">
-        <button class="tab-btn active" onclick="showTab('salad', this)">Salads</button>
-        <button class="tab-btn" onclick="showTab('main', this)">Mains</button>
-        <button class="tab-btn" onclick="showTab('recommend', this)">Chef's Picks</button>
-        <button class="tab-btn" onclick="showTab('soup', this)">Soups</button>
-        <button class="tab-btn" onclick="showTab('dessert', this)">Desserts</button>
-        <button class="tab-btn" onclick="showTab('snack', this)">Bites</button>
+      <div class="menu-tabs" role="tablist" aria-label="Menu categories">
+        <button class="tab-btn active" id="tab-btn-salad" role="tab" aria-selected="true" aria-controls="tab-salad" tabindex="0" onclick="showTab('salad', this)">Salads</button>
+        <button class="tab-btn" id="tab-btn-main" role="tab" aria-selected="false" aria-controls="tab-main" tabindex="-1" onclick="showTab('main', this)">Mains</button>
+        <button class="tab-btn" id="tab-btn-recommend" role="tab" aria-selected="false" aria-controls="tab-recommend" tabindex="-1" onclick="showTab('recommend', this)">Chef's Picks</button>
+        <button class="tab-btn" id="tab-btn-soup" role="tab" aria-selected="false" aria-controls="tab-soup" tabindex="-1" onclick="showTab('soup', this)">Soups</button>
+        <button class="tab-btn" id="tab-btn-dessert" role="tab" aria-selected="false" aria-controls="tab-dessert" tabindex="-1" onclick="showTab('dessert', this)">Desserts</button>
+        <button class="tab-btn" id="tab-btn-snack" role="tab" aria-selected="false" aria-controls="tab-snack" tabindex="-1" onclick="showTab('snack', this)">Bites</button>
       </div>
 
       <!-- 主廚推薦 -->
-      <div class="menu-panel" id="tab-recommend">
+      <div class="menu-panel" id="tab-recommend" role="tabpanel" aria-labelledby="tab-btn-recommend">
         <div class="menu-cat">
           <div class="menu-img-wrap" onclick="openMenuImg('recommend')">
             <img id="img-recommend" src="../webp/嫩煎脆皮烤半雞.webp" alt="D Town by A Train chef's pick — crispy roast half chicken" loading="lazy" width="1200" height="900" srcset="../webp/responsive/嫩煎脆皮烤半雞-480.webp 480w, ../webp/嫩煎脆皮烤半雞.webp 1200w" sizes="(max-width: 900px) 100vw, 400px" decoding="async" data-full-src="../webp/嫩煎脆皮烤半雞.webp">
@@ -4059,7 +4083,7 @@
       </div>
 
       <!-- 熱湯 SOUP -->
-      <div class="menu-panel" id="tab-soup">
+      <div class="menu-panel" id="tab-soup" role="tabpanel" aria-labelledby="tab-btn-soup">
         <div class="menu-cat">
           <div class="menu-img-wrap" onclick="openMenuImg('soup')">
             <img id="img-soup" src="../webp/清燉牛肉蛤蜊湯.webp" alt="D Town by A Train clear beef and clam soup" loading="lazy" width="1200" height="900" srcset="../webp/responsive/清燉牛肉蛤蜊湯-480.webp 480w, ../webp/清燉牛肉蛤蜊湯.webp 1200w" sizes="(max-width: 900px) 100vw, 400px" decoding="async" data-full-src="../webp/清燉牛肉蛤蜊湯.webp">
@@ -4083,7 +4107,7 @@
       </div>
 
       <!-- 甜點 DESSERT -->
-      <div class="menu-panel" id="tab-dessert">
+      <div class="menu-panel" id="tab-dessert" role="tabpanel" aria-labelledby="tab-btn-dessert">
         <div class="menu-cat">
           <div class="menu-img-wrap" onclick="openMenuImg('dessert')">
             <img id="img-dessert" src="../webp/甜點.webp" alt="D Town by A Train signature dessert" loading="lazy" width="1200" height="900" srcset="../webp/responsive/甜點-480.webp 480w, ../webp/甜點.webp 1200w" sizes="(max-width: 900px) 100vw, 400px" decoding="async" data-full-src="../webp/甜點.webp">
@@ -4107,7 +4131,7 @@
       </div>
 
       <!-- 小點 SNACK -->
-      <div class="menu-panel" id="tab-snack">
+      <div class="menu-panel" id="tab-snack" role="tabpanel" aria-labelledby="tab-btn-snack">
         <div class="menu-cat">
           <div class="menu-img-wrap" onclick="openMenuImg('snack')">
             <img id="img-snack" src="../webp/金磚起司豆腐.webp" alt="D Town by A Train must-try bite — golden cheese tofu" loading="lazy" width="1200" height="900" srcset="../webp/responsive/金磚起司豆腐-480.webp 480w, ../webp/金磚起司豆腐.webp 1200w" sizes="(max-width: 900px) 100vw, 400px" decoding="async" data-full-src="../webp/金磚起司豆腐.webp">
@@ -4314,7 +4338,7 @@
       </div>
 
       <!-- 輕食沙拉 -->
-      <div class="menu-panel active" id="tab-salad">
+      <div class="menu-panel active" id="tab-salad" role="tabpanel" aria-labelledby="tab-btn-salad">
         <div class="menu-cat">
           <div class="menu-img-wrap" onclick="openMenuImg('salad')">
             <img id="img-salad" src="../webp/布拉塔起司沙拉.webp" alt="D Town by A Train light bite — burrata salad with basil vinaigrette" loading="lazy" width="1200" height="900" srcset="../webp/responsive/布拉塔起司沙拉-480.webp 480w, ../webp/布拉塔起司沙拉.webp 1200w" sizes="(max-width: 900px) 100vw, 400px" decoding="async" data-full-src="../webp/布拉塔起司沙拉.webp">
@@ -4359,7 +4383,7 @@
       </div>
 
       <!-- 飽食主餐 -->
-      <div class="menu-panel" id="tab-main">
+      <div class="menu-panel" id="tab-main" role="tabpanel" aria-labelledby="tab-btn-main">
         <div class="menu-cat">
           <div class="menu-img-wrap" onclick="openMenuImg('main')">
             <img id="img-main" src="../webp/牛小排燉飯.webp" alt="D Town by A Train main course — boneless short rib cream risotto" loading="lazy" width="1200" height="900" srcset="../webp/responsive/牛小排燉飯-480.webp 480w, ../webp/牛小排燉飯.webp 1200w" sizes="(max-width: 900px) 100vw, 400px" decoding="async" data-full-src="../webp/牛小排燉飯.webp">
@@ -4664,7 +4688,7 @@
         color: var(--grey-light); font-size: 0.85rem; line-height: 1.9;
       }
       #latest-news .news-warn {
-        margin-top: 0.6rem; color: rgba(240,235,224,0.45);
+        margin-top: 0.6rem; color: rgba(240,235,224,0.52);
         font-size: 0.78rem; letter-spacing: 0.05em;
       }
       .news-video-wrap {
@@ -4683,7 +4707,7 @@
       }
       .video-sound-btn:active { transform: scale(0.94); }
       .video-sound-hint {
-        margin: 0.7rem auto 0; color: rgba(240,235,224,0.45);
+        margin: 0.7rem auto 0; color: rgba(240,235,224,0.52);
         font-size: 0.75rem; letter-spacing: 0.04em;
       }
       @media (max-width: 700px) {
@@ -5012,10 +5036,36 @@
 
     function showTab(id, trigger) {
       document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active');
+        if (b.getAttribute('role') === 'tab') { b.setAttribute('aria-selected', 'false'); b.setAttribute('tabindex', '-1'); }
+      });
       document.getElementById('tab-' + id).classList.add('active');
-      if (trigger) trigger.classList.add('active');
+      if (!trigger) trigger = document.getElementById('tab-btn-' + id);
+      if (trigger) {
+        trigger.classList.add('active');
+        if (trigger.getAttribute('role') === 'tab') { trigger.setAttribute('aria-selected', 'true'); trigger.setAttribute('tabindex', '0'); }
+      }
     }
+    // 鍵盤：tablist 內 ←/→/Home/End 切換分類（WAI-ARIA tabs pattern；非 tab 鍵盤使用者不受影響）
+    (function () {
+      var list = document.querySelector('.menu-tabs[role="tablist"]');
+      if (!list) return;
+      list.addEventListener('keydown', function (e) {
+        var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+        var i = tabs.indexOf(document.activeElement);
+        if (i < 0) return;
+        var n = null;
+        if (e.key === 'ArrowRight') n = (i + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home') n = 0;
+        else if (e.key === 'End') n = tabs.length - 1;
+        if (n === null) return;
+        e.preventDefault();
+        tabs[n].focus();
+        tabs[n].click();
+      });
+    })();
 
     var lightboxReturnFocus = null;
     var lightboxBodyOverflow = '';
@@ -5261,6 +5311,9 @@
     </div>
   </div>
 
+  <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2" class="book-fab" target="_blank" rel="noopener" aria-label="Book online"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zm0-13H5V6h14v1zM7 11h5v5H7z"/></svg></a>
+  </main>
+
   <!-- FOOTER -->
   <footer>
     <img src="../webp/logo.webp" loading="lazy" decoding="async" alt="D Town by A Train" class="footer-logo-img" width="940" height="1672" onclick="this.classList.add('logo-glow');setTimeout(()=>this.classList.remove('logo-glow'),1500)">
@@ -5277,7 +5330,6 @@
   </footer>
 
   <!-- Sticky mobile booking button -->
-  <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2" class="book-fab" target="_blank" rel="noopener" aria-label="Book online"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zm0-13H5V6h14v1zM7 11h5v5H7z"/></svg></a>
 
   <style>
   /* ── Conversion upgrades 2026-06-24 ── */
@@ -5331,6 +5383,16 @@
         el.insertBefore(b,el.firstChild);
         return;
       }
+      if(el.classList.contains('menu-img-wrap')){
+        // 圖框內還有上一道／下一道箭頭鈕，整個圖框不能再當 button（巢狀互動元件）。
+        // 改放一顆隱形原生 button 給鍵盤：aria-label 命名、不含文字節點（護欄不計）、pointer-events:none 不擋滑鼠。
+        var wb=document.createElement('button');
+        wb.type='button';wb.className='menu-item-btn menu-img-btn';
+        wb.setAttribute('aria-label','Enlarge current dish photo');
+        wb.addEventListener('click',function(e){e.stopPropagation();el.click();});
+        el.insertBefore(wb,el.firstChild);
+        return;
+      }
       if(!el.hasAttribute('tabindex'))el.setAttribute('tabindex','0');
       if(!el.hasAttribute('role'))el.setAttribute('role','button');
       el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}});
@@ -5343,6 +5405,8 @@
   .menu-item{position:relative}
   .menu-item-btn{position:absolute;inset:0;width:100%;height:100%;opacity:0;border:0;background:transparent;cursor:pointer;font:inherit;color:transparent}
   .menu-item-btn:focus-visible{opacity:1;outline:2px solid var(--gold);outline-offset:-2px}
+  .menu-img-btn{pointer-events:none;z-index:1}
+  @media (hover: none), (pointer: coarse){ .menu-img-btn{display:none} } /* 手機不做點圖放大（openMenuImg 直接 return），不給鍵盤一顆沒作用的鈕 */
   .news-video-wrap video{aspect-ratio:9/16}
   </style>
 
