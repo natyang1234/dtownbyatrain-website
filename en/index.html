@@ -3565,10 +3565,13 @@
     @media (prefers-reduced-motion: reduce) {
       .chapter-rail, .chapter-rail *, .nav-chapter { transition: none !important; }
     }
+    /* 速度（2026-10-23）：畫面外的區塊延後排版，文字仍在 HTML 裡，爬蟲與輔助技術照讀 */
+    main > section.page-section, body > section.page-section { content-visibility: auto; contain-intrinsic-size: auto 1200px; }
+    html.cv-off section.page-section { content-visibility: visible; }   /* 點頁內連結前先全部排好版，跳轉位置才準 */
   </style>
 
   <!-- Google Analytics 4 (G-PDTWFFHRPV) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PDTWFFHRPV"></script>
+  <script>/* 速度（2026-10-23）：GA 不跟首屏搶頻寬——頁面載完或客人第一次觸碰／捲動／按鍵就載（取先發生者）；網址帶 #錨點時一開始就關掉延後排版，深連結落點才準 */(function(){if(location.hash)document.documentElement.classList.add('cv-off');var done=false;function ga(){if(done)return;done=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-PDTWFFHRPV';document.head.appendChild(s);}window.addEventListener('load',ga);['pointerdown','keydown','scroll','touchstart'].forEach(function(t){window.addEventListener(t,ga,{once:true,passive:true});});})();</script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -3699,7 +3702,7 @@
         <div class="hero-logo-3d">
           <div class="hero-logo-light"></div>
           <div class="hero-logo-frame"></div>
-          <img class="hero-logo-glow" src="../webp/hero-logo-glow.webp" alt="" width="600" height="518" decoding="async">
+          <img class="hero-logo-glow" src="../webp/hero-logo-glow.webp" alt="" width="600" height="518" decoding="async" fetchpriority="high">
           <img class="hero-logo-side hero-logo-side-extra" style="--d:24" src="../webp/hero-logo-side.webp" alt="" width="1400" height="1213" decoding="async">
           <img class="hero-logo-side" style="--d:18" src="../webp/hero-logo-side.webp" alt="" width="1400" height="1213" decoding="async">
           <img class="hero-logo-side hero-logo-side-extra" style="--d:12" src="../webp/hero-logo-side.webp" alt="" width="1400" height="1213" decoding="async">
@@ -5369,6 +5372,7 @@
   })();
   </script>
 
+<script>(function(){function off(){document.documentElement.classList.add('cv-off');}document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(a)off();},true);window.addEventListener('hashchange',off);})();</script>
 <script src="../cocktail-particles.js?v=20260930f" defer></script>
 <script src="../hero-logo.js?v=20260929j" defer></script>
 <script>
