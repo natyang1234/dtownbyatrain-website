@@ -3571,7 +3571,7 @@
   </style>
 
   <!-- Google Analytics 4 (G-PDTWFFHRPV) -->
-  <script>/* 速度（2026-10-23）：GA 不跟首屏搶頻寬——頁面載完或客人第一次觸碰／捲動／按鍵就載（取先發生者）；網址帶 #錨點時一開始就關掉延後排版，深連結落點才準 */(function(){if(location.hash)document.documentElement.classList.add('cv-off');var done=false;function ga(){if(done)return;done=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-PDTWFFHRPV';document.head.appendChild(s);}window.addEventListener('load',ga);['pointerdown','keydown','scroll','touchstart'].forEach(function(t){window.addEventListener(t,ga,{once:true,passive:true});});})();</script>
+  <script>/* 只在正式網域載 GA（本機／預覽測試不污染數據，2026-10-23）；速度（2026-10-23）：GA 不跟首屏搶頻寬——頁面載完或客人第一次觸碰／捲動／按鍵就載（取先發生者）；網址帶 #錨點時一開始就關掉延後排版，深連結落點才準 */(function(){if(location.hash)document.documentElement.classList.add('cv-off');var done=false;function ga(){if(done)return;done=true;if(!/(^|\.)dtownbyatrain\.com$/.test(location.hostname))return;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-PDTWFFHRPV';document.head.appendChild(s);}window.addEventListener('load',ga);['pointerdown','keydown','scroll','touchstart'].forEach(function(t){window.addEventListener(t,ga,{once:true,passive:true});});})();</script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
