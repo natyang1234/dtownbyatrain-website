@@ -546,7 +546,7 @@
       "description": "忠孝復興 4 號出口・SOGO 旁巷子・Qmomo 旁小門上 2 樓，D Town by A Train 入口導覽影片。",
       "thumbnailUrl": "https://dtownbyatrain.com/dtown-entrance-poster.jpg",
       "contentUrl": "https://dtownbyatrain.com/dtown-entrance.mp4",
-      "uploadDate": "2026-07-06",
+      "uploadDate": "2026-07-06T00:00:00+08:00",
       "duration": "PT17S"
      },
      "speakable": {
@@ -2252,7 +2252,7 @@
       "description": "MRT Zhongxiao Fuxing Exit 4, the lane beside SOGO, up to 2F through the small door next to Qmomo — D Town by A Train entrance walk-through video.",
       "thumbnailUrl": "https://dtownbyatrain.com/dtown-entrance-poster.jpg",
       "contentUrl": "https://dtownbyatrain.com/dtown-entrance.mp4",
-      "uploadDate": "2026-07-06",
+      "uploadDate": "2026-07-06T00:00:00+08:00",
       "duration": "PT17S"
      },
      "speakable": {
