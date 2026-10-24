@@ -1162,6 +1162,11 @@
     }
 
     /* ─── NAV ─── */
+    /* 跳到主要內容：鍵盤 Tab 第一下才出現（放 head 避免 CLS；用 top 隱藏而非 transform） */
+    .skip-link { position: fixed; top: -200px; left: 0; z-index: 1000; padding: .6rem 1rem; background: #0e0e0e; color: var(--gold); font-size: .85rem; letter-spacing: .08em; text-decoration: none; }
+    .skip-link:focus { top: 0; outline: 2px solid var(--gold); outline-offset: 2px; }
+    main:focus { outline: none; }
+
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -1972,21 +1977,34 @@
 
     .carousel-dots {
       display: flex;
-      gap: 0.5rem;
+      gap: 0; /* 每顆按鈕 24×24（WCAG 2.5.8 target-size），點距 24px；可見圓點仍是 8px */
     }
 
     .carousel-dot {
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-dot::before {
+      content: '';
+      display: block;
       width: 8px;
       height: 8px;
-      padding: 0;
+      box-sizing: border-box;
       border-radius: 50%;
       border: 1px solid rgba(240,235,224,0.5);
       background: rgba(240,235,224,0.15);
-      cursor: pointer;
       transition: background 0.3s, transform 0.3s, border-color 0.3s;
     }
 
-    .carousel-dot.active {
+    .carousel-dot.active::before {
       background: var(--gold);
       border-color: var(--gold);
       transform: scale(1.25);
@@ -3645,9 +3663,10 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#main" data-aeo-ignore>跳到主要內容</a>
 
   <!-- NAV -->
-  <nav>
+  <nav aria-label="主選單">
     <a class="nav-logo" href="#hero">
       <img src="webp/favicon.webp" alt="D Town by A Train 金色 logo" class="nav-logo-img" width="101" height="180">
     </a>
@@ -3695,6 +3714,7 @@
     })();
   </script>
 
+  <main id="main" tabindex="-1">
   <!-- HERO -->
   <section id="hero">
     <div class="hero-pin">
@@ -4015,17 +4035,17 @@
       </div>
 
       <!-- TABS -->
-      <div class="menu-tabs">
-        <button class="tab-btn active" onclick="showTab('salad', this)">沙拉</button>
-        <button class="tab-btn" onclick="showTab('main', this)">主食</button>
-        <button class="tab-btn" onclick="showTab('recommend', this)">主廚推薦</button>
-        <button class="tab-btn" onclick="showTab('soup', this)">熱湯</button>
-        <button class="tab-btn" onclick="showTab('dessert', this)">甜點</button>
-        <button class="tab-btn" onclick="showTab('snack', this)">小點</button>
+      <div class="menu-tabs" role="tablist" aria-label="菜單分類">
+        <button class="tab-btn active" id="tab-btn-salad" role="tab" aria-selected="true" aria-controls="tab-salad" tabindex="0" onclick="showTab('salad', this)">沙拉</button>
+        <button class="tab-btn" id="tab-btn-main" role="tab" aria-selected="false" aria-controls="tab-main" tabindex="-1" onclick="showTab('main', this)">主食</button>
+        <button class="tab-btn" id="tab-btn-recommend" role="tab" aria-selected="false" aria-controls="tab-recommend" tabindex="-1" onclick="showTab('recommend', this)">主廚推薦</button>
+        <button class="tab-btn" id="tab-btn-soup" role="tab" aria-selected="false" aria-controls="tab-soup" tabindex="-1" onclick="showTab('soup', this)">熱湯</button>
+        <button class="tab-btn" id="tab-btn-dessert" role="tab" aria-selected="false" aria-controls="tab-dessert" tabindex="-1" onclick="showTab('dessert', this)">甜點</button>
+        <button class="tab-btn" id="tab-btn-snack" role="tab" aria-selected="false" aria-controls="tab-snack" tabindex="-1" onclick="showTab('snack', this)">小點</button>
       </div>
 
       <!-- 主廚推薦 -->
-      <div class="menu-panel" id="tab-recommend">
+      <div class="menu-panel" id="tab-recommend" role="tabpanel" aria-labelledby="tab-btn-recommend">
         <div class="menu-cat">
           <div class="menu-img-wrap" onclick="openMenuImg('recommend')">
             <img id="img-recommend" src="webp/嫩煎脆皮烤半雞.webp" alt="D Town by A Train 主廚推薦 嫩煎脆皮烤半雞" loading="lazy" width="1200" height="900" srcset="webp/responsive/嫩煎脆皮烤半雞-480.webp 480w, webp/嫩煎脆皮烤半雞.webp 1200w" sizes="(max-width: 900px) 100vw, 400px" decoding="async" data-full-src="webp/嫩煎脆皮烤半雞.webp">
@@ -4063,7 +4083,7 @@
       </div>
 
       <!-- 熱湯 SOUP -->
-      <div class="menu-panel" id="tab-soup">
+      <div class="menu-panel" id="tab-soup" role="tabpanel" aria-labelledby="tab-btn-soup">
         <div class="menu-cat">
           <div class="menu-img-wrap" onclick="openMenuImg('soup')">
             <img id="img-soup" src="webp/清燉牛肉蛤蜊湯.webp" alt="D Town by A Train 清燉牛肉蛤蜊湯" loading="lazy" width="1200" height="900" srcset="webp/responsive/清燉牛肉蛤蜊湯-480.webp 480w, webp/清燉牛肉蛤蜊湯.webp 1200w" sizes="(max-width: 900px) 100vw, 400px" decoding="async" data-full-src="webp/清燉牛肉蛤蜊湯.webp">
@@ -4087,7 +4107,7 @@
       </div>
 
       <!-- 甜點 DESSERT -->
-      <div class="menu-panel" id="tab-dessert">
+      <div class="menu-panel" id="tab-dessert" role="tabpanel" aria-labelledby="tab-btn-dessert">
         <div class="menu-cat">
           <div class="menu-img-wrap" onclick="openMenuImg('dessert')">
             <img id="img-dessert" src="webp/甜點.webp" alt="D Town by A Train 特製甜點" loading="lazy" width="1200" height="900" srcset="webp/responsive/甜點-480.webp 480w, webp/甜點.webp 1200w" sizes="(max-width: 900px) 100vw, 400px" decoding="async" data-full-src="webp/甜點.webp">
@@ -4111,7 +4131,7 @@
       </div>
 
       <!-- 小點 SNACK -->
-      <div class="menu-panel" id="tab-snack">
+      <div class="menu-panel" id="tab-snack" role="tabpanel" aria-labelledby="tab-btn-snack">
         <div class="menu-cat">
           <div class="menu-img-wrap" onclick="openMenuImg('snack')">
             <img id="img-snack" src="webp/金磚起司豆腐.webp" alt="D Town by A Train 必點小點 金磚起司豆腐" loading="lazy" width="1200" height="900" srcset="webp/responsive/金磚起司豆腐-480.webp 480w, webp/金磚起司豆腐.webp 1200w" sizes="(max-width: 900px) 100vw, 400px" decoding="async" data-full-src="webp/金磚起司豆腐.webp">
@@ -4318,7 +4338,7 @@
       </div>
 
       <!-- 輕食沙拉 -->
-      <div class="menu-panel active" id="tab-salad">
+      <div class="menu-panel active" id="tab-salad" role="tabpanel" aria-labelledby="tab-btn-salad">
         <div class="menu-cat">
           <div class="menu-img-wrap" onclick="openMenuImg('salad')">
             <img id="img-salad" src="webp/布拉塔起司沙拉.webp" alt="D Town by A Train 輕食沙拉 布拉塔起司沙拉佐羅勒油醋醬" loading="lazy" width="1200" height="900" srcset="webp/responsive/布拉塔起司沙拉-480.webp 480w, webp/布拉塔起司沙拉.webp 1200w" sizes="(max-width: 900px) 100vw, 400px" decoding="async" data-full-src="webp/布拉塔起司沙拉.webp">
@@ -4363,7 +4383,7 @@
       </div>
 
       <!-- 飽食主餐 -->
-      <div class="menu-panel" id="tab-main">
+      <div class="menu-panel" id="tab-main" role="tabpanel" aria-labelledby="tab-btn-main">
         <div class="menu-cat">
           <div class="menu-img-wrap" onclick="openMenuImg('main')">
             <img id="img-main" src="webp/牛小排燉飯.webp" alt="D Town by A Train 主餐 無骨牛小排奶油燉飯" loading="lazy" width="1200" height="900" srcset="webp/responsive/牛小排燉飯-480.webp 480w, webp/牛小排燉飯.webp 1200w" sizes="(max-width: 900px) 100vw, 400px" decoding="async" data-full-src="webp/牛小排燉飯.webp">
@@ -4668,7 +4688,7 @@
         color: var(--grey-light); font-size: 0.85rem; line-height: 1.9;
       }
       #latest-news .news-warn {
-        margin-top: 0.6rem; color: rgba(240,235,224,0.45);
+        margin-top: 0.6rem; color: rgba(240,235,224,0.52);
         font-size: 0.78rem; letter-spacing: 0.05em;
       }
       .news-video-wrap {
@@ -4690,7 +4710,7 @@
       }
       .video-sound-btn:active { transform: scale(0.94); }
       .video-sound-hint {
-        margin: 0.7rem auto 0; color: rgba(240,235,224,0.45);
+        margin: 0.7rem auto 0; color: rgba(240,235,224,0.52);
         font-size: 0.75rem; letter-spacing: 0.04em;
       }
       /* 手機：縮小 hero 下方與本區的間距 */
@@ -5010,10 +5030,36 @@
 
     function showTab(id, trigger) {
       document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active');
+        if (b.getAttribute('role') === 'tab') { b.setAttribute('aria-selected', 'false'); b.setAttribute('tabindex', '-1'); }
+      });
       document.getElementById('tab-' + id).classList.add('active');
-      if (trigger) trigger.classList.add('active');
+      if (!trigger) trigger = document.getElementById('tab-btn-' + id);
+      if (trigger) {
+        trigger.classList.add('active');
+        if (trigger.getAttribute('role') === 'tab') { trigger.setAttribute('aria-selected', 'true'); trigger.setAttribute('tabindex', '0'); }
+      }
     }
+    // 鍵盤：tablist 內 ←/→/Home/End 切換分類（WAI-ARIA tabs pattern）
+    (function () {
+      var list = document.querySelector('.menu-tabs[role="tablist"]');
+      if (!list) return;
+      list.addEventListener('keydown', function (e) {
+        var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+        var i = tabs.indexOf(document.activeElement);
+        if (i < 0) return;
+        var n = null;
+        if (e.key === 'ArrowRight') n = (i + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home') n = 0;
+        else if (e.key === 'End') n = tabs.length - 1;
+        if (n === null) return;
+        e.preventDefault();
+        tabs[n].focus();
+        tabs[n].click();
+      });
+    })();
 
     var lightboxReturnFocus = null;
     var lightboxBodyOverflow = '';
@@ -5259,6 +5305,10 @@
     </div>
   </div>
 
+  <!-- 手機常駐訂位浮動鈕（放在 main 內以免落在地標外；position:fixed，位置不變） -->
+  <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2" class="book-fab" target="_blank" rel="noopener" aria-label="線上訂位"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zm0-13H5V6h14v1zM7 11h5v5H7z"/></svg></a>
+  </main>
+
   <!-- FOOTER -->
   <footer>
     <img src="webp/logo.webp" loading="lazy" decoding="async" alt="D Town by A Train" class="footer-logo-img" width="940" height="1672" onclick="this.classList.add('logo-glow');setTimeout(()=>this.classList.remove('logo-glow'),1500)">
@@ -5273,9 +5323,6 @@
     <!-- ⚠️ 改版鐵則：每次更新網站內容，此行日期＋schema dateModified＋sitemap lastmod 三處同步改 -->
     <p class="footer-copy">資訊最後更新：2026-10-22</p>
   </footer>
-
-  <!-- 手機常駐訂位浮動鈕 -->
-  <a href="https://inline.app/booking/-NBFXYkdEjNVSH3a2oug:inline-live-1/-NN_nxGgCfzSvaC2Mkj2" class="book-fab" target="_blank" rel="noopener" aria-label="線上訂位"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zm0-13H5V6h14v1zM7 11h5v5H7z"/></svg></a>
 
   <style>
   /* ── 轉換升級 2026-06-24 ── */
@@ -5329,6 +5376,16 @@
         el.insertBefore(b,el.firstChild);
         return;
       }
+      if(el.classList.contains('menu-img-wrap')){
+        // 圖框內有上一道／下一道箭頭鈕，整個圖框不能再當 button（巢狀互動元件）。
+        // 改放一顆隱形原生 button 給鍵盤：aria-label 命名、不含文字節點、pointer-events:none 不擋滑鼠。
+        var wb=document.createElement('button');
+        wb.type='button';wb.className='menu-item-btn menu-img-btn';
+        wb.setAttribute('aria-label','放大目前菜色圖片');
+        wb.addEventListener('click',function(e){e.stopPropagation();el.click();});
+        el.insertBefore(wb,el.firstChild);
+        return;
+      }
       if(!el.hasAttribute('tabindex'))el.setAttribute('tabindex','0');
       if(!el.hasAttribute('role'))el.setAttribute('role','button');
       el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}});
@@ -5341,6 +5398,8 @@
   .menu-item{position:relative}
   .menu-item-btn{position:absolute;inset:0;width:100%;height:100%;opacity:0;border:0;background:transparent;cursor:pointer;font:inherit;color:transparent}
   .menu-item-btn:focus-visible{opacity:1;outline:2px solid var(--gold);outline-offset:-2px}
+  .menu-img-btn{pointer-events:none;z-index:1}
+  @media not all and (hover: hover) and (pointer: fine){ .menu-img-btn{display:none} } /* 與 openMenuImg 同條件：不能放大的裝置不給鍵盤一顆沒作用的鈕 */
   .news-video-wrap video{aspect-ratio:9/16}
   </style>
 
