@@ -14,7 +14,7 @@ for(const lang of ['', '/en']) {
  await page.waitForTimeout(700);
  async function check(name,fn){try{await fn();console.log('PASS',lang||'ZH',name)}catch(e){failures++;console.log('FAIL',lang||'ZH',name,e.message)}}
  await check('no offscreen video requests',()=>assert.equal(media.length,0));
- // 特調區（10/24 起）＝粒子舞台＋「看原版酒單圖」按鈕開 lightbox 海報（864×1080）
+ // 特調區（9/29 `718b3ea` 起）＝粒子舞台＋「看原版酒單圖」按鈕開 lightbox 海報（864×1080）
  await page.locator('#cs-poster-link').scrollIntoViewIfNeeded();
  await page.locator('#cs-poster-link').click();
  await check('poster button opens lightbox',async()=>assert.equal(await page.locator('#cocktail-lightbox').evaluate(el=>el.style.display),'flex'));
