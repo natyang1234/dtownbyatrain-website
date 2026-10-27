@@ -14,10 +14,11 @@ for(const lang of ['', '/en']) {
  await page.waitForTimeout(700);
  async function check(name,fn){try{await fn();console.log('PASS',lang||'ZH',name)}catch(e){failures++;console.log('FAIL',lang||'ZH',name,e.message)}}
  await check('no offscreen video requests',()=>assert.equal(media.length,0));
- await page.evaluate(()=>showTab('cocktail',document.querySelector('[onclick*="showTab(\'cocktail\'"]')));
- await page.locator('.cocktail-menu-card').first().scrollIntoViewIfNeeded();
- await check('correct cocktail aspect ratio',async()=>{const r=await page.locator('.cocktail-menu-card img').first().boundingBox();assert.ok(Math.abs(r.width/r.height-0.8)<0.02,JSON.stringify(r))});
- await page.evaluate(()=>openLightbox(document.querySelector('.cocktail-menu-card img').src,'test'));
+ // 特調區（10/24 起）＝粒子舞台＋「看原版酒單圖」按鈕開 lightbox 海報（864×1080）
+ await page.locator('#cs-poster-link').scrollIntoViewIfNeeded();
+ await page.locator('#cs-poster-link').click();
+ await check('poster button opens lightbox',async()=>assert.equal(await page.locator('#cocktail-lightbox').evaluate(el=>el.style.display),'flex'));
+ await check('correct cocktail poster aspect ratio',async()=>{await page.waitForFunction(()=>{const i=document.getElementById('lb-img');return i.complete&&i.naturalWidth>0},null,{timeout:5000});const r=await page.locator('#lb-img').boundingBox();assert.ok(Math.abs(r.width/r.height-0.8)<0.02,JSON.stringify(r))});
  await check('close button above nav',async()=>assert.equal(await page.locator('.lightbox-close').evaluate(el=>{const r=el.getBoundingClientRect();return document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)===el}),true));
  await page.keyboard.press('Escape');
  await check('escape restores scroll',async()=>assert.equal(await page.evaluate(()=>document.body.style.overflow),''));
