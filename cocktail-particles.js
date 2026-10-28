@@ -1,8 +1,9 @@
-/* D Town 特調粒子舞台（中英兩頁共用）
- * 每杯的粒子直接取樣自酒單插圖（webp/cocktail-particles-atlas.webp，取自原始酒單 PDF 的去背圖逐杯拼成），
- * 所以杯型、酒色、裝飾物都跟酒單一致。酒名／價格／原料則讀自頁面上的 .cocktail-text-item。
- * three.js 與圖集只在舞台第一次進入畫面時才載入，不影響首屏。
- * 無 WebGL／載入失敗／context lost → .is-fallback（顯示該杯原插圖＋文字），選單照常可用。
+/* D Town 特調舞台（中英兩頁共用）
+ * 平常顯示該杯的深色酒杯照（webp/cocktail-photo-*.webp，AI 生成示意照）；換杯時照片化成粒子、散開後聚成下一杯，聚好換回清晰照片。
+ * 粒子取樣自 webp/cocktail-photo-atlas.webp（24 張照片的去背杯子拼成）。PHOTOS 記下每杯在圖集與照片裡的位置，
+ * 所以粒子聚成的杯子跟照片裡的杯子疊得上。酒名／價格／原料讀自頁面上的 .cocktail-text-item。
+ * three.js 與圖集只在舞台第一次進入畫面、且裝置適合跑粒子時才載入。
+ * 減少動態／低階裝置／無 WebGL／載入失敗／context lost → 直接淡出淡入換照片，選單照常可用。
  */
 (function () {
   'use strict';
@@ -11,21 +12,47 @@
 
   var THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js';
   var scriptSrc = (document.currentScript && document.currentScript.src) || location.href;
-  var ATLAS_URL = new URL('webp/cocktail-particles-atlas.webp?v=4', scriptSrc).href; // 換圖集記得改 v
-  var ATLAS_W = 1080, ATLAS_H = 800;
-  // 圖集內每杯的位置 [x, y, w, h]，順序＝酒單順序（每系列 6 杯）
-  var RECTS = [
-    [62, 4, 56, 194], [216, 32, 107, 166], [409, 30, 82, 168], [587, 31, 86, 167], [755, 44, 110, 154], [940, 34, 100, 164],
-    [44, 237, 92, 161], [200, 248, 140, 150], [414, 217, 71, 181], [559, 237, 141, 161], [752, 234, 115, 164], [937, 258, 105, 140],
-    [35, 428, 109, 170], [184, 434, 172, 164], [376, 446, 147, 152], [588, 441, 83, 157], [752, 435, 116, 163], [931, 471, 117, 127],
-    [64, 617, 51, 181], [195, 630, 150, 168], [382, 639, 135, 159], [602, 617, 55, 181], [756, 637, 108, 161], [951, 626, 77, 172]
+  function asset(p) { return new URL(p, scriptSrc).href; }
+  var ATLAS_URL = asset('webp/cocktail-photo-atlas.webp?v=1'); // 換圖集記得改 v
+  var IMG_W = 900, IMG_H = 1125;        // 照片尺寸（4:5）
+  var POS_X = 0.5, POS_Y = 0.55;        // 與 CSS .cs-photo 的 object-position 一致，粒子才疊得上照片
+  // 每杯 [照片, 圖集位置 [x, y, w, h], 杯子在照片裡的位置 [x, y, w, h]（0–1）]；順序＝酒單順序
+  var PHOTOS = [
+    ['webp/cocktail-photo-gummy-bear.webp', [53, 0, 73, 250], [0.3967, 0.2604, 0.2056, 0.56]],
+    ['webp/cocktail-photo-snow-white.webp', [188, 0, 163, 250], [0.2722, 0.2596, 0.4556, 0.56]],
+    ['webp/cocktail-photo-zeal.webp', [389, 0, 121, 250], [0.33, 0.2604, 0.3389, 0.5591]],
+    ['webp/cocktail-photo-green-day.webp', [572, 0, 116, 250], [0.3378, 0.2604, 0.3244, 0.5591]],
+    ['webp/cocktail-photo-ibuki.webp', [720, 17, 180, 233], [0.2311, 0.2604, 0.5389, 0.5591]],
+    ['webp/cocktail-photo-memory.webp', [915, 0, 150, 250], [0.29, 0.2596, 0.4189, 0.56]],
+    ['webp/cocktail-photo-dusk.webp', [20, 250, 140, 250], [0.3033, 0.2596, 0.3933, 0.5609]],
+    ['webp/cocktail-photo-trinity.webp', [180, 294, 180, 206], [0.1944, 0.2604, 0.6111, 0.56]],
+    ['webp/cocktail-photo-orange-valley.webp', [396, 250, 108, 250], [0.3478, 0.2596, 0.3033, 0.5609]],
+    ['webp/cocktail-photo-wings-on-field.webp', [540, 288, 180, 212], [0.2033, 0.2596, 0.5933, 0.56]],
+    ['webp/cocktail-photo-wave.webp', [720, 258, 180, 242], [0.24, 0.2596, 0.52, 0.56]],
+    ['webp/cocktail-photo-tokyo-banana.webp', [902, 250, 176, 250], [0.2533, 0.2596, 0.4933, 0.5609]],
+    ['webp/cocktail-photo-sunday-morning.webp', [6, 500, 168, 250], [0.2644, 0.2604, 0.4711, 0.56]],
+    ['webp/cocktail-photo-destination.webp', [180, 577, 180, 173], [0.1367, 0.2604, 0.7278, 0.5591]],
+    ['webp/cocktail-photo-yoasobi.webp', [360, 563, 180, 187], [0.1778, 0.2596, 0.6733, 0.56]],
+    ['webp/cocktail-photo-treasure.webp', [566, 500, 128, 250], [0.3211, 0.2604, 0.3578, 0.5591]],
+    ['webp/cocktail-photo-arashiyama.webp', [727, 500, 166, 250], [0.2678, 0.2596, 0.4644, 0.5609]],
+    ['webp/cocktail-photo-twilight.webp', [900, 549, 180, 201], [0.1856, 0.2604, 0.6278, 0.56]],
+    ['webp/cocktail-photo-french-69.webp', [51, 750, 78, 250], [0.3911, 0.2604, 0.2178, 0.56]],
+    ['webp/cocktail-photo-ciao.webp', [180, 806, 180, 194], [0.1744, 0.2604, 0.6511, 0.56]],
+    ['webp/cocktail-photo-under-the-bridge.webp', [360, 799, 180, 201], [0.1856, 0.2596, 0.6289, 0.5609]],
+    ['webp/cocktail-photo-geisha.webp', [591, 750, 78, 250], [0.39, 0.2604, 0.2189, 0.56]],
+    ['webp/cocktail-photo-ember.webp', [725, 750, 170, 250], [0.2622, 0.2604, 0.4756, 0.5591]],
+    ['webp/cocktail-photo-boogie-wonderland.webp', [929, 750, 122, 250], [0.3289, 0.2596, 0.3411, 0.56]]
   ];
-  // 原圖解析度不夠、要用粒子重畫的裝飾物（座標為該杯插圖內的像素座標）
-  // Snow White：酒單原圖的三瓣玫瑰只有約 28×9px，粒子重現不出來 → 擦掉改畫
-  var GARNISH = {
-    1: { erase: [34, 8, 71, 25], foam: [252, 249, 243], petals: { cx: 52, cy: 19, len: 16, wid: 9 } }
-  };
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var lowEnd = (navigator.hardwareConcurrency || 8) <= 4;
+  var useFx = !reduceMotion && !lowEnd;
+
+  // 小圖路徑：webp/x.webp → webp/responsive/x-480.webp（與 index.html 的 smallSrc 同規則）
+  function smallSrc(src) {
+    var parts = src.split('/');
+    var file = parts.pop().replace(/(\.webp)$/, '-480$1');
+    return parts.concat('responsive', file).join('/');
+  }
 
   // ---- 從文字酒單收集 24 杯 ----
   var drinks = [];
@@ -40,6 +67,7 @@
       var price = item.querySelector('.cocktail-text-price');
       var desc = item.querySelector('.cocktail-text-description');
       var name = h5 ? (h5.firstChild && h5.firstChild.textContent || h5.textContent).trim() : '';
+      var photo = PHOTOS[drinks.length % PHOTOS.length];
       drinks.push({
         index: drinks.length,
         name: name,
@@ -47,8 +75,7 @@
         desc: desc ? desc.textContent.trim() : '',
         series: si,
         el: item,
-        rect: RECTS[drinks.length % RECTS.length],
-        tint: null   // 圖集載入後填入該杯平均色，用於背景光暈
+        photo: photo
       });
     });
   });
@@ -60,19 +87,17 @@
     desc: stage.querySelector('.cs-desc'),
     price: stage.querySelector('.cs-price'),
     info: stage.querySelector('.cs-info'),
+    photo: stage.querySelector('.cs-photo'),
     canvas: stage.querySelector('canvas'),
     prev: stage.querySelector('.cs-prev'),
     next: stage.querySelector('.cs-next')
   };
   if (!stage.hasAttribute('tabindex')) stage.tabIndex = -1;
+  // 照片 alt＝酒名＋頁面上寫好的後綴（中文「 示意圖」／英文「 (illustrative photo)」）
+  var altSuffix = el.photo ? el.photo.alt.slice(drinks[0].name.length) : '';
   var current = -1;
+  var shown = 0;          // 照片目前顯示的是哪一杯（HTML 預設第一杯）
   var engine = null;      // three.js＋圖集就緒後才有
-
-  // fallback 用：直接顯示該杯原插圖
-  var sprite = document.createElement('div');
-  sprite.className = 'cs-sprite';
-  sprite.setAttribute('aria-hidden', 'true');
-  stage.insertBefore(sprite, el.info);
 
   // ---- 「看原版酒單圖」：打開目前這杯所屬系列的酒單海報（海報清單寫在按鈕的 data-posters） ----
   var posterBtn = document.getElementById('cs-poster-link');
@@ -115,25 +140,12 @@
   if (el.prev) el.prev.addEventListener('click', function () { select((current - 1 + drinks.length) % drinks.length); });
   if (el.next) el.next.addEventListener('click', function () { select((current + 1) % drinks.length); });
 
-  function applyTint(d) {
-    if (!d.tint) return;
-    stage.style.setProperty('--cs-top', d.tint);
-  }
-
-  function placeSprite(d) {
-    var r = d.rect, box = stage.clientHeight * 0.62, s = Math.min(box / r[3], (stage.clientWidth * 0.5) / r[2], 2.4);
-    sprite.style.width = Math.round(r[2] * s) + 'px';
-    sprite.style.height = Math.round(r[3] * s) + 'px';
-    sprite.style.backgroundSize = Math.round(ATLAS_W * s) + 'px ' + Math.round(ATLAS_H * s) + 'px';
-    sprite.style.backgroundPosition = Math.round(-r[0] * s) + 'px ' + Math.round(-r[1] * s) + 'px';
-  }
-
   function select(i) {
     if (i === current) return;
+    var first = current < 0;
     current = i;
     var d = drinks[i];
     var s = seriesList[d.series];
-    applyTint(d);
     el.info.classList.remove('is-in');
     void el.info.offsetWidth; // 重啟淡入動畫
     el.series.textContent = s.title + (s.sub ? ' · ' + s.sub : '');
@@ -147,31 +159,84 @@
       x.el.setAttribute('aria-pressed', k === i ? 'true' : 'false');
     });
 
-    if (stage.classList.contains('is-fallback') && atlasOk) placeSprite(d);
-    if (engine) engine.morph(d);
+    if (!first && el.photo) swapTo(d);
+  }
+
+  // ---- 照片 ----
+  function srcsetOf(d) {
+    return asset(smallSrc(d.photo[0])) + ' 480w, ' + asset(d.photo[0]) + ' ' + IMG_W + 'w';
+  }
+  var loading = {};
+  function loadPhoto(d) {
+    if (!loading[d.index]) loading[d.index] = new Promise(function (resolve) {
+      var img = new Image();
+      img.decoding = 'async';
+      img.onload = img.onerror = function () { resolve(); };
+      img.sizes = el.photo.sizes;   // 跟頁面上的 <img> 選到同一張，換圖時直接吃快取
+      img.srcset = srcsetOf(d);
+      img.src = asset(d.photo[0]);
+    });
+    return loading[d.index];
+  }
+  function showPhoto(d) {
+    shown = d.index;
+    el.photo.srcset = srcsetOf(d);
+    el.photo.src = asset(d.photo[0]);
+    el.photo.alt = d.name + altSuffix;
+    // 鄰近兩杯先載，按左右鍵時不用等
+    var idle = window.requestIdleCallback || function (fn) { return setTimeout(fn, 300); };
+    idle(function () {
+      loadPhoto(drinks[(d.index + 1) % drinks.length]);
+      loadPhoto(drinks[(d.index - 1 + drinks.length) % drinks.length]);
+    });
+  }
+  function settled() {
+    // 新 src 解碼完再顯示，避免淡入時閃一下舊圖或空白
+    return el.photo.decode ? el.photo.decode().catch(function () {}) : Promise.resolve();
+  }
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+  var seq = 0;
+  function swapTo(d) {
+    var token = ++seq;
+    var ready = loadPhoto(d);
+    if (engine && !engine.dead) {
+      // 粒子過場：粒子先疊在目前照片的杯子上，照片淡出 → 粒子散開、聚成下一杯 → 換上新照片、粒子淡出
+      engine.sync(drinks[shown]);
+      stage.classList.add('is-morphing');
+      Promise.all([ready, engine.morph(d)]).then(function () {
+        if (token !== seq) return;
+        showPhoto(d);
+        return settled().then(function () {
+          if (token === seq) stage.classList.remove('is-morphing');
+        });
+      });
+      return;
+    }
+    el.photo.classList.add('is-out');
+    Promise.all([ready, wait(reduceMotion ? 0 : 300)]).then(function () {
+      if (token !== seq) return;
+      showPhoto(d);
+      return settled().then(function () {
+        if (token === seq) el.photo.classList.remove('is-out');
+      });
+    });
   }
 
   select(0);
+  if (!el.photo) return;
 
-  // ---- 進入畫面才載 three.js＋圖集 ----
-  var atlasOk = false;
-  function fallback() {
-    stage.classList.add('is-fallback');
-    stage.classList.remove('is-loading', 'is-live');
-    // three.js 失敗時圖集可能還在路上 → 自己再載一次；圖集本身載不到就只留文字卡
-    function showSprite() {
-      sprite.style.display = '';
-      sprite.style.backgroundImage = 'url("' + ATLAS_URL + '")';
-      placeSprite(drinks[current]);
-    }
-    if (atlasOk) { showSprite(); return; }
-    sprite.style.display = 'none';
-    var probe = new Image();
-    probe.onload = function () { atlasOk = true; if (stage.classList.contains('is-fallback')) showSprite(); };
-    probe.src = ATLAS_URL;
+  // 第一張照片載好前，舞台掃一道金光
+  if (!el.photo.complete) {
+    stage.classList.add('is-loading');
+    var doneLoading = function () { stage.classList.remove('is-loading'); };
+    el.photo.addEventListener('load', doneLoading);
+    el.photo.addEventListener('error', doneLoading);
   }
-  if (!('IntersectionObserver' in window) || !el.canvas) { fallback(); return; }
 
+  if (!useFx || !el.canvas || !('IntersectionObserver' in window)) return;
+
+  // ---- 進入畫面才載 three.js＋圖集（不影響首屏；照片先顯示，粒子之後才就緒） ----
   function loadAtlas() {
     return new Promise(function (resolve, reject) {
       var img = new Image();
@@ -181,7 +246,6 @@
         c.width = img.naturalWidth; c.height = img.naturalHeight;
         var ctx = c.getContext('2d', { willReadFrequently: true });
         ctx.drawImage(img, 0, 0);
-        atlasOk = true;
         resolve(ctx.getImageData(0, 0, c.width, c.height));
       };
       img.onerror = reject;
@@ -189,105 +253,55 @@
     });
   }
 
-  var started = false;
-  var visible = false;
   var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      visible = e.isIntersecting;
-      if (visible && !started) {
-        started = true;
-        stage.classList.add('is-loading');
-        Promise.all([import(THREE_URL), loadAtlas()]).then(function (res) {
-          engine = createEngine(res[0], res[1]);
-          stage.classList.remove('is-loading');
-          stage.classList.add('is-live');
-          applyTint(drinks[current]);
-          engine.morph(drinks[current], true);
-        }).catch(function () { fallback(); });
-      }
-      if (engine) engine.setRunning(visible);
-      if (!engine && atlasOk && stage.classList.contains('is-fallback')) placeSprite(drinks[current]);
-    });
+    if (!entries.some(function (e) { return e.isIntersecting; })) return;
+    io.disconnect();
+    Promise.all([import(THREE_URL), loadAtlas()]).then(function (res) {
+      engine = createEngine(res[0], res[1]);
+    }).catch(function () { engine = null; });   // 沒有 WebGL／載入失敗：維持淡出淡入
   }, { rootMargin: '200px 0px' });
   io.observe(stage);
 
   // =====================================================================
   function createEngine(THREE, atlas) {
     var canvas = el.canvas;
-    // 沒有 WebGL 時這裡會 throw → 外層 .catch 走 fallback
-    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: false, alpha: true, powerPreference: 'high-performance' });
+    // 沒有 WebGL 時這裡會 throw → 外層 .catch，維持淡出淡入
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: false, alpha: true });
     var small = Math.min(window.innerWidth, window.innerHeight) < 700;
-    var lowEnd = (navigator.hardwareConcurrency || 8) <= 4;
-    var dpr = Math.min(window.devicePixelRatio || 1, small || lowEnd ? 1.5 : 2);
+    var dpr = Math.min(window.devicePixelRatio || 1, small ? 1.5 : 2);
     renderer.setPixelRatio(dpr);
     renderer.setClearColor(0x000000, 0);
 
-    var N = lowEnd ? 8000 : small ? 10000 : 26000;
-    var NDrink = Math.floor(N * 0.86);   // 其餘是背景星塵
+    var N = small ? 9000 : 16000;
+    var NDrink = Math.floor(N * 0.9);   // 其餘是金色星塵
 
     // ---- 從圖集整理每杯的像素（只算一次） ----
     var px = atlas.data, AW = atlas.width;
     var cache = {};
     function pixels(d) {
       if (cache[d.index]) return cache[d.index];
-      var r = d.rect, W = r[2], H = r[3], list = [];
-      var sr = 0, sg = 0, sb = 0, x, y;
-      var mask = new Uint8Array(W * H);
-      for (y = 0; y < H; y++) for (x = 0; x < W; x++) {
-        // 門檻放低到 35：玻璃杯緣、杯腳在原圖是半透明的（投影已在製作圖集時擦掉）
-        if (px[((r[1] + y) * AW + r[0] + x) * 4 + 3] >= 35) mask[y * W + x] = 1;
-      }
-      // 厚度≈所在橫向連續段與縱向連續段到端點距離的較小值（近似，非真正的距離轉換）：杯身中央厚、杯緣／橋桁／竹籤／葉片薄
-      var th = new Float32Array(W * H);
-      for (y = 0; y < H; y++) {
-        x = 0;
-        while (x < W) {
-          if (!mask[y * W + x]) { x++; continue; }
-          var x0 = x;
-          while (x < W && mask[y * W + x]) x++;
-          for (var xx = x0; xx < x; xx++) th[y * W + xx] = Math.min(xx - x0, x - 1 - xx) + 0.5;
-        }
-      }
-      for (x = 0; x < W; x++) {
-        y = 0;
-        while (y < H) {
-          if (!mask[y * W + x]) { y++; continue; }
-          var y0 = y;
-          while (y < H && mask[y * W + x]) y++;
-          for (var yy = y0; yy < y; yy++) th[yy * W + x] = Math.min(th[yy * W + x], Math.min(yy - y0, y - 1 - yy) + 0.5);
-        }
-      }
-      // 細節權重：跟四鄰亮度差越大（花瓣、葉脈、杯緣）分到越多粒子；半透明的細杯緣也加權，免得只剩稀疏的點
+      var r = d.photo[1], W = r[2], H = r[3], list = [], cum = [], wsum = 0;
       var lum = function (xx, yy) { var o2 = ((r[1] + yy) * AW + r[0] + xx) * 4; return px[o2] * 0.3 + px[o2 + 1] * 0.59 + px[o2 + 2] * 0.11; };
-      var wsum = 0, cum = [];
-      for (y = 0; y < H; y++) for (x = 0; x < W; x++) {
-        if (!mask[y * W + x]) continue;
-        var o = ((r[1] + y) * AW + r[0] + x) * 4, L = lum(x, y), dv = 0;
+      for (var y = 0; y < H; y++) for (var x = 0; x < W; x++) {
+        var o = ((r[1] + y) * AW + r[0] + x) * 4;
+        if (px[o + 3] < 35) continue;   // 門檻放低：玻璃杯緣、杯腳在去背圖裡是半透明的
+        // 細節權重：跟四鄰亮度差越大（葉脈、杯緣、裝飾）分到越多粒子
+        var L = lum(x, y), dv = 0;
         if (x > 0) dv += Math.abs(L - lum(x - 1, y));
         if (x < W - 1) dv += Math.abs(L - lum(x + 1, y));
         if (y > 0) dv += Math.abs(L - lum(x, y - 1));
         if (y < H - 1) dv += Math.abs(L - lum(x, y + 1));
-        var wgt = 1 + Math.min(1, dv / 90) * 2 + (px[o + 3] < 128 ? 1.5 : 0);
-        var cr = px[o], cg = px[o + 1], cb = px[o + 2], ga = GARNISH[d.index];
-        if (ga && x >= ga.erase[0] && x <= ga.erase[2] && y >= ga.erase[1] && y <= ga.erase[3] && (cr - cb > 20 || cr + cg + cb < 690)) {
-          cr = ga.foam[0]; cg = ga.foam[1]; cb = ga.foam[2]; wgt = 1;   // 原本的褐色小團改成泡沫
-        }
-        list.push(x, y, cr, cg, cb, th[y * W + x]);
-        wsum += wgt; cum.push(wsum);
-        sr += px[o]; sg += px[o + 1]; sb += px[o + 2];
+        list.push(x, y, px[o], px[o + 1], px[o + 2]);
+        wsum += 1 + Math.min(1, dv / 90) * 2 + (px[o + 3] < 128 ? 1.5 : 0);
+        cum.push(wsum);
       }
-      var n = list.length / 6 || 1;
-      var info = { list: list, cum: cum, total: wsum, w: r[2], h: r[3] };
-      d.tint = 'rgb(' + Math.round(sr / n) + ',' + Math.round(sg / n) + ',' + Math.round(sb / n) + ')';
-      cache[d.index] = info;
-      return info;
+      return (cache[d.index] = { list: list, cum: cum, total: wsum, cnt: list.length / 5 });
     }
-    // 其餘各杯的像素在瀏覽器閒置時逐杯預算（避免進場時一次掃 24 杯卡住主執行緒）
+    // 各杯像素在瀏覽器閒置時逐杯預算（避免第一次換杯時一次掃完卡住）
     var idle = window.requestIdleCallback || function (fn) { return setTimeout(fn, 200); };
     var pre = 0;
     (function warm() {
       idle(function () {
-        while (pre < drinks.length && cache[drinks[pre].index]) pre++;
         if (pre >= drinks.length) return;
         pixels(drinks[pre++]);
         warm();
@@ -295,11 +309,7 @@
     })();
 
     var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
-    camera.position.set(0, 0.6, 9.8);
-    var group = new THREE.Group();
-    scene.add(group);
-
+    var camera = new THREE.OrthographicCamera(0, 1, 0, -1, -10, 10);   // 以畫布的 CSS 像素為單位，y 往下為負
     var start = new Float32Array(N * 3), target = new Float32Array(N * 3);
     var c0 = new Float32Array(N * 3), c1 = new Float32Array(N * 3);
     var rand = new Float32Array(N * 4), kind = new Float32Array(N);
@@ -307,19 +317,11 @@
       rand[i * 4] = Math.random(); rand[i * 4 + 1] = Math.random();
       rand[i * 4 + 2] = Math.random(); rand[i * 4 + 3] = Math.random();
       kind[i] = i < NDrink ? 0 : 3;
-      // 初始：散在遠處的星塵
-      var p = randSphere(4 + Math.random() * 3);
-      start[i * 3] = target[i * 3] = p[0];
-      start[i * 3 + 1] = target[i * 3 + 1] = p[1];
-      start[i * 3 + 2] = target[i * 3 + 2] = p[2];
     }
-
-    var perm = new Uint32Array(N);
-    for (i = 0; i < N; i++) perm[i] = i;
-    function shuffle(from, to) {
-      for (var a1 = to - 1; a1 > from; a1--) { var b1 = from + Math.floor(Math.random() * (a1 - from + 1)), t1 = perm[a1]; perm[a1] = perm[b1]; perm[b1] = t1; }
-    }
-    shuffle(0, NDrink); shuffle(NDrink, N);
+    // 打散粒子編號：換杯時每顆粒子飛去新杯子的任意位置，而不是平移
+    var perm = new Uint32Array(NDrink);
+    for (i = 0; i < NDrink; i++) perm[i] = i;
+    for (i = NDrink - 1; i > 0; i--) { var b1 = Math.floor(Math.random() * (i + 1)), t1 = perm[i]; perm[i] = perm[b1]; perm[b1] = t1; }
 
     var geo = new THREE.BufferGeometry();
     geo.setAttribute('position', new THREE.BufferAttribute(target, 3));
@@ -329,47 +331,34 @@
     geo.setAttribute('aC1', new THREE.BufferAttribute(c1, 3));
     geo.setAttribute('aRand', new THREE.BufferAttribute(rand, 4));
     geo.setAttribute('aKind', new THREE.BufferAttribute(kind, 1));
-    geo.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 20);
 
     var uniforms = {
-      uP: { value: 1 }, uTime: { value: 0 }, uScatter: { value: 1.7 },
-      uSize: { value: small || lowEnd ? 48 : 40 }, uPix: { value: dpr },
-      uMouse: { value: new THREE.Vector3(99, 99, 0) }, uMouseOn: { value: 0 }, uRadius: { value: 0.5 },
-      uMotion: { value: reduceMotion ? 0 : 1 }
+      uP: { value: 1 }, uTime: { value: 0 }, uScatter: { value: 100 },
+      uS0: { value: 3 }, uS1: { value: 3 }, uDust: { value: 2.4 }, uPix: { value: dpr }
     };
-
     var mat = new THREE.ShaderMaterial({
       uniforms: uniforms,
       transparent: true,
       depthWrite: false,
-      blending: THREE.NormalBlending, // 一般混色才保得住插圖原色；疊加會把顏色洗白或洗暗
+      depthTest: false,
+      blending: THREE.NormalBlending, // 一般混色才保得住照片原色；疊加會把顏色洗白
       vertexShader: [
         'attribute vec3 aStart; attribute vec3 aTarget; attribute vec3 aC0; attribute vec3 aC1;',
         'attribute vec4 aRand; attribute float aKind;',
-        'uniform float uP, uTime, uScatter, uSize, uPix, uMouseOn, uMotion, uRadius;',
-        'uniform vec3 uMouse;',
+        'uniform float uP, uTime, uScatter, uS0, uS1, uDust, uPix;',
         'varying vec3 vC; varying float vA;',
         'float ease(float t){ return t < 0.5 ? 4.0*t*t*t : 1.0 - pow(-2.0*t + 2.0, 3.0) / 2.0; }',
         'void main(){',
         '  float p = clamp((uP - aRand.w * 0.35) / 0.65, 0.0, 1.0);',
         '  float e = ease(p);',
-        '  vec3 dir = normalize(aRand.xyz * 2.0 - 1.0 + 1e-4);',
-        '  vec3 pos = mix(aStart, aTarget, e) + dir * sin(3.14159 * p) * uScatter * (0.6 + aRand.w);',
-        '  float drift = aKind > 2.5 ? 0.12 : 0.012;',
-        '  pos += uMotion * drift * vec3(sin(uTime*1.3 + aRand.x*40.0), cos(uTime*1.1 + aRand.y*40.0), sin(uTime*0.9 + aRand.z*40.0));',
-        '  vec4 wp = modelMatrix * vec4(pos, 1.0);',
-        '  vec2 dm = wp.xy - uMouse.xy;',
-        '  float dist = length(dm);',
-        // 游標附近像放大鏡：位移跟距離成正比（中心不動→不會開洞）、粒子往前浮並放大、變亮，帶一圈圈向外的起伏
-        '  float f = uMouseOn * smoothstep(uRadius, 0.0, dist);',
-        '  float wave = sin(dist / uRadius * 10.0 - uTime * 7.0);',
-        '  wp.xy += dm * f * 0.4;',
-        '  wp.z += f * (0.35 + 0.1 * wave);',
-        '  vec4 mv = viewMatrix * wp;',
-        '  gl_Position = projectionMatrix * mv;',
-        '  float tw = 0.82 + 0.18 * sin(uTime * 2.2 * uMotion + aRand.y * 60.0);',
-        '  gl_PointSize = uSize * uPix * (0.55 + aRand.z * 0.9) * (aKind > 2.5 ? 0.8 : 1.0) * (1.0 + f * (0.6 + 0.25 * wave)) / -mv.z;',
-        '  vC = mix(mix(aC0, aC1, e) * tw * (1.0 + f * 0.35), vec3(0.85, 0.92, 1.0), f * 0.1);',
+        '  vec2 dir = normalize(aRand.xy * 2.0 - 1.0 + 1e-4);',
+        '  vec3 pos = mix(aStart, aTarget, e);',
+        '  pos.xy += dir * sin(3.14159 * p) * uScatter * (0.6 + aRand.w);',
+        '  if (aKind > 2.5) pos.xy += 6.0 * vec2(sin(uTime*1.3 + aRand.x*40.0), cos(uTime*1.1 + aRand.y*40.0));',
+        '  gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);',
+        '  float s = aKind > 2.5 ? uDust : mix(uS0, uS1, ease(clamp(uP, 0.0, 1.0)));',
+        '  gl_PointSize = s * uPix * (0.6 + aRand.z * 0.8);',
+        '  vC = mix(aC0, aC1, e);',
         '  vA = aKind > 2.5 ? 0.35 : 0.95;',
         '}'
       ].join('\n'),
@@ -383,191 +372,132 @@
         '}'
       ].join('\n')
     });
-    group.add(new THREE.Points(geo, mat));
+    var points = new THREE.Points(geo, mat);
+    points.frustumCulled = false;
+    scene.add(points);
 
-    function randSphere(r) {
-      var u = Math.random() * 2 - 1, th = Math.random() * Math.PI * 2, s = Math.sqrt(1 - u * u);
-      return [r * s * Math.cos(th), r * u * 0.7, r * s * Math.sin(th)];
-    }
-    function hex(h) { var c = new THREE.Color(h); return [c.r, c.g, c.b]; }
-
-    // 插圖 → 粒子：x/y 取像素位置，z 依該列寬度做成圓柱般的厚度，顏色取像素色
-    var HEIGHT = 3.7, MAXW = 3.4;
-    function build(d) {
-      var info = pixels(d), list = info.list, cnt = list.length / 6;
-      var u = Math.min(HEIGHT / info.h, MAXW / info.w);
+    var W = 1, H = 1, dust = new Float32Array((N - NDrink) * 2);
+    var GOLD = [0.39, 0.33, 0.22];
+    // 照片 → 粒子：圖集像素 → 照片座標（PHOTOS 的杯子位置）→ 畫布座標（跟 object-fit: cover 同算法）
+    function layout(d) {
+      var info = pixels(d), list = info.list, r = d.photo[1], b = d.photo[2];
+      var s = Math.max(W / IMG_W, H / IMG_H);
+      var gx = (W - IMG_W * s) * POS_X + b[0] * IMG_W * s, gy = (H - IMG_H * s) * POS_Y + b[1] * IMG_H * s;
+      var kx = b[2] * IMG_W * s / r[2], ky = b[3] * IMG_H * s / r[3];
       var pos = new Float32Array(N * 3), col = new Float32Array(N * 3);
-      var ga = GARNISH[d.index], NP = ga ? Math.floor(NDrink * 0.12) : 0, NI = NDrink - NP;
-      for (var k = 0; k < NI; k++) {
-        // 依細節權重的累積分布等距取樣，鋪滿整張插圖。⚠️ 不能用 k % cnt：手機粒子數少於像素數時
-        // 只會分到上半部，杯子下半截被切掉。perm 打散粒子編號，變形時才會四處飛
-        var goal = (k + 0.5) / NI * info.total, lo = 0, hi = cnt - 1;
+      for (var k = 0; k < NDrink; k++) {
+        // 依細節權重的累積分布等距取樣，鋪滿整個杯子（粒子數少於像素數時也不會只分到上半部）
+        var goal = (k + 0.5) / NDrink * info.total, lo = 0, hi = info.cnt - 1;
         while (lo < hi) { var mid = (lo + hi) >> 1; if (info.cum[mid] < goal) lo = mid + 1; else hi = mid; }
-        var o = lo * 6;
-        var x = list[o] + Math.random(), y = list[o + 1] + Math.random();
-        var depth = Math.min(list[o + 5] * u, 0.55);
-        var j = perm[k] * 3;
-        pos[j] = (x - info.w / 2) * u;
-        pos[j + 1] = (info.h - y) * u - HEIGHT / 2;
-        // 粒子貼在一層朝前的曲面上（不是整塊體積）：前面的粒子才不會蓋住花瓣、葉脈等細節
-        pos[j + 2] = depth * (0.8 + Math.random() * 0.2);
-        // 深色部位（銅杯、橋、深色杯墊）在黑底疊加下會消失 → 墊一層底光，保留原色相
-        col[j] = 0.06 + list[o + 2] / 255 * 0.94;
-        col[j + 1] = 0.055 + list[o + 3] / 255 * 0.94;
-        col[j + 2] = 0.05 + list[o + 4] / 255 * 0.94;
+        var o = lo * 5, j = perm[k] * 3;
+        pos[j] = gx + (list[o] + Math.random()) * kx;
+        pos[j + 1] = -(gy + (list[o + 1] + Math.random()) * ky);
+        col[j] = 0.04 + list[o + 2] / 255 * 0.96;
+        col[j + 1] = 0.04 + list[o + 3] / 255 * 0.96;
+        col[j + 2] = 0.04 + list[o + 4] / 255 * 0.96;
       }
-      if (NP) drawPetals(ga.petals, info, u, pos, col, NI, NDrink);
-      var gold = hex('#c8a96e');
       for (k = NDrink; k < N; k++) {
-        var sp = randSphere(2.8 + Math.random() * 3.2), jj = perm[k] * 3;
-        pos[jj] = sp[0]; pos[jj + 1] = sp[1]; pos[jj + 2] = sp[2];
-        col[jj] = gold[0] * 0.5; col[jj + 1] = gold[1] * 0.5; col[jj + 2] = gold[2] * 0.5;
+        var jj = k * 3, q = (k - NDrink) * 2;
+        pos[jj] = dust[q]; pos[jj + 1] = dust[q + 1];
+        col[jj] = GOLD[0]; col[jj + 1] = GOLD[1]; col[jj + 2] = GOLD[2];
       }
-      return { pos: pos, col: col };
+      // 粒子大小跟著杯子在畫面上的面積走，聚好時剛好填滿、不留空隙
+      var size = Math.min(6, Math.max(1.6, Math.sqrt(info.cnt * kx * ky / NDrink) * 1.7));
+      return { pos: pos, col: col, size: size };
     }
 
-    // 三瓣玫瑰：左、中（後）、右三片平鋪在泡沫上，深紅根部→粉色邊緣，外框加深讓三片分得開
-    var PETAL_BASE = hex('#8e1b2e'), PETAL_MID = hex('#c23a52'), PETAL_EDGE = hex('#e27a8f'), PETAL_LINE = hex('#5e0f1c');
-    function drawPetals(pt, info, u, pos, col, from, to) {
-      var petals = [
-        { ang: Math.PI * 0.96, dx: -3, layer: 1 },     // 左
-        { ang: Math.PI * 0.5, dx: 0, layer: 0 },       // 中（往後，被兩側壓住）
-        { ang: Math.PI * 0.04, dx: 3, layer: 1 }       // 右
-      ];
-      function mix3(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
-      for (var k = from; k < to; k++) {
-        var p = petals[k % 3], t, s, half;
-        do {
-          t = Math.random(); s = Math.random() * 2 - 1;
-          half = Math.sin(Math.PI * Math.pow(t, 0.62)) * (1 - 0.12 * t);   // 圓潤、靠尖端較寬的花瓣形
-        } while (Math.abs(s) > half);
-        var ax = Math.cos(p.ang), az = Math.sin(p.ang);                    // 花瓣在泡沫平面上的方向
-        var sx = pt.len * t * ax - pt.wid * s * az, sz = pt.len * t * az + pt.wid * s * ax;
-        var ix = pt.cx + p.dx + sx;
-        var iy = pt.cy - sz * 0.62 - t * t * 2.5;                          // 平面透視壓扁＋尖端微翹
-        var j = perm[k] * 3;
-        pos[j] = (ix - info.w / 2) * u;
-        pos[j + 1] = (info.h - iy) * u - HEIGHT / 2;
-        pos[j + 2] = 0.34 + p.layer * 0.03 + Math.random() * 0.01;
-        var edge = Math.abs(s) / Math.max(half, 1e-3);
-        var c = edge > 0.8 || t > 0.94 ? PETAL_LINE : mix3(mix3(PETAL_BASE, PETAL_MID, Math.min(1, t * 1.6)), PETAL_EDGE, Math.max(0, edge - 0.45) * 1.2);
-        col[j] = c[0]; col[j + 1] = c[1]; col[j + 2] = c[2];
-      }
-    }
-
-    // ---- 變形 ----
-    var T0 = 0, morphing = false, P = 1;
-    var DUR = reduceMotion ? 0.001 : 1.9;
+    var at = -1, T0 = 0, morphing = false, P = 1, holdUntil = 0, raf = 0, finish = null, stale = false;
+    var DUR = 1.5;
     function easeJS(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
-    function morph(d, fromDust) {
-      var b = build(d);
-      if (d === drinks[current]) applyTint(d);
-      // 把「現在畫面上的位置」凍結成新起點（與 vertex shader 同公式，含漂浮），連點也不會跳
-      var mo = uniforms.uMotion.value, tm = uniforms.uTime.value;
+    function upload() { ['aStart', 'aTarget', 'aC0', 'aC1'].forEach(function (n) { geo.attributes[n].needsUpdate = true; }); }
+
+    // 直接把粒子擺成某杯（不動畫）
+    function place(d) {
+      var b = layout(d);
+      start.set(b.pos); target.set(b.pos); c0.set(b.col); c1.set(b.col);
+      uniforms.uS0.value = uniforms.uS1.value = b.size;
+      P = 1; uniforms.uP.value = 1; at = d.index;
+      upload();
+    }
+    function morph(d) {
+      var b = layout(d);
+      // 把「現在畫面上的位置」凍結成新起點（與 vertex shader 同公式），連點也不會跳
+      var tm = uniforms.uTime.value, sc0 = uniforms.uScatter.value;
       for (var i2 = 0; i2 < N; i2++) {
-        var rx = rand[i2 * 4], ry = rand[i2 * 4 + 1], rz = rand[i2 * 4 + 2], w = rand[i2 * 4 + 3];
+        var rx = rand[i2 * 4], ry = rand[i2 * 4 + 1], w = rand[i2 * 4 + 3];
         var p = Math.min(1, Math.max(0, (P - w * 0.35) / 0.65)), e = easeJS(p);
-        var sc = Math.sin(Math.PI * p) * uniforms.uScatter.value * (0.6 + w);
-        var dx = rx * 2 - 1 + 1e-4, dy = ry * 2 - 1 + 1e-4, dz = rz * 2 - 1 + 1e-4;
-        var dl = Math.hypot(dx, dy, dz) || 1;
-        var drift = kind[i2] > 2.5 ? 0.12 : 0.012;
-        var j = i2 * 3;
-        var cur0 = start[j] + (target[j] - start[j]) * e + dx / dl * sc + mo * drift * Math.sin(tm * 1.3 + rx * 40);
-        var cur1 = start[j + 1] + (target[j + 1] - start[j + 1]) * e + dy / dl * sc + mo * drift * Math.cos(tm * 1.1 + ry * 40);
-        var cur2 = start[j + 2] + (target[j + 2] - start[j + 2]) * e + dz / dl * sc + mo * drift * Math.sin(tm * 0.9 + rz * 40);
-        start[j] = cur0; start[j + 1] = cur1; start[j + 2] = cur2;
+        var sc = Math.sin(Math.PI * p) * sc0 * (0.6 + w);
+        var dx = rx * 2 - 1 + 1e-4, dy = ry * 2 - 1 + 1e-4, dl = Math.hypot(dx, dy) || 1;
+        var j = i2 * 3, dust2 = kind[i2] > 2.5;
+        var cur0 = start[j] + (target[j] - start[j]) * e + dx / dl * sc + (dust2 ? 6 * Math.sin(tm * 1.3 + rx * 40) : 0);
+        var cur1 = start[j + 1] + (target[j + 1] - start[j + 1]) * e + dy / dl * sc + (dust2 ? 6 * Math.cos(tm * 1.1 + ry * 40) : 0);
+        start[j] = cur0; start[j + 1] = cur1; start[j + 2] = 0;
         for (var a = 0; a < 3; a++) {
-          c0[j + a] = fromDust ? b.col[j + a] * 0.3 : c0[j + a] + (c1[j + a] - c0[j + a]) * e;
+          c0[j + a] = c0[j + a] + (c1[j + a] - c0[j + a]) * e;
           target[j + a] = b.pos[j + a];
           c1[j + a] = b.col[j + a];
         }
+        if (dust2) { target[j] = start[j]; target[j + 1] = start[j + 1]; }   // 星塵原地漂浮
       }
-      ['aStart', 'aTarget', 'aC0', 'aC1'].forEach(function (n) { geo.attributes[n].needsUpdate = true; });
+      uniforms.uS0.value += (uniforms.uS1.value - uniforms.uS0.value) * easeJS(P);
+      uniforms.uS1.value = b.size;
+      upload();
+      at = d.index;
+      if (finish) finish();   // 上一段還沒聚好就被打斷：放行（外層用 token 判斷要不要換圖）
       P = 0; uniforms.uP.value = 0; T0 = performance.now(); morphing = true;
       kick();
+      return new Promise(function (resolve) { finish = resolve; });
     }
 
-    // ---- 指標互動 ----
-    var ndc = new THREE.Vector3(), mouseTarget = 0, tilt = { x: 0, y: 0 };
-    function onMove(e) {
-      var rect = canvas.getBoundingClientRect();
-      var x = (e.clientX - rect.left) / rect.width * 2 - 1, y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-      ndc.set(x, y, 0.5).unproject(camera);
-      ndc.sub(camera.position).normalize();
-      var t = -camera.position.z / ndc.z;
-      uniforms.uMouse.value.copy(camera.position).addScaledVector(ndc, t);
-      tilt.x = y; tilt.y = x;
-      mouseTarget = 1;
-      kick();
-    }
-    // 手機回收 GPU 記憶體時 context 會遺失 → 停迴圈、改顯示原插圖
-    canvas.addEventListener('webglcontextlost', function (e) {
-      e.preventDefault();
-      setRunning(false);
-      engine = null;
-      fallback();
-    });
-    canvas.addEventListener('pointermove', onMove);
-    canvas.addEventListener('pointerdown', onMove);
-    canvas.addEventListener('pointerleave', function () { mouseTarget = 0; });
-    canvas.addEventListener('pointerup', function (e) { if (e.pointerType !== 'mouse') mouseTarget = 0; });
-    canvas.addEventListener('pointercancel', function () { mouseTarget = 0; });
-
-    // ---- 尺寸 ----
     function resize() {
-      var w = stage.clientWidth, h = stage.clientHeight;
-      if (!w || !h) return;
-      renderer.setSize(w, h, false);
-      camera.aspect = w / h;
-      var narrow = w / h < 0.9;
-      camera.position.z = narrow ? 11 : 9.8;
-      camera.lookAt(0, 0.2, 0);
-      // 起伏範圍固定為螢幕上直徑 100px（換算成 3D 單位；桌機／手機鏡頭距離不同）
-      var pxPerUnit = h / (2 * camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)));
-      uniforms.uRadius.value = 50 / pxPerUnit;
-      // 桌機杯子偏右讓出左下文字區；手機杯子上移讓出底部文字區
-      group.position.set(narrow ? 0 : 1.15, narrow ? 0.75 : 0.1, 0);
+      var w = canvas.clientWidth, h = canvas.clientHeight;
+      if (!w || !h || (w === W && h === H)) return;
+      W = w; H = h;
+      renderer.setSize(W, H, false);
+      camera.left = 0; camera.right = W; camera.top = 0; camera.bottom = -H;
       camera.updateProjectionMatrix();
-      kick();
+      uniforms.uScatter.value = Math.min(W, H) * 0.22;
+      for (var q = 0; q < dust.length; q += 2) { dust[q] = Math.random() * W; dust[q + 1] = -Math.random() * H; }
+      // 過場中途改尺寸（手機轉向、縮放視窗）：目標座標是舊尺寸算的，聚好後用新尺寸重擺一次，下次換杯才對得上照片
+      if (at >= 0) { if (morphing) stale = true; else place(drinks[at]); }
     }
-    if ('ResizeObserver' in window) new ResizeObserver(resize).observe(stage);
-    else window.addEventListener('resize', resize);
     resize();
+    var rt = 0;
+    window.addEventListener('resize', function () { cancelAnimationFrame(rt); rt = requestAnimationFrame(resize); });
 
-    // ---- 迴圈（不在畫面上就停） ----
-    var running = false, raf = 0, clock = performance.now(), elapsed = 0;
+    // 只在過場時畫：聚好後多畫一小段讓畫布淡出，之後停迴圈
     function frame(now) {
       raf = 0;
-      // 變形結束又沒在互動時降到約 30fps，省電
-      if (!morphing && uniforms.uMouseOn.value < 0.01 && mouseTarget === 0 && now - clock < 32) {
-        if (running) raf = requestAnimationFrame(frame);
-        return;
-      }
-      var dt = Math.min(0.05, (now - clock) / 1000); clock = now;
-      elapsed += dt;
       if (morphing) {
         P = Math.min(1, (now - T0) / 1000 / DUR);
         uniforms.uP.value = P;
-        if (P >= 1) morphing = false;
+        if (P >= 1) {
+          morphing = false;
+          holdUntil = now + 900;
+          if (stale) { stale = false; place(drinks[at]); }
+          if (finish) { var f = finish; finish = null; f(); }
+        }
       }
-      uniforms.uTime.value = elapsed;
-      uniforms.uMouseOn.value += (mouseTarget - uniforms.uMouseOn.value) * 0.08;
-      // 插圖是正面視角，只做左右小幅擺動（整圈轉到側面會變成一條線）
-      var sway = reduceMotion ? 0 : Math.sin(elapsed * 0.45) * 0.3;
-      group.rotation.y += (sway + tilt.y * 0.25 * uniforms.uMouseOn.value - group.rotation.y) * 0.06;
-      group.rotation.x += (tilt.x * -0.12 * uniforms.uMouseOn.value - group.rotation.x) * 0.05;
+      uniforms.uTime.value = now / 1000;
       renderer.render(scene, camera);
-      if (running && (!reduceMotion || morphing || Math.abs(uniforms.uMouseOn.value - mouseTarget) > 0.01)) raf = requestAnimationFrame(frame);
+      if (morphing || now < holdUntil) raf = requestAnimationFrame(frame);
     }
-    function kick() { if (running && !raf) { clock = performance.now(); raf = requestAnimationFrame(frame); } }
-    function setRunning(on) {
-      running = on && !document.hidden;
-      if (running) kick();
-      else if (raf) { cancelAnimationFrame(raf); raf = 0; }
-    }
-    document.addEventListener('visibilitychange', function () { setRunning(visible); });
-    setRunning(visible);
+    function kick() { if (!raf) raf = requestAnimationFrame(frame); }
 
-    return { morph: morph, setRunning: setRunning };
+    var api = {
+      dead: false,
+      morph: morph,
+      // 換杯前確認粒子停在照片目前那杯上（過場中途被打斷時不重擺，從現在位置接著飛）
+      sync: function (d) { resize(); if (!morphing && at !== d.index) place(d); }
+    };
+    // 手機回收 GPU 記憶體時 context 會遺失 → 停迴圈、改用淡出淡入
+    canvas.addEventListener('webglcontextlost', function (e) {
+      e.preventDefault();
+      api.dead = true;
+      morphing = false;
+      cancelAnimationFrame(raf); raf = 0;
+      if (finish) { var f = finish; finish = null; f(); }
+    });
+    return api;
   }
 })();

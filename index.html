@@ -906,7 +906,7 @@
       "height": 630
     },
     "datePublished": "2026-06-18",
-    "dateModified": "2026-10-22",
+    "dateModified": "2026-10-28",
     "speakable": {
       "@type": "SpeakableSpecification",
       "cssSelector": [
@@ -2379,10 +2379,8 @@
       margin-bottom: 1.8rem;
     }
 
-    /* 特調粒子舞台（cocktail-particles.js 驅動；海報收成下方連結） */
+    /* 特調舞台：深色酒杯照＋換杯粒子過場（cocktail-particles.js 驅動；海報收成下方連結） */
     .cocktail-stage {
-      --cs-top: #c8a96e;
-      --cs-bottom: #6b4a1f;
       position: relative;
       width: 100%;
       max-width: 960px;
@@ -2392,31 +2390,51 @@
       border: 1px solid var(--border);
       background: radial-gradient(ellipse at 55% 60%, #10141c 0%, #050608 72%);
     }
-    .cs-glow {
+    /* 照片框：電腦版在右側、左緣漸層融進黑底；粒子畫布疊在照片上，只在換杯過場時顯示 */
+    .cs-frame {
       position: absolute;
-      left: 62%;
-      top: 55%;
-      width: 55%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      background: var(--cs-top);
-      opacity: 0.12;
-      filter: blur(80px);
-      transition: background-color 0.9s ease;
-      pointer-events: none;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 58%;
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24%);
+      mask-image: linear-gradient(to right, transparent 0, #000 24%);
     }
-    .cocktail-stage canvas {
+    .cs-photo {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 55%;   /* 改這裡要同步 cocktail-particles.js 的 POS_X／POS_Y */
+      transition: opacity 0.3s ease;
+    }
+    .cs-frame canvas {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       display: block;
-      touch-action: none;   /* 手指在杯子上滑＝攪動粒子，不捲動頁面；要捲動就滑下方文字區 */
+      pointer-events: none;
       opacity: 0;
-      transition: opacity 1.2s ease;
+      transition: opacity 0.5s ease;
     }
-    .cocktail-stage.is-live canvas { opacity: 1; }
+    .cocktail-stage.is-morphing .cs-photo,
+    .cs-photo.is-out { opacity: 0; }
+    .cocktail-stage.is-morphing canvas { opacity: 1; transition-duration: 0.25s; }
+    /* 放在照片框外：框有揭幕動畫（clip-path），文字不能被動畫延遲顯示（AEO 護欄） */
+    .cs-note {
+      position: absolute;
+      right: 0.8rem;
+      bottom: 0.6rem;
+      z-index: 1;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      pointer-events: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cs-photo, .cs-frame canvas { transition: none; }
+    }
     .cs-info {
       position: absolute;
       left: clamp(1.2rem, 4vw, 2.6rem);
@@ -2487,18 +2505,6 @@
     .cs-nav:focus-visible { border-color: var(--gold); background: rgba(200,169,110,0.12); }
     .cs-prev { left: 12px; }
     .cs-next { right: 12px; }
-    /* 無 WebGL / three.js 載入失敗：顯示該杯原插圖（取自粒子圖集）＋文字 */
-    .cs-sprite {
-      display: none;
-      position: absolute;
-      left: 66%;
-      top: 50%;
-      z-index: 1;
-      background-repeat: no-repeat;
-      transform: translate(-50%, -50%);
-    }
-    .cocktail-stage.is-fallback canvas { display: none; }
-    .cocktail-stage.is-fallback .cs-sprite { display: block; }
     .cocktail-poster-links {
       max-width: 960px;
       margin: 1rem auto 0;
@@ -3209,13 +3215,23 @@
 
       #drinks { padding: 5.5rem 1rem 4rem; }   /* 上方留給固定導覽列（71px），導覽列跳過來時小標不被蓋住 */
       #drinks .cocktail-stage { width: calc(100% + 2rem); margin-inline: -1rem; }
-      .cocktail-stage { height: 540px; }
-      /* 手機：文字區接手觸控，在這裡滑才會捲動頁面（杯子區域鎖給粒子互動） */
+      .cocktail-stage { height: 600px; }
+      /* 手機：照片在上（寬度上限 520px，避免平板寬度把杯子裁掉）、上下左右淡進黑底，文字在下 */
+      .cs-frame {
+        left: 0;
+        right: 0;
+        bottom: 150px;
+        width: min(100%, 520px);
+        margin-inline: auto;
+        -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent), linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+        -webkit-mask-composite: source-in;
+        mask-image: linear-gradient(to bottom, #000 78%, transparent), linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+        mask-composite: intersect;
+      }
+      .cs-note { bottom: calc(150px + 1.4rem); right: calc(max(0px, 50% - 260px) + 12%); }
       .cs-info { right: 0; left: 0; bottom: 0; max-width: none; padding: 1rem 1.2rem 1.2rem; }
       .cs-name { font-size: 1.9rem; }
-      .cs-glow { left: 50%; top: 38%; width: 80%; }
       .cs-nav { top: 38%; }
-      .cs-sprite { left: 50%; top: 36%; }
 
       /* 分類標籤列換行全顯示：橫向捲動列在手機上按著可拖動、體感怪，改多行不可拖 */
       .menu-tabs { flex-wrap: wrap; justify-content: center; overflow-x: visible; }
@@ -3637,6 +3653,35 @@
     /* 速度（2026-10-23）：畫面外的區塊延後排版，文字仍在 HTML 裡，爬蟲與輔助技術照讀 */
     main > section.page-section, body > section.page-section { content-visibility: auto; contain-intrinsic-size: auto 1200px; }
     html.cv-off section.page-section { content-visibility: visible; }   /* 點頁內連結前先全部排好版，跳轉位置才準 */
+    /* 版面（2026-10-28）：文字酒單變矮、餐點圖跟右側清單等高、入口影片與地圖並排 */
+    @media (max-width: 700px) {
+      .cocktail-text-series-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 1.2rem; }
+      .cocktail-text-item { padding: 0.7rem 0; }
+      .cocktail-text-item h5 { display: block; font-size: 0.9rem; }   /* 兩欄太窄：價格改到酒名下一行 */
+      .cocktail-text-price { display: block; margin-top: 0.1rem; font-size: 0.74rem; }
+      .cocktail-text-description { font-size: 0.78rem; line-height: 1.6; }
+    }
+    @media (min-width: 1000px) {
+      .cocktail-text-series-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2.4rem 2rem; }
+    }
+    @media (min-width: 901px) {
+      /* 圖高＝右側清單高（--menu-list-h 由頁尾 JS 量），長清單封頂後圖片照舊釘住；菜名疊在圖片下緣 */
+      .menu-cat-list { align-self: center; }
+      .menu-img-wrap { border: 1px solid var(--gold-dim); border-radius: 6px; overflow: hidden; }
+      .menu-img-wrap img { aspect-ratio: auto; height: clamp(300px, var(--menu-list-h, 300px), 480px); }
+      .menu-img-caption {
+        position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; margin: 0;
+        padding: 2.2rem 1rem 0.8rem; color: var(--white);
+        background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, rgba(8,8,8,0.78) 55%, rgba(8,8,8,0) 100%);
+        text-shadow: 0 1px 3px rgba(0,0,0,0.9);   /* 亮色菜色圖上也要讀得到（Codex 10/28） */
+        pointer-events: none;
+      }
+    }
+    @media (min-width: 1000px) {
+      #visit .visit-map-wrap { grid-column: 1; align-self: stretch; display: flex; flex-direction: column; }
+      #visit .visit-map-wrap iframe { flex: 1; height: auto; min-height: 260px; }
+      #visit .entrance-video-card { grid-column: 2; margin-top: 0; }
+    }
   </style>
 
   <!-- Google Analytics 4 (G-PDTWFFHRPV) -->
@@ -3899,8 +3944,11 @@
             <a class="cocktail-text-link" href="#cocktail-text-menu">查看 24 款文字酒單 ↓</a>
           </div>
           <div class="cocktail-stage" id="cocktail-stage" role="region" aria-label="特調粒子展示">
-            <div class="cs-glow" aria-hidden="true"></div>
-            <canvas aria-hidden="true"></canvas>
+            <div class="cs-frame">
+              <img class="cs-photo" src="webp/cocktail-photo-gummy-bear.webp" srcset="webp/responsive/cocktail-photo-gummy-bear-480.webp 480w, webp/cocktail-photo-gummy-bear.webp 900w" sizes="(max-width: 900px) 100vw, 560px" width="900" height="1125" alt="Gummy Bear 示意圖" loading="lazy" decoding="async">
+              <canvas aria-hidden="true"></canvas>
+            </div>
+            <span class="cs-note" data-aeo-ignore>圖片為示意</span>
             <div class="cs-info" aria-live="polite">
               <div class="cs-series"></div>
               <h4 class="cs-name"></h4>
@@ -5208,6 +5256,16 @@
       }).catch(function () { if (token === img._request) panel._pendingItem = null; });
     }
 
+    /* 桌機菜單圖高度跟右側清單同高（CSS 用 --menu-list-h 封頂 300～480px） */
+    if ('ResizeObserver' in window) {
+      var listObserver = new ResizeObserver(function (entries) {
+        entries.forEach(function (e) {
+          e.target.parentElement.style.setProperty('--menu-list-h', Math.round(e.target.getBoundingClientRect().height) + 'px');
+        });
+      });
+      document.querySelectorAll('.menu-cat > .menu-cat-list').forEach(function (l) { listObserver.observe(l); });
+    }
+
     /* 菜單大圖：左右滑動／箭頭切換同分類上一道・下一道（重用 switchImg，列表點選不受影響） */
     (function () {
       document.querySelectorAll('.menu-panel').forEach(function (panel) {
@@ -5382,7 +5440,7 @@
     </div>
     <p class="footer-copy">© 2026 D Town by A Train · 台北東區餐酒館 · 忠孝復興站</p>
     <!-- ⚠️ 改版鐵則：每次更新網站內容，此行日期＋schema dateModified＋sitemap lastmod 三處同步改 -->
-    <p class="footer-copy">資訊最後更新：2026-10-22</p>
+    <p class="footer-copy">資訊最後更新：2026-10-28</p>
   </footer>
 
   <style>
@@ -5493,7 +5551,7 @@
   </script>
 
 <script>(function(){function off(){document.documentElement.classList.add('cv-off');}document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(a)off();},true);window.addEventListener('hashchange',off);})();</script>
-<script src="cocktail-particles.js?v=20260930f" defer></script>
+<script src="cocktail-particles.js?v=20261028" defer></script>
 <script src="hero-logo.js?v=20260929j" defer></script>
 <script>
   /* 畫面外背景圖延遲載入：距離畫面 600px 內才加 .bg-ready 讓 CSS 背景圖生效 */
@@ -5583,7 +5641,7 @@
     if (reduce || !('IntersectionObserver' in window)) return;
     // [觀察的容器, 被裁的媒體, 效果]
     var map = [['#about .about-images', '.carousel-slide', 'scene-door'],
-               ['#drinks .cocktail-stage', 'canvas', 'scene-rise'],
+               ['#drinks .cocktail-stage', '.cs-frame', 'scene-rise'],
                ['#latest-news .news-video-wrap', 'video', 'scene-rise'],
                ['#visit .entrance-video-wrap', 'video', 'scene-rise']];
     var groups = [];

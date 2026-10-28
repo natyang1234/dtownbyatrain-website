@@ -23,6 +23,10 @@ for(const lang of ['', '/en']) {
  await page.keyboard.press('Escape');
  await check('escape restores scroll',async()=>assert.equal(await page.evaluate(()=>document.body.style.overflow),''));
  await check('24 cocktail text items remain',async()=>assert.equal(await page.locator('.cocktail-text-item').count(),24));
+ await page.locator('#cocktail-stage .cs-next').click();
+ await check('next button swaps cocktail photo',async()=>{await page.waitForFunction(()=>{const i=document.querySelector('.cs-photo');return /snow-white/.test(i.currentSrc)&&i.alt.startsWith('Snow White')&&getComputedStyle(i).opacity==='1'},null,{timeout:8000})});
+ for(let k=0;k<3;k++){await page.locator('#cocktail-stage .cs-next').click();await page.waitForTimeout(200)}
+ await check('rapid clicks settle on the last cocktail',async()=>{await page.waitForFunction(()=>{const i=document.querySelector('.cs-photo'),s=document.getElementById('cocktail-stage');return /ibuki/.test(i.currentSrc)&&getComputedStyle(i).opacity==='1'&&!s.classList.contains('is-morphing')&&s.querySelector('.cs-name').textContent==='Ibuki'},null,{timeout:10000})});
  await check('no horizontal page overflow',async()=>assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),390));
  await context.close();
 }

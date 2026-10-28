@@ -13,6 +13,174 @@
     "originalBytes": 71022,
     "smallBytes": 22788
   },
+  "webp/cocktail-photo-arashiyama.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-arashiyama-480.webp",
+    "originalBytes": 74944,
+    "smallBytes": 27816
+  },
+  "webp/cocktail-photo-boogie-wonderland.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-boogie-wonderland-480.webp",
+    "originalBytes": 63196,
+    "smallBytes": 23522
+  },
+  "webp/cocktail-photo-ciao.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-ciao-480.webp",
+    "originalBytes": 70628,
+    "smallBytes": 25994
+  },
+  "webp/cocktail-photo-destination.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-destination-480.webp",
+    "originalBytes": 92266,
+    "smallBytes": 36512
+  },
+  "webp/cocktail-photo-dusk.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-dusk-480.webp",
+    "originalBytes": 42618,
+    "smallBytes": 15090
+  },
+  "webp/cocktail-photo-ember.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-ember-480.webp",
+    "originalBytes": 56972,
+    "smallBytes": 20386
+  },
+  "webp/cocktail-photo-french-69.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-french-69-480.webp",
+    "originalBytes": 41994,
+    "smallBytes": 14868
+  },
+  "webp/cocktail-photo-geisha.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-geisha-480.webp",
+    "originalBytes": 47158,
+    "smallBytes": 17882
+  },
+  "webp/cocktail-photo-green-day.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-green-day-480.webp",
+    "originalBytes": 57136,
+    "smallBytes": 21756
+  },
+  "webp/cocktail-photo-gummy-bear.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-gummy-bear-480.webp",
+    "originalBytes": 53086,
+    "smallBytes": 18876
+  },
+  "webp/cocktail-photo-ibuki.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-ibuki-480.webp",
+    "originalBytes": 101392,
+    "smallBytes": 38890
+  },
+  "webp/cocktail-photo-memory.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-memory-480.webp",
+    "originalBytes": 51948,
+    "smallBytes": 19856
+  },
+  "webp/cocktail-photo-orange-valley.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-orange-valley-480.webp",
+    "originalBytes": 41662,
+    "smallBytes": 16278
+  },
+  "webp/cocktail-photo-snow-white.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-snow-white-480.webp",
+    "originalBytes": 46106,
+    "smallBytes": 16510
+  },
+  "webp/cocktail-photo-sunday-morning.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-sunday-morning-480.webp",
+    "originalBytes": 78338,
+    "smallBytes": 31820
+  },
+  "webp/cocktail-photo-tokyo-banana.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-tokyo-banana-480.webp",
+    "originalBytes": 60672,
+    "smallBytes": 22050
+  },
+  "webp/cocktail-photo-treasure.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-treasure-480.webp",
+    "originalBytes": 83256,
+    "smallBytes": 34398
+  },
+  "webp/cocktail-photo-trinity.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-trinity-480.webp",
+    "originalBytes": 76852,
+    "smallBytes": 31414
+  },
+  "webp/cocktail-photo-twilight.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-twilight-480.webp",
+    "originalBytes": 104126,
+    "smallBytes": 39652
+  },
+  "webp/cocktail-photo-under-the-bridge.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-under-the-bridge-480.webp",
+    "originalBytes": 71612,
+    "smallBytes": 25318
+  },
+  "webp/cocktail-photo-wave.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-wave-480.webp",
+    "originalBytes": 43118,
+    "smallBytes": 17336
+  },
+  "webp/cocktail-photo-wings-on-field.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-wings-on-field-480.webp",
+    "originalBytes": 80390,
+    "smallBytes": 30660
+  },
+  "webp/cocktail-photo-yoasobi.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-yoasobi-480.webp",
+    "originalBytes": 109404,
+    "smallBytes": 42584
+  },
+  "webp/cocktail-photo-zeal.webp": {
+    "width": 900,
+    "height": 1125,
+    "small": "webp/responsive/cocktail-photo-zeal-480.webp",
+    "originalBytes": 53842,
+    "smallBytes": 20278
+  },
   "webp/cocktail-spirit-forward.webp": {
     "width": 864,
     "height": 1080,

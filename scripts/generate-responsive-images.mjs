@@ -9,6 +9,9 @@ for (const match of html.matchAll(/(?:data-)?src="(?:\.\.\/)?(webp\/[^"/]+\.webp
   if (!/favicon|logo\.webp$/.test(match[1]) || match[1].includes('氛圍')) sources.add(match[1]);
 }
 for (const match of html.matchAll(/switchImg\('[^']+',\s*'(webp\/[^']+\.webp)'/g)) sources.add(match[1]);
+// 特調舞台的 24 張酒杯照寫在 cocktail-particles.js 的 PHOTOS（圖集不需要小圖）
+const stageJs = fs.readFileSync(path.join(root, 'cocktail-particles.js'), 'utf8');
+for (const match of stageJs.matchAll(/'(webp\/cocktail-photo-[a-z0-9-]+\.webp)'/g)) if (!match[1].endsWith('-atlas.webp')) sources.add(match[1]);
 const out = path.join(root, 'webp/responsive');
 fs.mkdirSync(out, { recursive: true });
 const manifest = {};
