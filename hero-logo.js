@@ -1,7 +1,7 @@
 /* D Town 首頁：立體金屬背光 logo＋滾動「往前進」（中英兩頁共用）
  * 結構（.hero-logo-3d 內，CSS 3D）：牆上背光＋木框在最後面 → 4 層側面往後退出厚度 → 金屬正面在最前面。
  * 待機時 logo 緩慢擺動（桌機再加上滑鼠傾斜），前後層錯位露出側面、背光在牆上跟著位移 → 立體感。
- * #hero 高度＝2.2 個螢幕，.hero-pin 釘在畫面上；滑動進度 p：
+ * #hero 高度＝--hero-len 個螢幕（2026-11-11 起 1.8，原 2.2），.hero-pin 釘在畫面上；滑動進度 p：
  *   0.02–0.08 擺動歸零、側面層淡出（放大時只留正面＋背光兩層，避免手機大倍率合成吃爆記憶體）
  *   0.05–0.6  D 上半部中空處移到畫面中央
  *   0.08–1    以中空處為中心放大到約 9 倍（穿過 D 的洞）
@@ -23,6 +23,7 @@
   var flare = hero.querySelector('.hero-flare');
   var fade = hero.querySelector('.hero-fade');
   var hint = hero.querySelector('.hero-scroll-hint');
+  var cta = hero.querySelector('.hero-cta');   // logo 下的說明＋訂位（2026-11-11）：一開始往前進就淡出
   if (!pin || !logo) return;
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -83,6 +84,12 @@
       sides[i].style.display = tiltAmt <= 0 ? 'none' : '';
     }
     if (hint) hint.style.opacity = (1 - seg(p, 0, 0.06)).toFixed(3);
+    if (cta) {
+      var focused = cta.contains(document.activeElement);   // 鍵盤焦點在按鈕上時不隱藏，免得焦點停在看不見的東西上（Codex 審 major）
+      var co = focused ? 1 : 1 - seg(p, 0, 0.08);
+      cta.style.opacity = co.toFixed(3);
+      cta.style.visibility = co <= 0 ? 'hidden' : '';   // 淡出後不能再被點到
+    }
     if (flare) flare.style.opacity = (seg(p, 0.45, 0.8) * (1 - seg(p, 0.9, 1))).toFixed(3);
     if (fade) fade.style.opacity = seg(p, 0.82, 1).toFixed(3);
     kickSway();
