@@ -3626,7 +3626,7 @@
     }
 
     /* ════ P2 版型（2026-09-30）════ */
-    /* ① 章節大數字：與右側章節軌同編號；空心描邊壓在標題後方（偽元素，對輔助技術靜音） */
+    /* ① 章節大數字：與右側章節軌同編號；實心淡金浮水印壓在標題後方（偽元素，對輔助技術靜音；11/11 空心 1px 描邊在一般螢幕糊成灰線，改實心） */
     #about .sec-label, #drinks .sec-label, #menu .menu-header .sec-label, #visit .section-kicker, #latest-news .section-kicker, #reviews .section-kicker, #faq .section-kicker { position: relative; isolation: isolate; }
     #about .sec-label::before { content: '01'; content: '01' / ""; }
     #drinks .sec-label::before { content: '02'; content: '02' / ""; }
@@ -3639,14 +3639,13 @@
       position: absolute; z-index: -1; left: -0.06em; top: -0.42em;
       font-family: 'Noto Serif TC', Georgia, serif; font-weight: 400;
       font-size: clamp(3.6rem, 7.5vw, 7rem); line-height: 1; letter-spacing: 0;
-      color: transparent; -webkit-text-stroke: 1px rgba(200,169,110,0.26);
+      color: rgba(200,169,110,0.10);
       pointer-events: none;
     }
     #drinks .sec-label::before, #menu .menu-header .sec-label::before, #latest-news .section-kicker::before { left: 50%; transform: translateX(-50%); }
 
     /* ② 評論：第一則放大成精選引言，其餘三則並排 */
-    /* 小標壓在大數字線條上時加深色光暈，保持可讀（驗收回饋） */
-    #about .sec-label, #drinks .sec-label, #menu .menu-header .sec-label, #visit .section-kicker, #latest-news .section-kicker, #reviews .section-kicker, #faq .section-kicker { text-shadow: 0 0 6px #0b0b0b, 0 0 12px #0b0b0b; }
+    /* 11/11 拿掉小標的深色光暈：會在大數字中間抹出髒污；數字改淡色浮水印後小標本來就讀得到 */
 
     #reviews .review-card:first-child .review-text {
       font-family: 'Noto Serif TC', Georgia, 'Songti TC', serif;
