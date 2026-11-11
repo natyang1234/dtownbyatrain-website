@@ -5462,6 +5462,9 @@
           <span class="app-icon-label">Google 5★</span>
         </a>
       </div>
+      <!-- 社群與官網累計瀏覽（2026-11-11；nat 指定放在五個按鈕下面）：數字由私有排程每天寫進 views.json；讀不到就整行不顯示 -->
+      <p class="booking-views view-count" data-aeo-ignore style="display:none"></p>
+      <script>(function(){var el=document.querySelector(".view-count");if(!el||!window.fetch)return;fetch("../views.json",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(d){if(!d||!Number.isSafeInteger(d.total)||d.total<=0)return;el.textContent=d.total.toLocaleString("en-US")+" views across our social channels and website since July 2026";el.style.display="";}).catch(function(){});})();</script>
 
     </div>
   </div>
@@ -5480,9 +5483,6 @@
     <div class="footer-slogan">
       Good Food <span>·</span> Good Wine <span>·</span> Good Times
     </div>
-    <!-- 社群與官網累計瀏覽（2026-11-11）：數字由私有排程每天寫進 views.json；讀不到就整行不顯示 -->
-    <p class="footer-copy view-count" data-aeo-ignore style="display:none"></p>
-    <script>(function(){var el=document.querySelector(".view-count");if(!el||!window.fetch)return;fetch("../views.json",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(d){if(!d||!Number.isSafeInteger(d.total)||d.total<=0)return;el.textContent=d.total.toLocaleString("en-US")+" views across our social channels and website since July 2026";el.style.display="";}).catch(function(){});})();</script>
     <p class="footer-copy">© 2026 D Town by A Train · Taipei East District Bistro & Cocktail Bar · MRT Zhongxiao Fuxing</p>
     <!-- ⚠️ Sync rule: every content update must also refresh this date + schema dateModified + sitemap lastmod -->
     <p class="footer-copy">Information last updated: 2026-11-11</p>
@@ -5498,6 +5498,7 @@
   .mid-cta p{color:var(--grey-light);font-size:.95rem;letter-spacing:.04em;margin-bottom:1.4rem}
   .booking-primary{display:inline-block;margin:0 auto .9rem;background:var(--gold);color:var(--black);text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;padding:1rem 2.8rem;transition:background .2s,transform .15s}
   .booking-primary:hover{background:var(--gold-light);transform:translateY(-2px)}
+  .booking-views{margin:1.6rem 0 0;font-size:.82rem;letter-spacing:.08em;color:rgba(240,235,224,.72)}
   .booking-or{color:var(--grey);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;margin:.2rem 0 .4rem}
   .book-fab{position:fixed;right:1rem;bottom:calc(1rem + env(safe-area-inset-bottom, 0px));transition:opacity .25s ease,transform .25s ease;z-index:300;display:none;align-items:center;justify-content:center;width:48px;height:48px;padding:0;border-radius:50%;background:var(--gold);color:var(--black);text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.4);opacity:.92}
   .book-fab svg{width:22px;height:22px;fill:currentColor}
